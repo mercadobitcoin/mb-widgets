@@ -1,0 +1,53 @@
+@import "../../scss/variables";
+@import "../../scss/design-system/apollo/colors.scss";
+@import "../../scss/design-system/apollo/buttons.scss";
+
+.c-empty-state {
+    text-align: center;
+    width: 100%;
+    min-height: 389px;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    color: map-get($neutral-color, '50');
+    border-radius: $border-radius-small;
+    box-shadow: $box-shadow-lvl-1;
+    background-color: white;
+
+    img { 
+        max-width: 144px; 
+        margin: 0 0 32px 0;
+    }
+
+    .title {
+        font-family: map-get($font-families, 'title');
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 130%;
+        text-align: center;
+        color: map-get($neutral-color, '50');
+        margin: 0 0 4px 0;
+    }
+  
+    .message {
+        margin: 0;
+        font-size: 16px;
+        line-height: 140%;
+        text-align: center;
+        color: map-get($neutral-color, '50');
+        margin: 0;
+        white-space: pre-line;
+        max-width: 592px;
+    }
+  
+    .cta {
+        img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+    }
+}

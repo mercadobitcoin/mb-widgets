@@ -1,0 +1,233 @@
+@import "../../../../../foundation/scss/design-system/apollo/colors.scss";
+@import "../../../../../foundation/scss/design-system/apollo/buttons.scss";
+@import "../../../../../foundation/scss/design-system/apollo/typography.scss";
+@import "../../../../../foundation/scss/variables.scss";
+
+.mbwd-fixed-income-asset-card-list {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  &>.fixed-income-card {
+    background: map-get($background-color, 'primary');
+    box-shadow: $box-shadow-lvl-1;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    border: solid 1px transparent;
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:active {
+      border: 1px solid map-get($primary-color, '30');
+    }
+
+    .badge-wrapper {
+      display: flex;
+      align-items: center;
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 4px;
+        border: 1px solid map-get($neutral-color, '10');
+        border-radius: $border-radius-small;
+        @extend %typography-caption;
+        line-height: 100%;
+        color: map-get($neutral-color, '50');
+        white-space: nowrap;
+        
+  
+        .rounded-status {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          margin-right: 6px;
+  
+          &.primary {
+            background: map-get($tertiary-color, '30');
+          }
+
+          &.secondary {
+            background: map-get($secondary-color, '50')
+          }
+
+          &.sold-out {
+            background: map-get($negative-color, '30');
+          }
+        }
+      }
+    }
+
+    .asset-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .profitability {
+      color: map-get($positive-color, '30');
+      @extend %typography-label-3;
+      margin: 0;
+      white-space: nowrap;
+    }
+  }
+
+  &>.fixed-income-card.desktop {
+    border-radius: $border-radius-big;
+    padding: 24px;
+    // max-width: 280px;
+    min-width: 389px;
+    width: calc(33.3% - 32px);
+    // height: 195px;
+    margin-top: 32px;
+
+    .badge-wrapper { 
+      margin: 0 0 16px 0;
+    }
+
+    .asset-data {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+
+      .attributes {
+        .name {
+          @extend %typography-label-2;
+          color: map-get($neutral-color, '50');
+          margin: 0 0 16px 0;
+        }
+
+        .title, 
+        .description {
+          /* Mobile/Paragraph/Body 2 Highlight */
+          font-family: 'IBM Plex Sans';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 140%;
+          /* Light/Neutral/50 */
+          color: map-get($neutral-color, '50');
+          margin: 0 0 2px 0;
+        }
+
+        .description {
+          margin-bottom: 8px;
+          font-weight: 400;
+
+          &:last-child {
+            margin: 0;
+          }
+        }
+      }
+
+      .sold-percentage {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
+        .progress-spinner {
+          border-radius: 50%;
+          height: 104px;
+          width: 104px;
+        }
+  
+        .middle-circle {
+          position: absolute;
+          border-radius: 50%;
+          height: 86px;
+          width: 86px;
+          background-color: #FFFFFF;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          p {
+            font-family: 'IBM Plex Sans';
+            font-weight: 400;
+            font-size: 15.0361px;
+            line-height: 140%;
+            text-align: center;
+            letter-spacing: 0.313253px;
+            color: map-get($neutral-color, '30');
+            margin: 0;
+
+            strong {
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+
+    .ctas {
+      display: flex;
+      flex-direction: column;
+
+      .button {
+        @extend %typography-button-2;
+        height: 32px;
+        margin-bottom: 16px;
+        border-radius: 4px;
+
+        &:last-child { margin: 0; }
+      }
+    }
+  }
+
+  &>.fixed-income-card.mobile {
+    padding: 16px;
+    border-radius: $border-radius-default;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 24px;
+
+    &>.attributes {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin: 0 0 8px 0;
+
+
+      &>.header {
+        display: flex;
+        align-items: center;
+
+        &>.asset-icon {
+          width: 24px;
+          height: 24px;
+          margin-right: 8px;
+        }
+
+        &>.symbol {
+          @extend %typography-label-2;
+          color: map-get($neutral-color, '50');
+          white-space: nowrap;
+          margin: 0;
+        }
+      }
+    }
+
+    &>.market-data {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .minimum-value {
+        text-align: right;
+        .min-label {
+          @extend %typography-caption;
+          font-size: 10px;
+          margin: 0;
+        }
+        .min-value {
+          @extend %typography-label-2;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
