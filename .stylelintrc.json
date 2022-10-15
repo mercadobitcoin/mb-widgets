@@ -1,6 +1,7 @@
 {
   "rules": {
     "scss/no-global-function-names": null,
+    "function-no-unknown": null,
     "no-descending-specificity": null
   },
   "extends": [
