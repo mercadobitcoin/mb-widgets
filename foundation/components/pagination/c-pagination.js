@@ -1,4 +1,4 @@
-const MBC_PAGINATION = () => ({
+const MBC_PAGINATION = () => ({ //eslint-disable-line
   template: `
     <div class="c-pagination" v-if="totalPages > 1">
       <div class="pages">
@@ -20,32 +20,32 @@ const MBC_PAGINATION = () => ({
   props: {
     currentPage: {
       type: Number,
-      default: 1,
+      default: 1
     },
     totalPages: {
       type: Number,
-      default: 1,
-    },
+      default: 1
+    }
   },
-  data() {
+  data () {
     return {
-      maxDisplayPages: 3,
-    };
+      maxDisplayPages: 3
+    }
   },
   computed: {
-    cptdDisplayLeftEllipsis() {
-      return this.currentPage >= this.maxDisplayPages + 1;
+    cptdDisplayLeftEllipsis () {
+      return this.currentPage >= this.maxDisplayPages + 1
     },
-    cptdDisplayRightEllipsis() {
-      return this.currentPage < this.totalPages - this.maxDisplayPages + 1;
+    cptdDisplayRightEllipsis () {
+      return this.currentPage < this.totalPages - this.maxDisplayPages + 1
     },
-    cptdDisplayLastPage() {
-      return this.currentPage <= this.totalPages - this.maxDisplayPages;
+    cptdDisplayLastPage () {
+      return this.currentPage <= this.totalPages - this.maxDisplayPages
     },
-    cptdPagesList() {
+    cptdPagesList () {
       if (this.currentPage > this.maxDisplayPages) {
         if (this.currentPage <= this.totalPages - this.maxDisplayPages) {
-          return [this.currentPage - 1, this.currentPage, this.currentPage + 1];
+          return [this.currentPage - 1, this.currentPage, this.currentPage + 1]
         }
         // Creates an indexed array from with total pages + 1
         // Gets it's keys [1,2,3,4...50]
@@ -55,31 +55,31 @@ const MBC_PAGINATION = () => ({
         return Array.from(Array(this.totalPages + 1).keys())
           .reverse()
           .slice(0, this.maxDisplayPages)
-          .reverse();
+          .reverse()
       }
 
       if (this.totalPages < this.maxDisplayPages) {
-        return Array.from(new Array(this.totalPages - 1), (x, i) => i + 2);
+        return Array.from(new Array(this.totalPages - 1), (x, i) => i + 2)
       }
 
-      return Array.from(new Array(this.maxDisplayPages - 1), (x, i) => i + 2);
-    },
+      return Array.from(new Array(this.maxDisplayPages - 1), (x, i) => i + 2)
+    }
   },
   methods: {
-    cssIsActive(page) {
-      return this.currentPage === page ? "active" : "";
+    cssIsActive (page) {
+      return this.currentPage === page ? 'active' : ''
     },
-    onPageClick(page, action) {
+    onPageClick (page, action) {
       switch (action) {
-        case "back":
-          this.$emit("change", this.currentPage - 1);
-          break;
-        case "next":
-          this.$emit("change", this.currentPage + 1);
-          break;
+        case 'back':
+          this.$emit('change', this.currentPage - 1)
+          break
+        case 'next':
+          this.$emit('change', this.currentPage + 1)
+          break
         default:
-          this.$emit("change", page);
+          this.$emit('change', page)
       }
-    },
-  },
-});
+    }
+  }
+})

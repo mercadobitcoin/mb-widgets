@@ -1,4 +1,4 @@
-const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({
+const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
   template: `
             <div class="mbwd-fixed-income-asset-table">
               <table v-if="!mobileMode" class="fixed-income-asset-table-desktop">
@@ -85,106 +85,106 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({
   props: {
     language: {
       type: String,
-      default: "pt",
+      default: 'pt'
     },
     assets: {
       type: Array,
-      default: () => [],
-    },
+      default: () => []
+    }
   },
-  mixins: [configMixins, UIMixins],
-  data() {
+  mixins: [configMixins, UIMixins],// eslint-disable-line
+  data () {
     return {
-      sort: "",
-      order: "",
+      sort: '',
+      order: '',
       translateMap: {
         pt: {
-          Ativo: "Ativo",
-          "Valor inicial": "Valor inicial",
-          Rentabilidade: "Rentabilidade",
-          Prazo: "Prazo",
-          Estoque: "Estoque",
-          Mercado: "Mercado",
-          Investir: "Investir",
-          PRIMARY_MARKET: "Primário",
-          SECONDARY_MARKET: "Secundário",
-          SOLD_OUT: "esgotado",
+          Ativo: 'Ativo',
+          'Valor inicial': 'Valor inicial',
+          Rentabilidade: 'Rentabilidade',
+          Prazo: 'Prazo',
+          Estoque: 'Estoque',
+          Mercado: 'Mercado',
+          Investir: 'Investir',
+          PRIMARY_MARKET: 'Primário',
+          SECONDARY_MARKET: 'Secundário',
+          SOLD_OUT: 'esgotado'
         },
         en: {
-          Ativo: "Ativo",
-          "Valor inicial": "Valor inicial",
-          Rentabilidade: "Rentabilidade",
-          Prazo: "Prazo",
-          Estoque: "Estoque",
-          Mercado: "Mercado",
-          Investir: "Investir",
-          PRIMARY_MARKET: "Primário",
-          SECONDARY_MARKET: "Secundário",
-          SOLD_OUT: "esgotado",
+          Ativo: 'Ativo',
+          'Valor inicial': 'Valor inicial',
+          Rentabilidade: 'Rentabilidade',
+          Prazo: 'Prazo',
+          Estoque: 'Estoque',
+          Mercado: 'Mercado',
+          Investir: 'Investir',
+          PRIMARY_MARKET: 'Primário',
+          SECONDARY_MARKET: 'Secundário',
+          SOLD_OUT: 'esgotado'
         },
         es: {
-          Ativo: "Ativo",
-          "Valor inicial": "Valor inicial",
-          Rentabilidade: "Rentabilidade",
-          Prazo: "Prazo",
-          Estoque: "Estoque",
-          Mercado: "Mercado",
-          Investir: "Investir",
-          PRIMARY_MARKET: "Primário",
-          SECONDARY_MARKET: "Secundário",
-          SOLD_OUT: "esgotado",
-        },
-      },
-    };
+          Ativo: 'Ativo',
+          'Valor inicial': 'Valor inicial',
+          Rentabilidade: 'Rentabilidade',
+          Prazo: 'Prazo',
+          Estoque: 'Estoque',
+          Mercado: 'Mercado',
+          Investir: 'Investir',
+          PRIMARY_MARKET: 'Primário',
+          SECONDARY_MARKET: 'Secundário',
+          SOLD_OUT: 'esgotado'
+        }
+      }
+    }
   },
   methods: {
-    cssSortActive(sort, order) {
-      return this.sort === sort && this.order === order ? "active" : "";
+    cssSortActive (sort, order) {
+      return this.sort === sort && this.order === order ? 'active' : ''
     },
-    parsePercentageStrToNumber(percentage = "0") {
-      return Number(percentage.replace(/[^\d.-]/g, ""));
+    parsePercentageStrToNumber (percentage = '0') {
+      return Number(percentage.replace(/[^\d.-]/g, ''))
     },
-    getPercentageString(percentage = 0) {
-      let percString = this.parsePercentageStrToNumber(percentage);
-      percString = percString > 100 ? 100 : percString;
-      percString = percString < 0 ? 0 : percString;
-      return `${percString}%`;
+    getPercentageString (percentage = 0) {
+      let percString = this.parsePercentageStrToNumber(percentage)
+      percString = percString > 100 ? 100 : percString
+      percString = percString < 0 ? 0 : percString
+      return `${percString}%`
     },
-    getSoldPercentageStyle(percentage = "0") {
-      const progress = this.getPercentageString(percentage);
+    getSoldPercentageStyle (percentage = '0') {
+      const progress = this.getPercentageString(percentage)
       return {
-        background: `conic-gradient(#4D5EFF ${progress},#F3F4F4 ${progress})`,
-      };
+        background: `conic-gradient(#4D5EFF ${progress},#F3F4F4 ${progress})`
+      }
     },
-    getIconAlt(name) {
-      return `ícone ${name}`;
+    getIconAlt (name) {
+      return `ícone ${name}`
     },
-    getIconUrl(symbol) {
+    getIconUrl (symbol) {
       return `${this.GLOBAL_Cdn_Static_Path}/img/icons/assets/ico-asset-${(
-        symbol ?? ""
-      ).toLowerCase()}-color.svg`;
+        symbol ?? ''
+      ).toLowerCase()}-color.svg`
     },
-    i18n(key) {
-      return this.translateMap?.[this.language]?.[key] ?? "";
+    i18n (key) {
+      return this.translateMap?.[this.language]?.[key] ?? ''
     },
-    onSortChange(sort) {
+    onSortChange (sort) {
       if (this.sort === sort) {
         switch (this.order) {
-          case "":
-            this.order = "asc";
-            break;
-          case "asc":
-            this.order = "desc";
-            break;
+          case '':
+            this.order = 'asc'
+            break
+          case 'asc':
+            this.order = 'desc'
+            break
           default:
-            this.order = "";
+            this.order = ''
         }
       } else {
-        this.sort = sort;
-        this.order = "asc";
+        this.sort = sort
+        this.order = 'asc'
       }
 
-      this.$emit("sort", { order: this.order, sort: this.sort });
-    },
-  },
-});
+      this.$emit('sort', { order: this.order, sort: this.sort })
+    }
+  }
+})

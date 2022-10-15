@@ -1,4 +1,4 @@
-const MBWD_CRYPTO_ASSET_CARD_LIST = () => ({
+ MBWD_CRYPTO_ASSET_CARD_LIST = () => ({ // eslint-disable-line
   template: `
               <div class="mbwd-crypto-asset-card-list">
                 <a v-if="mobileMode" class="crypto-card mobile" v-for="asset in assets">
@@ -42,38 +42,38 @@ const MBWD_CRYPTO_ASSET_CARD_LIST = () => ({
   props: {
     language: {
       type: String,
-      default: "pt",
+      default: 'pt'
     },
     assets: {
       type: Array,
-      default: () => [],
-    },
+      default: () => []
+    }
   },
-  mixins: [configMixins, UIMixins, currencyFilters],
+  mixins: [configMixins, UIMixins, currencyFilters], // eslint-disable-line
   components: {
-    "mbc-asset-badges": MBC_ASSET_BADGES(),
+    'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
   },
-  data() {
+  data () {
     return {
       translateMap: {
         pt: {
-          "nas últimas 24h": "nas últimas 24h",
+          'nas últimas 24h': 'nas últimas 24h'
         },
         en: {
-          "nas últimas 24h": "nas últimas 24h",
+          'nas últimas 24h': 'nas últimas 24h'
         },
         es: {
-          "nas últimas 24h": "nas últimas 24h",
-        },
-      },
-    };
+          'nas últimas 24h': 'nas últimas 24h'
+        }
+      }
+    }
   },
   methods: {
-    i18n(key) {
-      return this.translateMap?.[this.language]?.[key] ?? "";
+    i18n (key) {
+      return this.translateMap?.[this.language]?.[key] ?? ''
     },
-    getIconAlt(name) {
-      return `ícone ${name}`;
-    },
-  },
-});
+    getIconAlt (name) {
+      return `ícone ${name}`
+    }
+  }
+})

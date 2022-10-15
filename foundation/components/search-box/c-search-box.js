@@ -1,4 +1,4 @@
-const MBC_SEARCH_BOX = () => ({
+const MBC_SEARCH_BOX = () => ({ //eslint-disable-line
   template: `
   <div :class="cssSearchBoxWrapper" v-click-outside="blur">
     <img v-if="displayInputIcon" class="search-box-icon" src="/img/icons/ico-search-neutral.svg" />
@@ -8,100 +8,100 @@ const MBC_SEARCH_BOX = () => ({
     </button>
   </div>`,
   directives: {
-    "click-outside": {
-      bind(el, binding, vnode) {
+    'click-outside': {
+      bind (el, binding, vnode) {
         document.body.addEventListener(
-          "mousedown",
+          'mousedown',
           (event) => {
-            if (!(el == event.target || el.contains(event.target))) {
-              vnode.context[binding.expression](event);
+            if (!(el === event.target || el.contains(event.target))) {
+              vnode.context[binding.expression](event)
             }
           },
           { capture: true }
-        );
+        )
       },
-      unbind() {
-        document.body.removeEventListener("mousedown", this.event);
-      },
-    },
+      unbind () {
+        document.body.removeEventListener('mousedown', this.event)
+      }
+    }
   },
   props: {
     autofocus: {
       type: Boolean,
-      default: false,
+      default: false
     },
     value: {
       type: String,
-      default: "",
+      default: ''
     },
     displayClearButton: {
       type: Boolean,
-      default: true,
+      default: true
     },
     displayInputIcon: {
       type: Boolean,
-      default: true,
+      default: true
     },
     placeholder: {
-      type: String,
-    },
+      type: String
+    }
   },
-  mixins: [mixins],
-  data() {
+  mixins: [mixins],//eslint-disable-line
+  data () {
     return {
       searchTerm: this.value,
       debounceIntervalId: null,
-      focused: false,
-    };
+      focused: false
+    }
   },
   computed: {
-    cptdCdnStaticDomainUrl() {
-      return "https://static.mercadobitcoin.com.br/web";
+    cptdCdnStaticDomainUrl () {
+      return 'https://static.mercadobitcoin.com.br/web'
     },
-    cssSearchBoxWrapper() {
+    cssSearchBoxWrapper () {
       return {
-        "c-search-box-wrapper": true,
-        focus: this.focused,
-      };
-    },
-    cssInput() {
-      return {
-        "has-text": this.cptdCanDisplayClearButton,
-      };
-    },
-    cptdCanDisplayClearButton() {
-      return this.displayClearButton && this.searchTerm.length > 0;
-    },
-  },
-  watch: {
-    autofocus(focus) {
-      if (focus) {
-        this.focusOnInputSearch();
+        'c-search-box-wrapper': true,
+        focus: this.focused
       }
     },
-    value(value) {
-      this.searchTerm = value;
+    cssInput () {
+      return {
+        'has-text': this.cptdCanDisplayClearButton
+      }
     },
+    cptdCanDisplayClearButton () {
+      return this.displayClearButton && this.searchTerm.length > 0
+    }
+  },
+  watch: {
+    autofocus (focus) {
+      if (focus) {
+        this.focusOnInputSearch()
+      }
+    },
+    value (value) {
+      this.searchTerm = value
+    }
   },
   methods: {
-    debounceSearch(event) {
+    debounceSearch (event) {
       this.debounceIntervalId = this.mxDebounce(this.debounceIntervalId, () => {
-        this.$emit("update:value", event.target.value);
-      });
+        this.$emit('update:value', event.target.value)
+      })
     },
-    focusOnInputSearch() {
-      Vue.nextTick(() => {
-        this.$refs.input_search.focus();
-      });
+    focusOnInputSearch () {
+      Vue.nextTick(() => {//eslint-disable-line
+        this.$refs.input_search.focus()
+      })
     },
-    clearSearch() {
-      this.searchTerm = "";
-      this.$emit("update:value", this.searchTerm);
-      this.focusOnInputSearch();
+    clearSearch () {
+      this.searchTerm = ''
+      this.$emit('update:value', this.searchTerm)
+      this.focusOnInputSearch()
     },
-    blur() {
-      this.focused = false;
-      this.$emit("blur");
-    },
-  },
-});
+    blur () {
+      this.focused = false
+      this.$emit('blur')
+    }
+  }
+})

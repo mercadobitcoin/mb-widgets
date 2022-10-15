@@ -1,4 +1,4 @@
-const MBWD_ASSETS = () => ({
+const MBWD_ASSETS = () => ({ //eslint-disable-line
   template: `
     <div class="mbwd-assets">
       <h2 class="title">{{ i18n('Conheça os nossos produtos') }}</h2>
@@ -16,77 +16,77 @@ const MBWD_ASSETS = () => ({
   props: {
     language: {
       type: String,
-      default: "pt",
+      default: 'pt'
     },
     intervalTimeout: {
       type: Number,
-      default: 30000, //ms
-    },
+      default: 30000 // ms
+    }
   },
-  mixins: [configMixins],
+  mixins: [configMixins],// eslint-disable-line
   components: {
-    "mbc-empty-state": MBC_EMPTY_STATE(),
-    "mbc-search-box": MBC_SEARCH_BOX(),
-    "mbwd-crypto-assets": MBWD_CRYPTO_ASSETS(),
-    "mbwd-fixed-income-assets": MBWD_FIXED_INCOME_ASSETS(),
+    'mbc-empty-state': MBC_EMPTY_STATE(),// eslint-disable-line
+    'mbc-search-box': MBC_SEARCH_BOX(),// eslint-disable-line
+    'mbwd-crypto-assets': MBWD_CRYPTO_ASSETS(),// eslint-disable-line
+    'mbwd-fixed-income-assets': MBWD_FIXED_INCOME_ASSETS()// eslint-disable-line
   },
-  data() {
+  data () {
     return {
       cryptoResults: undefined,
       fixedIncomeResults: undefined,
-      search: "",
+      search: '',
       translateMap: {
         pt: {
-          "Conheça os nossos produtos": "Conheça os nossos produtos",
-          "Busque um produto": "Busque um produto",
-          "Ainda não temos #searchTerm no MB, mas anotamos a sugestão!":
-            "Ainda não temos #searchTerm no MB, mas anotamos a sugestão!",
+          'Conheça os nossos produtos': 'Conheça os nossos produtos',
+          'Busque um produto': 'Busque um produto',
+          'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!':
+            'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
         },
         en: {
-          "Conheça os nossos produtos": "Conheça os nossos produtos",
-          "Busque um produto": "Busque um produto",
-          "Ainda não temos #searchTerm no MB, mas anotamos a sugestão!":
-            "Ainda não temos #searchTerm no MB, mas anotamos a sugestão!",
+          'Conheça os nossos produtos': 'Conheça os nossos produtos',
+          'Busque um produto': 'Busque um produto',
+          'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!':
+            'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
         },
         es: {
-          "Conheça os nossos produtos": "Conheça os nossos produtos",
-          "Busque um produto": "Busque um produto",
-          "Ainda não temos #searchTerm no MB, mas anotamos a sugestão!":
-            "Ainda não temos #searchTerm no MB, mas anotamos a sugestão!",
-        },
-      },
-    };
+          'Conheça os nossos produtos': 'Conheça os nossos produtos',
+          'Busque um produto': 'Busque um produto',
+          'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!':
+            'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
+        }
+      }
+    }
   },
   computed: {
-    cptdEmptyStateConfig() {
+    cptdEmptyStateConfig () {
       if (this.cptdDisplayEmptyState) {
         return {
-          title: "Sem resultado",
+          title: 'Sem resultado',
           message: this.i18n(
-            "Ainda não temos #searchTerm no MB, mas anotamos a sugestão!"
-          ).replace("#searchTerm", `"${this.search}"`),
-          img: `${this.GLOBAL_Cdn_Static_Path}/ilu/ilu-empty-state-search.svg`,
-        };
+            'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
+          ).replace('#searchTerm', `"${this.search}"`),
+          img: `${this.GLOBAL_Cdn_Static_Path}/ilu/ilu-empty-state-search.svg`
+        }
       }
     },
-    cptdHasAssetsCardsScopedSlot() {
-      return !!this.$slots["assets-cards"];
+    cptdHasAssetsCardsScopedSlot () {
+      return !!this.$slots['assets-cards']
     },
-    cptdDisplayEmptyState() {
+    cptdDisplayEmptyState () {
       return (
         this.search && this.cryptoResults === 0 && this.fixedIncomeResults === 0
-      );
-    },
+      )
+    }
   },
   methods: {
-    i18n(key) {
-      return this.translateMap?.[this.language]?.[key] ?? "";
+    i18n (key) {
+      return this.translateMap?.[this.language]?.[key] ?? ''
     },
-    onCryptoAssetsUpdated(resultLength) {
-      this.cryptoResults = resultLength;
+    onCryptoAssetsUpdated (resultLength) {
+      this.cryptoResults = resultLength
     },
-    onFixedIncomeAssetsUpdated(resultLength) {
-      this.fixedIncomeResults = resultLength;
-    },
-  },
-});
+    onFixedIncomeAssetsUpdated (resultLength) {
+      this.fixedIncomeResults = resultLength
+    }
+  }
+})

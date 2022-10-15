@@ -1,4 +1,4 @@
-const MBC_EMPTY_STATE = () => ({
+const MBC_EMPTY_STATE = () => ({ //eslint-disable-line
   template: `<div class="c-empty-state apollo">
         <img class="main-state-icon" :src="getMainStateIconSrc" />
         <p class="title">{{ title }}</p>
@@ -15,53 +15,53 @@ const MBC_EMPTY_STATE = () => ({
     cta: {
       type: Object,
       default: null,
-      required: false,
+      required: false
     },
     mainStateIcon: {
       type: String,
-      default: "ilu-empty-box.svg",
+      default: 'ilu-empty-box.svg'
     },
     message: {
       type: String,
-      default: "",
-      required: true,
+      default: '',
+      required: true
     },
     title: {
       type: String,
-      default: "",
-      required: true,
+      default: '',
+      required: true
     },
     displayCtaIcon: {
       type: Boolean,
-      default: false,
+      default: false
     },
     ctaIcon: {
       type: String,
-      default: "ico-refresh-mono.svg",
-    },
+      default: 'ico-refresh-mono.svg'
+    }
   },
   computed: {
-    cptdCdnStaticDomainUrl() {
-      return "https://static.mercadobitcoin.com.br/web";
+    cptdCdnStaticDomainUrl () {
+      return 'https://static.mercadobitcoin.com.br/web'
     },
-    ctaIsTypeFunction() {
-      return this.cta && this.cta.type && this.cta.type === "function";
+    ctaIsTypeFunction () {
+      return this.cta && this.cta.type && this.cta.type === 'function'
     },
-    ctaIsTypeUrl() {
-      return this.cta && this.cta.type && this.cta.type === "link";
+    ctaIsTypeUrl () {
+      return this.cta && this.cta.type && this.cta.type === 'link'
     },
-    getMainStateIconSrc() {
-      return `${this.cptdCdnStaticDomainUrl}/img/ilu/${this.mainStateIcon}`;
+    getMainStateIconSrc () {
+      return `${this.cptdCdnStaticDomainUrl}/img/ilu/${this.mainStateIcon}`
     },
-    getCtaIconSrc() {
-      return `${this.cptdCdnStaticDomainUrl}/img/icons/${this.ctaIcon}`;
-    },
+    getCtaIconSrc () {
+      return `${this.cptdCdnStaticDomainUrl}/img/icons/${this.ctaIcon}`
+    }
   },
   methods: {
-    ctaCallback() {
+    ctaCallback () {
       if (this.cta?.callback instanceof Function) {
-        this.cta.callback();
+        this.cta.callback()
       }
-    },
-  },
-});
+    }
+  }
+})

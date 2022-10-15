@@ -1,48 +1,48 @@
-const MBC_ASSET_BADGES = () => ({
+const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
   template: `<div class="c-asset-badges" v-if="badges.length > 0">
-			<div v-if="cptdIsTypeFixedIncome" class="c-badge fixed-income" v-for="badge in badges">
-				<span class="rounded-status" :class="badge" /> {{ i18n(badge) }}
-			</div>
-			<div v-else class="c-badge crypto" v-for="badge in badges">
-				<img class="icon" :src="getIconUrl(badge)" /> {{ i18n(badge) }}
-			</div>
-		</div>`,
+    <div v-if="cptdIsTypeFixedIncome" class="c-badge fixed-income" v-for="badge in badges">
+      <span class="rounded-status" :class="badge" /> {{ i18n(badge) }}
+    </div>
+    <div v-else class="c-badge crypto" v-for="badge in badges">
+      <img class="icon" :src="getIconUrl(badge)" /> {{ i18n(badge) }}
+    </div>
+  </div>`,
   props: {
     badges: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     type: {
       type: String,
-      default: "crypto", // [crypto, fixed-income]
-    },
+      default: 'crypto' // [crypto, fixed-income]
+    }
   },
-  data() {
+  data () {
     return {
       translateMap: {
         pt: {
-          Favoritos: "Favoritos",
+          Favoritos: 'Favoritos'
         },
         en: {
-          Favoritos: "Favoritos",
+          Favoritos: 'Favoritos'
         },
         es: {
-          Favoritos: "Favoritos",
-        },
-      },
-    };
+          Favoritos: 'Favoritos'
+        }
+      }
+    }
   },
   computed: {
-    cptdIsTypeFixedIncome: () => this.type === "fixed-income",
-    cptdIsTypeCrypto: () => this.type === "crypto",
+    cptdIsTypeFixedIncome: () => this.type === 'fixed-income',
+    cptdIsTypeCrypto: () => this.type === 'crypto'
   },
   methods: {
-    getIconUrl() {},
-    getIconAlt(name) {
-      return `ícone ${name}`;
+    getIconUrl () {},
+    getIconAlt (name) {
+      return `ícone ${name}`
     },
-    i18n(key) {
-      return this.translateMap?.[this.language]?.[key] ?? "";
-    },
-  },
-});
+    i18n (key) {
+      return this.translateMap?.[this.language]?.[key] ?? ''
+    }
+  }
+})

@@ -1,4 +1,4 @@
-const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({
+const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   template: `
               <div class="mbwd-fixed-income-asset-card-list apollo">
                 <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets">
@@ -63,85 +63,85 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({
   props: {
     language: {
       type: String,
-      default: "pt",
+      default: 'pt'
     },
     assets: {
       type: Array,
-      default: () => [],
-    },
+      default: () => []
+    }
   },
-  mixins: [UIMixins, configMixins, currencyFilters],
-  data() {
+  mixins: [UIMixins, configMixins, currencyFilters],// eslint-disable-line
+  data () {
     return {
       translateMap: {
         pt: {
-          "nas últimas 24h": "nas últimas 24h",
-          "Valor inicial": "Valor inicial",
-          "A partir de": "A partir de",
-          Rentabilidade: "Rentabilidade",
-          "Prazo estimado": "Prazo estimado",
-          vendido: "vendido",
-          PRIMARY_MARKET: "Primário",
-          SECONDARY_MARKET: "Secundário",
-          SOLD_OUT: "esgotado",
+          'nas últimas 24h': 'nas últimas 24h',
+          'Valor inicial': 'Valor inicial',
+          'A partir de': 'A partir de',
+          Rentabilidade: 'Rentabilidade',
+          'Prazo estimado': 'Prazo estimado',
+          vendido: 'vendido',
+          PRIMARY_MARKET: 'Primário',
+          SECONDARY_MARKET: 'Secundário',
+          SOLD_OUT: 'esgotado'
         },
         en: {
-          "nas últimas 24h": "nas últimas 24h",
-          "Valor inicial": "Valor inicial",
-          "A partir de": "A partir de",
-          Rentabilidade: "Rentabilidade",
-          "Prazo estimado": "Prazo estimado",
-          vendido: "vendido",
-          PRIMARY_MARKET: "Primário",
-          SECONDARY_MARKET: "Secundário",
-          SOLD_OUT: "esgotado",
+          'nas últimas 24h': 'nas últimas 24h',
+          'Valor inicial': 'Valor inicial',
+          'A partir de': 'A partir de',
+          Rentabilidade: 'Rentabilidade',
+          'Prazo estimado': 'Prazo estimado',
+          vendido: 'vendido',
+          PRIMARY_MARKET: 'Primário',
+          SECONDARY_MARKET: 'Secundário',
+          SOLD_OUT: 'esgotado'
         },
         es: {
-          "nas últimas 24h": "nas últimas 24h",
-          "Valor inicial": "Valor inicial",
-          "A partir de": "A partir de",
-          Rentabilidade: "Rentabilidade",
-          "Prazo estimado": "Prazo estimado",
-          vendido: "vendido",
-          PRIMARY_MARKET: "Primário",
-          SECONDARY_MARKET: "Secundário",
-          SOLD_OUT: "esgotado",
-        },
-      },
-    };
+          'nas últimas 24h': 'nas últimas 24h',
+          'Valor inicial': 'Valor inicial',
+          'A partir de': 'A partir de',
+          Rentabilidade: 'Rentabilidade',
+          'Prazo estimado': 'Prazo estimado',
+          vendido: 'vendido',
+          PRIMARY_MARKET: 'Primário',
+          SECONDARY_MARKET: 'Secundário',
+          SOLD_OUT: 'esgotado'
+        }
+      }
+    }
   },
   methods: {
-    getAssetStatusBadge(status) {
+    getAssetStatusBadge (status) {
       switch (status) {
         default:
-          return "";
+          return ''
       }
     },
-    parsePercentageStrToNumber(percentage = "0") {
-      return Number(percentage.replace(/[^\d.-]/g, ""));
+    parsePercentageStrToNumber (percentage = '0') {
+      return Number(percentage.replace(/[^\d.-]/g, ''))
     },
-    getPercentageString(percentage = 0) {
-      let percString = this.parsePercentageStrToNumber(percentage);
-      percString = percString > 100 ? 100 : percString;
-      percString = percString < 0 ? 0 : percString;
-      return `${percString}%`;
+    getPercentageString (percentage = 0) {
+      let percString = this.parsePercentageStrToNumber(percentage)
+      percString = percString > 100 ? 100 : percString
+      percString = percString < 0 ? 0 : percString
+      return `${percString}%`
     },
-    getSoldPercentageStyle(percentage = "0") {
-      const progress = this.getPercentageString(percentage);
+    getSoldPercentageStyle (percentage = '0') {
+      const progress = this.getPercentageString(percentage)
       return {
-        background: `conic-gradient(#4D5EFF ${progress},#F3F4F4 ${progress})`,
-      };
+        background: `conic-gradient(#4D5EFF ${progress},#F3F4F4 ${progress})`
+      }
     },
-    getIconAlt(name) {
-      return `ícone ${name}`;
+    getIconAlt (name) {
+      return `ícone ${name}`
     },
-    getIconUrl(symbol) {
+    getIconUrl (symbol) {
       return `${this.GLOBAL_Cdn_Static_Path}/img/icons/assets/ico-asset-${(
-        symbol ?? ""
-      ).toLowerCase()}-color.svg`;
+        symbol ?? ''
+      ).toLowerCase()}-color.svg`
     },
-    i18n(key) {
-      return this.translateMap?.[this.language]?.[key] ?? "";
-    },
-  },
-});
+    i18n (key) {
+      return this.translateMap?.[this.language]?.[key] ?? ''
+    }
+  }
+})
