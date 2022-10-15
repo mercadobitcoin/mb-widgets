@@ -5,8 +5,8 @@
   "scripts": {
     "build": "./node_modules/gulp-cli/bin/gulp.js all",
     "dev": "./node_modules/gulp-cli/bin/gulp.js all && ./node_modules/gulp-cli/bin/gulp.js watch",
-    "test": "standard && stylelint **/*.scss",
-    "lint": "standard --fix && stylelint **/*.scss --fix"
+    "lint": "standard && stylelint **/*.scss",
+    "lint:fix": "standard --fix && stylelint **/*.scss --fix"
   },
   "engines": {
     "node": "16.x",
