@@ -23,7 +23,7 @@ So, make sure that you use it inside a proper container or you can just overide 
 ```sh
 /public/mbwd-most-valued-assets/js/c-mbwd-most-valued-assets.js
 ```
-- Import the minified widget CSS, available on: 
+- Import the minified widget CSS, available on:
 ```sh
 /public/mbwd-most-valued-assets/css/c-mbwd-most-valued-assets.css
 ```
