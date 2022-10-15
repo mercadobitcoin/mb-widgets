@@ -29,13 +29,13 @@ $breakpoints: (
   "xxl": 1400px,
   "xxxl": 1536px,
 );
-$zindex-standard: 10000 !default;
-$zindex-sticky: 10020 !default;
-$zindex-fixed: 10030 !default;
-$zindex-modal-backdrop: 10040 !default;
-$zindex-modal: 10050 !default;
-$zindex-popover: 10060 !default;
-$zindex-tooltip: 10070 !default;
+$zindex-standard: 10000;
+$zindex-sticky: 10020;
+$zindex-fixed: 10030;
+$zindex-modal-backdrop: 10040;
+$zindex-modal: 10050;
+$zindex-popover: 10060;
+$zindex-tooltip: 10070;
 
 // Containers
 $content-container: 1170px;
@@ -55,7 +55,7 @@ $box-shadow-lvl-2: 0 12px 20px rgb(29 35 39 / 8%),
   0 2px 6px rgb(29 35 39 / 4%), 0 0 1px rgb(29 35 39 / 4%);
 $box-shadow-lvl-3: 0 4px 8px rgb(29 35 39 / 8%),
   0 0 2px rgb(29 35 39 / 6%), 0 0 1px rgb(29 35 39 / 4%);
-$font-families: () !default;
+$font-families: ();
 $font-families: map-merge(
   (
     "title": (

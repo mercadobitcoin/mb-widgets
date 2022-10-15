@@ -20,6 +20,7 @@
       height: 24px;
       margin: 0 4px;
       padding: 0;
+
       @extend %typography-body-3;
 
       color: map-get($neutral-color, "50");
@@ -62,6 +63,7 @@
 
       &.active {
         color: #fff;
+
         @extend %typography-label-3;
 
         border-radius: 4px;
