@@ -59,6 +59,7 @@
         th {
           padding: 10px 16px;
           @extend %typography-label-3;
+
           color: map-get($neutral-color, '50');
 
           .sorter-cell {
@@ -106,6 +107,7 @@
         td {
           padding: 16px;
           @extend %typography-body-2;
+
           color: map-get($neutral-color, '50');
 
           &.asset-cell {
