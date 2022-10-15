@@ -4,12 +4,11 @@
 The Widget is a [Factory](https://www.dofactory.com/javascript/design-patterns/factory-method) pattern, that provides a **render** method.
 
 The render method expects 2 parameters:
-  - a Vue 2 instance 
-  - a querySelector String value.
+- a Vue 2 instance
+- a querySelector String value.
 
 The widget have it's own styles and it'll fill the whole container width size available.
 So, make sure that you use it inside a proper container or you can just overide it :)
-
 
 ## Component Props
 | name | type | required | default | description |
@@ -18,11 +17,11 @@ So, make sure that you use it inside a proper container or you can just overide 
 | intervalTimeout | Number | false | 30000 | The intervalTimeout represents the timeout that'll be used on setInterval, so it must be in **milliseconds** and the default represents 30 seconds. |
 
 ## How to use it
-- Import the minified widget Javascript, available on:
+- Import the minified widget JavaScript, available on:
 ```sh
 /public/mbwd-most-valued-assets/js/c-mbwd-most-valued-assets.js
 ```
-- Import the minified widget CSS, available on: 
+- Import the minified widget CSS, available on:
 ```sh
 /public/mbwd-most-valued-assets/css/c-mbwd-most-valued-assets.css
 ```
@@ -39,5 +38,5 @@ widget.render(Vue, '#mostValuedAssets');
 ```
 
 ## Requirements
-  - Vue 2
-  - Font Families: `IBM Plex Sans (400, 700)`
+- Vue 2
+- Font Families: `IBM Plex Sans (400, 700)`
