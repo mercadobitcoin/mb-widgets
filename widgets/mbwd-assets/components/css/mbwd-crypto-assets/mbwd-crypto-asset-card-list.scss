@@ -9,8 +9,8 @@
   justify-content: space-between;
   width: 100%;
 
-  &>.crypto-card {
-    background: map-get($background-color, 'primary');
+  & > .crypto-card {
+    background: map-get($background-color, "primary");
     box-shadow: $box-shadow-lvl-1;
     display: flex;
     flex-direction: column;
@@ -19,9 +19,8 @@
     transition: all 0.2s ease;
 
     &:hover {
-      border: 1px solid map-get($primary-color, '30');
+      border: 1px solid map-get($primary-color, "30");
     }
-
 
     .badges {
       display: flex;
@@ -30,7 +29,7 @@
       flex-wrap: wrap;
       padding-left: 8px;
 
-      &>.badge {
+      & > .badge {
         display: flex;
         align-items: center;
         white-space: nowrap;
@@ -38,8 +37,8 @@
         margin-left: 8px;
         margin-bottom: 8px;
         @extend %typography-caption;
-        color: map-get($neutral-color, '50');
-        border: 1px solid map-get($neutral-color, '10');
+        color: map-get($neutral-color, "50");
+        border: 1px solid map-get($neutral-color, "10");
         border-radius: $border-radius-small;
 
         &:first-child {
@@ -50,7 +49,7 @@
           margin-bottom: 0;
         }
 
-        &>.icon {
+        & > .icon {
           width: 12px;
           height: 12px;
           margin-right: 6px;
@@ -64,21 +63,21 @@
     }
 
     .variation {
-      color: map-get($neutral-color, '50');
+      color: map-get($neutral-color, "50");
 
-      &>.value {
+      & > .value {
         &.negative {
-          color: map-get($negative-color, '30');
+          color: map-get($negative-color, "30");
         }
 
         &.positive {
-          color: map-get($positive-color, '30');
+          color: map-get($positive-color, "30");
         }
       }
     }
   }
 
-  &>.crypto-card.desktop {
+  & > .crypto-card.desktop {
     border-radius: 16px;
     padding: 24px;
     min-width: 280px;
@@ -86,87 +85,87 @@
     height: 195px;
     margin-top: 32px;
 
-    &>.attributes {
-      &>.header {
+    & > .attributes {
+      & > .header {
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
         margin-bottom: 8px;
       }
 
-      &>.name {
+      & > .name {
         @extend %typography-label-2;
-        color: map-get($neutral-color, '50');
+        color: map-get($neutral-color, "50");
         display: flex;
         align-items: center;
         margin: 0;
 
-        &>.symbol {
+        & > .symbol {
           @extend %typography-body-3;
           margin-left: 4px;
         }
       }
 
-      &>.type {
+      & > .type {
         /* Web/Paragraph/Body 3 */
         @extend %typography-body-3;
         /* Light/Neutral/30 */
-        color: map-get($neutral-color, '30');
+        color: map-get($neutral-color, "30");
         margin: 0 0 16px 0;
       }
     }
 
-    &>.price {
+    & > .price {
       @extend %typography-h5;
-      color: map-get($neutral-color, '50');
+      color: map-get($neutral-color, "50");
       margin: 0 0 4px 0;
     }
 
-    &>.variation {
+    & > .variation {
       @extend %typography-body-2;
       margin: 0 0 0 0;
 
-      &>.value {
-        @extend %typography-label-2; 
+      & > .value {
+        @extend %typography-label-2;
       }
     }
   }
 
-  &>.crypto-card.mobile {
+  & > .crypto-card.mobile {
     border-radius: 16px;
     padding: 16px;
     width: 100%;
     margin-top: 32px;
 
-    &>.attributes {
+    & > .attributes {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       margin: 0 0 8px 0;
 
-      &>.header {
+      & > .header {
         display: flex;
         align-items: center;
 
-        &>.asset-icon {
+        & > .asset-icon {
           width: 24px;
           height: 24px;
           margin-right: 8px;
         }
 
-        &>.asset-data {
+        & > .asset-data {
           display: flex;
           flex-direction: column;
           white-space: nowrap;
-          &>.name {
+          & > .name {
             @extend %typography-label-2;
-            color: map-get($neutral-color, '50');
+            color: map-get($neutral-color, "50");
             white-space: nowrap;
             margin: 0;
           }
-          &>.type {
+          & > .type {
             @extend %typography-caption;
-            color: map-get($neutral-color, '30');
+            color: map-get($neutral-color, "30");
             white-space: nowrap;
             margin: 0;
           }
@@ -174,27 +173,27 @@
       }
     }
 
-    &>.market-data {
+    & > .market-data {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-left: 32px;
-      &>.variation {
+      & > .variation {
         @extend %typography-label-3;
         margin: 0;
         white-space: nowrap;
 
-        &>.label-24h {
+        & > .label-24h {
           @extend %typography-caption;
-          background-color: map-get($primary-color, '5');
+          background-color: map-get($primary-color, "5");
           border-radius: $border-radius-big;
-          padding: 0 4px;         
+          padding: 0 4px;
           margin-left: 8px;
         }
       }
-      &>.price {
+      & > .price {
         @extend %typography-label-2;
-        color: map-get($neutral-color, '50');
+        color: map-get($neutral-color, "50");
         margin: 0;
         white-space: nowrap;
       }

@@ -5,31 +5,30 @@
 .c-search-box-wrapper {
   display: flex;
   position: relative;
-  animation: ani-grow-to-right .5s ease;
+  animation: ani-grow-to-right 0.5s ease;
   width: 100%;
   border-radius: 8px;
   border: 1px solid;
-  border-color: map-get($border-color , 'secondary');
-  background-color: map-get($background-color, 'primary');
-  transition: border .2s ease;
+  border-color: map-get($border-color, "secondary");
+  background-color: map-get($background-color, "primary");
+  transition: border 0.2s ease;
   position: relative;
 
   @keyframes ani-grow-to-right {
     0% {
-        width: 70%;
-        overflow: hidden;
+      width: 70%;
+      overflow: hidden;
     }
     100% {
-        width: 100%;
-        overflow: hidden;
+      width: 100%;
+      overflow: hidden;
     }
-}
-
-  &.focus {
-    border-color: map-get($primary-color , 'main');
-    background-color: map-get($primary-color, '5');
   }
 
+  &.focus {
+    border-color: map-get($primary-color, "main");
+    background-color: map-get($primary-color, "5");
+  }
 
   .search-box-icon {
     width: 24px;
@@ -48,7 +47,7 @@
     min-height: 24px;
     border: none;
     background-color: transparent;
-    color: map-get($neutral-color, '40');
+    color: map-get($neutral-color, "40");
     outline: none;
     z-index: 0;
 
@@ -56,7 +55,7 @@
       @extend %typography-body-2;
     }
   }
-  
+
   .clear {
     width: 24px;
     height: 24px;
@@ -76,7 +75,7 @@
       height: 24px;
     }
   }
-  
+
   .description {
     display: block;
     font-size: 18px;

@@ -20,17 +20,17 @@ const MBC_PAGINATION = () => ({
   props: {
     currentPage: {
       type: Number,
-      default: 1
+      default: 1,
     },
     totalPages: {
       type: Number,
-      default: 1
-    }
+      default: 1,
+    },
   },
   data() {
     return {
-      maxDisplayPages: 3
-    }
+      maxDisplayPages: 3,
+    };
   },
   computed: {
     cptdDisplayLeftEllipsis() {
@@ -44,7 +44,7 @@ const MBC_PAGINATION = () => ({
     },
     cptdPagesList() {
       if (this.currentPage > this.maxDisplayPages) {
-        if (this.currentPage <= (this.totalPages - this.maxDisplayPages)) {
+        if (this.currentPage <= this.totalPages - this.maxDisplayPages) {
           return [this.currentPage - 1, this.currentPage, this.currentPage + 1];
         }
         // Creates an indexed array from with total pages + 1
@@ -52,7 +52,10 @@ const MBC_PAGINATION = () => ({
         // Reverse [50,49,48,47...1]
         // Get the first 3 positions [50,49,48]
         // Reverse back [48,49,50]
-        return Array.from(Array(this.totalPages + 1).keys()).reverse().slice(0, this.maxDisplayPages).reverse();
+        return Array.from(Array(this.totalPages + 1).keys())
+          .reverse()
+          .slice(0, this.maxDisplayPages)
+          .reverse();
       }
 
       if (this.totalPages < this.maxDisplayPages) {
@@ -60,23 +63,23 @@ const MBC_PAGINATION = () => ({
       }
 
       return Array.from(new Array(this.maxDisplayPages - 1), (x, i) => i + 2);
-    }
+    },
   },
   methods: {
     cssIsActive(page) {
-      return this.currentPage === page ? 'active' : '';
+      return this.currentPage === page ? "active" : "";
     },
     onPageClick(page, action) {
       switch (action) {
-        case 'back':
-          this.$emit('change', this.currentPage - 1);
+        case "back":
+          this.$emit("change", this.currentPage - 1);
           break;
-        case 'next':
-          this.$emit('change', this.currentPage + 1);
+        case "next":
+          this.$emit("change", this.currentPage + 1);
           break;
         default:
-          this.$emit('change', page);
+          this.$emit("change", page);
       }
-    }
-  }
-})
+    },
+  },
+});

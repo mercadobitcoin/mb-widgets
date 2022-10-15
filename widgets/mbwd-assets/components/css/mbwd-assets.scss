@@ -5,13 +5,14 @@
 .mbwd-assets {
   margin: 56px 0;
 
-  &, & * {
+  &,
+  & * {
     box-sizing: border-box;
   }
 
   & > .title {
     @extend %typography-h3;
-    color: map-get($neutral-color, '50');
+    color: map-get($neutral-color, "50");
   }
 
   & > .title,
@@ -23,11 +24,11 @@
 @media screen and (max-width: $tablet-treshold) {
   .mbwd-assets {
     margin: 40px 0;
-    
+
     & > .title {
       font-size: 24px;
     }
-  
+
     & > .title,
     & > .search-wrapper {
       margin: 0 0 32px 0;

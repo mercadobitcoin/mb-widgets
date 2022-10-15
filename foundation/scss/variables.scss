@@ -1,14 +1,14 @@
 @import "./design-system/apollo/colors.scss";
 
 //Static path
-$static-path: '';
+$static-path: "";
 
 //Static Image Paths
-$static-img-path: '#{$static-path}/img';
-$static-icons-path: '#{$static-img-path}/icons';
-$static-ilu-path: '#{$static-img-path}/ilu';
-$static-logos-path: '#{$static-img-path}/logos';
-$static-bg-path: '#{$static-img-path}/bg';
+$static-img-path: "#{$static-path}/img";
+$static-icons-path: "#{$static-img-path}/icons";
+$static-ilu-path: "#{$static-img-path}/ilu";
+$static-logos-path: "#{$static-img-path}/logos";
+$static-bg-path: "#{$static-img-path}/bg";
 
 //Deprecated since 3.0.0
 //User the breakpoint mixins instead
@@ -20,22 +20,22 @@ $section-container-desktop-threshold: 1130px;
 //Deprecated variables above
 
 $breakpoints: (
-    "xsm": 360px,
-    "sm": 575px,
-    "md": 768px,
-    "lg": 1024px,
-    "xl": 1280px,
-    "xxl": 1400px,
-    "xxxl": 1536px
+  "xsm": 360px,
+  "sm": 575px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1280px,
+  "xxl": 1400px,
+  "xxxl": 1536px,
 );
 
-$zindex-standard:          10000 !default;
-$zindex-sticky:            10020 !default;
-$zindex-fixed:             10030 !default;
-$zindex-modal-backdrop:    10040 !default;
-$zindex-modal:             10050 !default;
-$zindex-popover:           10060 !default;
-$zindex-tooltip:           10070 !default;
+$zindex-standard: 10000 !default;
+$zindex-sticky: 10020 !default;
+$zindex-fixed: 10030 !default;
+$zindex-modal-backdrop: 10040 !default;
+$zindex-modal: 10050 !default;
+$zindex-popover: 10060 !default;
+$zindex-tooltip: 10070 !default;
 
 //Containers
 $content-container: 1170px;
@@ -49,21 +49,34 @@ $border-radius-big: 16px;
 $sidebar-size: 285px;
 
 //UI Box Shadows
-$box-shadow-lvl-1: 0px 4px 8px rgba(29, 35, 39, 0.08), 0px 0px 2px rgba(29, 35, 39, 0.06), 0px 0px 1px rgba(29, 35, 39, 0.04);
-$box-shadow-lvl-2: 0px 12px 20px rgba(29, 35, 39, 0.08), 0px 2px 6px rgba(29, 35, 39, 0.04), 0px 0px 1px rgba(29, 35, 39, 0.04);
-$box-shadow-lvl-3: 0px 4px 8px rgba(29, 35, 39, 0.08), 0px 0px 2px rgba(29, 35, 39, 0.06), 0px 0px 1px rgba(29, 35, 39, 0.04);
+$box-shadow-lvl-1: 0px 4px 8px rgba(29, 35, 39, 0.08),
+  0px 0px 2px rgba(29, 35, 39, 0.06), 0px 0px 1px rgba(29, 35, 39, 0.04);
+$box-shadow-lvl-2: 0px 12px 20px rgba(29, 35, 39, 0.08),
+  0px 2px 6px rgba(29, 35, 39, 0.04), 0px 0px 1px rgba(29, 35, 39, 0.04);
+$box-shadow-lvl-3: 0px 4px 8px rgba(29, 35, 39, 0.08),
+  0px 0px 2px rgba(29, 35, 39, 0.06), 0px 0px 1px rgba(29, 35, 39, 0.04);
 
 $font-families: () !default;
-$font-families: map-merge((
-        "title": ('IBM Plex Sans', sans-serif),
-        "body": ('IBM Plex Sans', Arial, sans-serif),
-),$font-families);
+$font-families: map-merge(
+  (
+    "title": (
+      "IBM Plex Sans",
+      sans-serif,
+    ),
+    "body": (
+      "IBM Plex Sans",
+      Arial,
+      sans-serif,
+    ),
+  ),
+  $font-families
+);
 
 //UI Border Radius
 $default-border-radius: 8px;
 
 //UI Inputs
-$input-color: map-get($neutral-color, '50');
-$input-border-color: map-get($neutral-color, '50');
+$input-color: map-get($neutral-color, "50");
+$input-border-color: map-get($neutral-color, "50");
 $input-padding-y: 13px;
 $input-padding-x: 16px;

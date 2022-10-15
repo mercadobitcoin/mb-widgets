@@ -15,47 +15,47 @@ const MBC_EMPTY_STATE = () => ({
     cta: {
       type: Object,
       default: null,
-      required: false
+      required: false,
     },
     mainStateIcon: {
       type: String,
-      default: 'ilu-empty-box.svg',
+      default: "ilu-empty-box.svg",
     },
     message: {
       type: String,
       default: "",
-      required: true
+      required: true,
     },
     title: {
       type: String,
       default: "",
-      required: true
+      required: true,
     },
     displayCtaIcon: {
       type: Boolean,
-      default: false
+      default: false,
     },
     ctaIcon: {
       type: String,
-      default: 'ico-refresh-mono.svg',
-    }
+      default: "ico-refresh-mono.svg",
+    },
   },
   computed: {
     cptdCdnStaticDomainUrl() {
-      return 'https://static.mercadobitcoin.com.br/web'
+      return "https://static.mercadobitcoin.com.br/web";
     },
     ctaIsTypeFunction() {
-      return this.cta && this.cta.type && this.cta.type === 'function';
+      return this.cta && this.cta.type && this.cta.type === "function";
     },
     ctaIsTypeUrl() {
-      return this.cta && this.cta.type && this.cta.type === 'link';
+      return this.cta && this.cta.type && this.cta.type === "link";
     },
     getMainStateIconSrc() {
       return `${this.cptdCdnStaticDomainUrl}/img/ilu/${this.mainStateIcon}`;
     },
     getCtaIconSrc() {
       return `${this.cptdCdnStaticDomainUrl}/img/icons/${this.ctaIcon}`;
-    }
+    },
   },
   methods: {
     ctaCallback() {
@@ -64,4 +64,4 @@ const MBC_EMPTY_STATE = () => ({
       }
     },
   },
-})
+});

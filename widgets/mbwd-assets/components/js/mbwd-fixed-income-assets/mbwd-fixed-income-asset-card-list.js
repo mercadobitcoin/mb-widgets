@@ -4,7 +4,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({
                 <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets">
                   <div class="badge-wrapper">
                     <div class="badge">
-                      <span class="rounded-status primary" /> {{ i18n('asset.status') }} mercadinhoww
+                      <span class="rounded-status primary" /> {{ i18n('asset.status') }}
                     </div>
                   </div>
                   <div class="asset-data">
@@ -18,14 +18,18 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({
                       <p class="description">{{ asset.estimated_liquidation_date }}</p>
                     </div>
                     <div class="sold-percentage">
-                      <svg>
-                        <circle cx="80" cy="80" r="70" class="da_sold"> </circle>
-                      </svg>
                       <div class="middle-circle">
                         <p>{{ getPercentageString(asset.sold_percentage) }}</p>
                         <p><strong>{{ i18n('vendido') }}</strong></p>
                       </div>
-                      <div class="progress-spinner" :style="getSoldPercentageStyle(asset.sold_percentage)" />                        
+                      <svg viewBox="0 0 36 36" class="circular-chart">
+                      <path class="circle"
+                        :stroke-dasharray="'' + parsePercentageStrToNumber(getPercentageString(asset.sold_percentage)) + ', 100'"
+                        d="M18 2.0845
+                          a 15.9155 15.9155 0 0 1 0 31.831
+                          a 15.9155 15.9155 0 0 1 0 -31.831"
+                      />
+                    </svg>
                     </div>
                   </div>
                   <div class="ctas">
@@ -59,12 +63,12 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({
   props: {
     language: {
       type: String,
-      default: 'pt'
+      default: "pt",
     },
     assets: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   mixins: [UIMixins, configMixins, currencyFilters],
   data() {
@@ -74,67 +78,70 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({
           "nas últimas 24h": "nas últimas 24h",
           "Valor inicial": "Valor inicial",
           "A partir de": "A partir de",
-          "Rentabilidade": "Rentabilidade",
+          Rentabilidade: "Rentabilidade",
           "Prazo estimado": "Prazo estimado",
-          "vendido": "vendido",
-          "PRIMARY_MARKET": "Primário",
-          "SECONDARY_MARKET": "Secundário",
-          "SOLD_OUT": "esgotado"
+          vendido: "vendido",
+          PRIMARY_MARKET: "Primário",
+          SECONDARY_MARKET: "Secundário",
+          SOLD_OUT: "esgotado",
         },
         en: {
           "nas últimas 24h": "nas últimas 24h",
           "Valor inicial": "Valor inicial",
           "A partir de": "A partir de",
-          "Rentabilidade": "Rentabilidade",
+          Rentabilidade: "Rentabilidade",
           "Prazo estimado": "Prazo estimado",
-          "vendido": "vendido",
-          "PRIMARY_MARKET": "Primário",
-          "SECONDARY_MARKET": "Secundário",
-          "SOLD_OUT": "esgotado"
+          vendido: "vendido",
+          PRIMARY_MARKET: "Primário",
+          SECONDARY_MARKET: "Secundário",
+          SOLD_OUT: "esgotado",
         },
         es: {
           "nas últimas 24h": "nas últimas 24h",
           "Valor inicial": "Valor inicial",
           "A partir de": "A partir de",
-          "Rentabilidade": "Rentabilidade",
+          Rentabilidade: "Rentabilidade",
           "Prazo estimado": "Prazo estimado",
-          "vendido": "vendido",
-          "PRIMARY_MARKET": "Primário",
-          "SECONDARY_MARKET": "Secundário",
-          "SOLD_OUT": "esgotado"
-        }
-      }
+          vendido: "vendido",
+          PRIMARY_MARKET: "Primário",
+          SECONDARY_MARKET: "Secundário",
+          SOLD_OUT: "esgotado",
+        },
+      },
     };
   },
   methods: {
     getAssetStatusBadge(status) {
-      switch(status) {
+      switch (status) {
         default:
-          return ''
+          return "";
       }
     },
-    parsePercentageStrToNumber(percentage = '0') {
-      return Number((percentage).replace(/[^\d.-]/g, ''))
+    parsePercentageStrToNumber(percentage = "0") {
+      return Number(percentage.replace(/[^\d.-]/g, ""));
     },
     getPercentageString(percentage = 0) {
-      let percString = this.parsePercentageStrToNumber(percentage)
-      percString = percString > 100 ? 100 : percString
-      return `${percString}%`
+      let percString = this.parsePercentageStrToNumber(percentage);
+      percString = percString > 100 ? 100 : percString;
+      percString = percString < 0 ? 0 : percString;
+      return `${percString}%`;
     },
-    getSoldPercentageStyle(percentage = '0') {
-      const progress = this.getPercentageString(percentage)
+    getSoldPercentageStyle(percentage = "0") {
+      const progress = this.getPercentageString(percentage);
       return {
-        background: `conic-gradient(#4D5EFF ${progress},#F3F4F4 ${progress})`
-      }
+        background: `conic-gradient(#4D5EFF ${progress},#F3F4F4 ${progress})`,
+      };
     },
     getIconAlt(name) {
-      return `ícone ${name}`
+      return `ícone ${name}`;
     },
     getIconUrl(symbol) {
-      return `${this.GLOBAL_Cdn_Static_Path}/img/icons/assets/ico-asset-${(symbol ?? '').toLowerCase()}-color.svg`
+      return `${this.GLOBAL_Cdn_Static_Path}/img/icons/assets/ico-asset-${(
+        symbol ?? ""
+      ).toLowerCase()}-color.svg`;
     },
     i18n(key) {
-      return this.translateMap?.[this.language]?.[key] ?? '';
-    }
+      return this.translateMap?.[this.language]?.[key] ?? "";
+    },
   },
-})
+});

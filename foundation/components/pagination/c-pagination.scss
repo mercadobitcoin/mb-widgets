@@ -21,7 +21,7 @@
       margin: 0 4px;
       padding: 0;
       @extend %typography-body-3;
-      color: map-get($neutral-color, '50');
+      color: map-get($neutral-color, "50");
       background-color: transparent;
       border: none;
       cursor: pointer;
@@ -35,14 +35,14 @@
         border-top-left-radius: 1.5px;
 
         &.right {
-          border-top: 2px solid map-get($primary-color, 'main');
-          border-right: 2px solid map-get($primary-color, 'main');
+          border-top: 2px solid map-get($primary-color, "main");
+          border-right: 2px solid map-get($primary-color, "main");
           transform: rotate(45deg);
         }
 
         &.left {
-          border-bottom: 2px solid map-get($primary-color, 'main');
-          border-left: 2px solid map-get($primary-color, 'main');
+          border-bottom: 2px solid map-get($primary-color, "main");
+          border-left: 2px solid map-get($primary-color, "main");
           transform: rotate(45deg);
         }
       }
@@ -52,30 +52,30 @@
       }
 
       &:first-child {
-        margin-left: 0
+        margin-left: 0;
       }
 
       &:last-child {
-        margin-right: 0
+        margin-right: 0;
       }
 
       &.active {
-        color: #FFFFFF;
+        color: #ffffff;
         @extend %typography-label-3;
         border-radius: 4px;
-        background-color: map-get($primary-color, 'main');
+        background-color: map-get($primary-color, "main");
       }
 
       &:disabled {
         .arrow {
           &.right {
-            border-top: 2px solid map-get($secondary-color, '20');
-            border-right: 2px solid map-get($secondary-color, '20');
+            border-top: 2px solid map-get($secondary-color, "20");
+            border-right: 2px solid map-get($secondary-color, "20");
           }
 
           &.left {
-            border-bottom: 2px solid map-get($secondary-color, '20');
-            border-left: 2px solid map-get($secondary-color, '20');
+            border-bottom: 2px solid map-get($secondary-color, "20");
+            border-left: 2px solid map-get($secondary-color, "20");
           }
         }
       }

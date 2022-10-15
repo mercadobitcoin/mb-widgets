@@ -48,71 +48,75 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
   props: {
     authToken: {
       type: Boolean,
-      default: false
+      default: false,
     },
     language: {
       type: String,
-      default: 'pt'
+      default: "pt",
     },
     search: {
       type: String,
-      default: ''
+      default: "",
     },
     intervalTimeout: {
       type: Number,
-      default: 30000 //ms
-    }
+      default: 30000, //ms
+    },
   },
   mixins: [configMixins, UIMixins, URLMixins],
   components: {
-    'mbc-pagination': MBC_PAGINATION(),
-    'mbwd-fixed-income-asset-card-list': MBWD_FIXED_INCOME_ASSET_CARD_LIST(),
-    'mbwd-fixed-income-asset-table': MBWD_FIXED_INCOME_ASSET_TABLE()
+    "mbc-pagination": MBC_PAGINATION(),
+    "mbwd-fixed-income-asset-card-list": MBWD_FIXED_INCOME_ASSET_CARD_LIST(),
+    "mbwd-fixed-income-asset-table": MBWD_FIXED_INCOME_ASSET_TABLE(),
   },
   data() {
     return {
       intervalId: undefined,
       fixedIncomeAssets: {},
       busy: true,
-      viewMode: 'table', // [card, table],
+      viewMode: "table", // [card, table],
       fixedIncomeAssets: {
         limit: 5,
-        category: 'all',
-        sort: '',
-        order: '',
+        category: "all",
+        sort: "",
+        order: "",
         currentPage: 1,
         totalPages: 1,
-        result: []
+        result: [],
       },
-      translateMap:{
+      translateMap: {
         pt: {
-          "Favoritos": "Favoritos",
+          Favoritos: "Favoritos",
           "Com saldo": "Com saldo",
           "Renda Fixa Digital": "Renda Fixa Digital",
-          "Novos": "Novos",
-          "Todos": "Todos"
+          Novos: "Novos",
+          Todos: "Todos",
         },
         en: {
-          "Favoritos": "Favoritos",
+          Favoritos: "Favoritos",
           "Com saldo": "Com saldo",
           "Renda Fixa Digital": "Renda Fixa Digital",
-          "Novos": "Novos",
-          "Todos": "Todos"
+          Novos: "Novos",
+          Todos: "Todos",
         },
         es: {
-          "Favoritos": "Favoritos",
+          Favoritos: "Favoritos",
           "Com saldo": "Com saldo",
           "Renda Fixa Digital": "Renda Fixa Digital",
-          "Novos": "Novos",
-          "Todos": "Todos"
-        }                                
+          Novos: "Novos",
+          Todos: "Todos",
+        },
       },
     };
   },
   mounted() {
     this.getFixedIncomeAssets();
     this.scheduleGetFixedIncomeAssetsInterval();
-    document.addEventListener('visibilitychange', this.handleVisibilityChange, false);
+    document.addEventListener(
+      "visibilitychange",
+      this.handleVisibilityChange,
+      false
+    );
   },
   destroy() {
     this.stopGetFixedIncomeAssetsInterval();
@@ -121,121 +125,122 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     cptdAssetCategories() {
       let defaultCategories = [
         {
-          label: 'Novos',
-          value: 'new'
+          label: "Novos",
+          value: "new",
         },
         {
-          label: 'Todos',
-          value: 'all'
-        }
-      ]
+          label: "Todos",
+          value: "all",
+        },
+      ];
 
       if (this.authToken) {
         defaultCategories = [
           {
-            label: 'Favoritos',
-            value: 'favorites'
+            label: "Favoritos",
+            value: "favorites",
           },
           {
-            label: 'Com saldo',
-            value: 'has-balance'
+            label: "Com saldo",
+            value: "has-balance",
           },
-          ...defaultCategories
-        ]
+          ...defaultCategories,
+        ];
       }
 
       return defaultCategories;
-    }
+    },
   },
   watch: {
     search() {
       this.resetFixedIncomeBasicQueryDefaultState();
       this.getFixedIncomeAssets();
-    }
+    },
   },
   methods: {
     cssIsCategoryActive(category) {
-      return this.fixedIncomeAssets.category === category ? 'active' : '';
+      return this.fixedIncomeAssets.category === category ? "active" : "";
     },
     cssIsViewModeActive(viewMode) {
-      return this.isViewModeActive(viewMode) ? 'active' : '';
+      return this.isViewModeActive(viewMode) ? "active" : "";
     },
     getIconUrl(path) {
       return `${this.GLOBAL_Cdn_Static_Path}/${path}`;
     },
     async getFixedIncomeAssets() {
       this.busy = true;
-      this.getFixedIncomeAssetsRequestQueryString()
+      this.getFixedIncomeAssetsRequestQueryString();
       // try {
       // const response = await fetch(`https://store.mercadobitcoin.com.br/api/v1/marketplace/crypto/coin?${this.getFixedIncomeAssetsRequestQueryString}`)
-      
+
       // if (response.ok) {
-        // const { response_data } = await response.json()
-        // this.fixedIncomeAssets.result = response_data?.data ?? []
+      // const { response_data } = await response.json()
+      // this.fixedIncomeAssets.result = response_data?.data ?? []
       // } else {
-        // this.fixedIncomeAssets.result = []
+      // this.fixedIncomeAssets.result = []
       // }
       // } catch (e) {
-        // this.fixedIncomeAssets.result = []
+      // this.fixedIncomeAssets.result = []
       // }
-      
+
       this.fixedIncomeAssets.result = [
         {
-          "asset_id": "704812c83d9b4b13b76bd38bd87ad33r",
-          "product_id": "3",
-          "legacy_id": "AAVE",
-          "name": "Aave",
-          "symbol": "AAVE",
-          "minimum_value": "R$ 1,00",
-          "profitability": "IGPM + TR + 7% a.a.",
-          "estimated_liquidation_date": "Jan/2024",
-          "sold_percentage": "0%",
-          "available_percentage": "100%",
-          "status": "PRIMARY_MARKET",
-          "family_name": "Consórcios"
+          asset_id: "704812c83d9b4b13b76bd38bd87ad33r",
+          product_id: "3",
+          legacy_id: "AAVE",
+          name: "Aave",
+          symbol: "AAVE",
+          minimum_value: "R$ 1,00",
+          profitability: "IGPM + TR + 7% a.a.",
+          estimated_liquidation_date: "Jan/2024",
+          sold_percentage: "0%",
+          available_percentage: "100%",
+          status: "PRIMARY_MARKET",
+          family_name: "Consórcios",
         },
         {
-          "asset_id": "634812c83d9b4b13b76bd38bd87ad20e",
-          "product_id": "2",
-          "legacy_id": "SUSHI",
-          "name": "SushiSwap",
-          "symbol": "SUSHI",
-          "minimum_value": "R$ 50,00",
-          "profitability": "IGPM + TR + 5% a.a.",
-          "estimated_liquidation_date": "Jan/2024",
-          "sold_percentage": "1000000%",
-          "available_percentage": "-999900%",
-          "status": "SECONDARY_MARKET",
-          "family_name": "Consórcios"
+          asset_id: "634812c83d9b4b13b76bd38bd87ad20e",
+          product_id: "2",
+          legacy_id: "SUSHI",
+          name: "SushiSwap",
+          symbol: "SUSHI",
+          minimum_value: "R$ 50,00",
+          profitability: "IGPM + TR + 5% a.a.",
+          estimated_liquidation_date: "Jan/2024",
+          sold_percentage: "1000000%",
+          available_percentage: "-999900%",
+          status: "SECONDARY_MARKET",
+          family_name: "Consórcios",
         },
         {
-          "asset_id": "d200df4a856b44348cc94f67488f958b",
-          "product_id": "1",
-          "legacy_id": "DAXPTO",
-          "name": "XRP",
-          "symbol": "AAA",
-          "minimum_value": "R$ 150,00",
-          "profitability": "IPCA + 15% a.a.",
-          "estimated_liquidation_date": "Mai/2023",
-          "sold_percentage": "5.59%",
-          "available_percentage": "94.41%",
-          "status": "PRIMARY_MARKET",
-          "family_name": "Precatórios"
-        }
-      ]
-      this.$emit('list-updated', this.fixedIncomeAssets.result.length);
+          asset_id: "d200df4a856b44348cc94f67488f958b",
+          product_id: "1",
+          legacy_id: "DAXPTO",
+          name: "XRP",
+          symbol: "AAA",
+          minimum_value: "R$ 150,00",
+          profitability: "IPCA + 15% a.a.",
+          estimated_liquidation_date: "Mai/2023",
+          sold_percentage: "5.59%",
+          available_percentage: "94.41%",
+          status: "PRIMARY_MARKET",
+          family_name: "Precatórios",
+        },
+      ];
+      this.$emit("list-updated", this.fixedIncomeAssets.result.length);
       this.busy = false;
     },
     getFixedIncomeAssetsRequestQueryString() {
-      const { sort, category, order, currentPage, totalPages, limit } = this.fixedIncomeAssets;
-      const searchQueryStringsMap = { 
-        limit, 
-        sort, 
-        order
+      const { sort, category, order, currentPage, totalPages, limit } =
+        this.fixedIncomeAssets;
+      const searchQueryStringsMap = {
+        limit,
+        sort,
+        order,
       };
 
       if (totalPages > 1) {
-        searchQueryStringsMap.offset = (currentPage - 1) * limit
+        searchQueryStringsMap.offset = (currentPage - 1) * limit;
       }
 
       if (this.search) {
@@ -250,7 +255,10 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
 
       // }
 
-      console.log('SEARCHING FOR:', this.mxCreateUrlQueryString(searchQueryStringsMap));
+      console.log(
+        "SEARCHING FOR:",
+        this.mxCreateUrlQueryString(searchQueryStringsMap)
+      );
 
       return this.mxCreateUrlQueryString(searchQueryStringsMap);
     },
@@ -262,7 +270,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       }
     },
     i18n(key) {
-      return this.translateMap?.[this.language]?.[key] ?? '';
+      return this.translateMap?.[this.language]?.[key] ?? "";
     },
     isViewModeActive(viewMode) {
       return this.viewMode === viewMode;
@@ -283,23 +291,29 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     onViewModeChange(viewMode) {
       this.viewMode = viewMode;
-      this.fixedIncomeAssets.limit = viewMode === 'card' ? 4 : 5;
+      this.fixedIncomeAssets.limit = viewMode === "card" ? 4 : 5;
     },
     resetFixedIncomeBasicQueryDefaultState() {
-      this.fixedIncomeAssets.sort = '';
-      this.$refs.refFixedIncomeAssetTable.sort = '';
-      this.fixedIncomeAssets.order = '';
-      this.$refs.refFixedIncomeAssetTable.order = '';
+      if (this.$refs?.refFixedIncomeAssetTable) {
+        this.$refs.refFixedIncomeAssetTable.sort = "";
+        this.$refs.refFixedIncomeAssetTable.order = "";
+      }
+
+      this.fixedIncomeAssets.sort = "";
+      this.fixedIncomeAssets.order = "";
       this.currentPage = 1;
       this.totalPages = 1;
-      this.category = 'all';
+      this.category = "all";
     },
     scheduleGetFixedIncomeAssetsInterval() {
-      this.intervalId = setInterval(this.getFixedIncomeAssets, this.intervalTimeout);
+      this.intervalId = setInterval(
+        this.getFixedIncomeAssets,
+        this.intervalTimeout
+      );
     },
     stopGetFixedIncomeAssetsInterval() {
       this.intervalId = null;
       clearInterval(this.intervalId);
     },
   },
-})
+});

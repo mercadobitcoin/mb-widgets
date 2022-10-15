@@ -1,0 +1,57 @@
+@import "../../scss/variables";
+@import "../../scss/design-system/apollo/colors.scss";
+@import "../../scss/design-system/apollo/buttons.scss";
+
+.c-asset-badges {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding-left: 8px;
+
+  .c-badge {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 2px 4px;
+    margin-left: 8px;
+    margin-bottom: 8px;
+    @extend %typography-caption;
+    color: map-get($neutral-color, "50");
+    border: 1px solid map-get($neutral-color, "10");
+    border-radius: $border-radius-small;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    & > .icon {
+      width: 12px;
+      height: 12px;
+      margin-right: 6px;
+    }
+
+    & > .rounded-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+
+      &.primary {
+        background: map-get($tertiary-color, "30");
+      }
+
+      &.secondary {
+        background: map-get($secondary-color, "50");
+      }
+
+      &.sold-out {
+        background: map-get($negative-color, "30");
+      }
+    }
+  }
+}

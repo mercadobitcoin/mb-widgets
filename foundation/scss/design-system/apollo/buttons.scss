@@ -1,32 +1,32 @@
-@import './colors.scss';
+@import "./colors.scss";
 
 %primary {
   &.filled {
     color: white;
-    background-color: map-get($primary-color , 'main');
+    background-color: map-get($primary-color, "main");
 
     &:hover,
     &:focus {
-      background-color: map-get($primary-color , '40');
+      background-color: map-get($primary-color, "40");
     }
 
     &:active {
-      background-color: map-get($primary-color , '50');
+      background-color: map-get($primary-color, "50");
     }
   }
 
   &.outlined {
-    color: map-get($primary-color , 'main');
-    border: 2px solid map-get($primary-color , 'main');
+    color: map-get($primary-color, "main");
+    border: 2px solid map-get($primary-color, "main");
   }
 
   &.ghost {
-    color: map-get($primary-color , 'main');
+    color: map-get($primary-color, "main");
   }
 
   &.disabled {
-    color: map-get($neutral-color , '10');
-    background-color: map-get($neutral-color , '5');
+    color: map-get($neutral-color, "10");
+    background-color: map-get($neutral-color, "5");
     opacity: 1;
     border: none;
   }
@@ -34,14 +34,15 @@
 
 %secondary {
   &.ghost {
-    color: map-get($neutral-color , '50');
+    color: map-get($neutral-color, "50");
 
-    &:hover, &:focus {
-      background-color: map-get($neutral-color , '5');
+    &:hover,
+    &:focus {
+      background-color: map-get($neutral-color, "5");
     }
 
     &:active {
-      background-color: map-get($neutral-color , '10');
+      background-color: map-get($neutral-color, "10");
     }
   }
 }
@@ -49,50 +50,55 @@
 %tertiary {
   &.filled {
     color: white;
-    background-color: map-get($tertiary-color , 'main');
+    background-color: map-get($tertiary-color, "main");
   }
 
   &.outlined {
-    color: map-get($tertiary-color , 'main');
-    border: 2px solid map-get($tertiary-color , 'main');
+    color: map-get($tertiary-color, "main");
+    border: 2px solid map-get($tertiary-color, "main");
   }
 
   &.ghost {
-    color: map-get($tertiary-color , 'main');
+    color: map-get($tertiary-color, "main");
   }
 }
 
 %positive {
   &.filled {
     color: white;
-    background-color: map-get($positive-color , 'main');
+    background-color: map-get($positive-color, "main");
   }
   &.outlined {
-    color: map-get($positive-color , 'main');
-    border: 2px solid map-get($positive-color, 'main');
+    color: map-get($positive-color, "main");
+    border: 2px solid map-get($positive-color, "main");
   }
   &.ghost {
-    color: map-get($positive-color , 'main');
+    color: map-get($positive-color, "main");
   }
 }
 
 %negative {
   &.filled {
     color: white;
-    background-color: map-get($negative-color , '40');
+    background-color: map-get($negative-color, "40");
   }
   &.outlined {
-    color: map-get($negative-color , '40');
-    border: 2px solid map-get($negative-color, '40');
+    color: map-get($negative-color, "40");
+    border: 2px solid map-get($negative-color, "40");
   }
   &.ghost {
-    color: map-get($negative-color , '40');
+    color: map-get($negative-color, "40");
   }
 }
 
 .apollo {
-  button, a.button {
-    &.primary, &.secondary, &.tertiary, &.positive, &.negative {
+  button,
+  a.button {
+    &.primary,
+    &.secondary,
+    &.tertiary,
+    &.positive,
+    &.negative {
       text-decoration: none;
       min-width: 164px;
       height: 48px;
@@ -111,7 +117,7 @@
 
       outline: none;
       overflow: hidden;
-      cursor:pointer;
+      cursor: pointer;
 
       border-radius: 8px;
       padding: 16px 24px;

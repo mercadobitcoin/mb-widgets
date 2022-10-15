@@ -8,62 +8,66 @@ const MBC_SEARCH_BOX = () => ({
     </button>
   </div>`,
   directives: {
-    'click-outside': {
+    "click-outside": {
       bind(el, binding, vnode) {
-        document.body.addEventListener('mousedown', (event) => {
-          if (!(el == event.target || el.contains(event.target))) {
-            vnode.context[binding.expression](event);
-          }
-        }, {capture: true});
+        document.body.addEventListener(
+          "mousedown",
+          (event) => {
+            if (!(el == event.target || el.contains(event.target))) {
+              vnode.context[binding.expression](event);
+            }
+          },
+          { capture: true }
+        );
       },
       unbind() {
-        document.body.removeEventListener('mousedown', this.event);
+        document.body.removeEventListener("mousedown", this.event);
       },
-    }
+    },
   },
   props: {
     autofocus: {
       type: Boolean,
-      default: false
+      default: false,
     },
     value: {
       type: String,
-      default: ''
+      default: "",
     },
     displayClearButton: {
       type: Boolean,
-      default: true
+      default: true,
     },
     displayInputIcon: {
       type: Boolean,
-      default: true
+      default: true,
     },
     placeholder: {
-      type: String
-    }
+      type: String,
+    },
   },
   mixins: [mixins],
   data() {
     return {
       searchTerm: this.value,
       debounceIntervalId: null,
-      focused: false
-    }
+      focused: false,
+    };
   },
   computed: {
     cptdCdnStaticDomainUrl() {
-      return 'https://static.mercadobitcoin.com.br/web'
+      return "https://static.mercadobitcoin.com.br/web";
     },
     cssSearchBoxWrapper() {
       return {
-        'c-search-box-wrapper': true,
-        'focus': this.focused
-      }
+        "c-search-box-wrapper": true,
+        focus: this.focused,
+      };
     },
     cssInput() {
       return {
-        'has-text': this.cptdCanDisplayClearButton
-      }
+        "has-text": this.cptdCanDisplayClearButton,
+      };
     },
     cptdCanDisplayClearButton() {
       return this.displayClearButton && this.searchTerm.length > 0;
@@ -77,12 +81,12 @@ const MBC_SEARCH_BOX = () => ({
     },
     value(value) {
       this.searchTerm = value;
-    }
+    },
   },
-  methods:{
+  methods: {
     debounceSearch(event) {
       this.debounceIntervalId = this.mxDebounce(this.debounceIntervalId, () => {
-        this.$emit('update:value', event.target.value);
+        this.$emit("update:value", event.target.value);
       });
     },
     focusOnInputSearch() {
@@ -91,13 +95,13 @@ const MBC_SEARCH_BOX = () => ({
       });
     },
     clearSearch() {
-      this.searchTerm = '';
-      this.$emit('update:value', this.searchTerm);
+      this.searchTerm = "";
+      this.$emit("update:value", this.searchTerm);
       this.focusOnInputSearch();
     },
     blur() {
       this.focused = false;
-      this.$emit('blur');
-    }
-  }
-})
+      this.$emit("blur");
+    },
+  },
+});

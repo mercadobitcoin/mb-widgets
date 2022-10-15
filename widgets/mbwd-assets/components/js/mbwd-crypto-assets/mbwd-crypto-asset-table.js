@@ -98,65 +98,67 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({
   props: {
     language: {
       type: String,
-      default: 'pt'
+      default: "pt",
     },
     assets: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   mixins: [configMixins, UIMixins, currencyFilters],
   data() {
     return {
-      sort: '',
-      order: '',
+      sort: "",
+      order: "",
       translateMap: {
         pt: {
-          "Ativo": "Ativo",
-          "Ticker": "Ticker",
-          "Segmento": "Segmento",
-          "Preço": "Preço",
-          "Variação": "Variação",
+          Ativo: "Ativo",
+          Ticker: "Ticker",
+          Segmento: "Segmento",
+          Preço: "Preço",
+          Variação: "Variação",
           "Capitalização de mercado": "Capitalização de mercado",
-          "Comprar": "Comprar"
+          Comprar: "Comprar",
+          utility_token: "Utility token",
         },
         en: {
-          "Ativo": "Ativo",
-          "Ticker": "Ticker",
-          "Segmento": "Segmento",
-          "Preço": "Preço",
-          "Variação": "Variação",
+          Ativo: "Ativo",
+          Ticker: "Ticker",
+          Segmento: "Segmento",
+          Preço: "Preço",
+          Variação: "Variação",
           "Capitalização de mercado": "Capitalização de mercado",
-          "Comprar": "Comprar"
+          Comprar: "Comprar",
+          utility_token: "Utility token",
         },
         es: {
-          "Ativo": "Ativo",
-          "Ticker": "Ticker",
-          "Segmento": "Segmento",
-          "Preço": "Preço",
-          "Variação": "Variação",
+          Ativo: "Ativo",
+          Ticker: "Ticker",
+          Segmento: "Segmento",
+          Preço: "Preço",
+          Variação: "Variação",
           "Capitalização de mercado": "Capitalização de mercado",
-          "Comprar": "Comprar"
-        }
+          Comprar: "Comprar",
+          utility_token: "Utility token",
+        },
       },
     };
   },
   methods: {
     i18n(key) {
-      return this.translateMap?.[this.language]?.[key] ?? '';
+      return this.translateMap?.[this.language]?.[key] ?? "";
     },
     getIconAlt(name) {
       return `ícone ${name}`;
     },
     onSortChange(sort) {
-      if (this.sort === 'sort') {
-
+      if (this.sort === "sort") {
       } else {
         this.sort = sort;
-        this.order = 'asc';
+        this.order = "asc";
       }
 
-      this.$emit('sort', { order: this.order, sort: this.sort });
-    }
+      this.$emit("sort", { order: this.order, sort: this.sort });
+    },
   },
-})
+});

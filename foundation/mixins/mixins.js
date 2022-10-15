@@ -4,7 +4,7 @@ const mixins = {
       const debounceWaitTimeOut = wait || 300;
 
       clearTimeout(debounceIntervalId);
-      return debounceIntervalId = setTimeout(callback, debounceWaitTimeOut);
-    }
-  }
-}
+      return (debounceIntervalId = setTimeout(callback, debounceWaitTimeOut));
+    },
+  },
+};

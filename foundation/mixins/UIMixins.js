@@ -6,13 +6,16 @@ const UIMixins = {
       mediumThreshold: null,
       mediumThresholdConfig: {
         min: 641,
-        max: 1130
-      }
-    }
+        max: 1130,
+      },
+    };
   },
   created() {
     var clientWidth = document.documentElement.clientWidth;
     this.mobileMode = clientWidth <= this.mobileThreshold;
-    this.mediumThreshold = !this.mobileMode && (clientWidth >= this.mediumThresholdConfig.min && clientWidth <= this.mediumThresholdConfig.max);
-  }
-}
+    this.mediumThreshold =
+      !this.mobileMode &&
+      clientWidth >= this.mediumThresholdConfig.min &&
+      clientWidth <= this.mediumThresholdConfig.max;
+  },
+};

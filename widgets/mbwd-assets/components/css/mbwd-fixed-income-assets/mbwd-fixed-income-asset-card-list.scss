@@ -9,8 +9,8 @@
   flex-wrap: wrap;
   justify-content: space-between;
 
-  &>.fixed-income-card {
-    background: map-get($background-color, 'primary');
+  & > .fixed-income-card {
+    background: map-get($background-color, "primary");
     box-shadow: $box-shadow-lvl-1;
     display: flex;
     flex-direction: column;
@@ -20,7 +20,7 @@
 
     &:hover,
     &:active {
-      border: 1px solid map-get($primary-color, '30');
+      border: 1px solid map-get($primary-color, "30");
     }
 
     .badge-wrapper {
@@ -31,30 +31,29 @@
         display: inline-flex;
         align-items: center;
         padding: 2px 4px;
-        border: 1px solid map-get($neutral-color, '10');
+        border: 1px solid map-get($neutral-color, "10");
         border-radius: $border-radius-small;
         @extend %typography-caption;
         line-height: 100%;
-        color: map-get($neutral-color, '50');
+        color: map-get($neutral-color, "50");
         white-space: nowrap;
-        
-  
+
         .rounded-status {
           width: 8px;
           height: 8px;
           border-radius: 50%;
           margin-right: 6px;
-  
+
           &.primary {
-            background: map-get($tertiary-color, '30');
+            background: map-get($tertiary-color, "30");
           }
 
           &.secondary {
-            background: map-get($secondary-color, '50')
+            background: map-get($secondary-color, "50");
           }
 
           &.sold-out {
-            background: map-get($negative-color, '30');
+            background: map-get($negative-color, "30");
           }
         }
       }
@@ -64,16 +63,9 @@
       width: 32px;
       height: 32px;
     }
-
-    .profitability {
-      color: map-get($positive-color, '30');
-      @extend %typography-label-3;
-      margin: 0;
-      white-space: nowrap;
-    }
   }
 
-  &>.fixed-income-card.desktop {
+  & > .fixed-income-card.desktop {
     border-radius: $border-radius-big;
     padding: 24px;
     // max-width: 280px;
@@ -82,7 +74,7 @@
     // height: 195px;
     margin-top: 32px;
 
-    .badge-wrapper { 
+    .badge-wrapper {
       margin: 0 0 16px 0;
     }
 
@@ -95,26 +87,33 @@
       .attributes {
         .name {
           @extend %typography-label-2;
-          color: map-get($neutral-color, '50');
+          color: map-get($neutral-color, "50");
           margin: 0 0 16px 0;
         }
 
-        .title, 
+        .title,
         .description {
           /* Mobile/Paragraph/Body 2 Highlight */
-          font-family: 'IBM Plex Sans';
+          font-family: "IBM Plex Sans";
           font-style: normal;
           font-weight: 600;
           font-size: 14px;
           line-height: 140%;
           /* Light/Neutral/50 */
-          color: map-get($neutral-color, '50');
+          color: map-get($neutral-color, "50");
           margin: 0 0 2px 0;
         }
 
         .description {
           margin-bottom: 8px;
           font-weight: 400;
+
+          &.profitability {
+            color: map-get($positive-color, "30");
+            @extend %typography-label-3;
+            margin: 0;
+            white-space: nowrap;
+          }
 
           &:last-child {
             margin: 0;
@@ -127,32 +126,51 @@
         display: flex;
         justify-content: center;
         align-items: center;
-  
+
+        .circular-chart {
+          width: 104px;
+          height: 104px;
+
+          .circle {
+            stroke: map-get($tertiary-color, "20");
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+          }
+
+          @keyframes progress {
+            0% {
+              stroke-dasharray: 0 100;
+            }
+          }
+        }
+
         .progress-spinner {
           border-radius: 50%;
           height: 104px;
           width: 104px;
         }
-  
+
         .middle-circle {
           position: absolute;
           border-radius: 50%;
           height: 86px;
           width: 86px;
-          background-color: #FFFFFF;
+          background-color: #ffffff;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
 
           p {
-            font-family: 'IBM Plex Sans';
+            font-family: "IBM Plex Sans";
             font-weight: 400;
             font-size: 15.0361px;
             line-height: 140%;
             text-align: center;
             letter-spacing: 0.313253px;
-            color: map-get($neutral-color, '30');
+            color: map-get($neutral-color, "30");
             margin: 0;
 
             strong {
@@ -173,48 +191,56 @@
         margin-bottom: 16px;
         border-radius: 4px;
 
-        &:last-child { margin: 0; }
+        &:last-child {
+          margin: 0;
+        }
       }
     }
   }
 
-  &>.fixed-income-card.mobile {
+  & > .fixed-income-card.mobile {
     padding: 16px;
     border-radius: $border-radius-default;
     width: 100%;
     justify-content: space-between;
     margin-top: 24px;
 
-    &>.attributes {
+    & > .attributes {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       margin: 0 0 8px 0;
 
-
-      &>.header {
+      & > .header {
         display: flex;
         align-items: center;
 
-        &>.asset-icon {
+        & > .asset-icon {
           width: 24px;
           height: 24px;
           margin-right: 8px;
         }
 
-        &>.symbol {
+        & > .symbol {
           @extend %typography-label-2;
-          color: map-get($neutral-color, '50');
+          color: map-get($neutral-color, "50");
           white-space: nowrap;
           margin: 0;
         }
       }
     }
 
-    &>.market-data {
+    & > .market-data {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
+
+      .profitability {
+        color: map-get($positive-color, "30");
+        @extend %typography-label-3;
+        margin: 0;
+        white-space: nowrap;
+      }
 
       .minimum-value {
         text-align: right;

@@ -8,8 +8,8 @@
     padding: 0;
     width: 68px;
     height: 32px;
-    background: map-get($neutral-color, '50');
-    border: 1px solid map-get($border-color, 'primary');
+    background: map-get($neutral-color, "50");
+    border: 1px solid map-get($border-color, "primary");
     border-radius: $border-radius-default;
     position: relative;
     overflow: hidden;
@@ -23,12 +23,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: map-get($neutral-color, '50');
+      background: map-get($neutral-color, "50");
       border: none;
       margin: 0 4px 0 0;
-      transition: all .2s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
-    
+
       &:last-child {
         margin-right: 0;
       }
@@ -39,22 +39,22 @@
       }
 
       &.active {
-        background: #FFFFFF;
-        border: 1px solid map-get($border-color, 'primary');
+        background: #ffffff;
+        border: 1px solid map-get($border-color, "primary");
         border-radius: 6px;
       }
     }
   }
 
-  &>.title {
+  & > .title {
     display: flex;
     align-items: center;
     justify-content: space-between;
     @extend %typography-h4;
-    color: map-get($neutral-color, '50');
+    color: map-get($neutral-color, "50");
     margin: 0 0 32px 0;
   }
-  &>.options {
+  & > .options {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -76,44 +76,45 @@
         border-radius: 24px;
         border: none;
         cursor: pointer;
-        transition: all .2s ease;
-        color: map-get($neutral-color, '50');
+        transition: all 0.2s ease;
+        color: map-get($neutral-color, "50");
         background-color: transparent;
 
         &:last-child {
           margin-right: 0;
         }
 
-        &:hover, &:focus {
-          background-color: map-get($neutral-color , '5');
+        &:hover,
+        &:focus {
+          background-color: map-get($neutral-color, "5");
         }
-    
+
         &:active {
-          background-color: map-get($neutral-color , '10');
+          background-color: map-get($neutral-color, "10");
         }
 
         &.active {
           /* light/neutral-color-50 */
-          background: map-get($neutral-color, '50');;
+          background: map-get($neutral-color, "50");
           /* White */
-          color: #FFFFFF;
+          color: #ffffff;
         }
       }
     }
   }
 
-  &>.pagination-wrapper {
+  & > .pagination-wrapper {
     padding: 32px 0;
   }
 }
 
 @media screen and (max-width: $tablet-treshold) {
   .mbwd-fixed-income-assets {
-    &>.title {
+    & > .title {
       font-size: 20px;
       margin: 0 0 24px 0;
     }
-    &>.pagination-wrapper {
+    & > .pagination-wrapper {
       padding: 32px 0;
     }
   }

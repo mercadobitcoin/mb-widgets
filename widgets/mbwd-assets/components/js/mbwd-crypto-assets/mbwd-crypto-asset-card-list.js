@@ -10,14 +10,7 @@ const MBWD_CRYPTO_ASSET_CARD_LIST = () => ({
                         <p class="type">{{ asset.sub_type }}</p>
                       </div>
                     </div>
-                    <div class="badges">
-                      <div class="badge">
-                        <img class="icon" :src="asset.icon_url" /> exclusivos mb
-                      </div>
-                      <div class="badge">
-                        <img class="icon" :src="asset.icon_url" /> novo
-                      </div>
-                    </div>
+                    <mbc-asset-badges :badges="asset.badges" type="crypto" />
                   </div>
                   <div class="market-data">
                     <p class="variation">
@@ -31,14 +24,7 @@ const MBWD_CRYPTO_ASSET_CARD_LIST = () => ({
                   <div class="attributes">
                     <div class="header">
                       <img class="asset-icon" :src="asset.icon_url" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-                      <div class="badges">
-                        <div class="badge">
-                          <img class="icon" :src="asset.icon_url" /> exclusivos mb
-                        </div>
-                        <div class="badge">
-                          <img class="icon" :src="asset.icon_url" /> novo
-                        </div>
-                      </div>
+                      <mbc-asset-badges :badges="asset.badges" type="crypto" />
                     </div>
                     <p class="name">
                       {{ asset.name }}
@@ -56,35 +42,38 @@ const MBWD_CRYPTO_ASSET_CARD_LIST = () => ({
   props: {
     language: {
       type: String,
-      default: 'pt'
+      default: "pt",
     },
     assets: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   mixins: [configMixins, UIMixins, currencyFilters],
+  components: {
+    "mbc-asset-badges": MBC_ASSET_BADGES(),
+  },
   data() {
     return {
       translateMap: {
         pt: {
-          "nas últimas 24h": "nas últimas 24h"
+          "nas últimas 24h": "nas últimas 24h",
         },
         en: {
-          "nas últimas 24h": "nas últimas 24h"
+          "nas últimas 24h": "nas últimas 24h",
         },
         es: {
-          "nas últimas 24h": "nas últimas 24h"
-        }
-      }
+          "nas últimas 24h": "nas últimas 24h",
+        },
+      },
     };
   },
   methods: {
     i18n(key) {
-      return this.translateMap?.[this.language]?.[key] ?? '';
+      return this.translateMap?.[this.language]?.[key] ?? "";
     },
     getIconAlt(name) {
       return `ícone ${name}`;
     },
   },
-})
+});
