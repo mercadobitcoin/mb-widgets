@@ -21,7 +21,6 @@ $primary-color: (
   "filter-50": brightness(0) saturate(100%) invert(10%) sepia(75%)
     saturate(5220%) hue-rotate(18deg) brightness(103%) contrast(101%),
 );
-
 $secondary-color: (
   "main": #1d2327,
   "5": #f3f4f4,
@@ -45,7 +44,6 @@ $secondary-color: (
   "filter-50": brightness(0) saturate(100%) invert(11%) sepia(16%)
     saturate(584%) hue-rotate(161deg) brightness(94%) contrast(93%),
 );
-
 $tertiary-color: (
   "main": #0019ff,
   "5": #e5e8ff,
@@ -69,7 +67,6 @@ $tertiary-color: (
   "filter-50": brightness(0) saturate(100%) invert(14%) sepia(88%)
     saturate(3481%) hue-rotate(233deg) brightness(72%) contrast(130%),
 );
-
 $neutral-color: (
   "main": #1d2327,
   "5": #f3f4f4,
@@ -93,7 +90,6 @@ $neutral-color: (
   "filter-50": brightness(0) saturate(100%) invert(11%) sepia(16%)
     saturate(584%) hue-rotate(161deg) brightness(94%) contrast(93%),
 );
-
 $negative-color: (
   "main": #dd222e,
   "5": #ffe5e7,
@@ -117,15 +113,14 @@ $negative-color: (
   "filter-50": brightness(0) saturate(100%) invert(9%) sepia(37%)
     saturate(6291%) hue-rotate(343deg) brightness(102%) contrast(103%),
 );
-
 $warning-color: (
   "main": #ffbe3d,
-  "5": #ffeecc,
-  "10": #ffdd99,
-  "20": #ffcc66,
+  "5": #fec,
+  "10": #fd9,
+  "20": #fc6,
   "30": #ffbe3d,
   "40": #e5a82e,
-  "50": #cc8800,
+  "50": #c80,
   "filter": brightness(0) saturate(100%) invert(91%) sepia(23%) saturate(5112%)
     hue-rotate(328deg) brightness(108%) contrast(101%),
   "filter-5": brightness(0) saturate(100%) invert(91%) sepia(15%) saturate(560%)
@@ -141,15 +136,14 @@ $warning-color: (
   "filter-50": brightness(0) saturate(100%) invert(56%) sepia(32%)
     saturate(4475%) hue-rotate(16deg) brightness(96%) contrast(101%),
 );
-
 $positive-color: (
   "main": #00875a,
-  "5": #ccffee,
+  "5": #cfe,
   "10": #7accb1,
   "20": #1f9970,
   "30": #00875a,
-  "40": #006644,
-  "50": #003322,
+  "40": #064,
+  "50": #032,
   "filter": brightness(0) saturate(100%) invert(30%) sepia(61%) saturate(2021%)
     hue-rotate(139deg) brightness(92%) contrast(101%),
   "filter-5": brightness(0) saturate(100%) invert(95%) sepia(3%) saturate(2769%)
@@ -165,21 +159,17 @@ $positive-color: (
   "filter-50": brightness(0) saturate(100%) invert(14%) sepia(60%)
     saturate(998%) hue-rotate(120deg) brightness(93%) contrast(102%),
 );
-
 $background-color: (
   "primary": white,
   "secondary": map-get($neutral-color, "10"),
 );
-
 $text-color: (
   "primary": map-get($neutral-color, "50"),
 );
-
 $border-color: (
   "primary": map-get($neutral-color, "5"),
   "secondary": map-get($neutral-color, "50"),
 );
-
 $filter-color: (
   "white": invert(100%) sepia(100%) saturate(0%) hue-rotate(227deg)
     brightness(106%) contrast(101%),

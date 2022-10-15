@@ -5,8 +5,8 @@
   "scripts": {
     "build": "./node_modules/gulp-cli/bin/gulp.js all",
     "dev": "./node_modules/gulp-cli/bin/gulp.js all && ./node_modules/gulp-cli/bin/gulp.js watch",
-    "test": "standard",
-    "lint": "standard --fix"
+    "test": "standard && stylelint **/*.scss",
+    "lint": "standard --fix && stylelint **/*.scss --fix"
   },
   "engines": {
     "node": "16.x",
@@ -32,9 +32,15 @@
     "gulp-uglify": "^3.0.2",
     "handlebars": "^4.7.7",
     "lodash": "^4.17.21",
+    "markdownlint-cli": "^0.32.2",
     "pump": "^3.0.0",
     "require-dir": "^1.2.0",
     "sass": "^1.43.2",
-    "standard": "^17.0.0"
+    "standard": "^17.0.0",
+    "stylelint": "^14.14.0",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-prettier-scss": "^0.0.1",
+    "stylelint-config-standard": "^29.0.0",
+    "stylelint-config-standard-scss": "^5.0.0"
   }
 }

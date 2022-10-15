@@ -1,6 +1,6 @@
 @import "../../scss/variables";
-@import "../../scss/design-system/apollo/colors.scss";
-@import "../../scss/design-system/apollo/buttons.scss";
+@import "../../scss/design-system/apollo/colors";
+@import "../../scss/design-system/apollo/buttons";
 
 .c-asset-badges {
   display: flex;
@@ -17,6 +17,7 @@
     margin-left: 8px;
     margin-bottom: 8px;
     @extend %typography-caption;
+
     color: map-get($neutral-color, "50");
     border: 1px solid map-get($neutral-color, "10");
     border-radius: $border-radius-small;

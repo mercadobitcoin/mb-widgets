@@ -1,6 +1,6 @@
-@import "../../../../../foundation/scss/design-system/apollo/colors.scss";
-@import "../../../../../foundation/scss/design-system/apollo/buttons.scss";
-@import "../../../../../foundation/scss/design-system/apollo/typography.scss";
+@import "../../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../../foundation/scss/design-system/apollo/buttons";
+@import "../../../../../foundation/scss/design-system/apollo/typography";
 
 .mbwd-crypto-asset-table {
   .crypto-asset-table-desktop {
@@ -59,6 +59,7 @@
         th {
           padding: 10px 16px;
           @extend %typography-label-3;
+
           color: map-get($neutral-color, "50");
 
           .sorter-cell {
@@ -105,8 +106,10 @@
       tr {
         td {
           padding: 16px;
+
           /* Web/Paragraph/Body 2 */
           @extend %typography-body-2;
+
           /* Light/Neutral/50 */
           color: map-get($neutral-color, "50");
 
@@ -124,9 +127,11 @@
               }
             }
           }
+
           &.price {
             font-weight: 700;
           }
+
           &.variation {
             font-weight: 700;
 
@@ -140,6 +145,7 @@
               color: map-get($positive-color, "30");
             }
           }
+
           &.cta-wrapper {
             text-align: right;
             width: 100px;
@@ -218,12 +224,15 @@
 
             & > .name {
               @extend %typography-label-2;
+
               color: map-get($neutral-color, "50");
               white-space: nowrap;
-              margin: 0 0 4px 0;
+              margin: 0 0 4px;
             }
+
             & > .type {
               @extend %typography-body-3;
+
               color: map-get($neutral-color, "30");
               white-space: nowrap;
               margin: 0;
@@ -238,21 +247,23 @@
 
         & > .price {
           @extend %typography-label-2;
+
           color: map-get($neutral-color, "50");
-          margin: 0;
           white-space: nowrap;
           text-align: right;
-          margin: 0 0 4px 0;
+          margin: 0 0 4px;
         }
 
         & > .variation {
           @extend %typography-label-3;
+
           margin: 0;
           white-space: nowrap;
           text-align: right;
 
           & > .label-24h {
             @extend %typography-caption;
+
             background-color: map-get($primary-color, "5");
             border-radius: $border-radius-big;
             padding: 0 4px;

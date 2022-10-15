@@ -1,7 +1,7 @@
-@import "../../../../../foundation/scss/design-system/apollo/colors.scss";
-@import "../../../../../foundation/scss/design-system/apollo/buttons.scss";
-@import "../../../../../foundation/scss/design-system/apollo/typography.scss";
-@import "../../../../../foundation/scss/variables.scss";
+@import "../../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../../foundation/scss/design-system/apollo/buttons";
+@import "../../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../../foundation/scss/variables";
 
 .mbwd-fixed-income-asset-table {
   .fixed-income-asset-table-desktop {
@@ -28,7 +28,6 @@
         }
 
         &:hover {
-
           th,
           td {
             border-top: solid 1px map-get($primary-color, "main");
@@ -60,6 +59,7 @@
         th {
           padding: 10px 16px;
           @extend %typography-label-3;
+
           color: map-get($neutral-color, '50');
 
           .sorter-cell {
@@ -107,6 +107,7 @@
         td {
           padding: 16px;
           @extend %typography-body-2;
+
           color: map-get($neutral-color, '50');
 
           &.asset-cell {
@@ -193,13 +194,15 @@
 
             &>.name {
               @extend %typography-label-2;
+
               color: map-get($neutral-color, '50');
               white-space: nowrap;
-              margin: 0 0 4px 0;
+              margin: 0 0 4px;
             }
 
             &>.symbol {
               @extend %typography-body-2;
+
               color: map-get($neutral-color, '50');
               white-space: nowrap;
               margin: 0;
@@ -225,6 +228,7 @@
             border: 1px solid map-get($neutral-color, '10');
             border-radius: $border-radius-small;
             @extend %typography-caption;
+
             line-height: 100%;
             color: map-get($neutral-color, '50');
             white-space: nowrap;
@@ -254,6 +258,7 @@
         &>.profitability {
           color: map-get($positive-color, '30');
           @extend %typography-label-3;
+
           margin: 0;
           white-space: nowrap;
           text-align: right;

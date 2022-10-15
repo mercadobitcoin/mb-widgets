@@ -1,7 +1,7 @@
-@import "../../../../../foundation/scss/design-system/apollo/colors.scss";
-@import "../../../../../foundation/scss/design-system/apollo/buttons.scss";
-@import "../../../../../foundation/scss/design-system/apollo/typography.scss";
-@import "../../../../../foundation/scss/variables.scss";
+@import "../../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../../foundation/scss/design-system/apollo/buttons";
+@import "../../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../../foundation/scss/variables";
 
 .mbwd-fixed-income-asset-card-list {
   display: flex;
@@ -34,6 +34,7 @@
         border: 1px solid map-get($neutral-color, "10");
         border-radius: $border-radius-small;
         @extend %typography-caption;
+
         line-height: 100%;
         color: map-get($neutral-color, "50");
         white-space: nowrap;
@@ -68,14 +69,16 @@
   & > .fixed-income-card.desktop {
     border-radius: $border-radius-big;
     padding: 24px;
+
     // max-width: 280px;
     min-width: 389px;
     width: calc(33.3% - 32px);
+
     // height: 195px;
     margin-top: 32px;
 
     .badge-wrapper {
-      margin: 0 0 16px 0;
+      margin: 0 0 16px;
     }
 
     .asset-data {
@@ -87,21 +90,17 @@
       .attributes {
         .name {
           @extend %typography-label-2;
+
           color: map-get($neutral-color, "50");
-          margin: 0 0 16px 0;
+          margin: 0 0 16px;
         }
 
         .title,
         .description {
-          /* Mobile/Paragraph/Body 2 Highlight */
-          font-family: "IBM Plex Sans";
-          font-style: normal;
-          font-weight: 600;
-          font-size: 14px;
-          line-height: 140%;
-          /* Light/Neutral/50 */
+          @extend %typography-label-3;
+
           color: map-get($neutral-color, "50");
-          margin: 0 0 2px 0;
+          margin: 0 0 2px;
         }
 
         .description {
@@ -111,6 +110,7 @@
           &.profitability {
             color: map-get($positive-color, "30");
             @extend %typography-label-3;
+
             margin: 0;
             white-space: nowrap;
           }
@@ -157,24 +157,21 @@
           border-radius: 50%;
           height: 86px;
           width: 86px;
-          background-color: #ffffff;
+          background-color: #fff;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
 
           p {
-            font-family: "IBM Plex Sans";
-            font-weight: 400;
-            font-size: 15.0361px;
-            line-height: 140%;
+            @extend %typography-body-3;
+
             text-align: center;
-            letter-spacing: 0.313253px;
             color: map-get($neutral-color, "30");
             margin: 0;
 
             strong {
-              font-weight: 700;
+              @extend %typography-label-3;
             }
           }
         }
@@ -187,6 +184,7 @@
 
       .button {
         @extend %typography-button-2;
+
         height: 32px;
         margin-bottom: 16px;
         border-radius: 4px;
@@ -209,7 +207,7 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin: 0 0 8px 0;
+      margin: 0 0 8px;
 
       & > .header {
         display: flex;
@@ -223,6 +221,7 @@
 
         & > .symbol {
           @extend %typography-label-2;
+
           color: map-get($neutral-color, "50");
           white-space: nowrap;
           margin: 0;
@@ -238,19 +237,24 @@
       .profitability {
         color: map-get($positive-color, "30");
         @extend %typography-label-3;
+
         margin: 0;
         white-space: nowrap;
       }
 
       .minimum-value {
         text-align: right;
+
         .min-label {
           @extend %typography-caption;
+
           font-size: 10px;
           margin: 0;
         }
+
         .min-value {
           @extend %typography-label-2;
+
           margin: 0;
         }
       }

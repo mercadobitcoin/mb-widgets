@@ -1,4 +1,4 @@
-@import "./colors.scss";
+@import "./colors";
 
 %primary {
   &.filled {
@@ -68,10 +68,12 @@
     color: white;
     background-color: map-get($positive-color, "main");
   }
+
   &.outlined {
     color: map-get($positive-color, "main");
     border: 2px solid map-get($positive-color, "main");
   }
+
   &.ghost {
     color: map-get($positive-color, "main");
   }
@@ -82,10 +84,12 @@
     color: white;
     background-color: map-get($negative-color, "40");
   }
+
   &.outlined {
     color: map-get($negative-color, "40");
     border: 2px solid map-get($negative-color, "40");
   }
+
   &.ghost {
     color: map-get($negative-color, "40");
   }
@@ -112,13 +116,10 @@
       text-transform: none;
       white-space: nowrap;
       text-overflow: ellipsis;
-
       background-color: white;
-
       outline: none;
       overflow: hidden;
       cursor: pointer;
-
       border-radius: 8px;
       padding: 16px 24px;
       transition: all 0.2s ease;
@@ -135,9 +136,11 @@
     &.tertiary {
       @extend %tertiary;
     }
+
     &.positive {
       @extend %positive;
     }
+
     &.negative {
       @extend %negative;
     }

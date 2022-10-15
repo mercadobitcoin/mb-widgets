@@ -1,4 +1,4 @@
-//Commonly used on Y Axis
+// Commonly used on Y Axis
 $spacing-stack: (
   "quarck": 4px,
   "nano": 8px,
@@ -15,7 +15,7 @@ $spacing-stack: (
   "giant": 200px,
 );
 
-//Commonly used on X Axis
+// Commonly used on X Axis
 $spacing-inline: (
   "quarck": 4px,
   "nano": 8px,
@@ -28,7 +28,7 @@ $spacing-inline: (
   "xxl": 80px,
 );
 
-//Commonly used on to inset spaces (border, box-shadow, etc.)
+// Commonly used on to inset spaces (border, box-shadow, etc.)
 $spacing-inset: (
   "quarck": 4px,
   "nano": 8px,
@@ -37,7 +37,6 @@ $spacing-inset: (
   "md": 32px,
   "lg": 40px,
 );
-
 $spacing-squish: (
   "quarck": 4px 8px,
   "nano": 8px 16px,

@@ -1,6 +1,6 @@
 @import "../../scss/variables";
-@import "../../scss/design-system/apollo/colors.scss";
-@import "../../scss/design-system/apollo/buttons.scss";
+@import "../../scss/design-system/apollo/colors";
+@import "../../scss/design-system/apollo/buttons";
 
 .c-empty-state {
   text-align: center;
@@ -18,7 +18,7 @@
 
   img {
     max-width: 144px;
-    margin: 0 0 32px 0;
+    margin: 0 0 32px;
   }
 
   .title {
@@ -29,11 +29,10 @@
     line-height: 130%;
     text-align: center;
     color: map-get($neutral-color, "50");
-    margin: 0 0 4px 0;
+    margin: 0 0 4px;
   }
 
   .message {
-    margin: 0;
     font-size: 16px;
     line-height: 140%;
     text-align: center;

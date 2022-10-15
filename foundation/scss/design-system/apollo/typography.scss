@@ -1,7 +1,7 @@
-@import "../../variables.scss";
+@import "../../variables";
 
 %typography-h1 {
-  font-family: map-get($font-families, "title");
+  font-family: map.get($font-families, "title");
   font-size: 64px;
   font-weight: bold;
   line-height: 115%;
@@ -9,7 +9,7 @@
 }
 
 %typography-h2 {
-  font-family: map-get($font-families, "title");
+  font-family: map.get($font-families, "title");
   font-size: 48px;
   font-weight: bold;
   line-height: 115%;
@@ -17,23 +17,23 @@
 }
 
 %typography-h3 {
-  font-family: map-get($font-families, "title");
+  font-family: map.get($font-families, "title");
   font-size: 34px;
   font-weight: bold;
   line-height: 115%;
-  letter-spacing: 0px;
+  letter-spacing: 0;
 }
 
 %typography-h4 {
-  font-family: map-get($font-families, "title");
+  font-family: map.get($font-families, "title");
   font-size: 24px;
   font-weight: bold;
   line-height: 115%;
-  letter-spacing: 0px;
+  letter-spacing: 0;
 }
 
 %typography-h5 {
-  font-family: map-get($font-families, "title");
+  font-family: map.get($font-families, "title");
   font-size: 20px;
   font-weight: bold;
   line-height: 118%;
@@ -41,7 +41,7 @@
 }
 
 %typography-h6 {
-  font-family: map-get($font-families, "title");
+  font-family: map.get($font-families, "title");
   font-size: 18px;
   font-weight: bold;
   line-height: 118%;
@@ -49,7 +49,7 @@
 }
 
 %typography-body-1 {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 18px;
   font-weight: normal;
   line-height: 140%;
@@ -57,7 +57,7 @@
 }
 
 %typography-body-2 {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 16px;
   font-weight: normal;
   line-height: 140%;
@@ -65,7 +65,7 @@
 }
 
 %typography-body-3 {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 14px;
   font-weight: normal;
   line-height: 140%;
@@ -73,7 +73,7 @@
 }
 
 %typography-label-1 {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 18px;
   font-weight: bold;
   line-height: 140%;
@@ -81,7 +81,7 @@
 }
 
 %typography-label-2 {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 16px;
   font-weight: bold;
   line-height: 140%;
@@ -89,7 +89,7 @@
 }
 
 %typography-label-3 {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 14px;
   font-weight: bold;
   line-height: 140%;
@@ -97,7 +97,7 @@
 }
 
 %typography-button-1 {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 16px;
   font-weight: bold;
   letter-spacing: 0.4px;
@@ -105,7 +105,7 @@
 }
 
 %typography-button-2 {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 14px;
   font-weight: bold;
   letter-spacing: 0.8px;
@@ -113,7 +113,7 @@
 }
 
 %typography-caption {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 12px;
   font-weight: normal;
   line-height: 140%;
@@ -121,7 +121,7 @@
 }
 
 %typography-overline {
-  font-family: map-get($font-families, "body");
+  font-family: map.get($font-families, "body");
   font-size: 10px;
   font-weight: normal;
   line-height: 140%;
