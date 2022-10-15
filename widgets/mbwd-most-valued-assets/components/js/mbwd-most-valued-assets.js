@@ -81,7 +81,7 @@ const MBWD_MOST_VALUED_ASSETS = function () { //eslint-disable-line
       async getMostValuedAssets () {
         try {
           // throw new Error('Error')
-          const response = await fetch('https://mb-product-coins-tp-together.dev.mercadolitecoin.com.br/assets?sort=variation&order=DESC&limit=4') // eslint-disable-line
+          const response = await fetch('https://store.mercadobitcoin.com.br/api/v1/marketplace/crypto/coin?sort=variation&order=DESC&limit=4') // eslint-disable-line
 
           if (response.ok) {
             const { response_data } = await response.json() // eslint-disable-line
