@@ -4,6 +4,7 @@
     "function-no-unknown": null,
     "no-descending-specificity": null
   },
+  "customSyntax": "postcss-scss",
   "extends": [
     "stylelint-config-standard-scss",
     "stylelint-config-prettier-scss"
