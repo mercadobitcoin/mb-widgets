@@ -6,8 +6,6 @@
 .mbwd-most-valued-assets {
   box-sizing: border-box;
   padding: 16px;
-
-  /* Light/Neutral/50 */
   background: map-get($neutral-color, '50');
   border-radius: 8px;
 
@@ -54,7 +52,7 @@
       width: calc(100% / 4);
       padding: 16px;
       margin-right: 16px;
-      background: map-get($background-color, 'secondary');
+      background: #fff;
       border: 1px solid map-get($secondary-color, '5');
       box-shadow: $box-shadow-lvl-1;
       border-radius: $default-border-radius;

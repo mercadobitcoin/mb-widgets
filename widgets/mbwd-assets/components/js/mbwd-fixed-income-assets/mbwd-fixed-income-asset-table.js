@@ -7,7 +7,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                     <th>
                       <div class="sorter-cell" @click="onSortChange('name')">
                         {{ i18n('Ativo') }}
-                        <div class="sorters">
+                        <div v-if="displaySorters" class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('name', 'asc')" />
                           <div class="sort-desc arrow down" :class="cssSortActive('name', 'desc')" />
                         </div>  
@@ -16,7 +16,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                     <th>
                       <div class="sorter-cell"  @click="onSortChange('minimum_value')">
                         {{ i18n('Valor inicial') }}
-                        <div class="sorters">
+                        <div v-if="displaySorters" class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('minimum_value', 'asc')" />
                           <div class="sort-desc arrow down" :class="cssSortActive('minimum_value', 'desc')" />
                         </div>  
@@ -27,7 +27,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                     <th>
                       <div class="sorter-cell" @click="onSortChange('available_percentage')">
                         {{ i18n('Estoque') }}
-                        <div class="sorters">
+                        <div v-if="displaySorters" class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('available_percentage', 'asc')"/>
                           <div class="sort-desc arrow down" :class="cssSortActive('available_percentage', 'desc')" />
                         </div>  
@@ -40,10 +40,10 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                 <tbody>
                   <tr v-for="asset in assets">
                     <td class="asset-cell">
-                      <div class="asset">
+                      <a class="asset" :href="getAssetLandingPageLink(asset.symbol)">
                         <img class="icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                         {{ asset.name }}
-                      </div>
+                      </a>
                     </td>
                     <td class="minimum-value">{{ asset.minimum_value }}</td>
                     <td class="profitability">
@@ -53,7 +53,9 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                     <td class="available-percentage">{{ getPercentageString(asset.available_percentage) }}</td>
                     <td class="status">{{ i18n(asset.status) }}</td>
                     <td class="cta-wrapper apollo">
-                      <a class="button primary outlined">{{ i18n('Investir') }}</a>
+                      <a class="button primary outlined" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
+                        {{ i18n('Investir') }}
+                      </a>
                     </td>
                   </tr>
                 </tbody>
@@ -90,6 +92,10 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     assets: {
       type: Array,
       default: () => []
+    },
+    displaySorters: {
+      type: Boolean,
+      default: true
     }
   },
   mixins: [configMixins, UIMixins],// eslint-disable-line
@@ -144,6 +150,12 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     parsePercentageStrToNumber (percentage = '0') {
       return Number(percentage.replace(/[^\d.-]/g, ''))
     },
+    getAssetBasicTradeExperienceLink (symbol) {
+      return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
+    },
+    getAssetLandingPageLink (symbol) {
+      return `https://www.mercadobitcoin.com.br/conhecer/${(symbol ?? '').toLowerCase()}`
+    },
     getPercentageString (percentage = 0) {
       let percString = this.parsePercentageStrToNumber(percentage)
       percString = percString > 100 ? 100 : percString
@@ -168,23 +180,25 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return this.translateMap?.[this.language]?.[key] ?? ''
     },
     onSortChange (sort) {
-      if (this.sort === sort) {
-        switch (this.order) {
-          case '':
-            this.order = 'asc'
-            break
-          case 'asc':
-            this.order = 'desc'
-            break
-          default:
-            this.order = ''
+      if (this.displaySorters) {
+        if (this.sort === sort) {
+          switch (this.order) {
+            case '':
+              this.order = 'asc'
+              break
+            case 'asc':
+              this.order = 'desc'
+              break
+            default:
+              this.order = ''
+          }
+        } else {
+          this.sort = sort
+          this.order = 'asc'
         }
-      } else {
-        this.sort = sort
-        this.order = 'asc'
-      }
 
-      this.$emit('sort', { order: this.order, sort: this.sort })
+        this.$emit('sort', { order: this.order, sort: this.sort })
+      }
     }
   }
 })

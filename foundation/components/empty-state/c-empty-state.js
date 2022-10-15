@@ -1,13 +1,13 @@
 const MBC_EMPTY_STATE = () => ({ //eslint-disable-line
   template: `<div class="c-empty-state apollo">
-        <img class="main-state-icon" :src="getMainStateIconSrc" />
+        <img class="main-state-icon" :src="cptdMainStateIconSrc" />
         <p class="title">{{ title }}</p>
         <p class="message">{{ message }}</p>
-        <button class="cta primary filled" :title="cta.label" v-if="ctaIsTypeFunction" @click="ctaCallback">
-            <img v-if="displayCtaIcon" class="icon" :src="getCtaIconSrc" />
+        <button class="cta primary filled" :title="cta.label" v-if="cptdCtaIsTypeFunction" @click="ctaCallback">
+            <img v-if="displayCtaIcon" class="icon" :src="cptdCtaIconSrc" />
             {{ cta.label }}
         </button>
-        <a v-if="ctaIsTypeUrl" class="cta button primary ghost" :target="cta.target" :href="cta.url" :title="cta.label" rel="noopener noreferrer">
+        <a v-if="cptdCtaIsTypeUrl" class="cta button primary ghost" :target="cta.target" :href="cta.url" :title="cta.label" rel="noopener noreferrer">
           {{cta.label}}
         </a>
     </div>`,
@@ -41,20 +41,17 @@ const MBC_EMPTY_STATE = () => ({ //eslint-disable-line
     }
   },
   computed: {
-    cptdCdnStaticDomainUrl () {
-      return 'https://static.mercadobitcoin.com.br/web'
-    },
-    ctaIsTypeFunction () {
+    cptdCtaIsTypeFunction () {
       return this.cta && this.cta.type && this.cta.type === 'function'
     },
-    ctaIsTypeUrl () {
+    cptdCtaIsTypeUrl () {
       return this.cta && this.cta.type && this.cta.type === 'link'
     },
-    getMainStateIconSrc () {
-      return `${this.cptdCdnStaticDomainUrl}/img/ilu/${this.mainStateIcon}`
+    cptdMainStateIconSrc () {
+      return `/img/ilu/${this.mainStateIcon}`
     },
-    getCtaIconSrc () {
-      return `${this.cptdCdnStaticDomainUrl}/img/icons/${this.ctaIcon}`
+    cptdCtaIconSrc () {
+      return `/img/icons/${this.ctaIcon}`
     }
   },
   methods: {

@@ -2,7 +2,7 @@ const MBC_SEARCH_BOX = () => ({ //eslint-disable-line
   template: `
   <div :class="cssSearchBoxWrapper" v-click-outside="blur">
     <img v-if="displayInputIcon" class="search-box-icon" src="/img/icons/ico-search-neutral.svg" />
-    <input ref="input_search" type="text" autocomplete="off" class="search-box-input" :class="cssInput" @focus="focused = true" :placeholder="placeholder" v-model="searchTerm" @input="debounceSearch($event)" @keyup.esc="blur" @keyup.enter="blur" />
+    <input ref="input_search" type="text" autocomplete="off" class="search-box-input" :class="cptdCssInput" @focus="focused = true" :placeholder="placeholder" v-model="searchTerm" @input="debounceSearch($event)" @keyup.esc="blur" @keyup.enter="blur" />
     <button v-if="cptdCanDisplayClearButton" class="clear" @click="clearSearch" title="Clique para limpar a busca">
       <img class="ico-close" src="/img/icons/ico-x.svg" />
     </button>
@@ -64,7 +64,7 @@ const MBC_SEARCH_BOX = () => ({ //eslint-disable-line
         focus: this.focused
       }
     },
-    cssInput () {
+    cptdCssInput () {
       return {
         'has-text': this.cptdCanDisplayClearButton
       }

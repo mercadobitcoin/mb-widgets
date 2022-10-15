@@ -1,4 +1,5 @@
-const MBWD_FIXED_INCOME_ASSETS = () => ({// eslint-disable-line
+// eslint-disable-next-line
+const MBWD_FIXED_INCOME_ASSETS = () => ({
   template: `
           <div class="mbwd-fixed-income-assets">
             <h3 class="title">
@@ -38,7 +39,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({// eslint-disable-line
                 </slot>
               </div>
               <div v-else class="view-mode-list table">
-                <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="onSortChange" :assets="fixedIncomeAssets.result" />
+                <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" :displaySorters="!cptdIsNewCategorySelected" @sort="onSortChange" :assets="fixedIncomeAssets.result" />
               </div>
             </div>
             <div v-if="!busy" class="pagination-wrapper">
@@ -63,11 +64,11 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({// eslint-disable-line
       default: 30000 // ms
     }
   },
-  mixins: [configMixins, UIMixins, URLMixins],// eslint-disable-line
+  mixins: [configMixins, UIMixins, URLMixins], // eslint-disable-line
   components: {
-    'mbc-pagination': MBC_PAGINATION(),// eslint-disable-line
-    'mbwd-fixed-income-asset-card-list': MBWD_FIXED_INCOME_ASSET_CARD_LIST(),// eslint-disable-line
-    'mbwd-fixed-income-asset-table': MBWD_FIXED_INCOME_ASSET_TABLE()// eslint-disable-line
+    "mbc-pagination": MBC_PAGINATION(), // eslint-disable-line
+    "mbwd-fixed-income-asset-card-list": MBWD_FIXED_INCOME_ASSET_CARD_LIST(), // eslint-disable-line
+    "mbwd-fixed-income-asset-table": MBWD_FIXED_INCOME_ASSET_TABLE(), // eslint-disable-line
   },
   data () {
     return {
@@ -148,6 +149,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({// eslint-disable-line
       }
 
       return defaultCategories
+    },
+    cptdIsNewCategorySelected () {
+      return this.fixedIncomeAssets.category === 'new'
     }
   },
   watch: {
@@ -168,64 +172,35 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({// eslint-disable-line
     },
     async getFixedIncomeAssets () {
       this.busy = true
-      this.getFixedIncomeAssetsRequestQueryString()
-      // try {
-      // const response = await fetch(`https://store.mercadobitcoin.com.br/api/v1/marketplace/crypto/coin?${this.getFixedIncomeAssetsRequestQueryString}`)
+      console.log(
+        'SEARCHING FOR: ',
+        this.getFixedIncomeAssetsRequestQueryString()
+      )
+      try {
+        const response = await fetch(`/fixed-incomes?${this.getFixedIncomeAssetsRequestQueryString()}`)
 
-      // if (response.ok) {
-      // const { response_data } = await response.json()
-      // this.fixedIncomeAssets.result = response_data?.data ?? []
-      // } else {
-      // this.fixedIncomeAssets.result = []
-      // }
-      // } catch (e) {
-      // this.fixedIncomeAssets.result = []
-      // }
-
-      this.fixedIncomeAssets.result = [
-        {
-          asset_id: '704812c83d9b4b13b76bd38bd87ad33r',
-          product_id: '3',
-          legacy_id: 'AAVE',
-          name: 'Aave',
-          symbol: 'AAVE',
-          minimum_value: 'R$ 1,00',
-          profitability: 'IGPM + TR + 7% a.a.',
-          estimated_liquidation_date: 'Jan/2024',
-          sold_percentage: '0%',
-          available_percentage: '100%',
-          status: 'PRIMARY_MARKET',
-          family_name: 'Consórcios'
-        },
-        {
-          asset_id: '634812c83d9b4b13b76bd38bd87ad20e',
-          product_id: '2',
-          legacy_id: 'SUSHI',
-          name: 'SushiSwap',
-          symbol: 'SUSHI',
-          minimum_value: 'R$ 50,00',
-          profitability: 'IGPM + TR + 5% a.a.',
-          estimated_liquidation_date: 'Jan/2024',
-          sold_percentage: '1000000%',
-          available_percentage: '-999900%',
-          status: 'SECONDARY_MARKET',
-          family_name: 'Consórcios'
-        },
-        {
-          asset_id: 'd200df4a856b44348cc94f67488f958b',
-          product_id: '1',
-          legacy_id: 'DAXPTO',
-          name: 'XRP',
-          symbol: 'AAA',
-          minimum_value: 'R$ 150,00',
-          profitability: 'IPCA + 15% a.a.',
-          estimated_liquidation_date: 'Mai/2023',
-          sold_percentage: '5.59%',
-          available_percentage: '94.41%',
-          status: 'PRIMARY_MARKET',
-          family_name: 'Precatórios'
+        if (response.ok) {
+          const { response_data } = await response.json() //eslint-disable-line
+          const { data, total_items } = response_data //eslint-disable-line
+          this.fixedIncomeAssets.result = data ?? [] //eslint-disable-line
+          if (this.cptdIsNewCategorySelected) {
+            this.fixedIncomeAssets.totalPages = 1
+          } else {
+            if (total_items) {//eslint-disable-line
+              this.fixedIncomeAssets.totalPages = Math.ceil(total_items / this.fixedIncomeAssets.limit)//eslint-disable-line
+            } else {
+              this.fixedIncomeAssets.totalPages = 1
+            }
+          }
+        } else {
+          this.fixedIncomeAssets.result = []
+          this.fixedIncomeAssets.totalPages = 1
         }
-      ]
+      } catch (e) {
+        this.fixedIncomeAssets.result = []
+        this.fixedIncomeAssets.totalPages = 1
+      }
+
       this.$emit('list-updated', this.fixedIncomeAssets.result.length)
       this.busy = false
     },
@@ -238,6 +213,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({// eslint-disable-line
         order
       }
 
+      if (category === 'new') {
+        searchQueryStringsMap.sort = 'release_date'
+        searchQueryStringsMap.order = 'desc'
+        return this.mxCreateUrlQueryString(searchQueryStringsMap)
+      }
+
       if (totalPages > 1) {
         searchQueryStringsMap.offset = (currentPage - 1) * limit
       }
@@ -245,19 +226,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({// eslint-disable-line
       if (this.search) {
         searchQueryStringsMap.query = this.search
       }
-
-      if (category === 'new') {
-        console.log('new selected')
-      }
-
-      // if (category === 'all') {
-
-      // }
-
-      console.log(
-        'SEARCHING FOR:',
-        this.mxCreateUrlQueryString(searchQueryStringsMap)
-      )
 
       return this.mxCreateUrlQueryString(searchQueryStringsMap)
     },
@@ -300,9 +268,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({// eslint-disable-line
 
       this.fixedIncomeAssets.sort = ''
       this.fixedIncomeAssets.order = ''
-      this.currentPage = 1
-      this.totalPages = 1
-      this.category = 'all'
+      this.fixedIncomeAssets.currentPage = 1
+      this.fixedIncomeAssets.totalPages = 1
+      this.fixedIncomeAssets.category = 'all'
     },
     scheduleGetFixedIncomeAssetsInterval () {
       this.intervalId = setInterval(

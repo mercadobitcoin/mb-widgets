@@ -21,13 +21,16 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
     return {
       translateMap: {
         pt: {
-          Favoritos: 'Favoritos'
+          novo: 'novo',
+          'exclusivos mb': 'exclusivos mb'
         },
         en: {
-          Favoritos: 'Favoritos'
+          novo: 'novo',
+          'exclusivos mb': 'exclusivos mb'
         },
         es: {
-          Favoritos: 'Favoritos'
+          novo: 'novo',
+          'exclusivos mb': 'exclusivos mb'
         }
       }
     }
@@ -37,7 +40,9 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
     cptdIsTypeCrypto: () => this.type === 'crypto'
   },
   methods: {
-    getIconUrl () {},
+    getIconUrl () {
+      return '/img/icons/ico-badge-check-mono.svg'
+    },
     getIconAlt (name) {
       return `ícone ${name}`
     },

@@ -164,124 +164,22 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       return this.isViewModeActive(viewMode) ? 'active' : ''
     },
     async getCryptoAssets () {
-      // try {
-      // const response = await fetch(`https://store.mercadobitcoin.com.br/api/v1/marketplace/crypto/coin?${this.getCryptoAssetsRequestQueryString}`)
+      try {
+        const response = await fetch(`/cryptos?${this.getCryptoAssetsRequestQueryString()}`)
 
-      // if (response.ok) {
-      // const { response_data } = await response.json()
-      // this.cryptoAssetsList.result = response_data?.data ?? []
-      // } else {
-      // this.cryptoAssetsList.result = []
-      // }
-      // } catch (e) {
-      // this.cryptoAssetsList.result = []
-      // }
+        if (response.ok) {
+          const { response_data } = await response.json() //eslint-disable-line
+          const { data, total_items } = response_data //eslint-disable-line
+          this.cryptoAssets.result = data ?? [] //eslint-disable-line
+          this.cryptoAssets.totalPages = total_items ?? 1 //eslint-disable-line
+        } else {
+          this.cryptoAssets.result = []
+        }
+      } catch (e) {
+        this.cryptoAssets.result = []
+      }
 
-      this.cryptoAssets.result = this.search
-        ? []
-        : [
-            {
-              product_id: 'ANKR',
-              symbol: 'ANKR',
-              name: 'ANKR',
-              type: 'crypto',
-              sub_type: 'utility_token',
-              variation: {
-                string: '+0%',
-                number: 0.0,
-                status: 'positive'
-              },
-              current_price: '0.00',
-              market_price: '0.00',
-              market_cap: 'R$ 0,00',
-              badges: ['novo', 'exclusivos mb'],
-              icon_url:
-                'https://static.mercadobitcoin.com.br/web/img/icons/assets/ico-asset-ankr-color.svg',
-              created_at: '2022-08-24T13:32:52-03:00',
-              release_date: '2022-08-24T13:32:54-03:00'
-            },
-            {
-              product_id: 'AXS',
-              symbol: 'AXS',
-              name: 'Axie Infinity Shard',
-              type: 'crypto',
-              sub_type: 'utility_token',
-              variation: {
-                string: '+0%',
-                number: 0.0,
-                status: 'positive'
-              },
-              current_price: '0.00',
-              market_price: '0.00',
-              market_cap: 'R$ 0,00',
-              badges: ['novo', 'exclusivos mb'],
-              icon_url:
-                'https://static.mercadobitcoin.com.br/web/img/icons/assets/ico-asset-axs-color.svg',
-              created_at: '2022-08-24T13:32:54-03:00',
-              release_date: '2022-08-24T13:32:54-03:00'
-            },
-            {
-              product_id: 'BAND',
-              symbol: 'BAND',
-              name: 'Band Protocol',
-              type: 'crypto',
-              sub_type: 'utility_token',
-              variation: {
-                string: '+0%',
-                number: 0.0,
-                status: 'positive'
-              },
-              current_price: '0.00',
-              market_price: '0.00',
-              market_cap: 'R$ 0,00',
-              badges: ['novo', 'exclusivos mb'],
-              icon_url:
-                'https://static.mercadobitcoin.com.br/web/img/icons/assets/ico-asset-band-color.svg',
-              created_at: '2022-08-24T13:32:55-03:00',
-              release_date: '2022-08-24T13:32:54-03:00'
-            },
-            {
-              product_id: 'BAT',
-              symbol: 'BAT',
-              name: 'Basic Attention token',
-              type: 'crypto',
-              sub_type: 'utility_token',
-              variation: {
-                string: '+0%',
-                number: 0.0,
-                status: 'positive'
-              },
-              current_price: '0.00',
-              market_price: '0.00',
-              market_cap: 'R$ 0,00',
-              badges: ['novo', 'exclusivos mb'],
-              icon_url:
-                'https://static.mercadobitcoin.com.br/web/img/icons/assets/ico-asset-bat-color.svg',
-              created_at: '2022-08-24T13:32:55-03:00',
-              release_date: '2022-08-24T13:32:54-03:00'
-            },
-            {
-              product_id: 'BTC',
-              symbol: 'BTC',
-              name: 'Bitcoin',
-              type: 'crypto',
-              sub_type: 'coin',
-              variation: {
-                string: '+0%',
-                number: 0.0,
-                status: 'positive'
-              },
-              current_price: '0.00',
-              market_price: '0.00',
-              market_cap: 'R$ 0,00',
-              badges: ['novo', 'exclusivos mb'],
-              icon_url:
-                'https://static.mercadobitcoin.com.br/web/img/icons/assets/ico-asset-btc-color.svg',
-              created_at: '2022-08-24T13:32:57-03:00',
-              release_date: '2022-08-24T13:32:54-03:00'
-            }
-          ]
-      this.$emit('list-updated', this.cryptoAssets?.result?.length ?? 0)
+      this.$emit('list-updated', this.cryptoAssets.result ?? 0) //eslint-disable-line
     },
     getCryptoAssetsRequestQueryString () {
       // TODO: Implement later
