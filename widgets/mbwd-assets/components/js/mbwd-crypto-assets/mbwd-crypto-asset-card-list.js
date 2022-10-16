@@ -7,7 +7,7 @@
                       <img class="asset-icon" :src="asset.icon_url" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                       <div class="asset-data">
                         <p class="name">{{ asset.name }}</p>
-                        <p class="type">{{ asset.sub_type }}</p>
+                        <p class="type">{{ i18n(asset.sub_type) }}</p>
                       </div>
                     </div>
                     <mbc-asset-badges :badges="asset.badges" type="crypto" />
@@ -17,7 +17,7 @@
                       <span class="value" :class="asset.variation.status">{{ asset.variation.string }}</span>
                       <span class="label-24h">24h</span>
                     </p>
-                    <p class="price">{{ asset.current_price | ftFormatCurrency(2) }}</p>
+                    <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
                   </div>
                 </a>
                 <a v-if="!mobileMode" class="crypto-card desktop" v-for="asset in assets">
@@ -30,9 +30,9 @@
                       {{ asset.name }}
                       <span class="symbol">({{ asset.symbol }})</span>
                     </p>
-                    <p class="type">{{ asset.sub_type }}</p>
+                    <p class="type">{{ i18n(asset.sub_type) }}</p>
                   </div>
-                  <p class="price">{{ asset.current_price | ftFormatCurrency(2) }}</p>
+                  <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
                   <span class="variation">
                     <span class="value" :class="asset.variation.status">{{ asset.variation.string }}</span>
                       {{ i18n('nas últimas 24h') }}
@@ -57,13 +57,19 @@
     return {
       translateMap: {
         pt: {
-          'nas últimas 24h': 'nas últimas 24h'
+          'nas últimas 24h': 'nas últimas 24h',
+          utility_token: 'Utility token',
+          coin: 'Criptomoeda'
         },
         en: {
-          'nas últimas 24h': 'nas últimas 24h'
+          'nas últimas 24h': 'nas últimas 24h',
+          utility_token: 'Utility token',
+          coin: 'Criptomoeda'
         },
         es: {
-          'nas últimas 24h': 'nas últimas 24h'
+          'nas últimas 24h': 'nas últimas 24h',
+          utility_token: 'Utility token',
+          coin: 'Criptomoeda'
         }
       }
     }

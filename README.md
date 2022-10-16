@@ -18,13 +18,15 @@ npm run build
 npm run dev
 ```
 
-### Before each commit
+### Linters (Required: Run before each commit)
 ```javascript
-// check sintax errors
+// check for sintax errors
 npm run lint
 
-// fix fixable sintax errors
+// check and fix fixable sintax errors
 npm run lint:fix
 ```
 
-### Linter: [Github Super Linter](https://github.com/github/super-linter#supported-linters)
+## Workflows
+- [GitHub Super Linter](https://github.com/github/super-linter)
+- [CodeQL](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning)

@@ -62,10 +62,10 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                       </a>
                     </td>
                     <td class="symbol">{{ asset.symbol }}</td>
-                    <td class="sub-type">{{ asset.sub_type }}</td>
-                    <td class="price">{{ asset.current_price | ftFormatCurrency(2) }}</td>
+                    <td class="sub-type">{{ i18n(asset.sub_type) }}</td>
+                    <td class="price">{{ asset.market_price | ftFormatCurrency(2) }}</td>
                     <td class="variation" :class="asset.variation.positive">
-                      {{ asset.variation.string }}%
+                      {{ asset.variation.string }}
                     </td>
                     <td class="market-cap">{{ asset.market_cap | ftFormatCurrency(2) }}</td>
                     <td class="cta-wrapper apollo">
@@ -83,12 +83,12 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                       <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                       <div class="asset-data">
                         <p class="name">{{ asset.name }}</p>
-                        <p class="sub-type">{{ asset.sub_type }}</p>
+                        <p class="sub-type">{{ i18n(asset.sub_type) }}</p>
                       </div>
                     </div>
                   </div>
                   <div class="market-data">
-                    <p class="price">{{ asset.current_price | ftFormatCurrency(2) }}</p>
+                    <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
                     <p class="variation">
                       <span class="value" :class="asset.variation.status">{{ asset.variation.string }}</span>
                       <span class="label-24h">24h</span>
@@ -125,7 +125,8 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           Variação: 'Variação',
           'Capitalização de mercado': 'Capitalização de mercado',
           Comprar: 'Comprar',
-          utility_token: 'Utility token'
+          utility_token: 'Utility token',
+          coin: 'Criptomoeda'
         },
         en: {
           Ativo: 'Ativo',
@@ -135,7 +136,8 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           Variação: 'Variação',
           'Capitalização de mercado': 'Capitalização de mercado',
           Comprar: 'Comprar',
-          utility_token: 'Utility token'
+          utility_token: 'Utility token',
+          coin: 'Criptomoeda'
         },
         es: {
           Ativo: 'Ativo',
@@ -145,7 +147,8 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           Variação: 'Variação',
           'Capitalização de mercado': 'Capitalização de mercado',
           Comprar: 'Comprar',
-          utility_token: 'Utility token'
+          utility_token: 'Utility token',
+          coin: 'Criptomoeda'
         }
       }
     }
