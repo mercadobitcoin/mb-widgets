@@ -7,7 +7,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                     <th>
                       <div class="sorter-cell" @click="onSortChange('name')">
                         {{ i18n('Ativo') }}
-                        <div v-if="displaySorters" class="sorters">
+                        <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('name', 'asc')" />
                           <div class="sort-desc arrow down" :class="cssSortActive('name', 'desc')" />
                         </div>
@@ -16,7 +16,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                     <th>
                       <div class="sorter-cell" @click="onSortChange('symbol')">
                         {{ i18n('Ticker') }}
-                        <div v-if="displaySorters" class="sorters">
+                        <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('symbol', 'asc')" />
                           <div class="sort-desc arrow down" :class="cssSortActive('symbol', 'desc')" />
                         </div>
@@ -25,7 +25,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                     <th>
                     <div class="sorter-cell" @click="onSortChange('sub_type')">
                       {{ i18n('Segmento') }}
-                      <div v-if="displaySorters" class="sorters">
+                      <div class="sorters">
                         <div class="sort-asc arrow up" :class="cssSortActive('sub_type', 'asc')" />
                         <div class="sort-desc arrow down" :class="cssSortActive('sub_type', 'desc')" />
                       </div>
@@ -34,7 +34,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                     <th>
                       <div class="sorter-cell" @click="onSortChange('market_price')">
                         {{ i18n('Preço') }}
-                        <div v-if="displaySorters" class="sorters">
+                        <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('market_price', 'asc')" />
                           <div class="sort-desc arrow down" :class="cssSortActive('market_price', 'desc')" />
                         </div>
@@ -44,7 +44,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                     <th>
                       <div class="sorter-cell" @click="onSortChange('market_cap')">
                         {{ i18n('Capitalização de mercado') }}
-                        <div v-if="displaySorters" class="sorters">
+                        <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('market_cap', 'asc')" />
                           <div class="sort-desc arrow down" :class="cssSortActive('market_cap', 'desc')" />
                         </div>
@@ -105,10 +105,6 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
     assets: {
       type: Array,
       default: () => []
-    },
-    displaySorters: {
-      type: Boolean,
-      default: true
     }
   },
   mixins: [configMixins, UIMixins, currencyFilters],// eslint-disable-line

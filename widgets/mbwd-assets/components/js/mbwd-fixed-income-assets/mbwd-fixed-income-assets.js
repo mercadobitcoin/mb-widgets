@@ -32,6 +32,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
                 </button>
               </div>
             </div>
+            <mbc-empty-state v-if="fixedIncomeAssets.result.length === 0" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" />
             <div v-if="fixedIncomeAssets.result.length > 0" class="result-list">
               <div v-if="isViewModeActive('card')" class="view-mode-list card">
                 <slot name="fixed-income-cards-list" :assets="fixedIncomeAssets.result">
@@ -40,7 +41,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
               </div>
               <div v-else class="view-mode-list table">
                 <slot name="fixed-income-table" :assets="fixedIncomeAssets.result">
-                  <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" :displaySorters="!cptdIsNewCategory" @sort="onSortChange" :assets="fixedIncomeAssets.result" />
+                  <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="onSortChange" :assets="fixedIncomeAssets.result" />
                 </slot>
               </div>
             </div>
@@ -68,6 +69,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
   },
   mixins: [configMixins, UIMixins, URLMixins], // eslint-disable-line
   components: {
+    'mbc-empty-state': MBC_EMPTY_STATE(),// eslint-disable-line
     "mbc-pagination": MBC_PAGINATION(), // eslint-disable-line
     "mbwd-fixed-income-asset-card-list": MBWD_FIXED_INCOME_ASSET_CARD_LIST(), // eslint-disable-line
     "mbwd-fixed-income-asset-table": MBWD_FIXED_INCOME_ASSET_TABLE(), // eslint-disable-line
@@ -92,21 +94,24 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           'Com saldo': 'Com saldo',
           'Renda Fixa Digital': 'Renda Fixa Digital',
           Novos: 'Novos',
-          Todos: 'Todos'
+          Todos: 'Todos',
+          'Não encontramos nada em Renda Fixa Digital': 'Não encontramos nada em Renda Fixa Digital'
         },
         en: {
           Favoritos: 'Favoritos',
           'Com saldo': 'Com saldo',
           'Renda Fixa Digital': 'Renda Fixa Digital',
           Novos: 'Novos',
-          Todos: 'Todos'
+          Todos: 'Todos',
+          'Não encontramos nada em Renda Fixa Digital': 'Não encontramos nada em Renda Fixa Digital'
         },
         es: {
           Favoritos: 'Favoritos',
           'Com saldo': 'Com saldo',
           'Renda Fixa Digital': 'Renda Fixa Digital',
           Novos: 'Novos',
-          Todos: 'Todos'
+          Todos: 'Todos',
+          'Não encontramos nada em Renda Fixa Digital': 'Não encontramos nada em Renda Fixa Digital'
         }
       }
     }
@@ -135,6 +140,13 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           value: 'all'
         }
       ]
+    },
+    cptdEmptyStateConfig () {
+      return {
+        title: this.i18n('Não encontramos nada em Renda Fixa Digital'),
+        message: '',
+        img: 'ilu-empty-search-result.svg'
+      }
     },
     cptdIsNewCategory () {
       return this.fixedIncomeAssets.category === 'new'

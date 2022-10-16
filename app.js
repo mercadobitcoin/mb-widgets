@@ -26,7 +26,7 @@ const emptyMockResponse = {
 app.get('/cryptos', (req, res) => {
   const { query } = req.query
   if (query) {
-    if (query === 'empty') {
+    if (query === 'empty' || query === 'crypto') {
       res.json(emptyMockResponse)
     } else {
       res.json({
@@ -160,7 +160,7 @@ app.get('/cryptos', (req, res) => {
 app.get('/fixed-incomes', (req, res) => {
   const { query } = req.query
   if (query) {
-    if (query === 'empty') {
+    if (query === 'empty' || query === 'fixed-income') {
       res.json(emptyMockResponse)
     } else {
       res.json({

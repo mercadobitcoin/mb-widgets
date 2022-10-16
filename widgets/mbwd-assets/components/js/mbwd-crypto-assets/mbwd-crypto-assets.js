@@ -31,6 +31,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
                 </button>
               </div>
             </div>
+            <mbc-empty-state v-if="cryptoAssets.result.length === 0" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" />
             <div v-if="cryptoAssets.result.length > 0" class="result-list">
               <div v-if="isViewModeActive('card')" class="view-mode-list card">
                 <slot name="crypto-cards-list" :assets="cryptoAssets.result">
@@ -39,7 +40,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
               </div>
               <div v-else class="view-mode-list table">
                 <slot name="crypto-table" :assets="cryptoAssets.result">
-                  <mbwd-crypto-asset-table ref="refCryptoAssetTable" :displaySorters="cptdDisplayTableSorters" @sort="onSortChange" :assets="cryptoAssets.result" />
+                  <mbwd-crypto-asset-table ref="refCryptoAssetTable" @sort="onSortChange" :assets="cryptoAssets.result" />
                 </slot>
               </div>
             </div>
@@ -67,6 +68,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
   },
   mixins: [configMixins, UIMixins, URLMixins], // eslint-disable-line
   components: {
+    'mbc-empty-state': MBC_EMPTY_STATE(),// eslint-disable-line
     'mbc-pagination': MBC_PAGINATION(),// eslint-disable-line
     'mbwd-crypto-asset-card-list': MBWD_CRYPTO_ASSET_CARD_LIST(),// eslint-disable-line
     'mbwd-crypto-asset-table': MBWD_CRYPTO_ASSET_TABLE()// eslint-disable-line
@@ -92,7 +94,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           Novos: 'Novos',
           Todos: 'Todos',
           'Em alta': 'Em alta',
-          'Em baixa': 'Em baixa'
+          'Em baixa': 'Em baixa',
+          'Não encontramos nada em Ativos': 'Não encontramos nada em Ativos'
         },
         en: {
           Favoritos: 'Favoritos',
@@ -100,7 +103,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           Novos: 'Novos',
           Todos: 'Todos',
           'Em alta': 'Em alta',
-          'Em baixa': 'Em baixa'
+          'Em baixa': 'Em baixa',
+          'Não encontramos nada em Ativos': 'Não encontramos nada em Ativos'
         },
         es: {
           Favoritos: 'Favoritos',
@@ -108,7 +112,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           Novos: 'Novos',
           Todos: 'Todos',
           'Em alta': 'Em alta',
-          'Em baixa': 'Em baixa'
+          'Em baixa': 'Em baixa',
+          'Não encontramos nada em Ativos': 'Não encontramos nada em Ativos'
         }
       }
     }
@@ -145,6 +150,13 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           value: 'downtrend'
         }
       ]
+    },
+    cptdEmptyStateConfig () {
+      return {
+        title: this.i18n('Não encontramos nada em Ativos'),
+        message: '',
+        img: 'ilu-empty-search-result.svg'
+      }
     },
     cptdIsNewCategory () {
       return this.cryptoAssets.category === 'new'

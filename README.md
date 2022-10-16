@@ -2,8 +2,8 @@
 Widgets are components Plug'n Play that can be used among side the apps.
 Widgets must be a [Factory](https://www.dofactory.com/javascript/design-patterns/factory-method) that provides a method **render**.
 
-### Why?
-Over time, a widget can be built in more than one framework, or even in different versions of the same framework.
+## Why?
+Over time, a widget can be build in more than one framework, or even in different versions of the same framework.
 So, the Factory pattern helps us to have several rendering methods and their specifics :grin:
 
 ### Requirements

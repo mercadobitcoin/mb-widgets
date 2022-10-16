@@ -7,7 +7,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                     <th>
                       <div class="sorter-cell" @click="onSortChange('name')">
                         {{ i18n('Ativo') }}
-                        <div v-if="displaySorters" class="sorters">
+                        <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('name', 'asc')" />
                           <div class="sort-desc arrow down" :class="cssSortActive('name', 'desc')" />
                         </div>  
@@ -16,7 +16,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                     <th>
                       <div class="sorter-cell"  @click="onSortChange('minimum_value')">
                         {{ i18n('Valor inicial') }}
-                        <div v-if="displaySorters" class="sorters">
+                        <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('minimum_value', 'asc')" />
                           <div class="sort-desc arrow down" :class="cssSortActive('minimum_value', 'desc')" />
                         </div>  
@@ -27,7 +27,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                     <th>
                       <div class="sorter-cell" @click="onSortChange('available_percentage')">
                         {{ i18n('Estoque') }}
-                        <div v-if="displaySorters" class="sorters">
+                        <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('available_percentage', 'asc')"/>
                           <div class="sort-desc arrow down" :class="cssSortActive('available_percentage', 'desc')" />
                         </div>  
@@ -88,10 +88,6 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     assets: {
       type: Array,
       default: () => []
-    },
-    displaySorters: {
-      type: Boolean,
-      default: true
     }
   },
   mixins: [configMixins, UIMixins],// eslint-disable-line

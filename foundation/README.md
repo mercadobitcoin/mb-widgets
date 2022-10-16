@@ -1,6 +1,6 @@
-## Foundation
+# Foundation
 
-### Structure
+## Structure
 - components
 - mixins
 - scss
