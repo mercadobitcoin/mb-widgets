@@ -32,17 +32,19 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
                 </button>
               </div>
             </div>
-            <div v-if="!busy && fixedIncomeAssets.result.length > 0" class="result-list">
+            <div v-if="fixedIncomeAssets.result.length > 0" class="result-list">
               <div v-if="isViewModeActive('card')" class="view-mode-list card">
                 <slot name="fixed-income-cards-list" :assets="fixedIncomeAssets.result">
                   <mbwd-fixed-income-asset-card-list :assets="fixedIncomeAssets.result" />
                 </slot>
               </div>
               <div v-else class="view-mode-list table">
-                <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" :displaySorters="!cptdIsNewCategorySelected" @sort="onSortChange" :assets="fixedIncomeAssets.result" />
+                <slot name="fixed-income-table" :assets="fixedIncomeAssets.result">
+                  <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" :displaySorters="!cptdIsNewCategory" @sort="onSortChange" :assets="fixedIncomeAssets.result" />
+                </slot>
               </div>
             </div>
-            <div v-if="!busy" class="pagination-wrapper">
+            <div class="pagination-wrapper">
               <mbc-pagination :total-pages="fixedIncomeAssets.totalPages" :current-page="fixedIncomeAssets.currentPage" @change="onPageChange"/>
             </div>
           </div>`,
@@ -123,7 +125,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
   },
   computed: {
     cptdAssetCategories () {
-      let defaultCategories = [
+      return [
         {
           label: 'Novos',
           value: 'new'
@@ -133,24 +135,8 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           value: 'all'
         }
       ]
-
-      if (this.authToken) {
-        defaultCategories = [
-          {
-            label: 'Favoritos',
-            value: 'favorites'
-          },
-          {
-            label: 'Com saldo',
-            value: 'has-balance'
-          },
-          ...defaultCategories
-        ]
-      }
-
-      return defaultCategories
     },
-    cptdIsNewCategorySelected () {
+    cptdIsNewCategory () {
       return this.fixedIncomeAssets.category === 'new'
     }
   },
@@ -173,7 +159,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     async getFixedIncomeAssets () {
       this.busy = true
       console.log(
-        'SEARCHING FOR: ',
+        'SEARCHING FOR FIXED INCOMES: ',
         this.getFixedIncomeAssetsRequestQueryString()
       )
       try {
@@ -183,7 +169,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           const { response_data } = await response.json() //eslint-disable-line
           const { data, total_items } = response_data //eslint-disable-line
           this.fixedIncomeAssets.result = data ?? [] //eslint-disable-line
-          if (this.cptdIsNewCategorySelected) {
+          if (this.cptdIsNewCategory) {
             this.fixedIncomeAssets.totalPages = 1
           } else {
             if (total_items) {//eslint-disable-line
@@ -201,10 +187,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.fixedIncomeAssets.totalPages = 1
       }
 
-      this.$emit('list-updated', this.fixedIncomeAssets.result.length)
       this.busy = false
+      this.$emit('list-updated', this.fixedIncomeAssets.result.length)
     },
     getFixedIncomeAssetsRequestQueryString () {
+      this.setFixedIncomeAssetsLimit()
+
       const { sort, category, order, currentPage, totalPages, limit } =
         this.fixedIncomeAssets
       const searchQueryStringsMap = {
@@ -252,13 +240,19 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       this.getFixedIncomeAssets()
     },
     onSortChange ({ sort, order }) {
+      if (this.fixedIncomeAssets.sort !== sort) {
+        this.fixedIncomeAssets.totalPages = 1
+        this.fixedIncomeAssets.currentPage = 1
+        this.fixedIncomeAssets.category = 'all'
+      }
+
       this.fixedIncomeAssets.sort = sort
       this.fixedIncomeAssets.order = order
       this.getFixedIncomeAssets()
     },
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
-      this.fixedIncomeAssets.limit = viewMode === 'card' ? 4 : 5
+      this.getFixedIncomeAssets()
     },
     resetFixedIncomeBasicQueryDefaultState () {
       if (this.$refs?.refFixedIncomeAssetTable) {
@@ -271,6 +265,13 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       this.fixedIncomeAssets.currentPage = 1
       this.fixedIncomeAssets.totalPages = 1
       this.fixedIncomeAssets.category = 'all'
+    },
+    setFixedIncomeAssetsLimit () {
+      if (this.mobileMode) {
+        this.fixedIncomeAssets.limit = this.viewMode === 'card' ? 4 : 5
+      } else {
+        this.fixedIncomeAssets.limit = this.viewMode === 'card' ? 3 : 5
+      }
     },
     scheduleGetFixedIncomeAssetsInterval () {
       this.intervalId = setInterval(

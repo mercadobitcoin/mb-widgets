@@ -18,6 +18,10 @@
   &.outlined {
     color: map-get($primary-color, "main");
     border: 2px solid map-get($primary-color, "main");
+
+    &:hover {
+      background: map-get($primary-color, "5");
+    }
   }
 
   &.ghost {

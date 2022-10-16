@@ -114,11 +114,15 @@
           color: map-get($neutral-color, "50");
 
           &.asset-cell {
-            cursor: pointer;
-
             .asset {
               display: flex;
               align-items: center;
+              color: map-get($neutral-color, '50');
+              cursor: pointer;
+              text-decoration: none;              display: flex;
+              align-items: center;
+              cursor: pointer;
+              text-decoration: none;
 
               img {
                 width: 24px;
@@ -154,10 +158,6 @@
               padding: 4px 16px;
               min-width: unset;
               height: 32px;
-
-              &:hover {
-                background: map-get($primary-color, "5");
-              }
             }
           }
         }
@@ -178,6 +178,7 @@
       border: solid 1px transparent;
       transition: all 0.2s ease;
       border-bottom: solid 1px map-get($secondary-color, "10");
+      text-decoration: none;
 
       &:hover,
       &:active {
@@ -230,7 +231,7 @@
               margin: 0 0 4px;
             }
 
-            & > .type {
+            & > .sub-type {
               @extend %typography-body-3;
 
               color: map-get($neutral-color, "30");

@@ -180,25 +180,23 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return this.translateMap?.[this.language]?.[key] ?? ''
     },
     onSortChange (sort) {
-      if (this.displaySorters) {
-        if (this.sort === sort) {
-          switch (this.order) {
-            case '':
-              this.order = 'asc'
-              break
-            case 'asc':
-              this.order = 'desc'
-              break
-            default:
-              this.order = ''
-          }
-        } else {
-          this.sort = sort
-          this.order = 'asc'
+      if (this.sort === sort) {
+        switch (this.order) {
+          case '':
+            this.order = 'asc'
+            break
+          case 'asc':
+            this.order = 'desc'
+            break
+          default:
+            this.order = ''
         }
-
-        this.$emit('sort', { order: this.order, sort: this.sort })
+      } else {
+        this.sort = sort
+        this.order = 'asc'
       }
+
+      this.$emit('sort', { order: this.order, sort: this.sort })
     }
   }
 })

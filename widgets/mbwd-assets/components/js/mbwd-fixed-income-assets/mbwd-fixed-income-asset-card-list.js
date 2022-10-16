@@ -24,7 +24,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
                       </div>
                       <svg viewBox="0 0 36 36" class="circular-chart">
                       <path class="circle"
-                        :stroke-dasharray="'' + parsePercentageStrToNumber(getPercentageString(asset.sold_percentage)) + ', 100'"
+                        :stroke-dasharray="parsePercentageStrToNumber(getPercentageString(asset.sold_percentage)) + ', 100'"
                         d="M18 2.0845
                           a 15.9155 15.9155 0 0 1 0 31.831
                           a 15.9155 15.9155 0 0 1 0 -31.831"

@@ -6,7 +6,7 @@ const MBWD_MOST_VALUED_ASSETS = function () { //eslint-disable-line
                 <p class="description">{{ i18n('Veja os 4 ativos que mais estão valorizando no Mercado Bitcoin.') }}</p>
                 <p class="badge">{{ i18n('Nas últimas 24 horas') }}</p>
                 <div class="assets">
-                    <a class="asset" v-for="asset in mostValuedAssetsList">
+                    <a class="asset" v-for="asset in mostValuedAssetsList" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
                         <div class="attributes">
                             <img class="icon" :src="getIconUrl(asset.icon)" :title="asset.symbol" :alt="asset.symbol"/>
                             <p class="name">{{ asset.symbol }}</p>
@@ -77,6 +77,9 @@ const MBWD_MOST_VALUED_ASSETS = function () { //eslint-disable-line
       },
       getIconUrl (path) {
         return this.cptdCdnStaticDomainUrl + path
+      },
+      getAssetBasicTradeExperienceLink (symbol) {
+        return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
       },
       async getMostValuedAssets () {
         try {
