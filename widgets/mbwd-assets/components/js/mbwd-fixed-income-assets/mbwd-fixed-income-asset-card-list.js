@@ -2,11 +2,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   template: `
               <div class="mbwd-fixed-income-asset-card-list apollo">
                 <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets">
-                  <div class="badge-wrapper">
-                    <div class="badge">
-                      <span class="rounded-status primary" /> {{ i18n('asset.status') }}
-                    </div>
-                  </div>
+                  <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status)" type="fixed-income" />
                   <div class="asset-data">
                     <div class="attributes">
                       <p class="name">{{ asset.name }}</p>
@@ -24,7 +20,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
                       </div>
                       <svg viewBox="0 0 36 36" class="circular-chart">
                       <path class="circle"
-                        :stroke-dasharray="parsePercentageStrToNumber(getPercentageString(asset.sold_percentage)) + ', 100'"
+                        :stroke-dasharray="getSVGSoldPercentageStyle(asset.sold_percentage)"
                         d="M18 2.0845
                           a 15.9155 15.9155 0 0 1 0 31.831
                           a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -43,11 +39,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
                       <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                       <p class="symbol">{{ asset.symbol }}</p>
                     </div>
-                    <div class="badge-wrapper">
-                      <div class="badge">
-                        <span class="rounded-status primary" /> {{ i18n('asset.status') }} mercadinhoww
-                      </div>
-                    </div>
+                    <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status)" type="fixed-income" />
                   </div>
                   <div class="market-data">
                     <p class="profitability">
@@ -71,6 +63,9 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
     }
   },
   mixins: [UIMixins, configMixins, currencyFilters],// eslint-disable-line
+  components: {
+    'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
+  },
   data () {
     return {
       translateMap: {
@@ -80,10 +75,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'A partir de': 'A partir de',
           Rentabilidade: 'Rentabilidade',
           'Prazo estimado': 'Prazo estimado',
-          vendido: 'vendido',
-          PRIMARY_MARKET: 'Primário',
-          SECONDARY_MARKET: 'Secundário',
-          SOLD_OUT: 'esgotado'
+          vendido: 'vendido'
         },
         en: {
           'nas últimas 24h': 'nas últimas 24h',
@@ -91,10 +83,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'A partir de': 'A partir de',
           Rentabilidade: 'Rentabilidade',
           'Prazo estimado': 'Prazo estimado',
-          vendido: 'vendido',
-          PRIMARY_MARKET: 'Primário',
-          SECONDARY_MARKET: 'Secundário',
-          SOLD_OUT: 'esgotado'
+          vendido: 'vendido'
         },
         es: {
           'nas últimas 24h': 'nas últimas 24h',
@@ -102,20 +91,14 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'A partir de': 'A partir de',
           Rentabilidade: 'Rentabilidade',
           'Prazo estimado': 'Prazo estimado',
-          vendido: 'vendido',
-          PRIMARY_MARKET: 'Primário',
-          SECONDARY_MARKET: 'Secundário',
-          SOLD_OUT: 'esgotado'
+          vendido: 'vendido'
         }
       }
     }
   },
   methods: {
-    getAssetStatusBadge (status) {
-      switch (status) {
-        default:
-          return ''
-      }
+    getAssetBadgeAsArray (status) {
+      return [status]
     },
     parsePercentageStrToNumber (percentage = '0') {
       return Number(percentage.replace(/[^\d.-]/g, ''))
@@ -126,11 +109,8 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
       percString = percString < 0 ? 0 : percString
       return `${percString}%`
     },
-    getSoldPercentageStyle (percentage = '0') {
-      const progress = this.getPercentageString(percentage)
-      return {
-        background: `conic-gradient(#4D5EFF ${progress},#F3F4F4 ${progress})`
-      }
+    getSVGSoldPercentageStyle (soldPercentage) {
+      return `${this.parsePercentageStrToNumber(this.getPercentageString(soldPercentage))} , 100`
     },
     getIconAlt (name) {
       return `ícone ${name}`

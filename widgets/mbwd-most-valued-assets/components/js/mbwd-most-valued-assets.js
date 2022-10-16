@@ -8,7 +8,7 @@ const MBWD_MOST_VALUED_ASSETS = function () { //eslint-disable-line
                 <div class="assets">
                     <a class="asset" v-for="asset in mostValuedAssetsList" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
                         <div class="attributes">
-                            <img class="icon" :src="getIconUrl(asset.icon)" :title="asset.symbol" :alt="asset.symbol"/>
+                            <img class="icon" :src="getIconUrl(asset.icon)" :title="getIconAlt(asset.symbol)" :alt="getIconAlt(asset.symbol)"/>
                             <p class="name">{{ asset.symbol }}</p>
                         </div>
                         <span class="variation">+{{ asset.variation }}%</span>
@@ -74,6 +74,9 @@ const MBWD_MOST_VALUED_ASSETS = function () { //eslint-disable-line
     methods: {
       i18n (key) {
         return this.translateMap?.[this.language]?.[key] ?? ''
+      },
+      getIconAlt (name) {
+        return `ícone ${name}`
       },
       getIconUrl (path) {
         return this.cptdCdnStaticDomainUrl + path

@@ -92,6 +92,7 @@ const task = function (cb) {
         'foundation/components/search-box/c-search-box.scss',
         'foundation/components/pagination/c-pagination.scss',
         'foundation/components/empty-state/c-empty-state.scss',
+        'foundation/components/asset-badges/c-asset-badges.scss',
         'widgets/mbwd-assets/components/css/**'
       ]),
       sass({ outputStyle: 'compressed' }).on('error', sass.logError),

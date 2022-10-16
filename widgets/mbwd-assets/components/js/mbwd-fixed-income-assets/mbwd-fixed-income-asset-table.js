@@ -72,11 +72,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                     </div>
                   </div>
                   <div class="market-data">
-                    <div class="badge-wrapper">
-                      <div class="badge">
-                        <span class="rounded-status primary" /> {{ i18n('asset.status') }} mercadinhoww
-                      </div>
-                    </div>
+                  <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status)" type="fixed-income" />
                     <p class="profitability">
                       {{ asset.profitability }}%
                     </p>
@@ -99,6 +95,9 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     }
   },
   mixins: [configMixins, UIMixins],// eslint-disable-line
+  components: {
+    'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
+  },
   data () {
     return {
       sort: '',
@@ -111,10 +110,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           Prazo: 'Prazo',
           Estoque: 'Estoque',
           Mercado: 'Mercado',
-          Investir: 'Investir',
-          PRIMARY_MARKET: 'Primário',
-          SECONDARY_MARKET: 'Secundário',
-          SOLD_OUT: 'esgotado'
+          Investir: 'Investir'
         },
         en: {
           Ativo: 'Ativo',
@@ -123,10 +119,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           Prazo: 'Prazo',
           Estoque: 'Estoque',
           Mercado: 'Mercado',
-          Investir: 'Investir',
-          PRIMARY_MARKET: 'Primário',
-          SECONDARY_MARKET: 'Secundário',
-          SOLD_OUT: 'esgotado'
+          Investir: 'Investir'
         },
         es: {
           Ativo: 'Ativo',
@@ -135,10 +128,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           Prazo: 'Prazo',
           Estoque: 'Estoque',
           Mercado: 'Mercado',
-          Investir: 'Investir',
-          PRIMARY_MARKET: 'Primário',
-          SECONDARY_MARKET: 'Secundário',
-          SOLD_OUT: 'esgotado'
+          Investir: 'Investir'
         }
       }
     }
@@ -149,6 +139,9 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     },
     parsePercentageStrToNumber (percentage = '0') {
       return Number(percentage.replace(/[^\d.-]/g, ''))
+    },
+    getAssetBadgeAsArray (status) {
+      return [status]
     },
     getAssetBasicTradeExperienceLink (symbol) {
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
@@ -161,12 +154,6 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       percString = percString > 100 ? 100 : percString
       percString = percString < 0 ? 0 : percString
       return `${percString}%`
-    },
-    getSoldPercentageStyle (percentage = '0') {
-      const progress = this.getPercentageString(percentage)
-      return {
-        background: `conic-gradient(#4D5EFF ${progress},#F3F4F4 ${progress})`
-      }
     },
     getIconAlt (name) {
       return `ícone ${name}`

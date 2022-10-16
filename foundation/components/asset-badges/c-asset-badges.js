@@ -1,9 +1,9 @@
 const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
   template: `<div class="c-asset-badges" v-if="badges.length > 0">
-    <div v-if="cptdIsTypeFixedIncome" class="c-badge fixed-income" v-for="badge in badges">
+    <div v-if="cptdIsTypeFixedIncome" class="c-badge fixed-income" v-for="badge in cptdNormalizedBadges">
       <span class="rounded-status" :class="badge" /> {{ i18n(badge) }}
     </div>
-    <div v-else class="c-badge crypto" v-for="badge in badges">
+    <div v-if="cptdIsTypeCrypto" class="c-badge crypto" v-for="badge in cptdNormalizedBadges">
       <img class="icon" :src="getIconUrl(badge)" /> {{ i18n(badge) }}
     </div>
   </div>`,
@@ -11,6 +11,10 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
     badges: {
       type: Array,
       default: () => []
+    },
+    language: {
+      type: String,
+      default: 'pt'
     },
     type: {
       type: String,
@@ -22,26 +26,50 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
       translateMap: {
         pt: {
           novo: 'novo',
-          'exclusivos mb': 'exclusivos mb'
+          'exclusivos mb': 'exclusivos mb',
+          'pré-listagem': 'pré-listagem',
+          'primary-market': 'mercado primário',
+          'secondary-market': 'mercado secundário',
+          'sold-out': 'esgotado'
         },
         en: {
           novo: 'novo',
-          'exclusivos mb': 'exclusivos mb'
+          'exclusivos mb': 'exclusivos mb',
+          'pré-listagem': 'pré-listagem',
+          'primary-market': 'mercado primário',
+          'secondary-market': 'mercado secundário',
+          'sold-out': 'esgotado'
         },
         es: {
           novo: 'novo',
-          'exclusivos mb': 'exclusivos mb'
+          'exclusivos mb': 'exclusivos mb',
+          'pré-listagem': 'pré-listagem',
+          'primary-market': 'mercado primário',
+          'secondary-market': 'mercado secundário',
+          'sold-out': 'esgotado'
         }
       }
     }
   },
   computed: {
-    cptdIsTypeFixedIncome: () => this.type === 'fixed-income',
-    cptdIsTypeCrypto: () => this.type === 'crypto'
+    cptdIsTypeFixedIncome () {
+      return this.type === 'fixed-income'
+    },
+    cptdIsTypeCrypto () {
+      return this.type === 'crypto'
+    },
+    cptdNormalizedBadges () {
+      return this.badges.map((badge) => (badge ?? '').toLowerCase().replace('_', '-'))
+    }
   },
   methods: {
-    getIconUrl () {
-      return '/img/icons/ico-badge-check-mono.svg'
+    getIconUrl (badge) {
+      switch ((badge ?? '').toLowerCase()) {
+        case 'exclusivos mb':
+          return '/img/icons/ico-badge-check-mono.svg'
+        default:
+          return '/img/icons/ico-badge-thunder-mono.svg'
+      }
     },
     getIconAlt (name) {
       return `ícone ${name}`
