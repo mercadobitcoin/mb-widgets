@@ -110,6 +110,7 @@
           &.profitability {
             color: map-get($positive-color, "30");
             @extend %typography-label-3;
+
             white-space: nowrap;
           }
 
