@@ -7,7 +7,7 @@
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 32px;
 
   & > .fixed-income-card {
     background: map-get($background-color, "primary");
@@ -69,11 +69,8 @@
   & > .fixed-income-card.desktop {
     border-radius: $border-radius-big;
     padding: 24px;
-
-    // max-width: 280px;
-    min-width: 389px;
     width: calc(33.3% - 32px);
-
+    min-width: 389px;
     // height: 195px;
     margin-top: 32px;
 

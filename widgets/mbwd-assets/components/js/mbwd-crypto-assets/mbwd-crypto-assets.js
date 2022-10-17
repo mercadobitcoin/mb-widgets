@@ -191,7 +191,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.getCryptoAssetsRequestQueryString()
       )
       try {
-        const response = await fetch(`/cryptos?${this.getCryptoAssetsRequestQueryString()}`)
+        const response = await fetch(`/cryptos${this.getCryptoAssetsRequestQueryString()}`)
 
         if (response.ok) {
           const { response_data } = await response.json() //eslint-disable-line
@@ -230,7 +230,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       }
 
       if (this.search) {
-        searchQueryStringsMap.query = this.search
+        searchQueryStringsMap.search = this.search
       }
 
       if (this.cptdIsNewCategory) {

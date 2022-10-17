@@ -175,7 +175,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.getFixedIncomeAssetsRequestQueryString()
       )
       try {
-        const response = await fetch(`/fixed-incomes?${this.getFixedIncomeAssetsRequestQueryString()}`)
+        const response = await fetch(`/fixed-incomes${this.getFixedIncomeAssetsRequestQueryString()}`)
 
         if (response.ok) {
           const { response_data } = await response.json() //eslint-disable-line
@@ -224,7 +224,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       }
 
       if (this.search) {
-        searchQueryStringsMap.query = this.search
+        searchQueryStringsMap.search = this.search
       }
 
       return this.mxCreateUrlQueryString(searchQueryStringsMap)

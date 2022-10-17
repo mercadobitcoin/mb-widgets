@@ -8,9 +8,15 @@ const URLMixins = { //eslint-disable-line
       return '?'.concat(
         Object.keys(options)
           .map(
-            (key) =>
-              `${encodeURIComponent(key)}=${encodeURIComponent(options[key])}`
+            (key) => {
+              if (options[key]) {
+                return `${encodeURIComponent(key)}=${encodeURIComponent(options[key])}`
+              }
+
+              return ''
+            }
           )
+          .filter(options => !!options)
           .join('&')
       )
     }
