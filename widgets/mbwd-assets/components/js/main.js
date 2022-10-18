@@ -1,4 +1,5 @@
 function MbwdAssets () { // eslint-disable-line
+  // ADD VERSION
   this.render = function (Vue, querySelector) {
     if (!Vue) {
       throw Error('Vue is required to load this widget')

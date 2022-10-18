@@ -1,4 +1,5 @@
 function MbwdMostValuedAssets () { // eslint-disable-line
+  // ADD VERSION
   this.render = function (Vue, querySelector) {
     if (!Vue) {
       throw new Error('Vue is required to load this widget')
