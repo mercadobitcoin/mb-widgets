@@ -21,7 +21,19 @@ const task = function (cb) {
   pump(
     [
       gulp.src([
-        CurrencyFilters,
+        CurrencyFilters
+      ]),
+      concat('c-mbwd-most-valued-assets.js'),
+      uglify(),
+      replace(/ {2,}/g, ''),
+      gulp.dest('public/mbwd-most-valued-assets/js')
+    ],
+    cb
+  )
+
+  pump(
+    [
+      gulp.src([
         MostValuedAssetsComponentPath,
         MainComponentJSpath
       ]),
