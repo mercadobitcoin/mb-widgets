@@ -16,11 +16,11 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
             </h3>
             <div class="options">
               <div class="categories">
-                <button class="category" v-for="category in cptdAssetCategories" :class="cssIsCategoryActive(category.value)" @click="onCategoryChange(category.value)">
+                <button class="category" v-for="category in cptdAssetCategories" :class="cssIsCategoryActive(category.value)" @click="changeCategory(category.value)">
                   {{ i18n(category.label) }}
                 </button>
               </div>
-              <div class="view-modes" v-if="!mobileMode">
+              <div v-if="!mobileMode" class="view-modes">
                 <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
                   <img v-if="isViewModeActive('card')" src="/img/icons/ico-four-squares-mono.svg">
                   <img v-else src="/img/icons/ico-four-squares-white.svg">
@@ -40,19 +40,15 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
               </div>
               <div v-else class="view-mode-list table">
                 <slot name="crypto-table" :assets="cryptoAssets.result">
-                  <mbwd-crypto-asset-table ref="refCryptoAssetTable" @sort="onSortChange" :assets="cryptoAssets.result" />
+                  <mbwd-crypto-asset-table ref="refCryptoAssetTable" @sort="changeSortOrder" :assets="cryptoAssets.result" />
                 </slot>
               </div>
             </div>
             <div class="pagination-wrapper">
-              <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" @change="onPageChange"/>
+              <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" @change="changePage"/>
             </div>
           </div>`,
   props: {
-    authenticated: {
-      type: Boolean,
-      default: false
-    },
     language: {
       type: String,
       default: 'pt'
@@ -191,6 +187,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.getCryptoAssetsRequestQueryString()
       )
       try {
+        // TODO: CHANGE TO API LATER
         const response = await fetch(`/cryptos${this.getCryptoAssetsRequestQueryString()}`)
 
         if (response.ok) {
@@ -268,16 +265,16 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     isViewModeActive (viewMode) {
       return this.viewMode === viewMode
     },
-    onCategoryChange (category) {
+    changeCategory (category) {
       this.resetCryptoBasicQueryDefaultState()
       this.cryptoAssets.category = category
       this.getCryptoAssets()
     },
-    onPageChange (page) {
+    changePage (page) {
       this.cryptoAssets.currentPage = page
       this.getCryptoAssets()
     },
-    onSortChange ({ sort, order }) {
+    changeSortOrder ({ sort, order }) {
       if (this.cryptoAssets.sort !== sort) {
         this.cryptoAssets.totalPages = 1
         this.cryptoAssets.currentPage = 1

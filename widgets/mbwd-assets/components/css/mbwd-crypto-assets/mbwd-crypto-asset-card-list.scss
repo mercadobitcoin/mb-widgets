@@ -1,5 +1,6 @@
 @import "../../../../../foundation/scss/design-system/apollo/colors";
 @import "../../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../../foundation/scss/design-system/apollo/spacing";
 @import "../../../../../foundation/scss/variables";
 
 .mbwd-crypto-asset-card-list {
@@ -95,6 +96,7 @@
 
       & > .name {
         @extend %typography-label-2;
+
         color: map-get($neutral-color, "50");
         display: flex;
         align-items: center;
@@ -137,7 +139,7 @@
 
   & > .crypto-card.mobile {
     border-radius: 16px;
-    padding: 16px;
+    padding: map-get($spacing-inset, 'xs');
     width: 100%;
 
     & > .attributes {
@@ -162,9 +164,10 @@
 
           & > .name {
             @extend %typography-label-2;
+
             max-height: 44px;
             word-break: break-word;
-            display: -webkit-box;
+            display: box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
@@ -174,6 +177,7 @@
 
           & > .type {
             @extend %typography-caption;
+
             color: map-get($neutral-color, "30");
             margin: 0;
           }
@@ -189,6 +193,7 @@
 
       & > .variation {
         @extend %typography-label-3;
+
         margin: 0;
 
         & > .label-24h {

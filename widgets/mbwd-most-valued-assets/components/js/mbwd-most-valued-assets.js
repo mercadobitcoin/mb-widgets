@@ -1,17 +1,17 @@
 const MBWD_MOST_VALUED_ASSETS = function () { //eslint-disable-line
   return {
     template: `
-            <div class="mbwd-most-valued-assets" v-if="cptdDisplaySelf">
+            <div v-if="cptdDisplaySelf" class="mbwd-most-valued-assets">
                 <p class="title">{{ i18n('Mais valorizados') }}</p>
                 <p class="description">{{ i18n('Veja os 4 ativos que mais estão valorizando no Mercado Bitcoin.') }}</p>
                 <p class="badge">{{ i18n('Nas últimas 24 horas') }}</p>
                 <div class="assets">
-                    <a class="asset" v-for="asset in mostValuedAssetsList" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
+                    <a class="asset" v-for="asset in mostValuedAssetsList" :key="asset.symbol" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
                         <div class="attributes">
                             <img class="icon" :src="getIconUrl(asset.icon)" :title="getIconAlt(asset.symbol)" :alt="getIconAlt(asset.symbol)"/>
                             <p class="name">{{ asset.symbol }}</p>
                         </div>
-                        <span class="variation">+{{ asset.variation }}%</span>
+                        <span class="variation">+{{ asset.variation | ftFormatNumber(2) }}%</span>
                     </a>
                 </div>
             </div>`,
@@ -25,6 +25,7 @@ const MBWD_MOST_VALUED_ASSETS = function () { //eslint-disable-line
         default: 30000 // ms
       }
     },
+    mixins: [currencyFilters], //eslint-disable-line
     data () {
       return {
         intervalId: null,
@@ -96,64 +97,7 @@ const MBWD_MOST_VALUED_ASSETS = function () { //eslint-disable-line
             this.mostValuedAssetsList = []
           }
         } catch (e) {
-          this.mostValuedAssetsList = [
-            {
-              id: 'STVFT',
-              symbol: 'STVFT',
-              name: 'Sint-Truidense FT',
-              status: null,
-              variation: 30.22,
-              decimals: 4,
-              quote_decimals: 2,
-              actual_value: 23.7,
-              volume_traded: 533.70082613,
-              brl_estimated_volume_traded: 12648.709579281,
-              icon: '/img/icons/assets/ico-asset-stvft-color.svg',
-              release_date: '2013-01-01 00:00:00'
-            },
-            {
-              id: 'RLY',
-              symbol: 'RLY',
-              name: 'Rally',
-              status: null,
-              variation: 26.18,
-              decimals: 4,
-              quote_decimals: 4,
-              actual_value: 0.1287,
-              volume_traded: 44302.59012839,
-              brl_estimated_volume_traded: 5701.743349523794,
-              icon: '/img/icons/assets/ico-asset-rly-color.svg',
-              release_date: '2013-01-01 00:00:00'
-            },
-            {
-              id: 'DG',
-              symbol: 'DG',
-              name: 'Decentral Games',
-              status: null,
-              variation: 24.23,
-              decimals: 4,
-              quote_decimals: 8,
-              actual_value: 0.31979,
-              volume_traded: 98322.66760683,
-              brl_estimated_volume_traded: 31442.605873988166,
-              icon: '/img/icons/assets/ico-asset-dg-color.svg',
-              release_date: '2022-06-14 10:00:00'
-            },
-            {
-              id: 'METIS',
-              symbol: 'METIS',
-              name: 'MetisDAO',
-              status: null,
-              variation: 18.58,
-              decimals: 4,
-              quote_decimals: 2,
-              actual_value: 133.99,
-              volume_traded: 202.18145047,
-              brl_estimated_volume_traded: 27090.2925484753,
-              icon: '/img/icons/assets/ico-asset-metis-color.svg',
-              release_date: '2013-01-01 00:00:00'
-            }
-          ]
+          this.mostValuedAssetsList = []
         }
       },
       scheduleGetMostValuedAssetsInterval () {

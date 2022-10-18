@@ -8,6 +8,9 @@ const pump = require('pump')
 const replace = require('gulp-replace')
 
 const task = function (cb) {
+  // Filters
+  const CurrencyFilters = 'foundation/mixins/filters/currencyFilters.js'
+
   // Modules
   const MostValuedAssetsComponentPath =
     'widgets/mbwd-most-valued-assets/components/js/mbwd-most-valued-assets.js'
@@ -17,7 +20,11 @@ const task = function (cb) {
   // Negotiate Component and dependencies
   pump(
     [
-      gulp.src([MostValuedAssetsComponentPath, MainComponentJSpath]),
+      gulp.src([
+        CurrencyFilters,
+        MostValuedAssetsComponentPath,
+        MainComponentJSpath
+      ]),
       concat('c-mbwd-most-valued-assets.js'),
       uglify(),
       replace(/ {2,}/g, ''),

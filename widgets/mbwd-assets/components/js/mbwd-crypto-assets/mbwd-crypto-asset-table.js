@@ -5,7 +5,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                 <thead>
                   <tr>
                     <th>
-                      <div class="sorter-cell" @click="onSortChange('name')">
+                      <div class="sorter-cell" @click="changeSortOrder('name')">
                         {{ i18n('Ativo') }}
                         <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('name', 'asc')" />
@@ -14,7 +14,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                       </div>
                     </th>
                     <th>
-                      <div class="sorter-cell" @click="onSortChange('symbol')">
+                      <div class="sorter-cell" @click="changeSortOrder('symbol')">
                         {{ i18n('Ticker') }}
                         <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('symbol', 'asc')" />
@@ -23,7 +23,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                       </div>
                     </th>
                     <th>
-                    <div class="sorter-cell" @click="onSortChange('sub_type')">
+                    <div class="sorter-cell" @click="changeSortOrder('sub_type')">
                       {{ i18n('Segmento') }}
                       <div class="sorters">
                         <div class="sort-asc arrow up" :class="cssSortActive('sub_type', 'asc')" />
@@ -32,7 +32,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                     </div>
                   </th>              
                     <th>
-                      <div class="sorter-cell" @click="onSortChange('market_price')">
+                      <div class="sorter-cell" @click="changeSortOrder('market_price')">
                         {{ i18n('Preço') }}
                         <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('market_price', 'asc')" />
@@ -42,7 +42,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                     </th>
                     <th>{{ i18n('Variação') }}</th>
                     <th>
-                      <div class="sorter-cell" @click="onSortChange('market_cap')">
+                      <div class="sorter-cell" @click="changeSortOrder('market_cap')">
                         {{ i18n('Capitalização de mercado') }}
                         <div class="sorters">
                           <div class="sort-asc arrow up" :class="cssSortActive('market_cap', 'asc')" />
@@ -54,7 +54,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                   </tr>
                 </thead>
                 <tbody>
-                  <tr v-for="asset in assets">
+                  <tr v-for="asset in assets" :key="asset.symbol">
                     <td class="asset-cell">
                       <a class="asset" :href="getAssetLandingPageLink(asset.symbol)">
                         <img class="icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
@@ -64,7 +64,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                     <td class="symbol">{{ asset.symbol }}</td>
                     <td class="sub-type">{{ i18n(asset.sub_type) }}</td>
                     <td class="price">{{ asset.market_price | ftFormatCurrency(2) }}</td>
-                    <td class="variation" :class="asset.variation.positive">
+                    <td class="variation" :class="asset.variation.status">
                       {{ asset.variation.string }}
                     </td>
                     <td class="market-cap">{{ asset.market_cap | ftFormatCurrency(2) }}</td>
@@ -77,7 +77,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
                 </tbody>
               </table>
               <div v-if="mobileMode" class="crypto-asset-table-mobile">
-                <a class="crypto-asset" v-for="asset in assets" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
+                <a class="crypto-asset" v-for="asset in assets" :key="asset.symbol" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
                   <div class="attributes">
                     <div class="header">
                       <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
@@ -170,7 +170,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
         symbol ?? ''
       ).toLowerCase()}-color.svg`
     },
-    onSortChange (sort) {
+    changeSortOrder (sort) {
       if (this.sort === sort) {
         switch (this.order) {
           case '':

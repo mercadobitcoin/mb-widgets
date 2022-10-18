@@ -1,8 +1,8 @@
 const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   template: `
               <div class="mbwd-fixed-income-asset-card-list apollo">
-                <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets">
-                  <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status)" type="fixed-income" />
+                <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets" :key="asset.symbol">
+                  <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status.value)" type="fixed-income" />
                   <div class="asset-data">
                     <div class="attributes">
                       <p class="name">{{ asset.name }}</p>
@@ -15,12 +15,12 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
                     </div>
                     <div class="sold-percentage">
                       <div class="middle-circle">
-                        <p>{{ getPercentageString(asset.sold_percentage) }}</p>
+                        <p>{{ getPercentageString(asset.sold_percentage.number) }}</p>
                         <p><strong>{{ i18n('vendido') }}</strong></p>
                       </div>
                       <svg viewBox="0 0 36 36" class="circular-chart">
                       <path class="circle"
-                        :stroke-dasharray="getSVGSoldPercentageStyle(asset.sold_percentage)"
+                        :stroke-dasharray="getSVGSoldPercentageStyle(asset.sold_percentage.number)"
                         d="M18 2.0845
                           a 15.9155 15.9155 0 0 1 0 31.831
                           a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -33,7 +33,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
                     <a class="button secondary ghost">Conhecer</a>
                   </div>
                 </a>
-                <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets">
+                <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.symbol">
                   <div class="attributes">
                     <div class="header">
                       <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
@@ -43,7 +43,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
                   </div>
                   <div class="market-data">
                     <p class="profitability">
-                      {{ asset.profitability }}%
+                      {{ asset.profitability }}
                     </p>
                     <div class="minimum-value">
                       <p class="min-label">{{ i18n('A partir de') }}</p>
@@ -100,17 +100,21 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
     getAssetBadgeAsArray (status) {
       return [status]
     },
-    parsePercentageStrToNumber (percentage = '0') {
-      return Number(percentage.replace(/[^\d.-]/g, ''))
-    },
     getPercentageString (percentage = 0) {
-      let percString = this.parsePercentageStrToNumber(percentage)
-      percString = percString > 100 ? 100 : percString
-      percString = percString < 0 ? 0 : percString
-      return `${percString}%`
+      let percString = percentage
+
+      if (percString > 100) {
+        percString = 100
+      }
+
+      if (percString < 0) {
+        percString = 0
+      }
+
+      return `${this.$options.filters.ftFormatNumber(percString, 2)}%`
     },
     getSVGSoldPercentageStyle (soldPercentage) {
-      return `${this.parsePercentageStrToNumber(this.getPercentageString(soldPercentage))} , 100`
+      return `${soldPercentage}, 100`
     },
     getIconAlt (name) {
       return `ícone ${name}`

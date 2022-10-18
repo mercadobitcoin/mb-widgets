@@ -1,7 +1,7 @@
  MBWD_CRYPTO_ASSET_CARD_LIST = () => ({ // eslint-disable-line
   template: `
               <div class="mbwd-crypto-asset-card-list">
-                <a v-if="mobileMode" class="crypto-card mobile" v-for="asset in assets">
+                <a v-if="mobileMode" class="crypto-card mobile" v-for="asset in assets" :key="asset.symbol">
                   <div class="attributes">
                     <div class="header">
                       <img class="asset-icon" :src="asset.icon_url" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
@@ -20,7 +20,7 @@
                     <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
                   </div>
                 </a>
-                <a v-if="!mobileMode" class="crypto-card desktop" v-for="asset in assets">
+                <a v-if="!mobileMode" class="crypto-card desktop" v-for="asset in assets" :key="asset.symbol">
                   <div class="attributes">
                     <div class="header">
                       <img class="asset-icon" :src="asset.icon_url" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>

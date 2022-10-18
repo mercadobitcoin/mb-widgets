@@ -6,7 +6,7 @@
   display: flex;
   animation: ani-grow-to-right 0.5s ease;
   width: 100%;
-  border-radius: 8px;
+  border-radius: $default-border-radius;
   border: 1px solid;
   border-color: map-get($border-color, "secondary");
   background-color: map-get($background-color, "primary");

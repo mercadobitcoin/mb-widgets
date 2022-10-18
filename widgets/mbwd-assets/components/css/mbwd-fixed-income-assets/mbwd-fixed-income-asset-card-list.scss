@@ -1,6 +1,7 @@
 @import "../../../../../foundation/scss/design-system/apollo/colors";
 @import "../../../../../foundation/scss/design-system/apollo/buttons";
 @import "../../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../../foundation/scss/design-system/apollo/spacing";
 @import "../../../../../foundation/scss/variables";
 
 .mbwd-fixed-income-asset-card-list {
@@ -71,7 +72,6 @@
     padding: 24px;
     width: calc(33.3% - 32px);
     min-width: 389px;
-    // height: 195px;
     margin-top: 32px;
 
     .badge-wrapper {
@@ -145,8 +145,8 @@
         .middle-circle {
           position: absolute;
           border-radius: 50%;
-          height: 86px;
-          width: 86px;
+          height: 85px;
+          width: 85px;
           background-color: #fff;
           display: flex;
           flex-direction: column;
@@ -187,7 +187,7 @@
   }
 
   & > .fixed-income-card.mobile {
-    padding: 16px;
+    padding: map-get($spacing-inset, 'xs');
     border-radius: $border-radius-default;
     width: 100%;
     justify-content: space-between;

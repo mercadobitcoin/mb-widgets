@@ -1,6 +1,7 @@
 @import "../../../../../foundation/scss/design-system/apollo/colors";
 @import "../../../../../foundation/scss/design-system/apollo/buttons";
 @import "../../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../../foundation/scss/design-system/apollo/spacing";
 @import "../../../../../foundation/scss/variables";
 
 .mbwd-fixed-income-asset-table {
@@ -105,7 +106,7 @@
     tbody {
       tr {
         td {
-          padding: 16px;
+          padding: map-get($spacing-inset, 'xs');
           @extend %typography-body-2;
 
           color: map-get($neutral-color, '50');
@@ -154,7 +155,7 @@
     margin-top: 32px;
 
     &>.fixed-income-asset {
-      padding: 16px;
+      padding: map-get($spacing-inset, 'xs');
       width: 100%;
       background: map-get($background-color, 'primary');
       display: flex;

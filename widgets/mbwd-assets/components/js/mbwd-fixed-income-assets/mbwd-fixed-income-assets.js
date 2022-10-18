@@ -17,7 +17,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
             </h3>
             <div class="options">
               <div class="categories">
-                <button class="category" v-for="category in cptdAssetCategories" :class="cssIsCategoryActive(category.value)" @click="onCategoryChange(category.value)">
+                <button class="category" v-for="category in cptdAssetCategories" :key="category.value" :class="cssIsCategoryActive(category.value)" @click="changeCategory(category.value)">
                   {{ i18n(category.label) }}
                 </button>
               </div>
@@ -41,12 +41,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
               </div>
               <div v-else class="view-mode-list table">
                 <slot name="fixed-income-table" :assets="fixedIncomeAssets.result">
-                  <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="onSortChange" :assets="fixedIncomeAssets.result" />
+                  <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="changeSortOrder" :assets="fixedIncomeAssets.result" />
                 </slot>
               </div>
             </div>
             <div class="pagination-wrapper">
-              <mbc-pagination :total-pages="fixedIncomeAssets.totalPages" :current-page="fixedIncomeAssets.currentPage" @change="onPageChange"/>
+              <mbc-pagination :total-pages="fixedIncomeAssets.totalPages" :current-page="fixedIncomeAssets.currentPage" @change="changePage"/>
             </div>
           </div>`,
   props: {
@@ -242,16 +242,16 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     isViewModeActive (viewMode) {
       return this.viewMode === viewMode
     },
-    onCategoryChange (category) {
+    changeCategory (category) {
       this.resetFixedIncomeBasicQueryDefaultState()
       this.fixedIncomeAssets.category = category
       this.getFixedIncomeAssets()
     },
-    onPageChange (page) {
+    changePage (page) {
       this.fixedIncomeAssets.currentPage = page
       this.getFixedIncomeAssets()
     },
-    onSortChange ({ sort, order }) {
+    changeSortOrder ({ sort, order }) {
       if (this.fixedIncomeAssets.sort !== sort) {
         this.fixedIncomeAssets.totalPages = 1
         this.fixedIncomeAssets.currentPage = 1

@@ -59,7 +59,7 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
       return this.type === 'crypto'
     },
     cptdNormalizedBadges () {
-      return this.badges.map((badge) => (badge ?? '').toLowerCase().replace('_', '-'))
+      return this.badges.map((badge) => String((badge ?? '')).toLowerCase().replace('_', '-'))
     }
   },
   methods: {
