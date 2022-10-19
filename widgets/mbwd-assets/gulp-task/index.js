@@ -81,7 +81,7 @@ const task = function (cb) {
       concat('c-mbwd-assets.js'),
       uglify(),
       replace(/ {2,}/g, ''),
-      gulp.dest('public/mbwd-assets/js')
+      gulp.dest('public/widgets/mbwd-assets/js')
     ],
     cb
   )
@@ -98,7 +98,7 @@ const task = function (cb) {
       sass({ outputStyle: 'compressed' }).on('error', sass.logError),
       concat('c-mbwd-assets.css'),
       replace(/\n/g, ''),
-      gulp.dest('public/mbwd-assets/css')
+      gulp.dest('public/widgets/mbwd-assets/css')
     ],
     cb
   )

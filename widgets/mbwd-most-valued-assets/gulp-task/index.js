@@ -26,7 +26,7 @@ const task = function (cb) {
       concat('c-mbwd-most-valued-assets.js'),
       uglify(),
       replace(/ {2,}/g, ''),
-      gulp.dest('public/mbwd-most-valued-assets/js')
+      gulp.dest('public/widgets/mbwd-most-valued-assets/js')
     ],
     cb
   )
@@ -40,7 +40,7 @@ const task = function (cb) {
       concat('c-mbwd-most-valued-assets.js'),
       uglify(),
       replace(/ {2,}/g, ''),
-      gulp.dest('public/mbwd-most-valued-assets/js')
+      gulp.dest('public/widgets/mbwd-most-valued-assets/js')
     ],
     cb
   )
@@ -54,7 +54,7 @@ const task = function (cb) {
       sass({ outputStyle: 'compressed' }).on('error', sass.logError),
       concat('c-mbwd-most-valued-assets.css'),
       replace(/\n/g, ''),
-      gulp.dest('public/mbwd-most-valued-assets/css')
+      gulp.dest('public/widgets/mbwd-most-valued-assets/css')
     ],
     cb
   )

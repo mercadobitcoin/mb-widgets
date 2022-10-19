@@ -6,12 +6,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
               {{ i18n('Renda Fixa Digital') }}
               <div v-if="mobileMode" class="view-modes">
                 <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-                  <img v-if="isViewModeActive('card')" src="/img/icons/ico-four-squares-mono.svg">
-                  <img v-else src="/img/icons/ico-four-squares-white.svg">
+                  <img v-if="isViewModeActive('card')" src="/widgets/img/icons/ico-four-squares-mono.svg">
+                  <img v-else src="/widgets/img/icons/ico-four-squares-white.svg">
                 </button>
                 <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-                  <img v-if="isViewModeActive('table')" src="/img/icons/ico-three-rectangles-mono.svg">
-                  <img v-else src="/img/icons/ico-three-rectangles-white.svg">
+                  <img v-if="isViewModeActive('table')" src="/widgets/img/icons/ico-three-rectangles-mono.svg">
+                  <img v-else src="/widgets/img/icons/ico-three-rectangles-white.svg">
                 </button>
               </div>
             </h3>
@@ -23,12 +23,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
               </div>
               <div v-if="!mobileMode" class="view-modes">
                 <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-                  <img v-if="isViewModeActive('card')" src="/img/icons/ico-four-squares-mono.svg">
-                  <img v-else src="/img/icons/ico-four-squares-white.svg">
+                  <img v-if="isViewModeActive('card')" src="/widgets/img/icons/ico-four-squares-mono.svg">
+                  <img v-else src="/widgets/img/icons/ico-four-squares-white.svg">
                 </button>
                 <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-                  <img v-if="isViewModeActive('table')" src="/img/icons/ico-three-rectangles-mono.svg">
-                  <img v-else src="/img/icons/ico-three-rectangles-white.svg">
+                  <img v-if="isViewModeActive('table')" src="/widgets/img/icons/ico-three-rectangles-mono.svg">
+                  <img v-else src="/widgets/img/icons/ico-three-rectangles-white.svg">
                 </button>
               </div>
             </div>

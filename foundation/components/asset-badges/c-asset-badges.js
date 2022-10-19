@@ -66,9 +66,9 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
     getIconUrl (badge) {
       switch ((badge ?? '').toLowerCase()) {
         case 'exclusivos mb':
-          return '/img/icons/ico-badge-check-mono.svg'
+          return '/widgets/img/icons/ico-badge-check-mono.svg'
         default:
-          return '/img/icons/ico-badge-thunder-mono.svg'
+          return '/widgets/img/icons/ico-badge-thunder-mono.svg'
       }
     },
     getIconAlt (name) {

@@ -48,10 +48,10 @@ const MBC_EMPTY_STATE = () => ({ //eslint-disable-line
       return this.cta && this.cta.type && this.cta.type === 'link'
     },
     cptdMainStateIconSrc () {
-      return `/img/ilu/${this.mainStateIcon}`
+      return `/widgets/img/ilu/${this.mainStateIcon}`
     },
     cptdCtaIconSrc () {
-      return `/img/icons/${this.ctaIcon}`
+      return `/widgets/img/icons/${this.ctaIcon}`
     }
   },
   methods: {

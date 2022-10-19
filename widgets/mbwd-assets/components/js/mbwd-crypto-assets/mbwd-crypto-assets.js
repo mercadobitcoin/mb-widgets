@@ -5,12 +5,12 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
               {{ i18n('Criptoativos') }}
               <div v-if="mobileMode" class="view-modes">
                 <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-                  <img v-if="isViewModeActive('card')" src="/img/icons/ico-four-squares-mono.svg">
-                  <img v-else src="/img/icons/ico-four-squares-white.svg">
+                  <img v-if="isViewModeActive('card')" src="/widgets/img/icons/ico-four-squares-mono.svg">
+                  <img v-else src="/widgets/img/icons/ico-four-squares-white.svg">
                 </button>
                 <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-                  <img v-if="isViewModeActive('table')" src="/img/icons/ico-three-rectangles-mono.svg">
-                  <img v-else src="/img/icons/ico-three-rectangles-white.svg">
+                  <img v-if="isViewModeActive('table')" src="/widgets/img/icons/ico-three-rectangles-mono.svg">
+                  <img v-else src="/widgets/img/icons/ico-three-rectangles-white.svg">
                 </button>
               </div>
             </h3>
@@ -22,12 +22,12 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
               </div>
               <div v-if="!mobileMode" class="view-modes">
                 <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-                  <img v-if="isViewModeActive('card')" src="/img/icons/ico-four-squares-mono.svg">
-                  <img v-else src="/img/icons/ico-four-squares-white.svg">
+                  <img v-if="isViewModeActive('card')" src="/widgets/img/icons/ico-four-squares-mono.svg">
+                  <img v-else src="/widgets/img/icons/ico-four-squares-white.svg">
                 </button>
                 <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-                  <img v-if="isViewModeActive('table')" src="/img/icons/ico-three-rectangles-mono.svg">
-                  <img v-else src="/img/icons/ico-three-rectangles-white.svg">
+                  <img v-if="isViewModeActive('table')" src="/widgets/img/icons/ico-three-rectangles-mono.svg">
+                  <img v-else src="/widgets/img/icons/ico-three-rectangles-white.svg">
                 </button>
               </div>
             </div>
@@ -82,7 +82,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         totalPages: 1,
         result: []
       },
-      viewMode: 'card', // [card, table]
+      viewMode: 'table', // [card, table]
       translateMap: {
         pt: {
           Favoritos: 'Favoritos',

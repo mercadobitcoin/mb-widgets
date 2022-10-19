@@ -6,7 +6,8 @@
 .mbwd-crypto-asset-table {
   .crypto-asset-table-desktop {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     margin-top: 32px;
     height: auto;
     transition: all 0.2s ease;
@@ -14,14 +15,23 @@
     thead,
     tbody {
       tr {
-        transition: border 0.2s ease;
-        border: solid 1px transparent;
-        border-bottom: solid 1px map-get($secondary-color, "10");
-
         th,
         td {
           text-align: left;
           transition: border 0.2s ease;
+          transition: border 0.2s ease;
+          border-left: none;
+          border-right: none;
+          border-top: solid 1px transparent;
+          border-bottom: solid 1px map-get($secondary-color, "10");
+
+          &:first-child {
+            border-left: solid 1px transparent;
+          }
+
+          &:last-child {
+            border-right: solid 1px transparent;
+          }
         }
 
         td {
@@ -38,7 +48,6 @@
               border-left: solid 1px map-get($primary-color, "main");
               border-top-left-radius: 4px;
               border-bottom-left-radius: 4px;
-              overflow: hidden;
             }
 
             &:last-child {
