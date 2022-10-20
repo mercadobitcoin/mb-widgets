@@ -11,7 +11,7 @@ const task = function (cb) {
   // Mixins
   const Mixins = 'foundation/mixins/mixins.js'
   const UIMixins = 'foundation/mixins/UIMixins.js'
-  const ConfigMixins = 'foundation/mixins/configMixins.js'
+  const configMixins = 'foundation/mixins/configMixins.js'
   const URLMixins = 'foundation/mixins/urlMixins.js'
 
   // Filters
@@ -55,7 +55,7 @@ const task = function (cb) {
     [
       gulp.src([
         // Mixins
-        ConfigMixins,
+        configMixins,
         Mixins,
         UIMixins,
         URLMixins,
