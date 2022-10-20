@@ -18,7 +18,8 @@ Number.prototype.toFixedNoRounding = function (n) { //eslint-disable-line
   }
 }
 
-const currencyMixins = {//eslint-disable-line
+window.MB_WIDGETS = window.MB_WIDGETS || {}
+window.MB_WIDGETS.currencyMixins = {//eslint-disable-line
   methods: {
     mxSetFiatMaskForInput (value, fiatDecimals) {
       let v, x

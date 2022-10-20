@@ -1,4 +1,5 @@
-const mixins = { //eslint-disable-line
+window.MB_WIDGETS = window.MB_WIDGETS || {}
+window.MB_WIDGETS.mixins = {
   methods: {
     mxDebounce (debounceIntervalId, callback, wait) {
       const debounceWaitTimeOut = wait || 300

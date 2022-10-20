@@ -1,6 +1,13 @@
-const configMixins = { //eslint-disable-line
+window.MB_WIDGETS = window.MB_WIDGETS || {}
+window.MB_WIDGETS.configMixins = {
   computed: {
-    GLOBAL_Cdn_Static_Path () {
+    MB_WIDGETS_GLOBAL_Cdn_Static_Path () {
+      return window.location.host.includes('localhost') ? '' : 'https://static.mercadobitcoin.com.br/web'
+    },
+    MB_WIDGETS_GLOBAL_Cdn_Widgets_Url () {
+      return `${this.MB_WIDGETS_GLOBAL_Cdn_Static_Path}/widgets`
+    },
+    MB_WIDGETS_GLOBAL_Cdn_Assets_Icon_Url () {
       return 'https://static.mercadobitcoin.com.br/web'
     }
   }

@@ -1,4 +1,5 @@
-const URLMixins = { //eslint-disable-line
+window.MB_WIDGETS = window.MB_WIDGETS || {}
+window.MB_WIDGETS.URLMixins = { //eslint-disable-line
   methods: {
     mxCreateUrlQueryString (options) {
       if (!options || !Object.keys(options).length) {

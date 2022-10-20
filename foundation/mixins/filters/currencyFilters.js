@@ -18,7 +18,7 @@ Number.prototype.toFixedNoRounding = function (n) { //eslint-disable-line
   }
 }
 
-const bigNumberToShortenValue = function (value, scale) {
+function bigNumberToShortenValue (value, scale) {
   if (!scale) scale = 'K'
   const scales = {
     Q: 1e15,
@@ -38,7 +38,8 @@ const bigNumberToShortenValue = function (value, scale) {
   return value
 }
 
-const currencyFilters = { //eslint-disable-line
+window.MB_WIDGETS = window.MB_WIDGETS || {}
+window.MB_WIDGETS.currencyFilters = { //eslint-disable-line
   filters: {
     ftFormatCrypto (v, maxDigits, scale) {
       if (v === '' || isNaN(v)) {

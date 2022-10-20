@@ -1,4 +1,5 @@
-const UIMixins = {//eslint-disable-line
+window.MB_WIDGETS = window.MB_WIDGETS || {}
+window.MB_WIDGETS.UIMixins = {//eslint-disable-line
   data () {
     return {
       mobileMode: false,
