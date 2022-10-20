@@ -7,6 +7,7 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
       <img class="icon" :src="getIconUrl(badge)" /> {{ i18n(badge) }}
     </div>
   </div>`,
+  mixins: [window.MB_WIDGETS.configMixins], //eslint-disable-line
   props: {
     badges: {
       type: Array,
@@ -66,9 +67,9 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
     getIconUrl (badge) {
       switch ((badge ?? '').toLowerCase()) {
         case 'exclusivos mb':
-          return '/widgets/img/icons/ico-badge-check-mono.svg'
+          return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/icons/ico-badge-check-mono.svg`
         default:
-          return '/widgets/img/icons/ico-badge-thunder-mono.svg'
+          return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/icons/ico-badge-thunder-mono.svg`
       }
     },
     getIconAlt (name) {

@@ -23,7 +23,7 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
       default: 30000 // ms
     }
   },
-  mixins: [configMixins],// eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins],// eslint-disable-line
   components: {
     'mbc-empty-state': MBC_EMPTY_STATE(),// eslint-disable-line
     'mbc-search-box': MBC_SEARCH_BOX(),// eslint-disable-line

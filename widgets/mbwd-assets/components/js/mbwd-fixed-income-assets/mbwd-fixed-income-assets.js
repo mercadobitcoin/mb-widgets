@@ -1,54 +1,55 @@
 // eslint-disable-next-line
 const MBWD_FIXED_INCOME_ASSETS = () => ({
   template: `
-          <div class="mbwd-fixed-income-assets">
-            <h3 class="title">
-              {{ i18n('Renda Fixa Digital') }}
-              <div v-if="mobileMode" class="view-modes">
-                <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-                  <img v-if="isViewModeActive('card')" src="/widgets/img/icons/ico-four-squares-mono.svg">
-                  <img v-else src="/widgets/img/icons/ico-four-squares-white.svg">
-                </button>
-                <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-                  <img v-if="isViewModeActive('table')" src="/widgets/img/icons/ico-three-rectangles-mono.svg">
-                  <img v-else src="/widgets/img/icons/ico-three-rectangles-white.svg">
-                </button>
-              </div>
-            </h3>
-            <div class="options">
-              <div class="categories">
-                <button class="category" v-for="category in cptdAssetCategories" :key="category.value" :class="cssIsCategoryActive(category.value)" @click="changeCategory(category.value)">
-                  {{ i18n(category.label) }}
-                </button>
-              </div>
-              <div v-if="!mobileMode" class="view-modes">
-                <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-                  <img v-if="isViewModeActive('card')" src="/widgets/img/icons/ico-four-squares-mono.svg">
-                  <img v-else src="/widgets/img/icons/ico-four-squares-white.svg">
-                </button>
-                <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-                  <img v-if="isViewModeActive('table')" src="/widgets/img/icons/ico-three-rectangles-mono.svg">
-                  <img v-else src="/widgets/img/icons/ico-three-rectangles-white.svg">
-                </button>
-              </div>
-            </div>
-            <mbc-empty-state v-if="fixedIncomeAssets.result.length === 0" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" />
-            <div v-if="fixedIncomeAssets.result.length > 0" class="result-list">
-              <div v-if="isViewModeActive('card')" class="view-mode-list card">
-                <slot name="fixed-income-cards-list" :assets="fixedIncomeAssets.result">
-                  <mbwd-fixed-income-asset-card-list :assets="fixedIncomeAssets.result" />
-                </slot>
-              </div>
-              <div v-else class="view-mode-list table">
-                <slot name="fixed-income-table" :assets="fixedIncomeAssets.result">
-                  <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="changeSortOrder" :assets="fixedIncomeAssets.result" />
-                </slot>
-              </div>
-            </div>
-            <div class="pagination-wrapper">
-              <mbc-pagination :total-pages="fixedIncomeAssets.totalPages" :current-page="fixedIncomeAssets.currentPage" @change="changePage"/>
-            </div>
-          </div>`,
+    <div class="mbwd-fixed-income-assets">
+      <h3 class="title">
+        {{ i18n('Renda Fixa Digital') }}
+        <div v-if="mobileMode" class="view-modes">
+          <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
+            <img v-if="isViewModeActive('card')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+          </button>
+          <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
+            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+          </button>
+        </div>
+      </h3>
+      <div class="options">
+        <div class="categories">
+          <button class="category" v-for="category in cptdAssetCategories" :key="category.value" :class="cssIsCategoryActive(category.value)" @click="changeCategory(category.value)">
+            {{ i18n(category.label) }}
+          </button>
+        </div>
+        <div v-if="!mobileMode" class="view-modes">
+          <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
+            <img v-if="isViewModeActive('card')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+          </button>
+          <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
+            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+          </button>
+        </div>
+      </div>
+      <mbc-empty-state v-if="fixedIncomeAssets.result.length === 0" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" />
+      <div v-if="fixedIncomeAssets.result.length > 0" class="result-list">
+        <div v-if="isViewModeActive('card')" class="view-mode-list card">
+          <slot name="fixed-income-cards-list" :assets="fixedIncomeAssets.result">
+            <mbwd-fixed-income-asset-card-list :assets="fixedIncomeAssets.result" />
+          </slot>
+        </div>
+        <div v-else class="view-mode-list table">
+          <slot name="fixed-income-table" :assets="fixedIncomeAssets.result">
+            <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="changeSortOrder" :assets="fixedIncomeAssets.result" />
+          </slot>
+        </div>
+      </div>
+      <div class="pagination-wrapper">
+        <mbc-pagination :total-pages="fixedIncomeAssets.totalPages" :current-page="fixedIncomeAssets.currentPage" @change="changePage"/>
+      </div>
+    </div>`,
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins], // eslint-disable-line
   props: {
     authToken: {
       type: Boolean,
@@ -67,7 +68,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       default: 30000 // ms
     }
   },
-  mixins: [configMixins, UIMixins, URLMixins], // eslint-disable-line
   components: {
     'mbc-empty-state': MBC_EMPTY_STATE(),// eslint-disable-line
     "mbc-pagination": MBC_PAGINATION(), // eslint-disable-line
@@ -165,9 +165,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     cssIsViewModeActive (viewMode) {
       return this.isViewModeActive(viewMode) ? 'active' : ''
     },
-    getIconUrl (path) {
-      return `${this.GLOBAL_Cdn_Static_Path}/${path}`
-    },
     async getFixedIncomeAssets () {
       this.busy = true
       console.log(
@@ -175,7 +172,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.getFixedIncomeAssetsRequestQueryString()
       )
       try {
-        const response = await fetch(`/fixed-incomes${this.getFixedIncomeAssetsRequestQueryString()}`)
+        // TODO: CHANGE TO API LATER
+        const response = await fetch(`https://mb-product-gutter-tp-together.dev.mercadolitecoin.com.br/assets/${this.getFixedIncomeAssetsRequestQueryString()}`)
+
 
         if (response.ok) {
           const { response_data } = await response.json() //eslint-disable-line

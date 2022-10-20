@@ -1,85 +1,85 @@
 const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
   template: `
-            <div class="mbwd-fixed-income-asset-table">
-              <table v-if="!mobileMode" class="fixed-income-asset-table-desktop">
-                <thead>
-                  <tr>
-                    <th>
-                      <div class="sorter-cell" @click="changeSortOrder('name')">
-                        {{ i18n('Ativo') }}
-                        <div class="sorters">
-                          <div class="sort-asc arrow up" :class="cssSortActive('name', 'asc')" />
-                          <div class="sort-desc arrow down" :class="cssSortActive('name', 'desc')" />
-                        </div>  
-                      </div>
-                    </th>
-                    <th>
-                      <div class="sorter-cell"  @click="changeSortOrder('minimum_value')">
-                        {{ i18n('Valor inicial') }}
-                        <div class="sorters">
-                          <div class="sort-asc arrow up" :class="cssSortActive('minimum_value', 'asc')" />
-                          <div class="sort-desc arrow down" :class="cssSortActive('minimum_value', 'desc')" />
-                        </div>  
-                      </div>
-                    </th>
-                    <th>{{ i18n('Rentabilidade') }}</th>
-                    <th>{{ i18n('Prazo') }}</th>
-                    <th>
-                      <div class="sorter-cell" @click="changeSortOrder('available_percentage')">
-                        {{ i18n('Estoque') }}
-                        <div class="sorters">
-                          <div class="sort-asc arrow up" :class="cssSortActive('available_percentage', 'asc')"/>
-                          <div class="sort-desc arrow down" :class="cssSortActive('available_percentage', 'desc')" />
-                        </div>  
-                      </div>
-                    </th>
-                    <th>{{ i18n('Mercado') }}</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr v-for="asset in assets">
-                    <td class="asset-cell">
-                      <a class="asset" :href="getAssetLandingPageLink(asset.symbol)">
-                        <img class="icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-                        {{ asset.name }}
-                      </a>
-                    </td>
-                    <td class="minimum-value">{{ asset.minimum_value }}</td>
-                    <td class="profitability">
-                      {{ asset.profitability }}
-                    </td>
-                    <td class="liquidation-date">{{ asset.estimated_liquidation_date }}</td>
-                    <td class="available-percentage">{{ getPercentageString(asset.available_percentage.number) }}</td>
-                    <td class="status">{{ i18n(asset.status) }}</td>
-                    <td class="cta-wrapper apollo">
-                      <a class="button primary outlined" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
-                        {{ i18n('Investir') }}
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div v-if="mobileMode" class="fixed-income-asset-table-mobile">
-                <a class="fixed-income-asset" v-for="asset in assets" :key="asset.symbol">
-                  <div class="attributes">
-                    <div class="header">
-                      <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-                      <div class="asset-data">
-                        <p class="name">{{ asset.name }}</p>
-                        <p class="symbol">{{ asset.symbol }}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="market-data">
-                  <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status)" type="fixed-income" />
-                    <p class="profitability">
-                      {{ asset.profitability }}
-                    </p>
-                  </div>
-                </a>
+    <div class="mbwd-fixed-income-asset-table">
+      <table v-if="!mobileMode" class="fixed-income-asset-table-desktop">
+        <thead>
+          <tr>
+            <th>
+              <div class="sorter-cell" @click="changeSortOrder('name')">
+                {{ i18n('Ativo') }}
+                <div class="sorters">
+                  <div class="sort-asc arrow up" :class="cssSortActive('name', 'asc')" />
+                  <div class="sort-desc arrow down" :class="cssSortActive('name', 'desc')" />
+                </div>  
               </div>
-            </div>`,
+            </th>
+            <th>
+              <div class="sorter-cell"  @click="changeSortOrder('minimum_value')">
+                {{ i18n('Valor inicial') }}
+                <div class="sorters">
+                  <div class="sort-asc arrow up" :class="cssSortActive('minimum_value', 'asc')" />
+                  <div class="sort-desc arrow down" :class="cssSortActive('minimum_value', 'desc')" />
+                </div>  
+              </div>
+            </th>
+            <th>{{ i18n('Rentabilidade') }}</th>
+            <th>{{ i18n('Prazo') }}</th>
+            <th>
+              <div class="sorter-cell" @click="changeSortOrder('available_percentage')">
+                {{ i18n('Estoque') }}
+                <div class="sorters">
+                  <div class="sort-asc arrow up" :class="cssSortActive('available_percentage', 'asc')"/>
+                  <div class="sort-desc arrow down" :class="cssSortActive('available_percentage', 'desc')" />
+                </div>  
+              </div>
+            </th>
+            <th>{{ i18n('Mercado') }}</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="asset in assets">
+            <td class="asset-cell">
+              <a class="asset" :href="getAssetLandingPageLink(asset.symbol)">
+                <img class="icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+                {{ asset.name }}
+              </a>
+            </td>
+            <td class="minimum-value">{{ asset.minimum_value }}</td>
+            <td class="profitability">
+              {{ asset.profitability }}
+            </td>
+            <td class="liquidation-date">{{ asset.estimated_liquidation_date }}</td>
+            <td class="available-percentage">{{ getPercentageString(asset.available_percentage.number) }}</td>
+            <td class="status">{{ i18n(asset.status) }}</td>
+            <td class="cta-wrapper apollo">
+              <a class="button primary outlined" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
+                {{ i18n('Investir') }}
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div v-if="mobileMode" class="fixed-income-asset-table-mobile">
+        <a class="fixed-income-asset" v-for="asset in assets" :key="asset.symbol">
+          <div class="attributes">
+            <div class="header">
+              <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+              <div class="asset-data">
+                <p class="name">{{ asset.name }}</p>
+                <p class="symbol">{{ asset.symbol }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="market-data">
+          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status)" type="fixed-income" />
+            <p class="profitability">
+              {{ asset.profitability }}
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>`,
   props: {
     language: {
       type: String,
@@ -90,7 +90,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       default: () => []
     }
   },
-  mixins: [configMixins, UIMixins, currencyFilters],// eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters],// eslint-disable-line
   components: {
     'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
   },
@@ -159,7 +159,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return `ícone ${name}`
     },
     getIconUrl (symbol) {
-      return `${this.GLOBAL_Cdn_Static_Path}/img/icons/assets/ico-asset-${(
+      return `${this.MB_WIDGETS_GLOBAL_Cdn_Assets_Icon_Url}/img/icons/assets/ico-asset-${(
         symbol ?? ''
       ).toLowerCase()}-color.svg`
     },

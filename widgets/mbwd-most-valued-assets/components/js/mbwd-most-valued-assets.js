@@ -24,7 +24,7 @@ const MBWD_MOST_VALUED_ASSETS = () => ({ //eslint-disable-line
       default: 30000 // ms
     }
   },
-    mixins: [currencyFilters], //eslint-disable-line
+    mixins: [window.MB_WIDGETS.currencyFilters], //eslint-disable-line
   data () {
     return {
       intervalId: null,

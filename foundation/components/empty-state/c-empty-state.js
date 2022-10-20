@@ -11,6 +11,7 @@ const MBC_EMPTY_STATE = () => ({ //eslint-disable-line
           {{cta.label}}
         </a>
     </div>`,
+  mixins: [window.MB_WIDGETS.configMixins], //eslint-disable-line
   props: {
     cta: {
       type: Object,
@@ -48,10 +49,10 @@ const MBC_EMPTY_STATE = () => ({ //eslint-disable-line
       return this.cta && this.cta.type && this.cta.type === 'link'
     },
     cptdMainStateIconSrc () {
-      return `/widgets/img/ilu/${this.mainStateIcon}`
+      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/ilu/${this.mainStateIcon}`
     },
     cptdCtaIconSrc () {
-      return `/widgets/img/icons/${this.ctaIcon}`
+      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/icons/${this.ctaIcon}`
     }
   },
   methods: {
