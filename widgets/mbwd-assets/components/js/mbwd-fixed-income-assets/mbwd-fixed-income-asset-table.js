@@ -45,7 +45,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                 {{ asset.name }}
               </a>
             </td>
-            <td class="minimum-value">{{ asset.minimum_value }}</td>
+            <td class="minimum-value">{{ asset.minimum_value | ftFormatCurrency(2) }}</td>
             <td class="profitability">
               {{ asset.profitability }}
             </td>
@@ -72,7 +72,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
             </div>
           </div>
           <div class="market-data">
-          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status)" type="fixed-income" />
+          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
             <p class="profitability">
               {{ asset.profitability }}
             </p>
@@ -133,8 +133,8 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     cssSortActive (sort, order) {
       return this.sort === sort && this.order === order ? 'active' : ''
     },
-    getAssetBadgeAsArray (status) {
-      return [status]
+    getAssetBadgeAsArray (asset) {
+      return [...(asset.badges || []), { text: asset?.status?.value ?? '', type: 'status' }]
     },
     getAssetBasicTradeExperienceLink (symbol) {
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`

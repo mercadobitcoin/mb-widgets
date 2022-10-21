@@ -3,7 +3,7 @@ window.MB_WIDGETS.UIMixins = {//eslint-disable-line
   data () {
     return {
       mobileMode: false,
-      mobileThreshold: 645,
+      mobileThreshold: 768,
       mediumThreshold: null,
       mediumThresholdConfig: {
         min: 641,

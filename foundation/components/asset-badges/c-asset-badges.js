@@ -1,10 +1,9 @@
 const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
   template: `<div class="c-asset-badges" v-if="badges.length > 0">
-    <div v-if="cptdIsTypeFixedIncome" class="c-badge fixed-income" v-for="badge in cptdNormalizedBadges">
-      <span class="rounded-status" :class="badge" /> {{ i18n(badge) }}
-    </div>
-    <div v-if="cptdIsTypeCrypto" class="c-badge crypto" v-for="badge in cptdNormalizedBadges">
-      <img class="icon" :src="getIconUrl(badge)" /> {{ i18n(badge) }}
+    <div class="c-badge" v-for="(badge, index) in cptdNormalizedBadges" :key="badge.text + index">
+      <span v-if="isTypeStatus(badge.type)" class="rounded-status" :class="badge.text" />
+      <img v-else class="icon" :src="cptdBadgeIconUrl" /> 
+      {{ badge.translatedText }}
     </div>
   </div>`,
   mixins: [window.MB_WIDGETS.configMixins], //eslint-disable-line
@@ -31,7 +30,9 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
           'pré-listagem': 'pré-listagem',
           'primary-market': 'mercado primário',
           'secondary-market': 'mercado secundário',
-          'sold-out': 'esgotado'
+          'sold-out': 'esgotado',
+          future: 'em breve',
+          finished: 'finalizado'
         },
         en: {
           novo: 'novo',
@@ -39,7 +40,9 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
           'pré-listagem': 'pré-listagem',
           'primary-market': 'mercado primário',
           'secondary-market': 'mercado secundário',
-          'sold-out': 'esgotado'
+          'sold-out': 'esgotado',
+          future: 'em breve',
+          finished: 'finalizado'
         },
         es: {
           novo: 'novo',
@@ -47,30 +50,28 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
           'pré-listagem': 'pré-listagem',
           'primary-market': 'mercado primário',
           'secondary-market': 'mercado secundário',
-          'sold-out': 'esgotado'
+          'sold-out': 'esgotado',
+          future: 'em breve',
+          finished: 'finalizado'
         }
       }
     }
   },
   computed: {
-    cptdIsTypeFixedIncome () {
-      return this.type === 'fixed-income'
-    },
-    cptdIsTypeCrypto () {
-      return this.type === 'crypto'
+    cptdBadgeIconUrl () {
+      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/icons/ico-badge-thunder-mono.svg`
     },
     cptdNormalizedBadges () {
-      return this.badges.map((badge) => String((badge ?? '')).toLowerCase().replace('_', '-'))
+      return this.badges.map((badge) => ({
+        ...badge,
+        text: (badge.text ?? '').toLowerCase().replace('_', '-'),
+        translatedText: this.i18n((badge.text ?? '').toLowerCase().replace('_', '-'))
+      })).filter(({ text, translatedText }) => !!text && !!translatedText)
     }
   },
   methods: {
-    getIconUrl (badge) {
-      switch ((badge ?? '').toLowerCase()) {
-        case 'exclusivos mb':
-          return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/icons/ico-badge-check-mono.svg`
-        default:
-          return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/icons/ico-badge-thunder-mono.svg`
-      }
+    isTypeStatus (type) {
+      return type === 'status'
     },
     getIconAlt (name) {
       return `ícone ${name}`

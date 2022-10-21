@@ -55,6 +55,14 @@
       &.sold-out {
         background: map-get($negative-color, "30");
       }
+
+      &.future {
+        background-color: map-get($warning-color, "30");
+      }
+
+      &.finished {
+        background-color: map-get($positive-color, "30");
+      }
     }
   }
 }

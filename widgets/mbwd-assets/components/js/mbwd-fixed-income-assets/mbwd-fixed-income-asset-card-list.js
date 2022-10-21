@@ -2,12 +2,12 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   template: `
     <div class="mbwd-fixed-income-asset-card-list apollo">
       <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets" :key="asset.symbol">
-        <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status.value)" type="fixed-income" />
+        <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
         <div class="asset-data">
           <div class="attributes">
             <p class="name">{{ asset.name }}</p>
             <p class="title">{{ i18n('Valor inicial') }}</p>
-            <p class="description minimum-value">{{ i18n('A partir de') }} {{ asset.minimum_value }}</p>
+            <p class="description minimum-value">{{ i18n('A partir de') }} {{ asset.minimum_value | ftFormatCurrency(2) }}</p>
             <p class="title">{{ i18n('Rentabilidade') }}</p>
             <p class="description profitability">{{ asset.profitability }}</p>
             <p class="title">{{ i18n('Prazo estimado') }}</p>
@@ -39,7 +39,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
             <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
             <p class="symbol">{{ asset.symbol }}</p>
           </div>
-          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset.status)" type="fixed-income" />
+          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
         </div>
         <div class="market-data">
           <p class="profitability">
@@ -47,7 +47,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           </p>
           <div class="minimum-value">
             <p class="min-label">{{ i18n('A partir de') }}</p>
-            <p class="min-value">{{ asset.minimum_value }}</p>
+            <p class="min-value">{{ asset.minimum_value | ftFormatCurrency(2) }}</p>
           </div>
         </div>
       </a>
@@ -97,8 +97,8 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
     }
   },
   methods: {
-    getAssetBadgeAsArray (status) {
-      return [status]
+    getAssetBadgeAsArray (asset) {
+      return [...(asset.badges || []), { text: asset?.status?.value ?? '', type: 'status' }]
     },
     getPercentageString (percentage = 0) {
       let percString = percentage
