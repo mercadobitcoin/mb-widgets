@@ -1,13 +1,15 @@
 'use strict'
 
-const gulp = require('gulp')
+const { src, dest } = require('gulp')
 const sass = require('gulp-sass')(require('sass'))
-const uglify = require('gulp-terser')
+const terser = require('gulp-terser')
 const concat = require('gulp-concat')
 const pump = require('pump')
 const replace = require('gulp-replace')
+const footer = require('gulp-footer')
+const rename = require('gulp-rename')
 
-const task = function (cb) {
+const task = (cb) => {
   // Filters
   const CurrencyFilters = 'foundation/mixins/filters/currencyFilters.js'
 
@@ -20,16 +22,18 @@ const task = function (cb) {
   // Negotiate Component and dependencies
   pump(
     [
-      gulp.src([
+      src([
         CurrencyFilters,
         MostValuedAssetsComponentPath,
         MainComponentJSpath
       ]),
-      concat('c-mbwd-most-valued-assets.js'),
-      uglify(),
+      concat('mbwd-most-valued-assets.js'),
+      footer('MbwdMostValuedAssets().render(Vue, "#mbwd-most-valued-assets");'),
+      terser(),
       replace(/\\n {2}/g, ' '),
       replace(/ {2,}/g, ''),
-      gulp.dest('public/widgets/mbwd-most-valued-assets/js')
+      rename({ extname: '.min.js' }),
+      dest('public/widgets/mbwd-most-valued-assets/js')
     ],
     cb
   )
@@ -37,13 +41,13 @@ const task = function (cb) {
   // Stylesheets
   pump(
     [
-      gulp.src([
+      src([
         'widgets/mbwd-most-valued-assets/components/css/mbwd-most-valued-assets.scss'
       ]),
       sass({ outputStyle: 'compressed' }).on('error', sass.logError),
-      concat('c-mbwd-most-valued-assets.css'),
+      concat('mbwd-most-valued-assets.css'),
       replace(/\n/g, ''),
-      gulp.dest('public/widgets/mbwd-most-valued-assets/css')
+      dest('public/widgets/mbwd-most-valued-assets/css')
     ],
     cb
   )

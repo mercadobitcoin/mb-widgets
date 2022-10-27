@@ -1,6 +1,13 @@
 function MbwdAssets () { // eslint-disable-line
-  const mbwdAssets = {
+  return {
     version: '1.0.0',
+    appendStyle () {
+      const cssLink = document.createElement('link')
+      cssLink.href = 'widgets/mbwd-assets/css/mbwd-assets.css'
+      cssLink.rel = 'stylesheet'
+
+      document.head.appendChild(cssLink)
+    },
     render: function (Vue, querySelector) {
       if (!Vue) {
         throw Error('Vue is required to load this widget')
@@ -14,14 +21,18 @@ function MbwdAssets () { // eslint-disable-line
         throw Error('Provide a querySelector')
       }
 
+      this.appendStyle()
+
+      const mbwdAssetsWrapper = document.querySelector(querySelector)
+      const mbwdAssetsTag = `<mbwd-assets v-bind='${mbwdAssetsWrapper.dataset.props}' />`
+      mbwdAssetsWrapper.insertAdjacentHTML('beforeend', mbwdAssetsTag)
+
       new Vue({// eslint-disable-line
-        el: document.querySelector(querySelector),
+        el: document.querySelector('mbwd-assets'),
         components: {
           'mbwd-assets': MBWD_ASSETS()// eslint-disable-line
         }
       })
     }
   }
-
-  return mbwdAssets
 }

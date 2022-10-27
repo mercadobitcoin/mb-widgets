@@ -48,7 +48,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" @change="changePage"/>
       </div>
     </div>`,
-  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins], // eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins, window.MB_WIDGETS.trackEvent], // eslint-disable-line
   props: {
     language: {
       type: String,
@@ -189,6 +189,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       try {
         // TODO: CHANGE TO API LATER
         const response = await fetch(`https://mb-product-coins-tp-together.dev.mercadolitecoin.com.br/assets/${this.getCryptoAssetsRequestQueryString()}`)
+        // const response = await fetch(`/cryptos/${this.getCryptoAssetsRequestQueryString()}`)
 
         if (response.ok) {
           const { response_data } = await response.json() //eslint-disable-line
@@ -288,6 +289,11 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
       this.getCryptoAssets()
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `assets:${viewMode}`
+      })
     },
     resetCryptoBasicQueryDefaultState () {
       if (this.$refs?.refCryptoAssetTable) {

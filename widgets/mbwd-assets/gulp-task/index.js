@@ -1,18 +1,21 @@
 'use strict'
 
-const gulp = require('gulp')
+const { src, dest } = require('gulp')
 const sass = require('gulp-sass')(require('sass'))
-const uglify = require('gulp-terser')
+const terser = require('gulp-terser')
 const concat = require('gulp-concat')
+const rename = require('gulp-rename')
 const pump = require('pump')
 const replace = require('gulp-replace')
+const footer = require('gulp-footer')
 
-const task = function (cb) {
+const task = (cb) => {
   // Mixins
   const Mixins = 'foundation/mixins/mixins.js'
   const UIMixins = 'foundation/mixins/UIMixins.js'
   const configMixins = 'foundation/mixins/configMixins.js'
   const URLMixins = 'foundation/mixins/urlMixins.js'
+  const TrackEventMixins = 'foundation/mixins/trackEventMixins.js'
 
   // Filters
   const CurrencyFilters = 'foundation/mixins/filters/currencyFilters.js'
@@ -53,13 +56,14 @@ const task = function (cb) {
 
   pump(
     [
-      gulp.src([
+      src([
         // Mixins
         configMixins,
         Mixins,
         UIMixins,
         URLMixins,
         CurrencyFilters,
+        TrackEventMixins,
         // Dependencies:4
         AssetBadges,
         Pagination,
@@ -78,17 +82,19 @@ const task = function (cb) {
         // Main
         MainComponentJSpath
       ]),
-      concat('c-mbwd-assets.js'),
-      uglify(),
+      concat('mbwd-assets.js'),
+      footer('MbwdAssets().render(Vue, "#mbwd-assets");'),
+      terser(),
       replace(/ {2,}/g, ''),
-      gulp.dest('public/widgets/mbwd-assets/js')
+      rename({ extname: '.min.js' }),
+      dest('public/widgets/mbwd-assets/js')
     ],
     cb
   )
 
   pump(
     [
-      gulp.src([
+      src([
         'foundation/components/search-box/c-search-box.scss',
         'foundation/components/pagination/c-pagination.scss',
         'foundation/components/empty-state/c-empty-state.scss',
@@ -96,9 +102,9 @@ const task = function (cb) {
         'widgets/mbwd-assets/components/css/**'
       ]),
       sass({ outputStyle: 'compressed' }).on('error', sass.logError),
-      concat('c-mbwd-assets.css'),
+      concat('mbwd-assets.css'),
       replace(/\n/g, ''),
-      gulp.dest('public/widgets/mbwd-assets/css')
+      dest('public/widgets/mbwd-assets/css')
     ],
     cb
   )

@@ -174,6 +174,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       try {
         // TODO: CHANGE TO API LATER
         const response = await fetch(`https://mb-product-gutter-tp-together.dev.mercadolitecoin.com.br/assets/${this.getFixedIncomeAssetsRequestQueryString()}`)
+        // const response = await fetch(`/fixed-incomes/${this.getFixedIncomeAssetsRequestQueryString()}`)
 
         if (response.ok) {
           const { response_data } = await response.json() //eslint-disable-line
