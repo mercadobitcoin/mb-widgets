@@ -5,28 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link rel="stylesheet" href="widgets/css/fonts.css" />
-    <link href="widgets/mbwd-assets/css/c-mbwd-assets.css" rel="stylesheet"></link>
-    <script src="widgets/mbwd-assets/js/c-mbwd-assets.js"></script>
-
-    <link href="widgets/mbwd-most-valued-assets/css/c-mbwd-most-valued-assets.css" rel="stylesheet"></link>
-    <script src="widgets/mbwd-most-valued-assets/js/c-mbwd-most-valued-assets.js" ></script>
-    <script>
-        window.onload = function() {
-            const widget = new MbwdMostValuedAssets();
-            widget.render(Vue, '#myDiv');
-            const widget2 = new MbwdAssets();
-            widget2.render(Vue, '#myDiv2');
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
-<body>
-    <mbwd-most-valued-assets id="myDiv"></mbwd-most-valued-assets>
-    <mbwd-assets id="myDiv2">
-        <!-- <template v-slot:crypto-cards-list="{ assets }">
-            <div v-for="asset in assets">{{ asset.symbol }}</div>
-        </template> -->
-    </mbwd-assets>
+<body> 
+    <div id="mbwd-most-valued-assets" data-props='{"language": "pt", "ga": true}'>
+        <script src="widgets/mbwd-most-valued-assets/js/mbwd-most-valued-assets.min.js" ></script>
+    </div>
+    
+    <div id="mbwd-assets" data-props='{"language": "pt", "ga": true}'>
+        <script src="widgets/mbwd-assets/js/mbwd-assets.min.js"></script>
+    </div>
+
 </body>
 </html>
