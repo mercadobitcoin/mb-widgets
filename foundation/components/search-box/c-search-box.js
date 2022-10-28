@@ -25,7 +25,7 @@ const MBC_SEARCH_BOX = () => ({ //eslint-disable-line
       }
     }
   },
-  mixins: [window.MB_WIDGETS.mixins, window.MB_WIDGETS.configMixins], //eslint-disable-line
+  mixins: [window.MB_WIDGETS.mixins, window.MB_WIDGETS.configMixins, window.MB_WIDGETS.trackEvent], //eslint-disable-line
   props: {
     autofocus: {
       type: Boolean,
@@ -87,6 +87,13 @@ const MBC_SEARCH_BOX = () => ({ //eslint-disable-line
     debounceSearch (event) {
       this.debounceIntervalId = this.mxDebounce(this.debounceIntervalId, () => {
         this.$emit('update:value', event.target.value)
+
+        let valueForGaTracking = (event.target.value).replace(/\s+/g,"-")
+        this.ga({
+          ec: 'web:site:home',
+          en: 'search',
+          lb: `search:${valueForGaTracking}`
+        })
       })
     },
     focusOnInputSearch () {

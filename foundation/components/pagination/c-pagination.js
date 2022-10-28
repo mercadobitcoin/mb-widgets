@@ -17,6 +17,7 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
         </button>
       </div>
     </div>`,
+  mixins: [window.MB_WIDGETS.trackEvent], // eslint-disable-line
   props: {
     currentPage: {
       type: Number,
@@ -25,6 +26,10 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
     totalPages: {
       type: Number,
       default: 1
+    },
+    gaComponent: {
+      type: String,
+      default: "assets"
     }
   },
   data () {
@@ -34,15 +39,18 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
   },
   computed: {
     cptdDisplayLeftEllipsis () {
-      if (this.totalPages === 5) { return false }
+      //if (this.totalPages === 5) { return false }
+      if (this.totalPages <= 5) { return false }
       return this.currentPage >= this.maxDisplayPages + 1
     },
     cptdDisplayRightEllipsis () {
-      if (this.totalPages === 5) { return false }
+      //if (this.totalPages === 5) { return false }
+      if (this.totalPages <= 5) { return false }
       return this.currentPage < this.totalPages - this.maxDisplayPages + 1
     },
     cptdDisplayLastPage () {
       if (this.totalPages === 5) { return true }
+      if (this.totalPages <= 5 && this.currentPage != this.totalPages) { return true }
       return this.currentPage <= this.totalPages - this.maxDisplayPages
     },
     cptdPagesList () {
@@ -78,12 +86,27 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
     onPageClick (page, action) {
       switch (action) {
         case 'back':
+          this.ga({
+            ec: 'web:site:home',
+            en: 'click',
+            lb: `${this.gaComponent}:pagination:previous`
+          })
           this.$emit('change', this.currentPage - 1)
           break
         case 'next':
           this.$emit('change', this.currentPage + 1)
+          this.ga({
+            ec: 'web:site:home',
+            en: 'click',
+            lb: `${this.gaComponent}:pagination:next`
+          })
           break
         default:
+          this.ga({
+            ec: 'web:site:home',
+            en: 'click',
+            lb: `${this.gaComponent}:pagination:${page}`
+          })
           this.$emit('change', page)
       }
     }

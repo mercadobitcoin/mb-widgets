@@ -29,8 +29,8 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           </div>
         </div>
         <div class="ctas">
-          <a class="button primary filled">Investir</a>
-          <a class="button secondary ghost">Conhecer</a>
+          <a class="button primary filled" @click="redirectToAssetTradeExperience(asset.symbol)">Investir</a>
+          <a class="button secondary ghost" @click="redirectToAssetLandingPage(asset.symbol)">Conhecer</a>
         </div>
       </a>
       <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.symbol">
@@ -62,7 +62,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
       default: () => []
     }
   },
-  mixins: [window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.configMixins, window.MB_WIDGETS.currencyFilters],// eslint-disable-line
+  mixins: [window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.configMixins, window.MB_WIDGETS.currencyFilters, window.MB_WIDGETS.trackEvent],// eslint-disable-line
   components: {
     'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
   },
@@ -124,8 +124,30 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         symbol ?? ''
       ).toLowerCase()}-color.svg`
     },
+    getAssetBasicTradeExperienceLink (symbol) {
+      return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
+    },
+    getAssetLandingPageLink (symbol) {
+      return `https://www.mercadobitcoin.com.br/conhecer/${(symbol ?? '').toLowerCase()}`
+    },
+    redirectToAssetTradeExperience(symbol) {
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `fixed-income:card:${symbol}:invest`
+      })
+      location.href = this.getAssetBasicTradeExperienceLink(symbol)
+    },
+    redirectToAssetLandingPage(symbol) {
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `fixed-income:card:${symbol}:learn`
+      })
+      location.href = this.getAssetLandingPageLink(symbol)
+    },
     i18n (key) {
       return this.translateMap?.[this.language]?.[key] ?? ''
-    }
+    },
   }
 })

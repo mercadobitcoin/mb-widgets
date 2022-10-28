@@ -45,7 +45,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         </div>
       </div>
       <div class="pagination-wrapper">
-        <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" @change="changePage"/>
+        <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" gaComponent="assets" @change="changePage"/>
       </div>
     </div>`,
   mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins, window.MB_WIDGETS.trackEvent], // eslint-disable-line
@@ -270,6 +270,11 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.resetCryptoBasicQueryDefaultState()
       this.cryptoAssets.category = category
       this.getCryptoAssets()
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `assets:${category}`
+      })
     },
     changePage (page) {
       this.cryptoAssets.currentPage = page

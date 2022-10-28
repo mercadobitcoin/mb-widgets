@@ -1,7 +1,7 @@
  MBWD_CRYPTO_ASSET_CARD_LIST = () => ({ // eslint-disable-line
   template: `
     <div class="mbwd-crypto-asset-card-list">
-      <a v-if="mobileMode" class="crypto-card mobile" v-for="asset in assets" :key="asset.symbol">
+      <a v-if="mobileMode" class="crypto-card mobile" v-for="asset in assets" :key="asset.symbol" @click="triggerGA(asset.symbol)">
         <div class="attributes">
           <div class="header">
             <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
@@ -20,7 +20,7 @@
           <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
         </div>
       </a>
-      <a v-if="!mobileMode" class="crypto-card desktop" v-for="asset in assets" :key="asset.symbol">
+      <a v-if="!mobileMode" class="crypto-card desktop" v-for="asset in assets" :key="asset.symbol" @click="triggerGA(asset.symbol)">
         <div class="attributes">
           <div class="header">
             <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
@@ -49,7 +49,7 @@
       default: () => []
     }
   },
-  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters], // eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters, window.MB_WIDGETS.trackEvent], // eslint-disable-line
   components: {
     'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
   },
@@ -85,6 +85,13 @@
       return `${this.MB_WIDGETS_GLOBAL_Cdn_Assets_Icon_Url}/img/icons/assets/ico-asset-${(
         symbol ?? ''
       ).toLowerCase()}-color.svg`
+    },
+    triggerGA (symbol) {
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `assets:card:${symbol}`
+      })
     }
   }
 })

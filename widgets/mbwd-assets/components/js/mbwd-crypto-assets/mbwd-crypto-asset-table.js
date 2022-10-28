@@ -56,7 +56,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
         <tbody>
           <tr v-for="asset in assets" :key="asset.symbol">
             <td class="asset-cell">
-              <a class="asset" :href="getAssetLandingPageLink(asset.symbol)">
+              <a class="asset" @click="redirectToAssetLandingPage(asset.symbol)">
                 <img class="icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                 {{ asset.name }}
               </a>
@@ -69,7 +69,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
             </td>
             <td class="market-cap">{{ asset.market_cap | ftFormatCurrency(2) }}</td>
             <td class="cta-wrapper apollo">
-              <a class="button primary outlined" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
+              <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.symbol)">
                 {{ i18n('Comprar') }}
               </a>
             </td>
@@ -107,7 +107,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
       default: () => []
     }
   },
-  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters],// eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters, window.MB_WIDGETS.trackEvent],// eslint-disable-line
   data () {
     return {
       sort: '',
@@ -170,6 +170,22 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
         symbol ?? ''
       ).toLowerCase()}-color.svg`
     },
+    redirectToAssetTradeExperience(symbol) {
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `assets:table:button:${symbol}`
+      })
+      location.href = this.getAssetBasicTradeExperienceLink(symbol)
+    },
+    redirectToAssetLandingPage(symbol) {
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `assets:table:asset-name:${symbol}`
+      })
+      location.href = this.getAssetLandingPageLink(symbol)
+    },
     changeSortOrder (sort) {
       if (this.sort === sort) {
         switch (this.order) {
@@ -186,6 +202,12 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
         this.sort = sort
         this.order = 'asc'
       }
+
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `assets:table:sort:${sort}`
+      })
 
       this.$emit('sort', { order: this.order, sort: this.sort })
     }

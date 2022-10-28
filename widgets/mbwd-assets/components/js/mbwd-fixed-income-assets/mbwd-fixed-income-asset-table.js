@@ -40,7 +40,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         <tbody>
           <tr v-for="asset in assets">
             <td class="asset-cell">
-              <a class="asset" :href="getAssetLandingPageLink(asset.symbol)">
+              <a class="asset" @click="redirectToAssetLandingPage(asset.symbol)">
                 <img class="icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                 {{ asset.name }}
               </a>
@@ -53,7 +53,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
             <td class="available-percentage">{{ getPercentageString(asset.available_percentage.number) }}</td>
             <td class="status">{{ i18n(asset.status) }}</td>
             <td class="cta-wrapper apollo">
-              <a class="button primary outlined" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
+              <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.symbol)">
                 {{ i18n('Investir') }}
               </a>
             </td>
@@ -90,7 +90,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       default: () => []
     }
   },
-  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters],// eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters, window.MB_WIDGETS.trackEvent],// eslint-disable-line
   components: {
     'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
   },
@@ -166,6 +166,22 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     i18n (key) {
       return this.translateMap?.[this.language]?.[key] ?? ''
     },
+    redirectToAssetTradeExperience(symbol) {
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `fixed-income:table:button:${symbol}`
+      })
+      location.href = this.getAssetBasicTradeExperienceLink(symbol)
+    },
+    redirectToAssetLandingPage(symbol) {
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `fixed-income:table:asset-name:${symbol}`
+      })
+      location.href = this.getAssetLandingPageLink(symbol)
+    },
     changeSortOrder (sort) {
       if (this.sort === sort) {
         switch (this.order) {
@@ -182,6 +198,12 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         this.sort = sort
         this.order = 'asc'
       }
+
+      this.ga({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `fixed-income:table:sort:${sort}`
+      })
 
       this.$emit('sort', { order: this.order, sort: this.sort })
     }
