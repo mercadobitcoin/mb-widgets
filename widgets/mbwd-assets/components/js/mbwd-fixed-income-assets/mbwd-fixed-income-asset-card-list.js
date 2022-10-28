@@ -36,7 +36,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
       <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.symbol">
         <div class="attributes">
           <div class="header">
-            <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+            <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
             <p class="symbol">{{ asset.symbol }}</p>
           </div>
           <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
@@ -118,11 +118,6 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
     },
     getIconAlt (name) {
       return `ícone ${name}`
-    },
-    getIconUrl (symbol) {
-      return `${this.MB_WIDGETS_GLOBAL_Cdn_Assets_Icon_Url}/img/icons/assets/ico-asset-${(
-        symbol ?? ''
-      ).toLowerCase()}-color.svg`
     },
     getAssetBasicTradeExperienceLink (symbol) {
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`

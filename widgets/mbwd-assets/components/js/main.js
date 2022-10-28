@@ -3,7 +3,7 @@ function MbwdAssets () { // eslint-disable-line
     version: '1.0.0',
     appendStyle () {
       const cssLink = document.createElement('link')
-      cssLink.href = 'widgets/mbwd-assets/css/mbwd-assets.css'
+      cssLink.href = 'http://localhost:5001/web/widgets/mbwd-assets/css/mbwd-assets.css'
       cssLink.rel = 'stylesheet'
 
       document.head.appendChild(cssLink)

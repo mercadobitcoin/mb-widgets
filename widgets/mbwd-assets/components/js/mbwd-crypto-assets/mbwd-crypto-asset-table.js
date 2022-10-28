@@ -57,7 +57,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           <tr v-for="asset in assets" :key="asset.symbol">
             <td class="asset-cell">
               <a class="asset" @click="redirectToAssetLandingPage(asset.symbol)">
-                <img class="icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+                <img class="icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                 {{ asset.name }}
               </a>
             </td>
@@ -164,11 +164,6 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
     },
     getIconAlt (name) {
       return `ícone ${name}`
-    },
-    getIconUrl (symbol) {
-      return `${this.MB_WIDGETS_GLOBAL_Cdn_Assets_Icon_Url}/img/icons/assets/ico-asset-${(
-        symbol ?? ''
-      ).toLowerCase()}-color.svg`
     },
     redirectToAssetTradeExperience(symbol) {
       this.ga({

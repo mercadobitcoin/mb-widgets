@@ -5,13 +5,13 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       <h3 class="title">
         {{ i18n('Renda Fixa Digital') }}
         <div v-if="mobileMode" class="view-modes">
-          <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-            <img v-if="isViewModeActive('card')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+          <button class="view-mode" :class="cssIsViewModeActive('cards')" @click="onViewModeChange('cards')">
+            <img v-if="isViewModeActive('cards')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
           </button>
           <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
           </button>
         </div>
       </h3>
@@ -22,19 +22,19 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           </button>
         </div>
         <div v-if="!mobileMode" class="view-modes">
-          <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-            <img v-if="isViewModeActive('card')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+          <button class="view-mode" :class="cssIsViewModeActive('cards')" @click="onViewModeChange('cards')">
+            <img v-if="isViewModeActive('cards')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
           </button>
           <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
           </button>
         </div>
       </div>
       <mbc-empty-state v-if="fixedIncomeAssets.result.length === 0" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" />
       <div v-if="fixedIncomeAssets.result.length > 0" class="result-list">
-        <div v-if="isViewModeActive('card')" class="view-mode-list card">
+        <div v-if="isViewModeActive('cards')" class="view-mode-list card">
           <slot name="fixed-income-cards-list" :assets="fixedIncomeAssets.result">
             <mbwd-fixed-income-asset-card-list :assets="fixedIncomeAssets.result" />
           </slot>
@@ -284,9 +284,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     setFixedIncomeAssetsLimit () {
       if (this.mobileMode) {
-        this.fixedIncomeAssets.limit = this.viewMode === 'card' ? 4 : 5
+        this.fixedIncomeAssets.limit = this.viewMode === 'cards' ? 4 : 5
       } else {
-        this.fixedIncomeAssets.limit = this.viewMode === 'card' ? 3 : 5
+        this.fixedIncomeAssets.limit = this.viewMode === 'cards' ? 3 : 5
       }
     },
     scheduleGetFixedIncomeAssetsInterval () {

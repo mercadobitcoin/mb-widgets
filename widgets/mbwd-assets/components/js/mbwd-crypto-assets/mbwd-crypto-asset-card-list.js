@@ -23,7 +23,7 @@
       <a v-if="!mobileMode" class="crypto-card desktop" v-for="asset in assets" :key="asset.symbol" @click="triggerGA(asset.symbol)">
         <div class="attributes">
           <div class="header">
-            <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+            <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
             <mbc-asset-badges :badges="asset.badges" type="crypto" />
           </div>
           <p class="name">
@@ -80,11 +80,6 @@
     },
     getIconAlt (name) {
       return `ícone ${name}`
-    },
-    getIconUrl (symbol) {
-      return `${this.MB_WIDGETS_GLOBAL_Cdn_Assets_Icon_Url}/img/icons/assets/ico-asset-${(
-        symbol ?? ''
-      ).toLowerCase()}-color.svg`
     },
     triggerGA (symbol) {
       this.ga({

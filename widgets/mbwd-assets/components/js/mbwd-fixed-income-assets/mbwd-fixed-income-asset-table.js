@@ -41,7 +41,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           <tr v-for="asset in assets">
             <td class="asset-cell">
               <a class="asset" @click="redirectToAssetLandingPage(asset.symbol)">
-                <img class="icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+                <img class="icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                 {{ asset.name }}
               </a>
             </td>
@@ -64,7 +64,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         <a class="fixed-income-asset" v-for="asset in assets" :key="asset.symbol">
           <div class="attributes">
             <div class="header">
-              <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+              <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
               <div class="asset-data">
                 <p class="name">{{ asset.name }}</p>
                 <p class="symbol">{{ asset.symbol }}</p>
@@ -157,11 +157,6 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     },
     getIconAlt (name) {
       return `ícone ${name}`
-    },
-    getIconUrl (symbol) {
-      return `${this.MB_WIDGETS_GLOBAL_Cdn_Assets_Icon_Url}/img/icons/assets/ico-asset-${(
-        symbol ?? ''
-      ).toLowerCase()}-color.svg`
     },
     i18n (key) {
       return this.translateMap?.[this.language]?.[key] ?? ''

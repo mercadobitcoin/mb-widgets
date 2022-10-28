@@ -4,13 +4,13 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       <h3 class="title">
         {{ i18n('Criptoativos') }}
         <div v-if="mobileMode" class="view-modes">
-          <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-            <img v-if="isViewModeActive('card')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+          <button class="view-mode" :class="cssIsViewModeActive('cards')" @click="onViewModeChange('cards')">
+            <img v-if="isViewModeActive('cards')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
           </button>
           <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
           </button>
         </div>
       </h3>
@@ -21,19 +21,19 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           </button>
         </div>
         <div v-if="!mobileMode" class="view-modes">
-          <button class="view-mode" :class="cssIsViewModeActive('card')" @click="onViewModeChange('card')">
-            <img v-if="isViewModeActive('card')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+          <button class="view-mode" :class="cssIsViewModeActive('cards')" @click="onViewModeChange('cards')">
+            <img v-if="isViewModeActive('cards')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-white.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-four-squares-mono.svg'">
           </button>
           <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-white.svg'">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/img/icons/ico-three-rectangles-mono.svg'">
           </button>
         </div>
       </div>
       <mbc-empty-state v-if="cryptoAssets.result.length === 0" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" />
       <div v-if="cryptoAssets.result.length > 0" class="result-list">
-        <div v-if="isViewModeActive('card')" class="view-mode-list card">
+        <div v-if="isViewModeActive('cards')" class="view-mode-list card">
           <slot name="crypto-cards-list" :assets="cryptoAssets.result">
             <mbwd-crypto-asset-card-list :assets="cryptoAssets.result" />
           </slot>
@@ -316,7 +316,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       if (this.mobileMode) {
         this.cryptoAssets.limit = 5
       } else {
-        this.cryptoAssets.limit = this.viewMode === 'card' ? 4 : 5
+        this.cryptoAssets.limit = this.viewMode === 'cards' ? 4 : 5
       }
     },
     scheduleGetCryptoAssetsInterval () {
