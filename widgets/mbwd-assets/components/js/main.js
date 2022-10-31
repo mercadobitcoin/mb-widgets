@@ -24,7 +24,7 @@ function MbwdAssets () { // eslint-disable-line
       this.appendStyle()
 
       const mbwdAssetsWrapper = document.querySelector(querySelector)
-      const mbwdAssetsTag = `<mbwd-assets v-bind='${mbwdAssetsWrapper.dataset.props}' />`
+      const mbwdAssetsTag = `<mbwd-assets language='${mbwdAssetsWrapper.dataset.language}'/>`
       mbwdAssetsWrapper.insertAdjacentHTML('beforeend', mbwdAssetsTag)
 
       new Vue({// eslint-disable-line
