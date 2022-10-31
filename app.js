@@ -36,29 +36,6 @@ function mxCreateUrlQueryString (options) {
   )
 }
 
-app.get('/cryptos', async (req, res) => {
-  try {
-    const response = await fetch('https://mb-product-coins-tp-together.dev.mercadolitecoin.com.br/assets/' + mxCreateUrlQueryString(req.query))
-    if (response.ok) {
-      const responseParsed = await response.json()
-      return res.json(responseParsed)
-    }
-  } catch (e) {
-    res.json({ response_data: { data: [], total_items: 0 } })
-  }
-})
-app.get('/fixed-incomes', async (req, res) => {
-  try {
-    const response = await fetch('https://mb-product-gutter-tp-together.dev.mercadolitecoin.com.br/assets/' + mxCreateUrlQueryString(req.query))
-    if (response.ok) {
-      const responseParsed = await response.json()
-      return res.json(responseParsed)
-    }
-  } catch (e) {
-    res.json({ response_data: { data: [], total_items: 0 } })
-  }
-})
-
 let { PORT, IP, ENVIRONMENT_NAME } = process.env
 
 PORT = PORT || 3000
