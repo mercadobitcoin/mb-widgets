@@ -188,13 +188,13 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       )
       try {
         // TODO: CHANGE TO API LATER
-        const response = await fetch(`https://mb-product-coins-tp-together.dev.mercadolitecoin.com.br/assets/${this.getCryptoAssetsRequestQueryString()}`)
+        const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getCryptoAssetsRequestQueryString()}`)
         // const response = await fetch(`/cryptos/${this.getCryptoAssetsRequestQueryString()}`)
 
         if (response.ok) {
           const { response_data } = await response.json() //eslint-disable-line
-          const { data, total_items } = response_data //eslint-disable-line
-          this.cryptoAssets.result = data ?? [] //eslint-disable-line
+          const { products, total_items } = response_data //eslint-disable-line
+          this.cryptoAssets.result = products ?? [] //eslint-disable-line
           if (this.cptdIsNewCategory) {
             this.cryptoAssets.totalPages = 1
           } else {
@@ -222,6 +222,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       const { sort, order, currentPage, totalPages, limit } =
       this.cryptoAssets
       const searchQueryStringsMap = {
+        type: 'crypto',
         limit,
         sort,
         order
@@ -294,6 +295,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
       this.getCryptoAssets()
+
       this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',

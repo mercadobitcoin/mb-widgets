@@ -54,22 +54,22 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           </tr>
         </thead>
         <tbody>
-          <tr v-for="asset in assets" :key="asset.symbol">
+          <tr v-for="asset in assets" :key="asset.product_data.symbol">
             <td class="asset-cell">
-              <a class="asset" @click="redirectToAssetLandingPage(asset.symbol)">
+              <a class="asset" @click="redirectToAssetLandingPage(asset.product_data.symbol)">
                 <img class="icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                 {{ asset.name }}
               </a>
             </td>
-            <td class="symbol">{{ asset.symbol }}</td>
-            <td class="sub-type">{{ i18n(asset.sub_type) }}</td>
+            <td class="symbol">{{ asset.product_data.symbol }}</td>
+            <td class="sub-type">{{ i18n(asset.product_data.sub_type) }}</td>
             <td class="price">{{ asset.market_price | ftFormatCurrency(2) }}</td>
-            <td class="variation" :class="asset.variation.status">
-              {{ asset.variation.string }}
+            <td class="variation" :class="asset.product_data.variation.status">
+              {{ asset.product_data.variation.string }}
             </td>
-            <td class="market-cap">{{ asset.market_cap | ftFormatCurrency(2) }}</td>
+            <td class="market-cap">{{ asset.product_data.market_cap | ftFormatCurrency(2) }}</td>
             <td class="cta-wrapper apollo">
-              <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.symbol)">
+              <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
                 {{ i18n('Comprar') }}
               </a>
             </td>
@@ -77,20 +77,20 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
         </tbody>
       </table>
       <div v-if="mobileMode" class="crypto-asset-table-mobile">
-        <a class="crypto-asset" v-for="asset in assets" :key="asset.symbol" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
+        <a class="crypto-asset" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
           <div class="attributes">
             <div class="header">
-              <img class="asset-icon" :src="getIconUrl(asset.symbol)" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+              <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
               <div class="asset-data">
                 <p class="name">{{ asset.name }}</p>
-                <p class="sub-type">{{ i18n(asset.sub_type) }}</p>
+                <p class="sub-type">{{ i18n(asset.product_data.sub_type) }}</p>
               </div>
             </div>
           </div>
           <div class="market-data">
             <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
             <p class="variation">
-              <span class="value" :class="asset.variation.status">{{ asset.variation.string }}</span>
+              <span class="value" :class="asset.product_data.variation.status">{{ asset.product_data.variation.string }}</span>
               <span class="label-24h">24h</span>
             </p>
           </div>

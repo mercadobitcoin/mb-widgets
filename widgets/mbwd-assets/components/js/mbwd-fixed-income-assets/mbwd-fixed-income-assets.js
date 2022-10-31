@@ -173,13 +173,14 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       )
       try {
         // TODO: CHANGE TO API LATER
-        const response = await fetch(`https://mb-product-gutter-tp-together.dev.mercadolitecoin.com.br/assets/${this.getFixedIncomeAssetsRequestQueryString()}`)
+        const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getFixedIncomeAssetsRequestQueryString()}`)
+        //&limit=5&offset=0&sort=symbol&order=asc
         // const response = await fetch(`/fixed-incomes/${this.getFixedIncomeAssetsRequestQueryString()}`)
 
         if (response.ok) {
           const { response_data } = await response.json() //eslint-disable-line
-          const { data, total_items } = response_data //eslint-disable-line
-          this.fixedIncomeAssets.result = data ?? [] //eslint-disable-line
+          const { products, total_items } = response_data //eslint-disable-line
+          this.fixedIncomeAssets.result = products ?? [] //eslint-disable-line
           if (this.cptdIsNewCategory) {
             this.fixedIncomeAssets.totalPages = 1
           } else {
@@ -207,6 +208,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       const { sort, category, order, currentPage, totalPages, limit } =
         this.fixedIncomeAssets
       const searchQueryStringsMap = {
+        type: 'fixed_income',
         limit,
         sort,
         order

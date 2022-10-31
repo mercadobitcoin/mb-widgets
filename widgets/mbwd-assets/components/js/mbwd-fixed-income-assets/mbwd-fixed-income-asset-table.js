@@ -40,20 +40,20 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         <tbody>
           <tr v-for="asset in assets">
             <td class="asset-cell">
-              <a class="asset" @click="redirectToAssetLandingPage(asset.symbol)">
+              <a class="asset" @click="redirectToAssetLandingPage(asset.product_data.symbol)">
                 <img class="icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
                 {{ asset.name }}
               </a>
             </td>
-            <td class="minimum-value">{{ asset.minimum_value | ftFormatCurrency(2) }}</td>
+            <td class="minimum-value">{{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</td>
             <td class="profitability">
-              {{ asset.profitability }}
+              {{ asset.product_data.profitability }}
             </td>
-            <td class="liquidation-date">{{ asset.estimated_liquidation_date }}</td>
-            <td class="available-percentage">{{ getPercentageString(asset.available_percentage.number) }}</td>
-            <td class="status">{{ i18n(asset.status) }}</td>
+            <td class="liquidation-date">{{ asset.product_data.estimated_liquidation_date }}</td>
+            <td class="available-percentage">{{ getPercentageString(asset.product_data.available_percentage.number) }}</td>
+            <td class="status">{{ i18n(asset.product_data.status.value) }}</td>
             <td class="cta-wrapper apollo">
-              <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.symbol)">
+              <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
                 {{ i18n('Investir') }}
               </a>
             </td>
@@ -61,20 +61,20 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         </tbody>
       </table>
       <div v-if="mobileMode" class="fixed-income-asset-table-mobile">
-        <a class="fixed-income-asset" v-for="asset in assets" :key="asset.symbol">
+        <a class="fixed-income-asset" v-for="asset in assets" :key="asset.product_data.symbol">
           <div class="attributes">
             <div class="header">
               <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
               <div class="asset-data">
                 <p class="name">{{ asset.name }}</p>
-                <p class="symbol">{{ asset.symbol }}</p>
+                <p class="symbol">{{ asset.product_data.symbol }}</p>
               </div>
             </div>
           </div>
           <div class="market-data">
           <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
             <p class="profitability">
-              {{ asset.profitability }}
+              {{ asset.product_data.profitability }}
             </p>
           </div>
         </a>
@@ -106,7 +106,15 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           Prazo: 'Prazo',
           Estoque: 'Estoque',
           Mercado: 'Mercado',
-          Investir: 'Investir'
+          Investir: 'Investir',
+          novo: 'novo',
+          'exclusivos mb': 'exclusivos mb',
+          'pré-listagem': 'pré-listagem',
+          'primary-market': 'Primário',
+          'secondary-market': 'Secundário',
+          'sold-out': 'esgotado',
+          future: 'em breve',
+          finished: 'finalizado'
         },
         en: {
           Ativo: 'Ativo',
@@ -115,7 +123,15 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           Prazo: 'Prazo',
           Estoque: 'Estoque',
           Mercado: 'Mercado',
-          Investir: 'Investir'
+          Investir: 'Investir',
+          novo: 'novo',
+          'exclusivos mb': 'exclusivos mb',
+          'pré-listagem': 'pré-listagem',
+          'primary-market': 'Primário',
+          'secondary-market': 'Secundário',
+          'sold-out': 'esgotado',
+          future: 'em breve',
+          finished: 'finalizado'
         },
         es: {
           Ativo: 'Ativo',
@@ -124,7 +140,15 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           Prazo: 'Prazo',
           Estoque: 'Estoque',
           Mercado: 'Mercado',
-          Investir: 'Investir'
+          Investir: 'Investir',
+          novo: 'novo',
+          'exclusivos mb': 'exclusivos mb',
+          'pré-listagem': 'pré-listagem',
+          'primary-market': 'Primário',
+          'secondary-market': 'Secundário',
+          'sold-out': 'esgotado',
+          future: 'em breve',
+          finished: 'finalizado'
         }
       }
     }
@@ -134,7 +158,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return this.sort === sort && this.order === order ? 'active' : ''
     },
     getAssetBadgeAsArray (asset) {
-      return [...(asset.badges || []), { text: asset?.status?.value ?? '', type: 'status' }]
+      return [...(asset.product_data.badges || []), { text: asset?.product_data?.status?.value ?? '', type: 'status' }]
     },
     getAssetBasicTradeExperienceLink (symbol) {
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
@@ -159,7 +183,10 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return `ícone ${name}`
     },
     i18n (key) {
-      return this.translateMap?.[this.language]?.[key] ?? ''
+      if(key.indexOf('_') >= 0) {
+        return this.translateMap?.[this.language]?.[key.toLowerCase().replace('_', '-')] ?? '';
+      }
+      return this.translateMap?.[this.language]?.[key] ?? '';
     },
     redirectToAssetTradeExperience(symbol) {
       this.trackAnalytics({

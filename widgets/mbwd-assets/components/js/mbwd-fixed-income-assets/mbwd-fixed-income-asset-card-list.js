@@ -1,26 +1,26 @@
 const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   template: `
     <div class="mbwd-fixed-income-asset-card-list apollo">
-      <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets" :key="asset.symbol">
+      <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets" :key="asset.product_data.symbol">
         <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
         <div class="asset-data">
           <div class="attributes">
             <p class="name">{{ asset.name }}</p>
             <p class="title">{{ i18n('Valor inicial') }}</p>
-            <p class="description minimum-value">{{ i18n('A partir de') }} {{ asset.minimum_value | ftFormatCurrency(2) }}</p>
+            <p class="description minimum-value">{{ i18n('A partir de') }} {{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
             <p class="title">{{ i18n('Rentabilidade') }}</p>
-            <p class="description profitability">{{ asset.profitability }}</p>
+            <p class="description profitability">{{ asset.product_data.profitability }}</p>
             <p class="title">{{ i18n('Prazo estimado') }}</p>
-            <p class="description">{{ asset.estimated_liquidation_date }}</p>
+            <p class="description">{{ asset.product_data.estimated_liquidation_date }}</p>
           </div>
           <div class="sold-percentage">
             <div class="middle-circle">
-              <p>{{ getPercentageString(asset.sold_percentage.number) }}</p>
+              <p>{{ getPercentageString(asset.product_data.sold_percentage.number) }}</p>
               <p><strong>{{ i18n('vendido') }}</strong></p>
             </div>
             <svg viewBox="0 0 36 36" class="circular-chart">
             <path class="circle"
-              :stroke-dasharray="getSVGSoldPercentageStyle(asset.sold_percentage.number)"
+              :stroke-dasharray="getSVGSoldPercentageStyle(asset.product_data.sold_percentage.number)"
               d="M18 2.0845
                 a 15.9155 15.9155 0 0 1 0 31.831
                 a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -29,25 +29,25 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           </div>
         </div>
         <div class="ctas">
-          <a class="button primary filled" @click="redirectToAssetTradeExperience(asset.symbol)">Investir</a>
-          <a class="button secondary ghost" @click="redirectToAssetLandingPage(asset.symbol)">Conhecer</a>
+          <a class="button primary filled" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">Investir</a>
+          <a class="button secondary ghost" @click="redirectToAssetLandingPage(asset.product_data.symbol)">Conhecer</a>
         </div>
       </a>
-      <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.symbol">
+      <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.product_data.symbol">
         <div class="attributes">
           <div class="header">
             <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-            <p class="symbol">{{ asset.symbol }}</p>
+            <p class="symbol">{{ asset.product_data.symbol }}</p>
           </div>
           <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
         </div>
         <div class="market-data">
           <p class="profitability">
-            {{ asset.profitability }}
+            {{ asset.product_data.profitability }}
           </p>
           <div class="minimum-value">
             <p class="min-label">{{ i18n('A partir de') }}</p>
-            <p class="min-value">{{ asset.minimum_value | ftFormatCurrency(2) }}</p>
+            <p class="min-value">{{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
           </div>
         </div>
       </a>
@@ -98,7 +98,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   },
   methods: {
     getAssetBadgeAsArray (asset) {
-      return [...(asset.badges || []), { text: asset?.status?.value ?? '', type: 'status' }]
+      return [...(asset.product_data?.badges || []), { text: asset?.product_data?.status?.value ?? '', type: 'status' }]
     },
     getPercentageString (percentage = 0) {
       let percString = percentage
