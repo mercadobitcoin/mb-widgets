@@ -162,7 +162,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return this.translateMap?.[this.language]?.[key] ?? ''
     },
     redirectToAssetTradeExperience(symbol) {
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:table:button:${symbol}`
@@ -170,7 +170,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       location.href = this.getAssetBasicTradeExperienceLink(symbol)
     },
     redirectToAssetLandingPage(symbol) {
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:table:asset-name:${symbol}`
@@ -194,7 +194,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         this.order = 'asc'
       }
 
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:table:sort:${sort}`

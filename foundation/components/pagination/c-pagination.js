@@ -27,7 +27,7 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
       type: Number,
       default: 1
     },
-    gaComponent: {
+    trackComponent: {
       type: String,
       default: "assets"
     }
@@ -83,32 +83,29 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
     cssIsActive (page) {
       return this.currentPage === page ? 'active' : ''
     },
-    onPageClick (page, action) {
-      switch (action) {
-        case 'back':
-          this.ga({
-            ec: 'web:site:home',
-            en: 'click',
-            lb: `${this.gaComponent}:pagination:previous`
-          })
-          this.$emit('change', this.currentPage - 1)
-          break
-        case 'next':
-          this.$emit('change', this.currentPage + 1)
-          this.ga({
-            ec: 'web:site:home',
-            en: 'click',
-            lb: `${this.gaComponent}:pagination:next`
-          })
-          break
-        default:
-          this.ga({
-            ec: 'web:site:home',
-            en: 'click',
-            lb: `${this.gaComponent}:pagination:${page}`
-          })
-          this.$emit('change', page)
+    onPageClick (page, action = 'numeric') {
+      const eventActions = {
+        'back': {
+          label:'pagination:previous',
+          page: this.currentPage - 1
+        },
+        'next': {
+          label:'pagination:next',
+          page: this.currentPage + 1
+        },
+        'numeric': {
+          label:`pagination:${page}`,
+          page: page
+        },  
       }
+
+      this.$emit('change', eventActions[action]['page'])
+
+      this.trackAnalytics({
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `${this.trackComponent}:${eventActions[action]['label']}`
+      })
     }
   }
 })

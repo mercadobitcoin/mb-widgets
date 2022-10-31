@@ -270,7 +270,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.resetCryptoBasicQueryDefaultState()
       this.cryptoAssets.category = category
       this.getCryptoAssets()
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `assets:${category}`
@@ -294,7 +294,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
       this.getCryptoAssets()
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `assets:${viewMode}`

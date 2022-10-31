@@ -89,7 +89,7 @@ const MBC_SEARCH_BOX = () => ({ //eslint-disable-line
         this.$emit('update:value', event.target.value)
 
         let valueForGaTracking = (event.target.value).replace(/\s+/g,"-")
-        this.ga({
+        this.trackAnalytics({
           ec: 'web:site:home',
           en: 'search',
           lb: `search:${valueForGaTracking}`

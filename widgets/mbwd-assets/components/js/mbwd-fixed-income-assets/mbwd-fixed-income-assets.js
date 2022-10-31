@@ -245,7 +245,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       this.resetFixedIncomeBasicQueryDefaultState()
       this.fixedIncomeAssets.category = category
       this.getFixedIncomeAssets()
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:${category}`

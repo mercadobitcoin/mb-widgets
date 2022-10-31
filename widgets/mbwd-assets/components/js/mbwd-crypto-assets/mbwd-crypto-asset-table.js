@@ -166,7 +166,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
       return `ícone ${name}`
     },
     redirectToAssetTradeExperience(symbol) {
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `assets:table:button:${symbol}`
@@ -174,7 +174,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
       location.href = this.getAssetBasicTradeExperienceLink(symbol)
     },
     redirectToAssetLandingPage(symbol) {
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `assets:table:asset-name:${symbol}`
@@ -198,7 +198,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
         this.order = 'asc'
       }
 
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `assets:table:sort:${sort}`

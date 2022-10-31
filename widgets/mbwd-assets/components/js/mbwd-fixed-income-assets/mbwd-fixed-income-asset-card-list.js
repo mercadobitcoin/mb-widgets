@@ -126,7 +126,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
       return `https://www.mercadobitcoin.com.br/conhecer/${(symbol ?? '').toLowerCase()}`
     },
     redirectToAssetTradeExperience(symbol) {
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:card:${symbol}:invest`
@@ -134,7 +134,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
       location.href = this.getAssetBasicTradeExperienceLink(symbol)
     },
     redirectToAssetLandingPage(symbol) {
-      this.ga({
+      this.trackAnalytics({
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:card:${symbol}:learn`
