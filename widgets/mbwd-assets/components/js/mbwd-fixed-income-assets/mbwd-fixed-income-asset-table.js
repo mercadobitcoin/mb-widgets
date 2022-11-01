@@ -90,7 +90,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       default: () => []
     }
   },
-  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters, window.MB_WIDGETS.trackEvent],// eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters],// eslint-disable-line
   components: {
     'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
   },
@@ -189,7 +189,8 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return this.translateMap?.[this.language]?.[key] ?? '';
     },
     redirectToAssetTradeExperience(symbol) {
-      this.trackAnalytics({
+      this.$root.$emit('track', 'asset-table');
+      this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:table:button:${symbol}`
@@ -197,7 +198,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       location.href = this.getAssetBasicTradeExperienceLink(symbol)
     },
     redirectToAssetLandingPage(symbol) {
-      this.trackAnalytics({
+      this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:table:asset-name:${symbol}`
@@ -221,7 +222,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         this.order = 'asc'
       }
 
-      this.trackAnalytics({
+      this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:table:sort:${sort}`

@@ -3,7 +3,7 @@ function MbwdAssets () { // eslint-disable-line
     version: '1.0.0',
     appendStyle () {
       const cssLink = document.createElement('link')
-      cssLink.href = 'http://localhost:5001/web/widgets/mbwd-assets/css/mbwd-assets.css'
+      cssLink.href = '/widgets/mbwd-assets/css/mbwd-assets.css'
       cssLink.rel = 'stylesheet'
 
       document.head.appendChild(cssLink)
@@ -31,6 +31,21 @@ function MbwdAssets () { // eslint-disable-line
         el: document.querySelector('mbwd-assets'),
         components: {
           'mbwd-assets': MBWD_ASSETS()// eslint-disable-line
+        },
+        created() {
+          this.$root.$on('track-analytics', event => {
+            console.log('tracking', event);
+            if (mbwdAssetsWrapper.dataset.trackAnalyticsEnabled) {
+              try {
+                if (window.gtag) {
+                  gtag('event', event.en, { //eslint-disable-line
+                    event_category: event.ec,
+                    event_label: event.lb
+                  })
+                }
+              } catch (e) {}
+            }
+          });
         }
       })
     }

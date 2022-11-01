@@ -49,7 +49,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         <mbc-pagination :total-pages="fixedIncomeAssets.totalPages" gaComponent="fixed-income" :current-page="fixedIncomeAssets.currentPage" @change="changePage"/>
       </div>
     </div>`,
-  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins, window.MB_WIDGETS.trackEvent], // eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins], // eslint-disable-line
   props: {
     authToken: {
       type: Boolean,
@@ -248,7 +248,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       this.resetFixedIncomeBasicQueryDefaultState()
       this.fixedIncomeAssets.category = category
       this.getFixedIncomeAssets()
-      this.trackAnalytics({
+      this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
         lb: `fixed-income:${category}`

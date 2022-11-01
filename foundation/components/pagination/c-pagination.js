@@ -17,7 +17,6 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
         </button>
       </div>
     </div>`,
-  mixins: [window.MB_WIDGETS.trackEvent], // eslint-disable-line
   props: {
     currentPage: {
       type: Number,
@@ -101,7 +100,7 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
 
       this.$emit('change', eventActions[action]['page'])
 
-      this.trackAnalytics({
+      this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
         lb: `${this.trackComponent}:${eventActions[action]['label']}`

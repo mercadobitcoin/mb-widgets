@@ -49,7 +49,7 @@
       default: () => []
     }
   },
-  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters, window.MB_WIDGETS.trackEvent], // eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters], // eslint-disable-line
   components: {
     'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
   },
@@ -85,7 +85,7 @@
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
     },
     redirectToAssetTradeExperience(symbol) {
-      this.trackAnalytics({
+      this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
         lb: `assets:card:${symbol}`

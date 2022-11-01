@@ -48,7 +48,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" gaComponent="assets" @change="changePage"/>
       </div>
     </div>`,
-  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins, window.MB_WIDGETS.trackEvent], // eslint-disable-line
+  mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins], // eslint-disable-line
   props: {
     language: {
       type: String,
@@ -272,7 +272,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.resetCryptoBasicQueryDefaultState()
       this.cryptoAssets.category = category
       this.getCryptoAssets()
-      this.trackAnalytics({
+      this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
         lb: `assets:${category}`
@@ -297,7 +297,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.viewMode = viewMode
       this.getCryptoAssets()
 
-      this.trackAnalytics({
+      this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
         lb: `assets:${viewMode}`

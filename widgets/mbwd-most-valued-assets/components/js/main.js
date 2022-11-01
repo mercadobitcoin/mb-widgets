@@ -31,6 +31,20 @@ function MbwdMostValuedAssets () { // eslint-disable-line
         el: document.querySelector('mbwd-most-valued-assets'),
         components: {
           'mbwd-most-valued-assets': MBWD_MOST_VALUED_ASSETS() // eslint-disable-line
+        },
+        created() {
+          this.$root.$on('track', event => {
+            if (mbwdMostValuedAssetsWrapper.dataset.trackAnalyticsEnabled) {
+              try {
+                if (window.gtag) {
+                  gtag('event', event.en, { //eslint-disable-line
+                    event_category: event.ec,
+                    event_label: event.lb
+                  })
+                }
+              } catch (e) {}
+            }
+          });
         }
       })
     }
