@@ -183,13 +183,13 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return `ícone ${name}`
     },
     i18n (key) {
-      if(key.indexOf('_') >= 0) {
-        return this.translateMap?.[this.language]?.[key.toLowerCase().replace('_', '-')] ?? '';
+      if (key.indexOf('_') >= 0) {
+        return this.translateMap?.[this.language]?.[key.toLowerCase().replace('_', '-')] ?? ''
       }
-      return this.translateMap?.[this.language]?.[key] ?? '';
+      return this.translateMap?.[this.language]?.[key] ?? ''
     },
-    redirectToAssetTradeExperience(symbol) {
-      this.$root.$emit('track', 'asset-table');
+    redirectToAssetTradeExperience (symbol) {
+      this.$root.$emit('track', 'asset-table')
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
@@ -197,7 +197,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       })
       location.href = this.getAssetBasicTradeExperienceLink(symbol)
     },
-    redirectToAssetLandingPage(symbol) {
+    redirectToAssetLandingPage (symbol) {
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',

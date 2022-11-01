@@ -88,7 +88,7 @@ const MBC_SEARCH_BOX = () => ({ //eslint-disable-line
       this.debounceIntervalId = this.mxDebounce(this.debounceIntervalId, () => {
         this.$emit('update:value', event.target.value)
 
-        let valueForGaTracking = (event.target.value).replace(/\s+/g,"-")
+        const valueForGaTracking = (event.target.value).replace(/\s+/g, '-')
         this.$root.$emit('track-analytics', {
           ec: 'web:site:home',
           en: 'search',

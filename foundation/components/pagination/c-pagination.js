@@ -1,7 +1,7 @@
 const MBC_PAGINATION = () => ({ //eslint-disable-line
   template: `
     <div class="c-pagination" v-if="totalPages > 1">
-      <div class="pages">
+      <div v-if="!mobileMode" class="pages">
         <button class="page go-to-first" :disabled="currentPage === 1" @click="onPageClick(null, 'back')">
           <div class="arrow left" />
         </button>
@@ -16,7 +16,14 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
           <div class="arrow right" />
         </button>
       </div>
+      <div v-if="mobileMode" class="show-more">
+        <button class="btn-show-more" :disabled="currentPage === totalPages" @click="onPageClick(null, 'next')">
+          <span> Mostrar mais </span>
+          <div class="arrow bottom" />
+        </button>
+      </div>
     </div>`,
+  mixins: [window.MB_WIDGETS.UIMixins], //eslint-disable-line
   props: {
     currentPage: {
       type: Number,
@@ -28,7 +35,7 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
     },
     trackComponent: {
       type: String,
-      default: "assets"
+      default: 'assets'
     }
   },
   data () {
@@ -38,12 +45,12 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
   },
   computed: {
     cptdDisplayLeftEllipsis () {
-      //if (this.totalPages === 5) { return false }
+      // if (this.totalPages === 5) { return false }
       if (this.totalPages <= 5) { return false }
       return this.currentPage >= this.maxDisplayPages + 1
     },
     cptdDisplayRightEllipsis () {
-      //if (this.totalPages === 5) { return false }
+      // if (this.totalPages === 5) { return false }
       if (this.totalPages <= 5) { return false }
       return this.currentPage < this.totalPages - this.maxDisplayPages + 1
     },
@@ -84,26 +91,26 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
     },
     onPageClick (page, action = 'numeric') {
       const eventActions = {
-        'back': {
-          label:'pagination:previous',
+        back: {
+          label: 'pagination:previous',
           page: this.currentPage - 1
         },
-        'next': {
-          label:'pagination:next',
+        next: {
+          label: 'pagination:next',
           page: this.currentPage + 1
         },
-        'numeric': {
-          label:`pagination:${page}`,
-          page: page
-        },  
+        numeric: {
+          label: `pagination:${page}`,
+          page
+        }
       }
 
-      this.$emit('change', eventActions[action]['page'])
+      this.$emit('change', eventActions[action].page)
 
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
-        lb: `${this.trackComponent}:${eventActions[action]['label']}`
+        lb: `${this.trackComponent}:${eventActions[action].label}`
       })
     }
   }

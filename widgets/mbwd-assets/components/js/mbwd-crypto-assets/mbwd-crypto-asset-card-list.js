@@ -84,7 +84,7 @@
     getAssetBasicTradeExperienceLink (symbol) {
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
     },
-    redirectToAssetTradeExperience(symbol) {
+    redirectToAssetTradeExperience (symbol) {
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
@@ -92,6 +92,6 @@
       })
 
       location.href = this.getAssetBasicTradeExperienceLink(symbol)
-    },
+    }
   }
 })

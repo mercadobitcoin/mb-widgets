@@ -26,8 +26,8 @@
       color: map-get($neutral-color, "50");
       background-color: transparent;
       border: none;
-      cursor: pointer;
       transition: all 0.2s ease;
+      cursor: pointer;
 
       .arrow {
         width: 8px;
@@ -81,6 +81,42 @@
             border-bottom: 2px solid map-get($secondary-color, "20");
             border-left: 2px solid map-get($secondary-color, "20");
           }
+        }
+      }
+    }
+  }
+
+  .show-more {
+
+    .btn-show-more {
+      background-color: transparent;
+      border: none;
+      color: map-get($primary-color, "main");
+      cursor: pointer;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+
+      @extend %typography-button-1;
+
+      &:disabled {
+        display: none;
+      }
+
+      .arrow {
+        width: 8px;
+        height: 8px;
+        transition: border 0.2s ease;
+        border-bottom-right-radius: 1.5px;
+        border-top-left-radius: 1.5px;
+        margin-top: -4px;
+
+        &.bottom {
+          border-top: 2px solid map-get($primary-color, "main");
+          border-right: 2px solid map-get($primary-color, "main");
+          transform: rotate(135deg);
         }
       }
     }

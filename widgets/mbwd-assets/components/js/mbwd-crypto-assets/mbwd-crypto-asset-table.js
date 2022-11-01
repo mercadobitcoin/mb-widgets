@@ -165,7 +165,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
     getIconAlt (name) {
       return `ícone ${name}`
     },
-    redirectToAssetTradeExperience(symbol) {
+    redirectToAssetTradeExperience (symbol) {
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
@@ -173,7 +173,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
       })
       location.href = this.getAssetBasicTradeExperienceLink(symbol)
     },
-    redirectToAssetLandingPage(symbol) {
+    redirectToAssetLandingPage (symbol) {
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',

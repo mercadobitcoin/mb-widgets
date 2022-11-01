@@ -195,7 +195,13 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           const data = await response.json() //eslint-disable-line
           const { total_items, response_data } = data //eslint-disable-line
           const { products } = response_data
-          this.cryptoAssets.result = products ?? [] //eslint-disable-line
+
+          // if(this.mobileMode){
+          //   this.cryptoAssets.result.push(...products ?? []) //eslint-disable-line
+          // } else {
+            this.cryptoAssets.result = products ?? [] //eslint-disable-line
+          // }
+
           if (this.cptdIsNewCategory) {
             this.cryptoAssets.totalPages = 1
           } else {

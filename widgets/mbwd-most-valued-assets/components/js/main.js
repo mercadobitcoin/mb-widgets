@@ -32,7 +32,7 @@ function MbwdMostValuedAssets () { // eslint-disable-line
         components: {
           'mbwd-most-valued-assets': MBWD_MOST_VALUED_ASSETS() // eslint-disable-line
         },
-        created() {
+        created () {
           this.$root.$on('track', event => {
             if (mbwdMostValuedAssetsWrapper.dataset.trackAnalyticsEnabled) {
               try {
@@ -44,7 +44,7 @@ function MbwdMostValuedAssets () { // eslint-disable-line
                 }
               } catch (e) {}
             }
-          });
+          })
         }
       })
     }

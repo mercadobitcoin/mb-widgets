@@ -174,7 +174,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       try {
         // TODO: CHANGE TO API LATER
         const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getFixedIncomeAssetsRequestQueryString()}`)
-        //&limit=5&offset=0&sort=symbol&order=asc
+        // &limit=5&offset=0&sort=symbol&order=asc
         // const response = await fetch(`/fixed-incomes/${this.getFixedIncomeAssetsRequestQueryString()}`)
 
         if (response.ok) {

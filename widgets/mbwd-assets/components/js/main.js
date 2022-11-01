@@ -32,9 +32,9 @@ function MbwdAssets () { // eslint-disable-line
         components: {
           'mbwd-assets': MBWD_ASSETS()// eslint-disable-line
         },
-        created() {
+        created () {
           this.$root.$on('track-analytics', event => {
-            console.log('tracking', event);
+            console.log('tracking', event)
             if (mbwdAssetsWrapper.dataset.trackAnalyticsEnabled) {
               try {
                 if (window.gtag) {
@@ -45,7 +45,7 @@ function MbwdAssets () { // eslint-disable-line
                 }
               } catch (e) {}
             }
-          });
+          })
         }
       })
     }
