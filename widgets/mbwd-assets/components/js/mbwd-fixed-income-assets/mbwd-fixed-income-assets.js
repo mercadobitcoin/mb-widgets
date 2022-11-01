@@ -178,8 +178,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         // const response = await fetch(`/fixed-incomes/${this.getFixedIncomeAssetsRequestQueryString()}`)
 
         if (response.ok) {
-          const { response_data } = await response.json() //eslint-disable-line
-          const { products, total_items } = response_data //eslint-disable-line
+          const data = await response.json() //eslint-disable-line
+          const { total_items, response_data } = data //eslint-disable-line
+          const { products } = response_data
           this.fixedIncomeAssets.result = products ?? [] //eslint-disable-line
           if (this.cptdIsNewCategory) {
             this.fixedIncomeAssets.totalPages = 1
