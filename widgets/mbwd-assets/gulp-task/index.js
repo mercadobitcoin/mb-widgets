@@ -15,7 +15,6 @@ const task = (cb) => {
   const UIMixins = 'foundation/mixins/UIMixins.js'
   const configMixins = 'foundation/mixins/configMixins.js'
   const URLMixins = 'foundation/mixins/urlMixins.js'
-  const TrackEventMixins = 'foundation/mixins/trackEventMixins.js'
 
   // Filters
   const CurrencyFilters = 'foundation/mixins/filters/currencyFilters.js'
@@ -63,7 +62,6 @@ const task = (cb) => {
         UIMixins,
         URLMixins,
         CurrencyFilters,
-        TrackEventMixins,
         // Dependencies:4
         AssetBadges,
         Pagination,
