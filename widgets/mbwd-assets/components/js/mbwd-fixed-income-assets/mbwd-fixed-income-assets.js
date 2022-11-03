@@ -46,7 +46,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         </div>
       </div>
       <div class="pagination-wrapper">
-        <mbc-pagination :total-pages="fixedIncomeAssets.totalPages" gaComponent="fixed-income" :current-page="fixedIncomeAssets.currentPage" @change="changePage"/>
+        <mbc-pagination :total-pages="fixedIncomeAssets.totalPages" trackComponent="fixed-income" :current-page="fixedIncomeAssets.currentPage" @change="changePage"/>
       </div>
     </div>`,
   mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins], // eslint-disable-line
@@ -79,6 +79,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       intervalId: undefined,
       busy: true,
       viewMode: 'table', // [card, table],
+      shouldOverwriteFixedIncomeResult: false,
       fixedIncomeAssets: {
         limit: 5,
         category: 'all',
@@ -141,6 +142,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         }
       ]
     },
+    cptdShowMore(){
+      return this.mobileMode
+    },
     cptdEmptyStateConfig () {
       return {
         title: this.i18n('Não encontramos nada em Renda Fixa Digital'),
@@ -150,7 +154,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     cptdIsNewCategory () {
       return this.fixedIncomeAssets.category === 'new'
-    }
+    },
   },
   watch: {
     search () {
@@ -181,7 +185,16 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           const data = await response.json() //eslint-disable-line
           const { total_items, response_data } = data //eslint-disable-line
           const { products } = response_data
-          this.fixedIncomeAssets.result = products ?? [] //eslint-disable-line
+
+          if(this.cptdShowMore && !this.shouldOverwriteFixedIncomeResult){
+            this.fixedIncomeAssets.result.push(...products ?? []) //eslint-disable-line
+          } else {
+            this.fixedIncomeAssets.result = products ?? [] //eslint-disable-line
+            this.shouldOverwriteFixedIncomeResult = false
+            this.setFixedIncomeAssetsLimit()
+          }
+
+    
           if (this.cptdIsNewCategory) {
             this.fixedIncomeAssets.totalPages = 1
           } else {
@@ -222,9 +235,13 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       }
 
       if (totalPages > 1) {
-        searchQueryStringsMap.offset = (currentPage - 1) * limit
+        if(this.shouldOverwriteFixedIncomeResult && this.cptdShowMore) {
+          searchQueryStringsMap.offset = 0
+        } else {
+          searchQueryStringsMap.offset = (currentPage - 1) * limit
+        }
       }
-
+        
       if (this.search) {
         searchQueryStringsMap.search = this.search
       }
@@ -271,7 +288,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
-      this.getFixedIncomeAssets()
     },
     resetFixedIncomeBasicQueryDefaultState () {
       if (this.$refs?.refFixedIncomeAssetTable) {
@@ -284,19 +300,21 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       this.fixedIncomeAssets.currentPage = 1
       this.fixedIncomeAssets.totalPages = 1
       this.fixedIncomeAssets.category = 'all'
+      this.shouldOverwriteFixedIncomeResult = true
     },
     setFixedIncomeAssetsLimit () {
-      if (this.mobileMode) {
-        this.fixedIncomeAssets.limit = this.viewMode === 'cards' ? 4 : 5
+      if (this.cptdShowMore) {
+        this.fixedIncomeAssets.limit = this.shouldOverwriteFixedIncomeResult ? this.fixedIncomeAssets.currentPage * 5 : 5
       } else {
         this.fixedIncomeAssets.limit = this.viewMode === 'cards' ? 3 : 5
       }
     },
     scheduleGetFixedIncomeAssetsInterval () {
-      this.intervalId = setInterval(
-        this.getFixedIncomeAssets,
-        this.intervalTimeout
-      )
+      this.intervalId = setInterval(() => {
+        this.shouldOverwriteFixedIncomeResult = true
+        this.getFixedIncomeAssets() 
+      }, this.intervalTimeout)
+
     },
     stopGetFixedIncomeAssetsInterval () {
       this.intervalId = null

@@ -11,13 +11,13 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
           {{ page }}
         </button>
         <span v-if="cptdDisplayRightEllipsis" class="page ellipsis">...</span>
-        <button v-if="cptdDisplayLastPage" class="page last" :class="cssIsActive(totalPages)" @click="onPageClick(totalPages)">{{totalPages}}</button>
+        <button class="page last" :class="cssIsActive(totalPages)" @click="onPageClick(totalPages)">{{totalPages}}</button>
         <button class="page go-to-last" :disabled="currentPage === totalPages" @click="onPageClick(null, 'next')">
           <div class="arrow right" />
         </button>
       </div>
       <div v-if="mobileMode" class="show-more">
-        <button class="btn-show-more" :disabled="currentPage === totalPages" @click="onPageClick(null, 'next')">
+        <button class="btn-show-more" :disabled="currentPage === totalPages" @click="onPageClick(null, 'showMore')">
           <span> Mostrar mais </span>
           <div class="arrow bottom" />
         </button>
@@ -45,42 +45,28 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
   },
   computed: {
     cptdDisplayLeftEllipsis () {
-      // if (this.totalPages === 5) { return false }
-      if (this.totalPages <= 5) { return false }
-      return this.currentPage >= this.maxDisplayPages + 1
+      return this.totalPages > 5 && this.currentPage > this.maxDisplayPages
     },
     cptdDisplayRightEllipsis () {
-      // if (this.totalPages === 5) { return false }
-      if (this.totalPages <= 5) { return false }
-      return this.currentPage < this.totalPages - this.maxDisplayPages + 1
-    },
-    cptdDisplayLastPage () {
-      if (this.totalPages === 5) { return true }
-      if (this.totalPages <= 5 && this.currentPage != this.totalPages) { return true }
-      return this.currentPage <= this.totalPages - this.maxDisplayPages
+      return this.totalPages > 5 && this.currentPage <= this.totalPages - this.maxDisplayPages
+      
     },
     cptdPagesList () {
-      if (this.totalPages === 5) {
-        return [2, 3, 4]
-      }
-      if (this.currentPage > this.maxDisplayPages) {
-        if (this.currentPage <= this.totalPages - this.maxDisplayPages) {
-          return [this.currentPage - 1, this.currentPage, this.currentPage + 1]
-        }
-        // Creates an indexed array from with total pages + 1
-        // Gets it's keys [1,2,3,4...50]
-        // Reverse [50,49,48,47...1]
-        // Get the first 3 positions [50,49,48]
-        // Reverse back [48,49,50]
-        return Array.from(Array(this.totalPages + 1).keys())
-          .reverse()
-          .slice(0, this.maxDisplayPages)
-          .reverse()
+      if(this.totalPages <= 5){
+        return Array.from(new Array(this.totalPages - 2), (x, i) => i + 2)
       }
 
-      if (this.totalPages < this.maxDisplayPages) {
-        return Array.from(new Array(this.totalPages - 1), (x, i) => i + 2)
-      }
+      if(this.currentPage >= this.maxDisplayPages) {        
+        if(this.currentPage < this.totalPages - 1) {
+          return [this.currentPage - 1, this.currentPage, this.currentPage + 1]
+        }
+        if(this.currentPage < this.totalPages) {
+          return [this.currentPage - 1, this.currentPage]
+        }
+        if(this.currentPage == this.totalPages) {
+          return [this.currentPage - 2, this.currentPage - 1]
+        }
+       }
 
       return Array.from(new Array(this.maxDisplayPages - 1), (x, i) => i + 2)
     }
@@ -102,6 +88,10 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
         numeric: {
           label: `pagination:${page}`,
           page
+        },
+        showMore: {
+          label: 'show-more',
+          page: this.currentPage + 1
         }
       }
 

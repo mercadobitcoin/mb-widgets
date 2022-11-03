@@ -178,6 +178,7 @@
       width: 100%;
       background: map-get($background-color, "primary");
       display: flex;
+      gap: 8px;
       justify-content: space-between;
       cursor: pointer;
       border: solid 1px transparent;
@@ -214,10 +215,12 @@
         display: flex;
         align-items: flex-start;
         margin: 0;
+        overflow: hidden;
 
         & > .header {
           display: flex;
           align-items: flex-start;
+          width: 100%;
 
           & > .asset-icon {
             margin-right: 8px;
@@ -226,6 +229,7 @@
           & > .asset-data {
             display: flex;
             flex-direction: column;
+            overflow: hidden;
             white-space: nowrap;
 
             & > .name {
@@ -234,6 +238,8 @@
               color: map-get($neutral-color, "50");
               white-space: nowrap;
               margin: 0 0 4px;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
 
             & > .sub-type {

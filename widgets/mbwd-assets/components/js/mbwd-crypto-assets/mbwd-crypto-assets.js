@@ -45,7 +45,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         </div>
       </div>
       <div class="pagination-wrapper">
-        <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" gaComponent="assets" @change="changePage"/>
+        <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" trackComponent="assets" @change="changePage"/>
       </div>
     </div>`,
   mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins], // eslint-disable-line
@@ -83,6 +83,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         result: []
       },
       viewMode: 'table', // [card, table]
+      shouldOverwriteCryptoAssetResult: false,
       translateMap: {
         pt: {
           Favoritos: 'Favoritos',
@@ -147,6 +148,9 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         }
       ]
     },
+    cptdShowMore(){
+      return this.mobileMode
+    },
     cptdEmptyStateConfig () {
       return {
         title: this.i18n('Não encontramos nada em Ativos'),
@@ -196,11 +200,13 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           const { total_items, response_data } = data //eslint-disable-line
           const { products } = response_data
 
-          // if(this.mobileMode){
-          //   this.cryptoAssets.result.push(...products ?? []) //eslint-disable-line
-          // } else {
+          if(this.cptdShowMore && !this.shouldOverwriteCryptoAssetResult){
+            this.cryptoAssets.result.push(...products ?? []) //eslint-disable-line
+          } else {
             this.cryptoAssets.result = products ?? [] //eslint-disable-line
-          // }
+            this.shouldOverwriteCryptoAssetResult = false
+            this.setCryptoAssetsLimit()
+          }
 
           if (this.cptdIsNewCategory) {
             this.cryptoAssets.totalPages = 1
@@ -211,6 +217,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
               this.cryptoAssets.totalPages = 1
             }
           }
+
+          
         } else {
           this.cryptoAssets.result = []
           this.cryptoAssets.totalPages = 1
@@ -256,7 +264,12 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       }
 
       if (totalPages > 1) {
-        searchQueryStringsMap.offset = (currentPage - 1) * limit
+        if(this.shouldOverwriteCryptoAssetResult && this.cptdShowMore) {
+          searchQueryStringsMap.offset = 0
+        } else {
+          searchQueryStringsMap.offset = (currentPage - 1) * limit
+        }
+        
       }
 
       return this.mxCreateUrlQueryString(searchQueryStringsMap)
@@ -301,7 +314,6 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
-      this.getCryptoAssets()
 
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
@@ -320,16 +332,20 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.cryptoAssets.currentPage = 1
       this.cryptoAssets.totalPages = 1
       this.cryptoAssets.category = 'all'
+      this.shouldOverwriteCryptoAssetResult = true
     },
     setCryptoAssetsLimit () {
-      if (this.mobileMode) {
-        this.cryptoAssets.limit = 5
+      if (this.cptdShowMore) {
+        this.cryptoAssets.limit = this.shouldOverwriteCryptoAssetResult ? this.cryptoAssets.currentPage * 5 : 5
       } else {
         this.cryptoAssets.limit = this.viewMode === 'cards' ? 4 : 5
       }
     },
     scheduleGetCryptoAssetsInterval () {
-      this.intervalId = setInterval(this.getCryptoAssets, this.intervalTimeout)
+      this.intervalId = setInterval(() => {
+        this.shouldOverwriteCryptoAssetResult = true
+        this.getCryptoAssets() 
+      }, this.intervalTimeout)
     },
     stopGetCryptoAssetsInterval () {
       this.intervalId = null
