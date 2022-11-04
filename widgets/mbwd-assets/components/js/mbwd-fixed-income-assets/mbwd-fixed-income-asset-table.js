@@ -195,7 +195,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         en: 'click',
         lb: `fixed-income:table:button:${symbol}`
       })
-      location.href = this.getAssetBasicTradeExperienceLink(symbol)
+      location.href = this.getAssetBasicTradeExperienceLink(symbol) // eslint-disable-line
     },
     redirectToAssetLandingPage (symbol) {
       this.$root.$emit('track-analytics', {
@@ -203,7 +203,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         en: 'click',
         lb: `fixed-income:table:asset-name:${symbol}`
       })
-      location.href = this.getAssetLandingPageLink(symbol)
+      location.href = this.getAssetLandingPageLink(symbol) // eslint-disable-line
     },
     changeSortOrder (sort) {
       if (this.sort === sort) {

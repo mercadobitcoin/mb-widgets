@@ -91,7 +91,7 @@
         lb: `assets:card:${symbol}`
       })
 
-      location.href = this.getAssetBasicTradeExperienceLink(symbol)
+      location.href = this.getAssetBasicTradeExperienceLink(symbol) // eslint-disable-line
     }
   }
 })

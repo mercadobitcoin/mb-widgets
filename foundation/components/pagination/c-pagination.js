@@ -49,24 +49,23 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
     },
     cptdDisplayRightEllipsis () {
       return this.totalPages > 5 && this.currentPage <= this.totalPages - this.maxDisplayPages
-      
     },
     cptdPagesList () {
-      if(this.totalPages <= 5){
+      if (this.totalPages <= 5) {
         return Array.from(new Array(this.totalPages - 2), (x, i) => i + 2)
       }
 
-      if(this.currentPage >= this.maxDisplayPages) {        
-        if(this.currentPage < this.totalPages - 1) {
+      if (this.currentPage >= this.maxDisplayPages) {
+        if (this.currentPage < this.totalPages - 1) {
           return [this.currentPage - 1, this.currentPage, this.currentPage + 1]
         }
-        if(this.currentPage < this.totalPages) {
+        if (this.currentPage < this.totalPages) {
           return [this.currentPage - 1, this.currentPage]
         }
-        if(this.currentPage == this.totalPages) {
+        if (this.currentPage === this.totalPages) {
           return [this.currentPage - 2, this.currentPage - 1]
         }
-       }
+      }
 
       return Array.from(new Array(this.maxDisplayPages - 1), (x, i) => i + 2)
     }

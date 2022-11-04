@@ -1,7 +1,6 @@
 const compression = require('compression')
 const express = require('express')
 const helmet = require('helmet')
-const fetch = require('node-fetch')
 const app = express()
 
 // View engine setup
@@ -14,27 +13,6 @@ app.use(helmet.ieNoOpen())
 // Sets "X-Content-Type-Options: nosniff"
 app.use(helmet.noSniff())
 app.use(helmet.frameguard({ action: 'sameorigin' }))
-
-function mxCreateUrlQueryString (options) {
-  if (!options || !Object.keys(options).length) {
-    return ''
-  }
-
-  return '?'.concat(
-    Object.keys(options)
-      .map(
-        (key) => {
-          if (options[key]) {
-            return `${encodeURIComponent(key)}=${encodeURIComponent(options[key])}`
-          }
-
-          return ''
-        }
-      )
-      .filter(options => !!options)
-      .join('&')
-  )
-}
 
 let { PORT, IP, ENVIRONMENT_NAME } = process.env
 

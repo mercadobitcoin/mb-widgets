@@ -122,6 +122,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'Capitalização de mercado': 'Capitalização de mercado',
           Comprar: 'Comprar',
           utility_token: 'Utility token',
+          fan_token: 'Fan Token',
           coin: 'Criptomoeda'
         },
         en: {
@@ -133,6 +134,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'Capitalização de mercado': 'Capitalização de mercado',
           Comprar: 'Comprar',
           utility_token: 'Utility token',
+          fan_token: 'Fan Token',
           coin: 'Criptomoeda'
         },
         es: {
@@ -144,6 +146,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'Capitalização de mercado': 'Capitalização de mercado',
           Comprar: 'Comprar',
           utility_token: 'Utility token',
+          fan_token: 'Fan Token',
           coin: 'Criptomoeda'
         }
       }
@@ -171,7 +174,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
         en: 'click',
         lb: `assets:table:button:${symbol}`
       })
-      location.href = this.getAssetBasicTradeExperienceLink(symbol)
+      location.href = this.getAssetBasicTradeExperienceLink(symbol) // eslint-disable-line
     },
     redirectToAssetLandingPage (symbol) {
       this.$root.$emit('track-analytics', {
@@ -179,7 +182,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
         en: 'click',
         lb: `assets:table:asset-name:${symbol}`
       })
-      location.href = this.getAssetLandingPageLink(symbol)
+      location.href = this.getAssetLandingPageLink(symbol) // eslint-disable-line
     },
     changeSortOrder (sort) {
       if (this.sort === sort) {
