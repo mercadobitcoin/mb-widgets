@@ -2,22 +2,22 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
   template: `
     <div class="c-pagination" v-if="totalPages > 1">
       <div v-if="!mobileMode" class="pages">
-        <button class="page go-to-first" :disabled="currentPage === 1" @click="onPageClick(null, 'back')">
+        <button class="page go-to-first" :disabled="currentPage === 1" @click="navigateTo(null, 'back')">
           <div class="arrow left" />
         </button>
-        <button class="page first" :class="cssIsActive(1)" @click="onPageClick(1)">1</button>
+        <button class="page first" :class="cssIsActive(1)" @click="navigateTo(1)">1</button>
         <span v-if="cptdDisplayLeftEllipsis" class="page ellipsis">...</span>
-        <button class="page" :class="cssIsActive(page)" v-for="page in cptdPagesList" @click="onPageClick(page)">
+        <button class="page" :class="cssIsActive(page)" v-for="page in cptdPagesList" @click="navigateTo(page)">
           {{ page }}
         </button>
         <span v-if="cptdDisplayRightEllipsis" class="page ellipsis">...</span>
-        <button class="page last" :class="cssIsActive(totalPages)" @click="onPageClick(totalPages)">{{totalPages}}</button>
-        <button class="page go-to-last" :disabled="currentPage === totalPages" @click="onPageClick(null, 'next')">
+        <button class="page last" :class="cptdLastPageActive" @click="navigateTo(totalPages)">{{totalPages}}</button>
+        <button class="page go-to-last" :disabled="currentPage === totalPages" @click="navigateTo(null, 'next')">
           <div class="arrow right" />
         </button>
       </div>
       <div v-if="mobileMode" class="show-more">
-        <button class="btn-show-more" :disabled="currentPage === totalPages" @click="onPageClick(null, 'showMore')">
+        <button class="btn-show-more" :disabled="currentPage === totalPages" @click="navigateTo(null, 'showMore')">
           <span> Mostrar mais </span>
           <div class="arrow bottom" />
         </button>
@@ -69,13 +69,16 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
        }
 
       return Array.from(new Array(this.maxDisplayPages - 1), (x, i) => i + 2)
+    },
+    cptdLastPageActive(){
+      return this.currentPage === this.totalPages ? 'active' : ''
     }
   },
   methods: {
     cssIsActive (page) {
       return this.currentPage === page ? 'active' : ''
     },
-    onPageClick (page, action = 'numeric') {
+    navigateTo (page, action = 'numeric') {
       const eventActions = {
         back: {
           label: 'pagination:previous',
