@@ -148,7 +148,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         }
       ]
     },
-    cptdShowMore(){
+    cptdShowMore () {
       return this.mobileMode
     },
     cptdEmptyStateConfig () {
@@ -186,21 +186,15 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     async getCryptoAssets () {
       this.busy = true
-      console.log(
-        'SEARCHING FOR CRYPTOS: ',
-        this.getCryptoAssetsRequestQueryString()
-      )
       try {
-        // TODO: CHANGE TO API LATER
         const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getCryptoAssetsRequestQueryString()}`)
-        // const response = await fetch(`/cryptos/${this.getCryptoAssetsRequestQueryString()}`)
 
         if (response.ok) {
           const data = await response.json() //eslint-disable-line
           const { total_items, response_data } = data //eslint-disable-line
-          const { products } = response_data
+          const { products } = response_data // eslint-disable-line
 
-          if(this.cptdShowMore && !this.shouldOverwriteCryptoAssetResult){
+          if (this.cptdShowMore && !this.shouldOverwriteCryptoAssetResult) {
             this.cryptoAssets.result.push(...products ?? []) //eslint-disable-line
           } else {
             this.cryptoAssets.result = products ?? [] //eslint-disable-line
@@ -217,8 +211,6 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
               this.cryptoAssets.totalPages = 1
             }
           }
-
-          
         } else {
           this.cryptoAssets.result = []
           this.cryptoAssets.totalPages = 1
@@ -264,12 +256,11 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       }
 
       if (totalPages > 1) {
-        if(this.shouldOverwriteCryptoAssetResult && this.cptdShowMore) {
+        if (this.shouldOverwriteCryptoAssetResult && this.cptdShowMore) {
           searchQueryStringsMap.offset = 0
         } else {
           searchQueryStringsMap.offset = (currentPage - 1) * limit
         }
-        
       }
 
       return this.mxCreateUrlQueryString(searchQueryStringsMap)
@@ -344,7 +335,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     scheduleGetCryptoAssetsInterval () {
       this.intervalId = setInterval(() => {
         this.shouldOverwriteCryptoAssetResult = true
-        this.getCryptoAssets() 
+        this.getCryptoAssets()
       }, this.intervalTimeout)
     },
     stopGetCryptoAssetsInterval () {

@@ -34,7 +34,6 @@ function MbwdAssets () { // eslint-disable-line
         },
         created () {
           this.$root.$on('track-analytics', event => {
-            console.log('tracking', event)
             if (mbwdAssetsWrapper.dataset.trackAnalyticsEnabled) {
               try {
                 if (window.gtag) {

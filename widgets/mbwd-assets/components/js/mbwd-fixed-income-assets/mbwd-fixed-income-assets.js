@@ -142,7 +142,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         }
       ]
     },
-    cptdShowMore(){
+    cptdShowMore () {
       return this.mobileMode
     },
     cptdEmptyStateConfig () {
@@ -154,7 +154,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     cptdIsNewCategory () {
       return this.fixedIncomeAssets.category === 'new'
-    },
+    }
   },
   watch: {
     search () {
@@ -171,22 +171,15 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     async getFixedIncomeAssets () {
       this.busy = true
-      console.log(
-        'SEARCHING FOR FIXED INCOMES: ',
-        this.getFixedIncomeAssetsRequestQueryString()
-      )
       try {
-        // TODO: CHANGE TO API LATER
         const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getFixedIncomeAssetsRequestQueryString()}`)
-        // &limit=5&offset=0&sort=symbol&order=asc
-        // const response = await fetch(`/fixed-incomes/${this.getFixedIncomeAssetsRequestQueryString()}`)
 
         if (response.ok) {
           const data = await response.json() //eslint-disable-line
           const { total_items, response_data } = data //eslint-disable-line
-          const { products } = response_data
+          const { products } = response_data // eslint-disable-line
 
-          if(this.cptdShowMore && !this.shouldOverwriteFixedIncomeResult){
+          if (this.cptdShowMore && !this.shouldOverwriteFixedIncomeResult) {
             this.fixedIncomeAssets.result.push(...products ?? []) //eslint-disable-line
           } else {
             this.fixedIncomeAssets.result = products ?? [] //eslint-disable-line
@@ -194,7 +187,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
             this.setFixedIncomeAssetsLimit()
           }
 
-    
           if (this.cptdIsNewCategory) {
             this.fixedIncomeAssets.totalPages = 1
           } else {
@@ -235,13 +227,13 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       }
 
       if (totalPages > 1) {
-        if(this.shouldOverwriteFixedIncomeResult && this.cptdShowMore) {
+        if (this.shouldOverwriteFixedIncomeResult && this.cptdShowMore) {
           searchQueryStringsMap.offset = 0
         } else {
           searchQueryStringsMap.offset = (currentPage - 1) * limit
         }
       }
-        
+
       if (this.search) {
         searchQueryStringsMap.search = this.search
       }
@@ -312,9 +304,8 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     scheduleGetFixedIncomeAssetsInterval () {
       this.intervalId = setInterval(() => {
         this.shouldOverwriteFixedIncomeResult = true
-        this.getFixedIncomeAssets() 
+        this.getFixedIncomeAssets()
       }, this.intervalTimeout)
-
     },
     stopGetFixedIncomeAssetsInterval () {
       this.intervalId = null

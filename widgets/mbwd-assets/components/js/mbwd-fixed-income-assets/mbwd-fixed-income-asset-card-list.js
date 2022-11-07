@@ -138,7 +138,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         en: 'click',
         lb: `fixed-income:card:${symbol}:invest`
       })
-      location.href = this.getAssetBasicTradeExperienceLink(symbol)
+      location.href = this.getAssetBasicTradeExperienceLink(symbol) // eslint-disable-line
     },
     redirectToAssetLandingPage (symbol) {
       this.$root.$emit('track-analytics', {
@@ -146,7 +146,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         en: 'click',
         lb: `fixed-income:card:${symbol}:learn`
       })
-      location.href = this.getAssetLandingPageLink(symbol)
+      location.href = this.getAssetLandingPageLink(symbol) // eslint-disable-line
     },
     i18n (key) {
       return this.translateMap?.[this.language]?.[key] ?? ''
