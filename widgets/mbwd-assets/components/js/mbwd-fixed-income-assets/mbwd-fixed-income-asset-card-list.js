@@ -2,7 +2,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   template: `
     <div class="mbwd-fixed-income-asset-card-list apollo">
       <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets" :key="asset.product_data.symbol">
-        <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
+        <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" />
         <div class="asset-data">
           <div class="attributes">
             <p class="name">{{ asset.name }}</p>
@@ -29,8 +29,8 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           </div>
         </div>
         <div class="ctas">
-          <a class="button primary filled" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">Investir</a>
-          <a class="button secondary ghost" @click="redirectToAssetLandingPage(asset.product_data.symbol)">Conhecer</a>
+          <a class="button primary filled" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">{{ i18n('Investir') }}</a>
+          <a class="button secondary ghost" @click="redirectToAssetLandingPage(asset.product_data.symbol)">{{ i18n('Conhecer') }}</a>
         </div>
       </a>
       <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.product_data.symbol">
@@ -39,7 +39,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
             <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
             <p class="symbol">{{ asset.product_data.symbol }}</p>
           </div>
-          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
+          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language"/>
         </div>
         <div class="market-data">
           <p class="profitability">
@@ -75,23 +75,30 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'A partir de': 'A partir de',
           Rentabilidade: 'Rentabilidade',
           'Prazo estimado': 'Prazo estimado',
-          vendido: 'vendido'
+          vendido: 'vendido',
+          Investir: 'Investir',
+          Conhecer: 'Conhecer'
         },
         en: {
-          'nas últimas 24h': 'nas últimas 24h',
-          'Valor inicial': 'Valor inicial',
-          'A partir de': 'A partir de',
-          Rentabilidade: 'Rentabilidade',
-          'Prazo estimado': 'Prazo estimado',
-          vendido: 'vendido'
+          'nas últimas 24h': 'in the last 24h',
+          'Valor inicial': 'Initial Value',
+          'A partir de': 'From',
+          Rentabilidade: 'Profitability',
+          'Prazo estimado': 'Due Date',
+          vendido: 'sold',
+          Investir: 'Trade',
+          Conhecer: 'View more'
+
         },
         es: {
-          'nas últimas 24h': 'nas últimas 24h',
+          'nas últimas 24h': 'en las últimas 24 horas',
           'Valor inicial': 'Valor inicial',
-          'A partir de': 'A partir de',
-          Rentabilidade: 'Rentabilidade',
-          'Prazo estimado': 'Prazo estimado',
-          vendido: 'vendido'
+          'A partir de': 'De',
+          Rentabilidade: 'Rentabilidad',
+          'Prazo estimado': 'Plazo',
+          vendido: 'vendido',
+          Investir: 'Invertir',
+          Conhecer: 'Saber más'
         }
       }
     }

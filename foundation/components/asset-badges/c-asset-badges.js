@@ -36,23 +36,23 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
         },
         en: {
           novo: 'novo',
-          'exclusivos mb': 'exclusivos mb',
-          'pré-listagem': 'pré-listagem',
-          'primary-market': 'mercado primário',
-          'secondary-market': 'mercado secundário',
-          'sold-out': 'esgotado',
-          future: 'em breve',
-          finished: 'finalizado'
+          'exclusivos mb': 'mb exclusives',
+          'pré-listagem': 'pre-listing',
+          'primary-market': 'primary market',
+          'secondary-market': 'secondary market',
+          'sold-out': 'sold out',
+          future: 'coming soon',
+          finished: 'finished'
         },
         es: {
           novo: 'novo',
-          'exclusivos mb': 'exclusivos mb',
-          'pré-listagem': 'pré-listagem',
-          'primary-market': 'mercado primário',
-          'secondary-market': 'mercado secundário',
-          'sold-out': 'esgotado',
-          future: 'em breve',
-          finished: 'finalizado'
+          'exclusivos mb': 'exclusivas mb',
+          'pré-listagem': 'pre-listado',
+          'primary-market': 'mercado principal',
+          'secondary-market': 'mercado secundario',
+          'sold-out': 'vendido',
+          future: 'pronto',
+          finished: 'acabado'
         }
       }
     }

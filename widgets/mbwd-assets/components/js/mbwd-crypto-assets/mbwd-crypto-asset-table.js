@@ -125,26 +125,26 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           coin: 'Criptomoeda'
         },
         en: {
-          Ativo: 'Ativo',
+          Ativo: 'Asset',
           Ticker: 'Ticker',
-          Segmento: 'Segmento',
-          Preço: 'Preço',
-          Variação: 'Variação',
-          'Capitalização de mercado': 'Capitalização de mercado',
-          Comprar: 'Comprar',
+          Segmento: 'Segment',
+          Preço: 'Price',
+          Variação: 'Variation',
+          'Capitalização de mercado': 'Market capitalization',
+          Comprar: 'Buy',
           utility_token: 'Utility token',
-          coin: 'Criptomoeda'
+          coin: 'Criptocurrency'
         },
         es: {
-          Ativo: 'Ativo',
+          Ativo: 'Activo',
           Ticker: 'Ticker',
           Segmento: 'Segmento',
-          Preço: 'Preço',
-          Variação: 'Variação',
-          'Capitalização de mercado': 'Capitalização de mercado',
+          Preço: 'Precio',
+          Variação: 'Variación',
+          'Capitalização de mercado': 'Capitalización de Mercado',
           Comprar: 'Comprar',
           utility_token: 'Utility token',
-          coin: 'Criptomoeda'
+          coin: 'Criptomoneda'
         }
       }
     }

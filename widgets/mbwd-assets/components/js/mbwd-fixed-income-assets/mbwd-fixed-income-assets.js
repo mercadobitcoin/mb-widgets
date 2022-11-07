@@ -36,12 +36,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       <div v-if="fixedIncomeAssets.result.length > 0" class="result-list">
         <div v-if="isViewModeActive('cards')" class="view-mode-list card">
           <slot name="fixed-income-cards-list" :assets="fixedIncomeAssets.result">
-            <mbwd-fixed-income-asset-card-list :assets="fixedIncomeAssets.result" />
+            <mbwd-fixed-income-asset-card-list :assets="fixedIncomeAssets.result" :language="language" />
           </slot>
         </div>
         <div v-else class="view-mode-list table">
           <slot name="fixed-income-table" :assets="fixedIncomeAssets.result">
-            <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="changeSortOrder" :assets="fixedIncomeAssets.result" />
+            <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="changeSortOrder" :assets="fixedIncomeAssets.result" :language="language" />
           </slot>
         </div>
       </div>
@@ -99,20 +99,20 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           'Não encontramos nada em Renda Fixa Digital': 'Não encontramos nada em Renda Fixa Digital'
         },
         en: {
-          Favoritos: 'Favoritos',
-          'Com saldo': 'Com saldo',
-          'Renda Fixa Digital': 'Renda Fixa Digital',
-          Novos: 'Novos',
-          Todos: 'Todos',
-          'Não encontramos nada em Renda Fixa Digital': 'Não encontramos nada em Renda Fixa Digital'
+          Favoritos: 'Favorites',
+          'Com saldo': 'With balance',
+          'Renda Fixa Digital': 'Digital Fixed Income',
+          Novos: 'New',
+          Todos: 'All',
+          'Não encontramos nada em Renda Fixa Digital': 'We didn\'t find anything in Digital Fixed Income'
         },
         es: {
           Favoritos: 'Favoritos',
-          'Com saldo': 'Com saldo',
-          'Renda Fixa Digital': 'Renda Fixa Digital',
-          Novos: 'Novos',
+          'Com saldo': 'Con saldo',
+          'Renda Fixa Digital': 'Renta Fija Digital',
+          Novos: 'Nuevos',
           Todos: 'Todos',
-          'Não encontramos nada em Renda Fixa Digital': 'Não encontramos nada em Renda Fixa Digital'
+          'Não encontramos nada em Renda Fixa Digital': 'No encontramos nada en Renta Fija Digital'
         }
       }
     }

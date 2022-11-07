@@ -10,7 +10,7 @@
               <p class="type">{{ i18n(asset.product_data.sub_type) }}</p>
             </div>
           </div>
-          <mbc-asset-badges :badges="asset.product_data.badges" type="crypto" />
+          <mbc-asset-badges :badges="asset.product_data.badges" type="crypto" :language="language"/>
         </div>
         <div class="market-data">
           <p class="variation">
@@ -24,7 +24,7 @@
         <div class="attributes">
           <div class="header">
             <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-            <mbc-asset-badges :badges="asset.product_data.badges" type="crypto" />
+            <mbc-asset-badges :badges="asset.product_data.badges" type="crypto" :language="language"/>
           </div>
           <p class="name">
             {{ asset.name }}
@@ -62,14 +62,14 @@
           coin: 'Criptomoeda'
         },
         en: {
-          'nas últimas 24h': 'nas últimas 24h',
+          'nas últimas 24h': 'in the last 24h',
           utility_token: 'Utility token',
-          coin: 'Criptomoeda'
+          coin: 'Cryptocurrency'
         },
         es: {
-          'nas últimas 24h': 'nas últimas 24h',
+          'nas últimas 24h': 'en las últimas 24 horas',
           utility_token: 'Utility token',
-          coin: 'Criptomoeda'
+          coin: 'Criptomoneda'
         }
       }
     }

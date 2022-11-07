@@ -43,16 +43,16 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
             'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
         },
         en: {
-          'Conheça os nossos produtos': 'Conheça os nossos produtos',
-          'Busque um produto': 'Busque um produto',
+          'Conheça os nossos produtos': 'Discover our products',
+          'Busque um produto': 'Search for a product',
           'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!':
-            'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
+            'We don\'t have #searchTerm in MB yet, but we\'ve noted the suggestion!'
         },
         es: {
-          'Conheça os nossos produtos': 'Conheça os nossos produtos',
-          'Busque um produto': 'Busque um produto',
+          'Conheça os nossos produtos': 'Descubre nuestros productos',
+          'Busque um produto': 'Buscar un producto',
           'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!':
-            'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
+            'Todavía no tenemos #searchTerm en MB, ¡pero hemos tomado nota de la sugerencia!'
         }
       }
     }

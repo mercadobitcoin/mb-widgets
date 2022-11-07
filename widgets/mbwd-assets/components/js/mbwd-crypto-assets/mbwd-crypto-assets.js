@@ -35,12 +35,12 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       <div v-if="cryptoAssets.result.length > 0" class="result-list">
         <div v-if="isViewModeActive('cards')" class="view-mode-list card">
           <slot name="crypto-cards-list" :assets="cryptoAssets.result">
-            <mbwd-crypto-asset-card-list :assets="cryptoAssets.result" />
+            <mbwd-crypto-asset-card-list :assets="cryptoAssets.result" :language="language"/>
           </slot>
         </div>
         <div v-else class="view-mode-list table">
           <slot name="crypto-table" :assets="cryptoAssets.result">
-            <mbwd-crypto-asset-table ref="refCryptoAssetTable" @sort="changeSortOrder" :assets="cryptoAssets.result" />
+            <mbwd-crypto-asset-table ref="refCryptoAssetTable" @sort="changeSortOrder" :assets="cryptoAssets.result" :language="language" />
           </slot>
         </div>
       </div>
@@ -95,22 +95,22 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           'Não encontramos nada em Ativos': 'Não encontramos nada em Ativos'
         },
         en: {
-          Favoritos: 'Favoritos',
-          Criptoativos: 'Criptoativos',
-          Novos: 'Novos',
-          Todos: 'Todos',
-          'Em alta': 'Em alta',
-          'Em baixa': 'Em baixa',
-          'Não encontramos nada em Ativos': 'Não encontramos nada em Ativos'
+          Favoritos: 'Favorites',
+          Criptoativos: 'Cryptoassets',
+          Novos: 'New',
+          Todos: 'All',
+          'Em alta': 'High',
+          'Em baixa': 'Down',
+          'Não encontramos nada em Ativos': 'We didn\'t find anything in Assets'
         },
         es: {
           Favoritos: 'Favoritos',
-          Criptoativos: 'Criptoativos',
-          Novos: 'Novos',
+          Criptoativos: 'Criptoactivos',
+          Novos: 'Nuevos',
           Todos: 'Todos',
-          'Em alta': 'Em alta',
-          'Em baixa': 'Em baixa',
-          'Não encontramos nada em Ativos': 'Não encontramos nada em Ativos'
+          'Em alta': 'En alta',
+          'Em baixa': 'En baja',
+          'Não encontramos nada em Ativos': 'No encontramos nada en Activos'
         }
       }
     }
