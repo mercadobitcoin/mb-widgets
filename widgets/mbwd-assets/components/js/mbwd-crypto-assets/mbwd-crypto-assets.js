@@ -99,8 +99,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           Criptoativos: 'Cryptoassets',
           Novos: 'New',
           Todos: 'All',
-          'Em alta': 'High',
-          'Em baixa': 'Down',
+          'Em alta': 'Ups',
+          'Em baixa': 'Downs',
           'Não encontramos nada em Ativos': 'We didn\'t find anything in Assets'
         },
         es: {

@@ -135,7 +135,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           Comprar: 'Buy',
           utility_token: 'Utility token',
           fan_token: 'Fan Token',
-          coin: 'Criptocurrency'
+          coin: 'Cryptocurrency'
         },
         es: {
           Ativo: 'Activo',
