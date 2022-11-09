@@ -72,7 +72,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
             </div>
           </div>
           <div class="market-data">
-          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" />
+          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" widgetName="mbwd-assets"/>
             <p class="profitability">
               {{ asset.product_data.profitability }}
             </p>

@@ -3,7 +3,7 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
     <div class="mbwd-assets">
       <h2 class="title">{{ i18n('Conheça os nossos produtos') }}</h2>
       <div class="search-wrapper">
-        <mbc-search-box :value.sync="search" :placeholder="i18n('Busque um produto')" />
+        <mbc-search-box :value.sync="search" :placeholder="i18n('Busque um produto')" widgetName="mbwd-assets" />
       </div>
       <mbwd-crypto-assets v-show="!cptdDisplayEmptyState" :search="search" :language="language" :interval-timeout="intervalTimeout" @list-updated="onCryptoAssetsUpdated">
         <template v-slot:crypto-cards-list="{ assets }">
@@ -11,7 +11,7 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
         </template>
       </mbwd-crypto-assets>
       <mbwd-fixed-income-assets v-show="!cptdDisplayEmptyState" :search="search" :language="language" :interval-timeout="intervalTimeout" @list-updated="onFixedIncomeAssetsUpdated" />
-      <mbc-empty-state v-if="cptdDisplayEmptyState" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" />
+      <mbc-empty-state v-if="cptdDisplayEmptyState" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" widgetName="mbwd-assets"/>
     </div>`,
   props: {
     language: {

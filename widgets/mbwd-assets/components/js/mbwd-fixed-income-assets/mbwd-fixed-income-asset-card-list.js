@@ -2,7 +2,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   template: `
     <div class="mbwd-fixed-income-asset-card-list apollo">
       <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets" :key="asset.product_data.symbol">
-        <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" />
+        <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" widgetName="mbwd-assets" />
         <div class="asset-data">
           <div class="attributes">
             <p class="name">{{ asset.name }}</p>
@@ -39,7 +39,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
             <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
             <p class="symbol">{{ asset.product_data.symbol }}</p>
           </div>
-          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language"/>
+          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" widgetName="mbwd-assets"/>
         </div>
         <div class="market-data">
           <p class="profitability">

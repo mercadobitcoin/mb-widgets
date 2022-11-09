@@ -19,6 +19,9 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
     type: {
       type: String,
       default: 'crypto' // [crypto, fixed-income]
+    },
+    widgetName: {
+      type: String
     }
   },
   data () {
@@ -59,7 +62,7 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
   },
   computed: {
     cptdBadgeIconUrl () {
-      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/icons/ico-badge-thunder-mono.svg`
+      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/${this.widgetName}/img/icons/ico-badge-thunder-mono.svg`
     },
     cptdNormalizedBadges () {
       return this.badges.map((badge) => ({

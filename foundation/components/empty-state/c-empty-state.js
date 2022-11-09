@@ -39,6 +39,9 @@ const MBC_EMPTY_STATE = () => ({ //eslint-disable-line
     ctaIcon: {
       type: String,
       default: 'ico-refresh-mono.svg'
+    },
+    widgetName: {
+      type: String
     }
   },
   computed: {
@@ -49,10 +52,10 @@ const MBC_EMPTY_STATE = () => ({ //eslint-disable-line
       return this.cta && this.cta.type && this.cta.type === 'link'
     },
     cptdMainStateIconSrc () {
-      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/ilu/${this.mainStateIcon}`
+      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/${this.widgetName}/img/ilu/${this.mainStateIcon}`
     },
     cptdCtaIconSrc () {
-      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/img/icons/${this.ctaIcon}`
+      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/${this.widgetName}/img/icons/${this.ctaIcon}`
     }
   },
   methods: {
