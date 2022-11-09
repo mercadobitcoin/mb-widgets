@@ -47,7 +47,7 @@ const MBC_SEARCH_BOX = () => ({ //eslint-disable-line
       type: String
     },
     widgetName: {
-      type: String,
+      type: String
     }
   },
   data () {
