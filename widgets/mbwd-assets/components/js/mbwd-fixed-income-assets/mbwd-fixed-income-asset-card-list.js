@@ -86,7 +86,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           Rentabilidade: 'Profitability',
           'Prazo estimado': 'Due Date',
           vendido: 'sold',
-          Investir: 'Trade',
+          Investir: 'Invest',
           Conhecer: 'View more'
 
         },

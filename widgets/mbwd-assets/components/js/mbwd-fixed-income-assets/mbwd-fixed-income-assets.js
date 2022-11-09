@@ -170,7 +170,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       return this.isViewModeActive(viewMode) ? 'active' : ''
     },
     async getFixedIncomeAssets () {
-      console.log(this.getFixedIncomeAssetsRequestQueryString())
       this.busy = true
       try {
         const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getFixedIncomeAssetsRequestQueryString()}`)
