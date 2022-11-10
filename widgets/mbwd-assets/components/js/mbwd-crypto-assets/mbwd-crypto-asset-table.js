@@ -62,7 +62,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
               </a>
             </td>
             <td class="symbol">{{ asset.product_data.symbol }}</td>
-            <td class="sub-type">{{ i18n(asset.product_data.sub_type) }}</td>
+            <td class="sub-type">{{ i18n(asset.product_data.sub_type.display_text) }}</td>
             <td class="price">{{ asset.market_price | ftFormatCurrency(2) }}</td>
             <td class="variation" :class="asset.product_data.variation.status">
               {{ asset.product_data.variation.string }}
@@ -121,9 +121,10 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           Variação: 'Variação',
           'Capitalização de mercado': 'Capitalização de mercado',
           Comprar: 'Comprar',
-          utility_token: 'Utility token',
-          fan_token: 'Fan Token',
-          coin: 'Criptomoeda'
+          Criptomoeda: 'Criptomoeda',
+          'Utility Token': 'Utility Token',
+          DeFi: 'DeFi',
+          'Fan Token': 'Fan Token'
         },
         en: {
           Ativo: 'Asset',
@@ -133,9 +134,10 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           Variação: 'Variation',
           'Capitalização de mercado': 'Market capitalization',
           Comprar: 'Buy',
-          utility_token: 'Utility token',
-          fan_token: 'Fan Token',
-          coin: 'Cryptocurrency'
+          Criptomoeda: 'Cryptocurrency',
+          'Utility Token': 'Utility Token',
+          DeFi: 'DeFi',
+          'Fan Token': 'Fan Token'
         },
         es: {
           Ativo: 'Activo',
@@ -145,9 +147,10 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           Variação: 'Variación',
           'Capitalização de mercado': 'Capitalización de Mercado',
           Comprar: 'Comprar',
-          utility_token: 'Utility token',
-          fan_token: 'Fan Token',
-          coin: 'Criptomoneda'
+          Criptomoeda: 'Criptomoneda',
+          'Utility Token': 'Utility Token',
+          DeFi: 'DeFi',
+          'Fan Token': 'Fan Token'
         }
       }
     }

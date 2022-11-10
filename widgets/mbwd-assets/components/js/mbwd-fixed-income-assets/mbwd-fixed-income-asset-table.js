@@ -51,7 +51,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
             </td>
             <td class="liquidation-date">{{ asset.product_data.estimated_liquidation_date }}</td>
             <td class="available-percentage">{{ getPercentageString(asset.product_data.available_percentage.number) }}</td>
-            <td class="status">{{ i18n(asset.product_data.status.value) }}</td>
+            <td class="status">{{ i18n(asset.product_data.status.short_text)}} </td>
             <td class="cta-wrapper apollo">
               <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
                 {{ i18n('Investir') }}
@@ -110,11 +110,11 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           novo: 'novo',
           'exclusivos mb': 'exclusivos mb',
           'pré-listagem': 'pré-listagem',
-          'primary-market': 'Primário',
-          'secondary-market': 'Secundário',
-          'sold-out': 'esgotado',
-          future: 'em breve',
-          finished: 'finalizado'
+          'Primário': 'Primário', // eslint-disable-line
+          'Secundário': 'Secundário', // eslint-disable-line
+          Esgotado: 'Esgotado',
+          'Em breve': 'Em breve',
+          Finalizado: 'Finalizado'
         },
         en: {
           Ativo: 'Asset',
@@ -127,11 +127,11 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           novo: 'new',
           'exclusivos mb': 'mb exclusives',
           'pré-listagem': 'pre-listing',
-          'primary-market': 'Primary',
-          'secondary-market': 'Secondary',
-          'sold-out': 'sold out',
-          future: 'coming soon',
-          finished: 'finished'
+          'Primário': 'Primary', // eslint-disable-line
+          'Secundário': 'Secondary', // eslint-disable-line
+          Esgotado: 'Sold out',
+          'Em breve': 'Future',
+          Finalizado: 'Finished'
         },
         es: {
           Ativo: 'Activo',
@@ -144,11 +144,11 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           novo: 'nueovo',
           'exclusivos mb': 'exclusivas mb',
           'pré-listagem': 'pre-listado',
-          'primary-market': 'Principal',
-          'secondary-market': 'Secundario',
-          'sold-out': 'vendido',
-          future: 'pronto',
-          finished: 'acabado'
+          'Primário': 'Principal', // eslint-disable-line
+          'Secundário': 'Secundario', // eslint-disable-line
+          Esgotado: 'Vendido',
+          'Em breve': 'Pronto',
+          Finalizado: 'Acabado'
         }
       }
     }
