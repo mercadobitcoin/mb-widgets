@@ -68,7 +68,7 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
       return this.badges.map((badge) => ({
         ...badge,
         text: (badge.text ?? '').toLowerCase().replace('_', '-'),
-        translatedText: this.i18n((badge.text ?? '').toLowerCase().replaceAll('_', '-')) || badge.text,
+        translatedText: this.i18n((badge.text ?? '').toLowerCase().replaceAll('_', '-')) || badge.text
       }))
     }
   },
