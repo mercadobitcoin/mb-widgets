@@ -100,55 +100,55 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       order: '',
       translateMap: {
         pt: {
-          Ativo: 'Ativo',
+          'Ativo': 'Ativo', // eslint-disable-line
           'Valor inicial': 'Valor inicial',
-          Rentabilidade: 'Rentabilidade',
-          Prazo: 'Prazo',
-          Estoque: 'Estoque',
-          Mercado: 'Mercado',
-          Investir: 'Investir',
-          novo: 'novo',
+          'Rentabilidade': 'Rentabilidade', // eslint-disable-line
+          'Prazo': 'Prazo', // eslint-disable-line
+          'Estoque': 'Estoque', // eslint-disable-line
+          'Mercado': 'Mercado', // eslint-disable-line
+          'Investir': 'Investir', // eslint-disable-line
+          'novo': 'novo', // eslint-disable-line
           'exclusivos mb': 'exclusivos mb',
           'pré-listagem': 'pré-listagem',
           'Primário': 'Primário', // eslint-disable-line
           'Secundário': 'Secundário', // eslint-disable-line
-          Esgotado: 'Esgotado',
+          'Esgotado': 'Esgotado', // eslint-disable-line
           'Em breve': 'Em breve',
-          Finalizado: 'Finalizado'
+          'Finalizado': 'Finalizado' // eslint-disable-line
         },
         en: {
-          Ativo: 'Asset',
+          'Ativo': 'Asset', // eslint-disable-line
           'Valor inicial': 'Initial Value',
-          Rentabilidade: 'Profitability',
-          Prazo: 'Due Date',
-          Estoque: 'Supply',
-          Mercado: 'Market',
-          Investir: 'Trade',
-          novo: 'new',
+          'Rentabilidade': 'Profitability', // eslint-disable-line
+          'Prazo': 'Due Date', // eslint-disable-line
+          'Estoque': 'Supply', // eslint-disable-line
+          'Mercado': 'Market', // eslint-disable-line
+          'Investir': 'Trade', // eslint-disable-line
+          'novo': 'new', // eslint-disable-line
           'exclusivos mb': 'mb exclusives',
           'pré-listagem': 'pre-listing',
           'Primário': 'Primary', // eslint-disable-line
           'Secundário': 'Secondary', // eslint-disable-line
-          Esgotado: 'Sold out',
-          'Em breve': 'Future',
-          Finalizado: 'Finished'
+          'Esgotado': 'Sold out', // eslint-disable-line
+          'Em breve': 'Future', // eslint-disable-line
+          'Finalizado': 'Finished' // eslint-disable-line
         },
         es: {
-          Ativo: 'Activo',
-          'Valor inicial': 'Valor inicial',
-          Rentabilidade: 'Rentabilidad',
-          Prazo: 'Plazo',
-          Estoque: 'Existencias',
-          Mercado: 'Mercado',
-          Investir: 'Invertir',
-          novo: 'nueovo',
+          'Ativo': 'Activo', // eslint-disable-line
+          'Valor inicial': 'Valor inicial', // eslint-disable-line
+          'Rentabilidade': 'Rentabilidad', // eslint-disable-line
+          'Prazo': 'Plazo', // eslint-disable-line
+          'Estoque': 'Existencias', // eslint-disable-line
+          'Mercado': 'Mercado', // eslint-disable-line
+          'Investir': 'Invertir', // eslint-disable-line
+          'novo': 'nueovo', // eslint-disable-line
           'exclusivos mb': 'exclusivas mb',
           'pré-listagem': 'pre-listado',
           'Primário': 'Principal', // eslint-disable-line
           'Secundário': 'Secundario', // eslint-disable-line
-          Esgotado: 'Vendido',
-          'Em breve': 'Pronto',
-          Finalizado: 'Acabado'
+          'Esgotado': 'Vendido', // eslint-disable-line
+          'Em breve': 'Pronto', // eslint-disable-line
+          'Finalizado': 'Acabado' // eslint-disable-line
         }
       }
     }

@@ -7,7 +7,7 @@
             <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
             <div class="asset-data">
               <p class="name">{{ asset.name }}</p>
-              <p class="type">{{ i18n(asset.product_data.sub_type) }}</p>
+              <p class="type">{{ i18n(asset.product_data.sub_type.display_text) }}</p>
             </div>
           </div>
           <mbc-asset-badges :badges="asset.product_data.badges" type="crypto" :language="language" widgetName="mbwd-assets"/>
@@ -30,7 +30,7 @@
             {{ asset.name }}
             <span class="symbol">({{ asset.product_data.symbol }})</span>
           </p>
-          <p class="type">{{ i18n(asset.product_data.sub_type) }}</p>
+          <p class="type">{{ i18n(asset.product_data.sub_type.display_text) }}</p>
         </div>
         <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
         <span class="variation">
@@ -58,18 +58,24 @@
       translateMap: {
         pt: {
           'nas últimas 24h': 'nas últimas 24h',
-          utility_token: 'Utility token',
-          coin: 'Criptomoeda'
+          'Criptomoeda': 'Criptomoeda', // eslint-disable-line
+          'Utility Token': 'Utility Token',
+          'DeFi': 'DeFi', // eslint-disable-line
+          'Fan Token': 'Fan Token'
         },
         en: {
           'nas últimas 24h': 'in the last 24h',
-          utility_token: 'Utility token',
-          coin: 'Cryptocurrency'
+          'Criptomoeda': 'Cryptocurrency', // eslint-disable-line
+          'Utility Token': 'Utility Token',
+          'DeFi': 'DeFi', // eslint-disable-line
+          'Fan Token': 'Fan Token'
         },
         es: {
           'nas últimas 24h': 'en las últimas 24 horas',
-          utility_token: 'Utility token',
-          coin: 'Criptomoneda'
+          'Criptomoeda': 'Criptomoneda', // eslint-disable-line
+          'Utility Token': 'Utility Token',
+          'DeFi': 'DeFi', // eslint-disable-line
+          'Fan Token': 'Fan Token'
         }
       }
     }

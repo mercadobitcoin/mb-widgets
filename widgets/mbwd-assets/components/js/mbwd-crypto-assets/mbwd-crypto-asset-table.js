@@ -83,7 +83,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
               <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
               <div class="asset-data">
                 <p class="name">{{ asset.name }}</p>
-                <p class="sub-type">{{ i18n(asset.product_data.sub_type) }}</p>
+                <p class="sub-type">{{ i18n(asset.product_data.sub_type.display_text) }}</p>
               </div>
             </div>
           </div>
@@ -114,42 +114,42 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
       order: '',
       translateMap: {
         pt: {
-          Ativo: 'Ativo',
-          Ticker: 'Ticker',
-          Segmento: 'Segmento',
-          Preço: 'Preço',
-          Variação: 'Variação',
+          'Ativo': 'Ativo', // eslint-disable-line
+          'Ticker': 'Ticker', // eslint-disable-line
+          'Segmento': 'Segmento', // eslint-disable-line
+          'Preço': 'Preço', // eslint-disable-line
+          'Variação': 'Variação', // eslint-disable-line
           'Capitalização de mercado': 'Capitalização de mercado',
-          Comprar: 'Comprar',
-          Criptomoeda: 'Criptomoeda',
+          'Comprar': 'Comprar', // eslint-disable-line
+          'Criptomoeda': 'Criptomoeda', // eslint-disable-line
           'Utility Token': 'Utility Token',
-          DeFi: 'DeFi',
+          'DeFi': 'DeFi', // eslint-disable-line
           'Fan Token': 'Fan Token'
         },
         en: {
-          Ativo: 'Asset',
-          Ticker: 'Ticker',
-          Segmento: 'Segment',
-          Preço: 'Price',
-          Variação: 'Variation',
+          'Ativo': 'Asset', // eslint-disable-line
+          'Ticker': 'Ticker', // eslint-disable-line
+          'Segmento': 'Segment', // eslint-disable-line
+          'Preço': 'Price', // eslint-disable-line
+          'Variação': 'Variation', // eslint-disable-line
           'Capitalização de mercado': 'Market capitalization',
-          Comprar: 'Buy',
-          Criptomoeda: 'Cryptocurrency',
+          'Comprar': 'Buy', // eslint-disable-line
+          'Criptomoeda': 'Cryptocurrency', // eslint-disable-line
           'Utility Token': 'Utility Token',
-          DeFi: 'DeFi',
+          'DeFi': 'DeFi', // eslint-disable-line
           'Fan Token': 'Fan Token'
         },
         es: {
-          Ativo: 'Activo',
-          Ticker: 'Ticker',
-          Segmento: 'Segmento',
-          Preço: 'Precio',
-          Variação: 'Variación',
+          'Ativo': 'Activo', // eslint-disable-line
+          'Ticker': 'Ticker', // eslint-disable-line
+          'Segmento': 'Segmento', // eslint-disable-line
+          'Preço': 'Precio', // eslint-disable-line
+          'Variação': 'Variación', // eslint-disable-line
           'Capitalização de mercado': 'Capitalización de Mercado',
-          Comprar: 'Comprar',
-          Criptomoeda: 'Criptomoneda',
+          'Comprar': 'Comprar', // eslint-disable-line
+          'Criptomoeda': 'Criptomoneda', // eslint-disable-line
           'Utility Token': 'Utility Token',
-          DeFi: 'DeFi',
+          'DeFi': 'DeFi', // eslint-disable-line
           'Fan Token': 'Fan Token'
         }
       }

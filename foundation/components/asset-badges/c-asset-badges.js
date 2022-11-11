@@ -28,34 +28,34 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
     return {
       translateMap: {
         pt: {
-          novo: 'novo',
+          'novo': 'novo', // eslint-disable-line
           'exclusivos mb': 'exclusivos mb',
           'pré-listagem': 'pré-listagem',
           'primary-market': 'mercado primário',
           'secondary-market': 'mercado secundário',
           'sold-out': 'esgotado',
-          future: 'em breve',
-          finished: 'finalizado'
+          'future': 'em breve', // eslint-disable-line
+          'finished': 'finalizado' // eslint-disable-line
         },
         en: {
-          novo: 'novo',
+          'novo': 'novo', // eslint-disable-line
           'exclusivos mb': 'mb exclusives',
           'pré-listagem': 'pre-listing',
           'primary-market': 'primary market',
           'secondary-market': 'secondary market',
           'sold-out': 'sold out',
-          future: 'coming soon',
-          finished: 'finished'
+          'future': 'coming soon', // eslint-disable-line
+          'finished': 'finished' // eslint-disable-line
         },
         es: {
-          novo: 'novo',
+          'novo': 'novo', // eslint-disable-line
           'exclusivos mb': 'exclusivas mb',
           'pré-listagem': 'pre-listado',
           'primary-market': 'mercado principal',
           'secondary-market': 'mercado secundario',
           'sold-out': 'vendido',
-          future: 'pronto',
-          finished: 'acabado'
+          'future': 'pronto', // eslint-disable-line
+          'finished': 'acabado' // eslint-disable-line
         }
       }
     }

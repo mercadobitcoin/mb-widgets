@@ -73,39 +73,39 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'nas últimas 24h': 'nas últimas 24h',
           'Valor inicial': 'Valor inicial',
           'A partir de': 'A partir de',
-          Rentabilidade: 'Rentabilidade',
+          'Rentabilidade': 'Rentabilidade', // eslint-disable-line
           'Prazo estimado': 'Prazo estimado',
-          vendido: 'vendido',
-          Investir: 'Investir',
-          Conhecer: 'Conhecer'
+          'vendido': 'vendido', // eslint-disable-line
+          'Investir': 'Investir', // eslint-disable-line
+          'Conhecer': 'Conhecer' // eslint-disable-line
         },
         en: {
           'nas últimas 24h': 'in the last 24h',
           'Valor inicial': 'Initial Value',
           'A partir de': 'From',
-          Rentabilidade: 'Profitability',
+          'Rentabilidade': 'Profitability', // eslint-disable-line
           'Prazo estimado': 'Due Date',
-          vendido: 'sold',
-          Investir: 'Invest',
-          Conhecer: 'View more'
+          'vendido': 'sold', // eslint-disable-line
+          'Investir': 'Invest', // eslint-disable-line
+          'Conhecer': 'View more' // eslint-disable-line
 
         },
         es: {
           'nas últimas 24h': 'en las últimas 24 horas',
           'Valor inicial': 'Valor inicial',
           'A partir de': 'De',
-          Rentabilidade: 'Rentabilidad',
+          'Rentabilidade': 'Rentabilidad', // eslint-disable-line
           'Prazo estimado': 'Plazo',
-          vendido: 'vendido',
-          Investir: 'Invertir',
-          Conhecer: 'Saber más'
+          'vendido': 'vendido', // eslint-disable-line
+          'Investir': 'Invertir', // eslint-disable-line
+          'Conhecer': 'Saber más' // eslint-disable-line
         }
       }
     }
   },
   methods: {
     getAssetBadgeAsArray (asset) {
-      return [...(asset.product_data?.badges || []), { text: asset?.product_data?.status?.value ?? '', type: 'status' }]
+      return [...(asset.product_data?.tags || []), { text: asset?.product_data?.status?.value ?? '', type: 'status' }]
     },
     getPercentageString (percentage = 0) {
       let percString = percentage

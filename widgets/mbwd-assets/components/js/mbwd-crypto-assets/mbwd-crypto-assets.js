@@ -86,28 +86,28 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       shouldOverwriteCryptoAssetResult: false,
       translateMap: {
         pt: {
-          Favoritos: 'Favoritos',
-          Criptoativos: 'Criptoativos',
-          Novos: 'Novos',
-          Todos: 'Todos',
+          'Favoritos': 'Favoritos', // eslint-disable-line
+          'Criptoativos': 'Criptoativos', // eslint-disable-line
+          'Novos': 'Novos', // eslint-disable-line
+          'Todos': 'Todos', // eslint-disable-line
           'Em alta': 'Em alta',
           'Em baixa': 'Em baixa',
           'Não encontramos nada em Ativos': 'Não encontramos nada em Ativos'
         },
         en: {
-          Favoritos: 'Favorites',
-          Criptoativos: 'Cryptoassets',
-          Novos: 'New',
-          Todos: 'All',
+          'Favoritos': 'Favorites', // eslint-disable-line
+          'Criptoativos': 'Cryptoassets', // eslint-disable-line
+          'Novos': 'New', // eslint-disable-line
+          'Todos': 'All', // eslint-disable-line
           'Em alta': 'Ups',
           'Em baixa': 'Downs',
           'Não encontramos nada em Ativos': 'We didn\'t find anything in Assets'
         },
         es: {
-          Favoritos: 'Favoritos',
-          Criptoativos: 'Criptoactivos',
-          Novos: 'Nuevos',
-          Todos: 'Todos',
+          'Favoritos': 'Favoritos', // eslint-disable-line
+          'Criptoativos': 'Criptoactivos', // eslint-disable-line
+          'Novos': 'Nuevos', // eslint-disable-line
+          'Todos': 'Todos', // eslint-disable-line
           'Em alta': 'En alta',
           'Em baixa': 'En baja',
           'Não encontramos nada em Ativos': 'No encontramos nada en Activos'
