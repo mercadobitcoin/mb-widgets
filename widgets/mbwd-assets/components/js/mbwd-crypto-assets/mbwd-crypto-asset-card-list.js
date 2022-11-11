@@ -10,7 +10,7 @@
               <p class="type">{{ i18n(asset.product_data.sub_type.display_text) }}</p>
             </div>
           </div>
-          <mbc-asset-badges :badges="asset.product_data.badges" type="crypto" :language="language" widgetName="mbwd-assets"/>
+          <mbc-asset-badges :badges="asset.tags" type="crypto" :language="language" widgetName="mbwd-assets"/>
         </div>
         <div class="market-data">
           <p class="variation">
@@ -24,7 +24,7 @@
         <div class="attributes">
           <div class="header">
             <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-            <mbc-asset-badges :badges="asset.product_data.badges" type="crypto" :language="language" widgetName="mbwd-assets"/>
+            <mbc-asset-badges :badges="asset.tags" type="crypto" :language="language" widgetName="mbwd-assets"/>
           </div>
           <p class="name">
             {{ asset.name }}

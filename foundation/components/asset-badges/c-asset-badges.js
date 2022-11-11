@@ -1,7 +1,7 @@
 const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
   template: `<div class="c-asset-badges" v-if="badges.length > 0">
-    <div class="c-badge" v-for="(badge, index) in cptdNormalizedBadges" :key="badge.text + index">
-      <span v-if="isTypeStatus(badge.type)" class="rounded-status" :class="badge.text" />
+    <div class="c-badge" v-for="(badge, index) in cptdNormalizedBadges" :key="badge.text + index" :style="getBadgeTextColor(badge)">
+      <span v-if="isTypeStatus(badge.type)" class="rounded-status" :style="{ 'background': badge.color }" />
       <img v-else class="icon" :src="cptdBadgeIconUrl" /> 
       {{ badge.translatedText }}
     </div>
@@ -68,8 +68,8 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
       return this.badges.map((badge) => ({
         ...badge,
         text: (badge.text ?? '').toLowerCase().replace('_', '-'),
-        translatedText: this.i18n((badge.text ?? '').toLowerCase().replace('_', '-'))
-      })).filter(({ text, translatedText }) => !!text && !!translatedText)
+        translatedText: this.i18n((badge.text ?? '').toLowerCase().replace('_', '-')) || badge.text
+      }))
     }
   },
   methods: {
@@ -78,6 +78,13 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
     },
     getIconAlt (name) {
       return `ícone ${name}`
+    },
+    getBadgeTextColor (badge) {
+      const textColor = badge.text === 'sold-out' ? badge.color : '#1d2327'
+      const styleObject = {
+        color: textColor
+      }
+      return styleObject
     },
     i18n (key) {
       return this.translateMap?.[this.language]?.[key] ?? ''

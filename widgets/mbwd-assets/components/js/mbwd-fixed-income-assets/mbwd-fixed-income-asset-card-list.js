@@ -105,7 +105,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   },
   methods: {
     getAssetBadgeAsArray (asset) {
-      return [...(asset.product_data?.tags || []), { text: asset?.product_data?.status?.value ?? '', type: 'status' }]
+      return [...(asset.product_data?.tags || []), { text: asset?.product_data?.status?.value ?? '', type: 'status', color: asset?.product_data?.status?.color }]
     },
     getPercentageString (percentage = 0) {
       let percString = percentage

@@ -158,7 +158,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return this.sort === sort && this.order === order ? 'active' : ''
     },
     getAssetBadgeAsArray (asset) {
-      return [...(asset.product_data.badges || []), { text: asset?.product_data?.status?.value ?? '', type: 'status' }]
+      return [...(asset.product_data?.tags || []), { text: asset?.product_data?.status?.value ?? '', type: 'status', color: asset?.product_data?.status?.color }]
     },
     getAssetBasicTradeExperienceLink (symbol) {
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
