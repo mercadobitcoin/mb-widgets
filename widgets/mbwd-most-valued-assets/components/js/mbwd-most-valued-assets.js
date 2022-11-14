@@ -68,7 +68,7 @@ const MBWD_MOST_VALUED_ASSETS = () => ({ //eslint-disable-line
       return this.mostValuedAssetsList?.length > 0
     },
     cptdCdnStaticDomainUrl () {
-      return 'https://static.mercadobitcoin.com.br/web'
+      return 'https://static.mercadolitecoin.com.br/web'
     }
   },
   methods: {

@@ -6,7 +6,7 @@ function MbwdAssets () { // eslint-disable-line
       if (window.location.host.includes('mercado-bitcoin.vipdev.lndo.site') || window.location.host.includes('localhost')) {
         cssLink.href = 'http://localhost:5001/web/widgets/mbwd-assets/css/mbwd-assets.css'
       } else {
-        cssLink.href = 'https://static.mercadobitcoin.com.br/web/widgets/mbwd-assets/css/mbwd-assets.css'
+        cssLink.href = 'https://static.mercadolitecoin.com.br/web/widgets/mbwd-assets/css/mbwd-assets.css'
       }
       cssLink.rel = 'stylesheet'
 

@@ -59,7 +59,7 @@ const MBC_SEARCH_BOX = () => ({ //eslint-disable-line
   },
   computed: {
     cptdCdnStaticDomainUrl () {
-      return 'https://static.mercadobitcoin.com.br/web'
+      return 'https://static.mercadolitecoin.com.br/web'
     },
     cssSearchBoxWrapper () {
       return {
