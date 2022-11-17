@@ -22,6 +22,12 @@
     &:hover {
       background: map-get($primary-color, "5");
     }
+
+    &:active {
+      background-color: map-get($primary-color, "10");
+      border-color: map-get($primary-color, "50");
+      color: map-get($primary-color, "50");
+    }
   }
 
   &.ghost {
