@@ -76,8 +76,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       cryptoAssets: {
         limit: 5,
         category: 'all',
-        sort: '',
-        order: '',
+        sort: 'name',
+        order: 'asc',
         currentPage: 1,
         totalPages: 1,
         result: []
@@ -314,12 +314,12 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     resetCryptoBasicQueryDefaultState () {
       if (this.$refs?.refCryptoAssetTable) {
-        this.$refs.refCryptoAssetTable.sort = ''
-        this.$refs.refCryptoAssetTable.order = ''
+        this.$refs.refCryptoAssetTable.sort = 'name'
+        this.$refs.refCryptoAssetTable.order = 'asc'
       }
 
-      this.cryptoAssets.sort = ''
-      this.cryptoAssets.order = ''
+      this.cryptoAssets.sort = 'name'
+      this.cryptoAssets.order = 'asc'
       this.cryptoAssets.currentPage = 1
       this.cryptoAssets.totalPages = 1
       this.cryptoAssets.category = 'all'

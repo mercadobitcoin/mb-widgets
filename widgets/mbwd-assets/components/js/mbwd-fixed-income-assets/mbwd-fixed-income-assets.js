@@ -83,8 +83,8 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       fixedIncomeAssets: {
         limit: 5,
         category: 'all',
-        sort: '',
-        order: '',
+        sort: 'name',
+        order: 'asc',
         currentPage: 1,
         totalPages: 1,
         result: []
@@ -283,12 +283,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     resetFixedIncomeBasicQueryDefaultState () {
       if (this.$refs?.refFixedIncomeAssetTable) {
-        this.$refs.refFixedIncomeAssetTable.sort = ''
-        this.$refs.refFixedIncomeAssetTable.order = ''
+        this.$refs.refFixedIncomeAssetTable.sort = 'name'
+        this.$refs.refFixedIncomeAssetTable.order = 'asc'
       }
 
-      this.fixedIncomeAssets.sort = ''
-      this.fixedIncomeAssets.order = ''
+      this.fixedIncomeAssets.sort = 'name'
+      this.fixedIncomeAssets.order = 'asc'
       this.fixedIncomeAssets.currentPage = 1
       this.fixedIncomeAssets.totalPages = 1
       this.fixedIncomeAssets.category = 'all'
