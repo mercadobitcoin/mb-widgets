@@ -3,7 +3,10 @@ function MbwdAssets () { // eslint-disable-line
     version: '1.0.0',
     appendStyle () {
       const cssLink = document.createElement('link')
-      if (window.location.host.includes('mercado-bitcoin.vipdev.lndo.site') || window.location.host.includes('localhost')) {
+      if (window.location.host.includes('localhost')) {
+        cssLink.href = 'widgets/mbwd-assets/css/mbwd-assets.css'
+      }
+      else if (window.location.host.includes('mercado-bitcoin.vipdev.lndo.site')) {
         cssLink.href = 'http://localhost:5001/web/widgets/mbwd-assets/css/mbwd-assets.css'
       } else {
         cssLink.href = 'https://static.mercadolitecoin.com.br/web/widgets/mbwd-assets/css/mbwd-assets.css'

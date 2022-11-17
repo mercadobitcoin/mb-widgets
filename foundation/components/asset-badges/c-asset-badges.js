@@ -2,7 +2,6 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
   template: `<div class="c-asset-badges" v-if="badges.length > 0">
     <div class="c-badge" v-for="(badge, index) in cptdNormalizedBadges" :key="badge.text + index" :style="getBadgeTextColor(badge)">
       <span v-if="isTypeStatus(badge.type)" class="rounded-status" :style="getBadgeSpanColor(badge)" />
-      <img v-else class="icon" :src="cptdBadgeIconUrl" /> 
       {{ badge.translatedText }}
     </div>
   </div>`,
@@ -61,9 +60,6 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
     }
   },
   computed: {
-    cptdBadgeIconUrl () {
-      return `${this.MB_WIDGETS_GLOBAL_Cdn_Widgets_Url}/${this.widgetName}/img/icons/ico-badge-thunder-mono.svg`
-    },
     cptdNormalizedBadges () {
       return this.badges.map((badge) => ({
         ...badge,
@@ -75,9 +71,6 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
   methods: {
     isTypeStatus (type) {
       return type === 'status'
-    },
-    getIconAlt (name) {
-      return `ícone ${name}`
     },
     getBadgeTextColor (badge) {
       const textColor = badge.text === 'sold-out' ? badge.color : '#1d2327'

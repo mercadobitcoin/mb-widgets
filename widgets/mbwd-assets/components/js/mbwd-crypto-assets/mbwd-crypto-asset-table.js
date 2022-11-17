@@ -63,7 +63,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
             </td>
             <td class="symbol">{{ asset.product_data.symbol }}</td>
             <td class="sub-type">{{ i18n(asset.product_data.sub_type.display_text) }}</td>
-            <td class="price">{{ asset.market_price | ftFormatCurrency(2) }}</td>
+            <td class="price">{{ asset.market_price | ftFormatCurrency(asset.product_data.fiat_decimals || 4) }}</td>
             <td class="variation" :class="asset.product_data.variation.status">
               {{ asset.product_data.variation.string }}
             </td>
@@ -88,7 +88,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
             </div>
           </div>
           <div class="market-data">
-            <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
+            <p class="price">{{ asset.market_price | ftFormatCurrency(asset.product_data.fiat_decimals || 4) }}</p>
             <p class="variation">
               <span class="value" :class="asset.product_data.variation.status">{{ asset.product_data.variation.string }}</span>
               <span class="label-24h">24h</span>
