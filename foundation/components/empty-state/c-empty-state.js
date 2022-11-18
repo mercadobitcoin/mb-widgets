@@ -2,7 +2,7 @@ const MBC_EMPTY_STATE = () => ({ //eslint-disable-line
   template: `<div class="c-empty-state apollo">
         <img class="main-state-icon" :src="cptdMainStateIconSrc" />
         <p class="title">{{ title }}</p>
-        <p class="message">{{ message }}</p>
+        <p class="message" v-html="message"></p>
         <button class="cta primary filled" :title="cta.label" v-if="cptdCtaIsTypeFunction" @click="ctaCallback">
             <img v-if="displayCtaIcon" class="icon" :src="cptdCtaIconSrc" />
             {{ cta.label }}

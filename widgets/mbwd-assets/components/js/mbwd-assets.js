@@ -64,7 +64,7 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
           title: 'Sem resultado',
           message: this.i18n(
             'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
-          ).replace('#searchTerm', `"${this.search}"`),
+          ).replace('#searchTerm', `<span class='search-term'>"${this.search}"</span>`),
           img: 'ilu-empty-search-result.svg'
         }
       }
