@@ -190,7 +190,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
     changeSortOrder (sort) {
       if (this.sort === sort) {
         switch (this.order) {
-          case '':
+          case 'desc':
             this.order = 'asc'
             break
           case 'asc':
