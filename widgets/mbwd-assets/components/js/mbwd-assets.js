@@ -37,18 +37,21 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
       search: '',
       translateMap: {
         pt: {
+          'Sem resultado': 'Sem resultado',
           'Conheça os nossos produtos': 'Conheça os nossos produtos',
           'Busque um produto': 'Busque um produto',
           'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!':
             'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
         },
         en: {
+          'Sem resultado': 'No results',
           'Conheça os nossos produtos': 'Discover our products',
           'Busque um produto': 'Search for a product',
           'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!':
             'We don\'t have #searchTerm in MB yet, but we\'ve noted the suggestion!'
         },
         es: {
+          'Sem resultado': 'No hay resultados',
           'Conheça os nossos produtos': 'Descubre nuestros productos',
           'Busque um produto': 'Buscar un producto',
           'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!':
@@ -61,7 +64,7 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
     cptdEmptyStateConfig () {
       if (this.cptdDisplayEmptyState) {
         return {
-          title: 'Sem resultado',
+          title: this.i18n('Sem resultado'),
           message: this.i18n(
             'Ainda não temos #searchTerm no MB, mas anotamos a sugestão!'
           ).replace('#searchTerm', `<span class='search-term'>"${this.search}"</span>`),

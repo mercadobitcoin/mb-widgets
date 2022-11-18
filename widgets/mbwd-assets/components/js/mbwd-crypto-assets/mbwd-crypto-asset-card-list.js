@@ -64,14 +64,14 @@
           'Fan Token': 'Fan Token'
         },
         en: {
-          'nas últimas 24h': 'in the last 24h',
+          'nas últimas 24h': 'last 24h',
           'Criptomoeda': 'Cryptocurrency', // eslint-disable-line
           'Utility Token': 'Utility Token',
           'DeFi': 'DeFi', // eslint-disable-line
           'Fan Token': 'Fan Token'
         },
         es: {
-          'nas últimas 24h': 'en las últimas 24 horas',
+          'nas últimas 24h': 'últimas 24h',
           'Criptomoeda': 'Criptomoneda', // eslint-disable-line
           'Utility Token': 'Utility Token',
           'DeFi': 'DeFi', // eslint-disable-line

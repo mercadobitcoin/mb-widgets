@@ -131,7 +131,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           'Primário': 'Primary', // eslint-disable-line
           'Secundário': 'Secondary', // eslint-disable-line
           'Esgotado': 'Sold out', // eslint-disable-line
-          'Em breve': 'Future', // eslint-disable-line
+          'Em breve': 'Coming soon', // eslint-disable-line
           'Finalizado': 'Finished', // eslint-disable-line
           'disponível': 'available' // eslint-disable-line
         },

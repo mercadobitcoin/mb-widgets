@@ -70,7 +70,6 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
     return {
       translateMap: {
         pt: {
-          'nas últimas 24h': 'nas últimas 24h',
           'Valor inicial': 'Valor inicial',
           'A partir de': 'A partir de',
           'Rentabilidade': 'Rentabilidade', // eslint-disable-line
@@ -80,7 +79,6 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'Conhecer': 'Conhecer' // eslint-disable-line
         },
         en: {
-          'nas últimas 24h': 'in the last 24h',
           'Valor inicial': 'Initial Value',
           'A partir de': 'From',
           'Rentabilidade': 'Profitability', // eslint-disable-line
@@ -91,7 +89,6 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
 
         },
         es: {
-          'nas últimas 24h': 'en las últimas 24 horas',
           'Valor inicial': 'Valor inicial',
           'A partir de': 'De',
           'Rentabilidade': 'Rentabilidad', // eslint-disable-line

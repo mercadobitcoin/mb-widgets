@@ -37,7 +37,7 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
           'finished': 'finalizado' // eslint-disable-line
         },
         en: {
-          'novo': 'novo', // eslint-disable-line
+          'novo': 'new', // eslint-disable-line
           'exclusivos mb': 'mb exclusives',
           'pré-listagem': 'pre-listing',
           'primary-market': 'primary market',
@@ -47,7 +47,7 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
           'finished': 'finished' // eslint-disable-line
         },
         es: {
-          'novo': 'novo', // eslint-disable-line
+          'novo': 'nuevo', // eslint-disable-line
           'exclusivos mb': 'exclusivas mb',
           'pré-listagem': 'pre-listado',
           'primary-market': 'mercado principal',
