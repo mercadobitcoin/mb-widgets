@@ -172,8 +172,8 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     getPercentageString (percentage = 0) {
       let percString = percentage
 
-      if(percString === "-") {
-        return "-"
+      if (percString === '-') {
+        return '-'
       }
 
       if (percString > 100) {
@@ -184,14 +184,14 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         percString = 0
       }
 
-      return `${Math.round(percString)}% ${ this.i18n('disponível')}`
+      return `${Math.round(percString)}% ${this.i18n('disponível')}`
     },
     getIconAlt (name) {
       return `ícone ${name}`
     },
-    getButtonClass(assetStatus){
+    getButtonClass (assetStatus) {
       const assetsStatusToDisableButton = ['SOLD_OUT', 'FINISHED', 'FUTURE']
-      if(assetsStatusToDisableButton.indexOf(assetStatus) !== -1){
+      if (assetsStatusToDisableButton.indexOf(assetStatus) !== -1) {
         return 'disabled'
       }
       return 'outlined'
