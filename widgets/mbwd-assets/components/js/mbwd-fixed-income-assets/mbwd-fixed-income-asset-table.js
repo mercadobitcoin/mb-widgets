@@ -53,7 +53,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
             <td class="available-percentage">{{ getPercentageString(asset.product_data.available_percentage.number) }}</td>
             <td class="status">{{ i18n(asset.product_data.status.short_text)}} </td>
             <td class="cta-wrapper apollo">
-              <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
+              <a class="button primary" :class="getButtonClass(asset.product_data.status.value)" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
                 {{ i18n('Investir') }}
               </a>
             </td>
@@ -114,7 +114,8 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           'Secundário': 'Secundário', // eslint-disable-line
           'Esgotado': 'Esgotado', // eslint-disable-line
           'Em breve': 'Em breve',
-          'Finalizado': 'Finalizado' // eslint-disable-line
+          'Finalizado': 'Finalizado', // eslint-disable-line
+          'disponível': 'disponível' // eslint-disable-line
         },
         en: {
           'Ativo': 'Asset', // eslint-disable-line
@@ -131,7 +132,8 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           'Secundário': 'Secondary', // eslint-disable-line
           'Esgotado': 'Sold out', // eslint-disable-line
           'Em breve': 'Future', // eslint-disable-line
-          'Finalizado': 'Finished' // eslint-disable-line
+          'Finalizado': 'Finished', // eslint-disable-line
+          'disponível': 'available' // eslint-disable-line
         },
         es: {
           'Ativo': 'Activo', // eslint-disable-line
@@ -148,7 +150,8 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           'Secundário': 'Secundario', // eslint-disable-line
           'Esgotado': 'Vendido', // eslint-disable-line
           'Em breve': 'Pronto', // eslint-disable-line
-          'Finalizado': 'Acabado' // eslint-disable-line
+          'Finalizado': 'Acabado', // eslint-disable-line
+          'disponível': 'disponible' // eslint-disable-line
         }
       }
     }
@@ -169,6 +172,10 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     getPercentageString (percentage = 0) {
       let percString = percentage
 
+      if(percString === "-") {
+        return "-"
+      }
+
       if (percString > 100) {
         percString = 100
       }
@@ -177,10 +184,17 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         percString = 0
       }
 
-      return `${this.$options.filters.ftFormatNumber(percString, 2)}%`
+      return `${Math.round(percString)}% ${ this.i18n('disponível')}`
     },
     getIconAlt (name) {
       return `ícone ${name}`
+    },
+    getButtonClass(assetStatus){
+      const assetsStatusToDisableButton = ['SOLD_OUT', 'FINISHED', 'FUTURE']
+      if(assetsStatusToDisableButton.indexOf(assetStatus) !== -1){
+        return 'disabled'
+      }
+      return 'outlined'
     },
     i18n (key) {
       if (key.indexOf('_') >= 0) {
