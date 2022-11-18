@@ -280,6 +280,15 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
+      this.getFixedIncomeAssets()
+      this.stopGetFixedIncomeAssetsInterval()
+      this.scheduleGetFixedIncomeAssetsInterval()
+
+      this.$root.$emit('track-analytics', {
+        ec: 'web:site:home',
+        en: 'click',
+        lb: `fixed-income:${viewMode}`
+      })
     },
     resetFixedIncomeBasicQueryDefaultState () {
       if (this.$refs?.refFixedIncomeAssetTable) {
@@ -308,7 +317,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       }, this.intervalTimeout)
     },
     stopGetFixedIncomeAssetsInterval () {
-      this.intervalId = null
       clearInterval(this.intervalId)
     }
   }
