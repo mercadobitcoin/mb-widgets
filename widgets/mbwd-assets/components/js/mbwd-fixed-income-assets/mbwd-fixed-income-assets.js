@@ -16,7 +16,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         </div>
       </h3>
       <div class="options">
-        <div class="categories">
+        <div :class="cptdClassCategory">
           <button class="category" v-for="category in cptdAssetCategories" :key="category.value" :class="cssIsCategoryActive(category.value)" @click="changeCategory(category.value)">
             {{ i18n(category.label) }}
           </button>
@@ -154,6 +154,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     cptdIsNewCategory () {
       return this.fixedIncomeAssets.category === 'new'
+    },
+    cptdClassCategory () {
+      return [
+        'categories',
+        this.mobileMode ? 'mobile' : ''
+      ]
     }
   },
   watch: {

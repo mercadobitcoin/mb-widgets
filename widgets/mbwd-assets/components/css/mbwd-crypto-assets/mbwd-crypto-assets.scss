@@ -113,6 +113,12 @@
           color: #fff;
         }
       }
+
+      &.mobile {
+        .category {
+          cursor: default;
+        }
+      }
     }
   }
 

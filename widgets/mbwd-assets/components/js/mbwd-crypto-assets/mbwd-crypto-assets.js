@@ -15,7 +15,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         </div>
       </h3>
       <div class="options">
-        <div class="categories">
+        <div :class="cptdClassCategory">
           <button class="category" v-for="category in cptdAssetCategories" :class="cssIsCategoryActive(category.value)" @click="changeCategory(category.value)">
             {{ i18n(category.label) }}
           </button>
@@ -169,6 +169,12 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     cptdDisplayTableSorters () {
       return !this.cptdIsNewCategory
+    },
+    cptdClassCategory () {
+      return [
+        'categories',
+        this.mobileMode ? 'mobile' : ''
+      ]
     }
   },
   watch: {

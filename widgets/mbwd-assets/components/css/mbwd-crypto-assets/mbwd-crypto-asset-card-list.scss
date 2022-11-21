@@ -82,9 +82,10 @@
   & > .crypto-card.desktop {
     border-radius: 16px;
     padding: 24px;
+    min-width: 250px;
     width: calc(25% - 32px);
-    min-width: 280px;
-    height: 195px;
+    max-width: 300px;
+
 
     & > .attributes {
       & > .header {
@@ -92,10 +93,6 @@
         align-items: flex-start;
         justify-content: space-between;
         margin-bottom: 8px;
-
-        .c-asset-badges {
-          margin-bottom: map-get($spacing-stack, "xxxs");
-        }
       }
 
       & > .name {

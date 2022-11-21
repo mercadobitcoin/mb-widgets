@@ -83,6 +83,10 @@
       margin: 0 0 16px;
     }
 
+    .c-asset-badges {
+      margin-bottom: map-get($spacing-stack, 'xxxs');
+    }
+
     .asset-data {
       display: flex;
       align-items: center;
