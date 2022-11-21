@@ -7,7 +7,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           <div class="attributes">
             <p class="name">{{ asset.name }}</p>
             <p class="title">{{ i18n('Valor inicial') }}</p>
-            <p class="description minimum-value">{{ i18n('A partir de') }} {{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
+            <p class="description minimum-value">{{ i18n('a partir de') }} {{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
             <p class="title">{{ i18n('Rentabilidade') }}</p>
             <p class="description profitability">{{ asset.product_data.profitability }}</p>
             <p class="title">{{ i18n('Prazo estimado') }}</p>
@@ -33,7 +33,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           <a class="button secondary ghost" @click="redirectToAssetLandingPage(asset.product_data.symbol)">{{ i18n('Conhecer') }}</a>
         </div>
       </a>
-      <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.product_data.symbol">
+      <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
         <div class="attributes">
           <div class="header">
             <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
@@ -46,7 +46,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
             {{ asset.product_data.profitability }}
           </p>
           <div class="minimum-value">
-            <p class="min-label">{{ i18n('A partir de') }}</p>
+            <p class="min-label">{{ i18n('a partir de') }}</p>
             <p class="min-value">{{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
           </div>
         </div>
@@ -71,7 +71,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
       translateMap: {
         pt: {
           'Valor inicial': 'Valor inicial',
-          'A partir de': 'A partir de',
+          'a partir de': 'a partir de',
           'Rentabilidade': 'Rentabilidade', // eslint-disable-line
           'Prazo estimado': 'Prazo estimado',
           'vendido': 'vendido', // eslint-disable-line
@@ -80,7 +80,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         },
         en: {
           'Valor inicial': 'Initial Value',
-          'A partir de': 'From',
+          'a partir de': 'from',
           'Rentabilidade': 'Profitability', // eslint-disable-line
           'Prazo estimado': 'Due Date',
           'vendido': 'sold', // eslint-disable-line
@@ -90,7 +90,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         },
         es: {
           'Valor inicial': 'Valor inicial',
-          'A partir de': 'De',
+          'a partir de': 'de',
           'Rentabilidade': 'Rentabilidad', // eslint-disable-line
           'Prazo estimado': 'Plazo',
           'vendido': 'vendido', // eslint-disable-line
