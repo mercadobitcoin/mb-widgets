@@ -156,7 +156,8 @@
       & > .header {
         display: flex;
         align-items: center;
-        max-width: 55%;
+        width: 100%;
+        overflow: hidden;
 
         & > .asset-icon {
           width: 24px;
@@ -167,6 +168,7 @@
         & > .asset-data {
           display: flex;
           flex-direction: column;
+          margin-right: map-get($spacing-inline, 'quarck');
           overflow: hidden;
           white-space: nowrap;
 
@@ -191,6 +193,11 @@
             margin: 0;
           }
         }
+      }
+
+      .c-asset-badges {
+        flex-wrap: nowrap;
+        width: auto;
       }
     }
 

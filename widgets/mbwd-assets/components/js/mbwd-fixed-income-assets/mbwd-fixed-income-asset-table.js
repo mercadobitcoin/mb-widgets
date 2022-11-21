@@ -61,7 +61,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         </tbody>
       </table>
       <div v-if="mobileMode" class="fixed-income-asset-table-mobile">
-        <a class="fixed-income-asset" v-for="asset in assets" :key="asset.product_data.symbol">
+        <a class="fixed-income-asset" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
           <div class="attributes">
             <div class="header">
               <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>

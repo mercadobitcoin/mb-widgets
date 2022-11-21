@@ -277,6 +277,8 @@
       & > .header {
         display: flex;
         align-items: center;
+        width: 100%;
+        overflow: hidden;
 
         & > .asset-icon {
           width: 24px;
@@ -290,7 +292,15 @@
           color: map-get($neutral-color, "50");
           white-space: nowrap;
           margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-right: map-get($spacing-inline, 'quarck');
         }
+      }
+
+      .c-asset-badges {
+        flex-wrap: nowrap;
+        width: auto;
       }
     }
 
