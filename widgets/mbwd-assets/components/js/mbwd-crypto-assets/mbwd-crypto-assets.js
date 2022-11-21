@@ -305,6 +305,10 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
+      this.shouldOverwriteCryptoAssetResult = true
+      this.getCryptoAssets()
+      this.stopGetCryptoAssetsInterval()
+      this.scheduleGetCryptoAssetsInterval()
 
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
@@ -339,7 +343,6 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       }, this.intervalTimeout)
     },
     stopGetCryptoAssetsInterval () {
-      this.intervalId = null
       clearInterval(this.intervalId)
     }
   }

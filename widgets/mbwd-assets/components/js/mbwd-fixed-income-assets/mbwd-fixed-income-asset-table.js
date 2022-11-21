@@ -184,7 +184,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         percString = 0
       }
 
-      return `${Math.round(percString)}% ${this.i18n('disponível')}`
+      return `${Math.trunc(percString)}% ${this.i18n('disponível')}`
     },
     getIconAlt (name) {
       return `ícone ${name}`
