@@ -123,7 +123,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'Investir': 'Investir', // eslint-disable-line
           'Criptomoeda': 'Criptomoeda', // eslint-disable-line
           'Utility Token': 'Utility Token',
-          'DeFi': 'DeFi', // eslint-disable-line
+          'Defi': 'Defi', // eslint-disable-line
           'Fan Token': 'Fan Token'
         },
         en: {
@@ -136,7 +136,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'Investir': 'Invest', // eslint-disable-line
           'Criptomoeda': 'Cryptocurrency', // eslint-disable-line
           'Utility Token': 'Utility Token',
-          'DeFi': 'DeFi', // eslint-disable-line
+          'Defi': 'Defi', // eslint-disable-line
           'Fan Token': 'Fan Token'
         },
         es: {
@@ -149,7 +149,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'Investir': 'Invertir', // eslint-disable-line
           'Criptomoeda': 'Criptomoneda', // eslint-disable-line
           'Utility Token': 'Utility Token',
-          'DeFi': 'DeFi', // eslint-disable-line
+          'Defi': 'Defi', // eslint-disable-line
           'Fan Token': 'Fan Token'
         }
       }
