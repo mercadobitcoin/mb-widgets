@@ -67,7 +67,7 @@
 
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       overflow-x: auto;
       overflow-y: hidden;
       white-space: nowrap;
@@ -94,8 +94,15 @@
           background-color: map-get($neutral-color, "5");
         }
 
+        &:focus {
+          outline: none !important;
+          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
+        }
+
         &:active {
           background-color: map-get($neutral-color, "10");
+          outline: none !important;
+          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
         }
 
         &.active {

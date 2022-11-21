@@ -153,6 +153,10 @@
               min-width: unset;
               height: 32px;
             }
+
+            .disabled {
+              pointer-events: none;
+            }
           }
         }
       }

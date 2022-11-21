@@ -9,7 +9,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
             <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-four-squares-mono.svg'">
           </button>
           <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets//img/icons/ico-three-rectangles-white.svg'">
+            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-three-rectangles-white.svg'">
             <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-three-rectangles-mono.svg'">
           </button>
         </div>
@@ -332,7 +332,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       if (this.cptdShowMore) {
         this.cryptoAssets.limit = this.shouldOverwriteCryptoAssetResult ? this.cryptoAssets.currentPage * 5 : 5
       } else {
-        this.cryptoAssets.limit = this.viewMode === 'cards' ? 4 : 5
+        this.cryptoAssets.limit = this.viewMode === 'cards' || this.mobileMode ? 4 : 5
       }
     },
     scheduleGetCryptoAssetsInterval () {

@@ -63,14 +63,14 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
             </td>
             <td class="symbol">{{ asset.product_data.symbol }}</td>
             <td class="sub-type">{{ i18n(asset.product_data.sub_type.display_text) }}</td>
-            <td class="price">{{ asset.market_price | ftFormatCurrency(2) }}</td>
+            <td class="price">{{ asset.market_price | ftFormatCurrency(asset.product_data.fiat_decimals || 4) }}</td>
             <td class="variation" :class="asset.product_data.variation.status">
               {{ asset.product_data.variation.string }}
             </td>
             <td class="market-cap">{{ asset.product_data.market_cap | ftFormatCurrency(2) }}</td>
             <td class="cta-wrapper apollo">
               <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
-                {{ i18n('Comprar') }}
+                {{ i18n('Investir') }}
               </a>
             </td>
           </tr>
@@ -88,7 +88,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
             </div>
           </div>
           <div class="market-data">
-            <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
+            <p class="price">{{ asset.market_price | ftFormatCurrency(asset.product_data.fiat_decimals || 4) }}</p>
             <p class="variation">
               <span class="value" :class="asset.product_data.variation.status">{{ asset.product_data.variation.string }}</span>
               <span class="label-24h">24h</span>
@@ -120,7 +120,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'Preço': 'Preço', // eslint-disable-line
           'Variação': 'Variação', // eslint-disable-line
           'Capitalização de mercado': 'Capitalização de mercado',
-          'Comprar': 'Comprar', // eslint-disable-line
+          'Investir': 'Investir', // eslint-disable-line
           'Criptomoeda': 'Criptomoeda', // eslint-disable-line
           'Utility Token': 'Utility Token',
           'DeFi': 'DeFi', // eslint-disable-line
@@ -132,8 +132,8 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'Segmento': 'Segment', // eslint-disable-line
           'Preço': 'Price', // eslint-disable-line
           'Variação': 'Variation', // eslint-disable-line
-          'Capitalização de mercado': 'Market capitalization',
-          'Comprar': 'Buy', // eslint-disable-line
+          'Capitalização de mercado': 'Market cap',
+          'Investir': 'Invest', // eslint-disable-line
           'Criptomoeda': 'Cryptocurrency', // eslint-disable-line
           'Utility Token': 'Utility Token',
           'DeFi': 'DeFi', // eslint-disable-line
@@ -146,7 +146,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'Preço': 'Precio', // eslint-disable-line
           'Variação': 'Variación', // eslint-disable-line
           'Capitalização de mercado': 'Capitalización de Mercado',
-          'Comprar': 'Comprar', // eslint-disable-line
+          'Investir': 'Invertir', // eslint-disable-line
           'Criptomoeda': 'Criptomoneda', // eslint-disable-line
           'Utility Token': 'Utility Token',
           'DeFi': 'DeFi', // eslint-disable-line
@@ -190,7 +190,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
     changeSortOrder (sort) {
       if (this.sort === sort) {
         switch (this.order) {
-          case '':
+          case 'desc':
             this.order = 'asc'
             break
           case 'asc':
