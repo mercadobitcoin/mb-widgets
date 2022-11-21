@@ -220,6 +220,10 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         order
       }
 
+      if (this.search) {
+        searchQueryStringsMap.search = this.search
+      }
+
       if (category === 'new') {
         searchQueryStringsMap.sort = 'release_date'
         searchQueryStringsMap.order = 'desc'
@@ -232,10 +236,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         } else {
           searchQueryStringsMap.offset = (currentPage - 1) * limit
         }
-      }
-
-      if (this.search) {
-        searchQueryStringsMap.search = this.search
       }
 
       return this.mxCreateUrlQueryString(searchQueryStringsMap)
