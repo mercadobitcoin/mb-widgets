@@ -305,10 +305,11 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       this.shouldOverwriteFixedIncomeResult = true
     },
     setFixedIncomeAssetsLimit () {
+      let limit = this.viewMode === 'cards' ? 3 : 5
       if (this.cptdShowMore) {
-        this.fixedIncomeAssets.limit = this.shouldOverwriteFixedIncomeResult ? this.fixedIncomeAssets.currentPage * 5 : 5
+        this.fixedIncomeAssets.limit = this.shouldOverwriteFixedIncomeResult ? this.fixedIncomeAssets.currentPage * limit : limit
       } else {
-        this.fixedIncomeAssets.limit = this.viewMode === 'cards' ? 3 : 5
+        this.fixedIncomeAssets.limit = limit
       }
     },
     scheduleGetFixedIncomeAssetsInterval () {

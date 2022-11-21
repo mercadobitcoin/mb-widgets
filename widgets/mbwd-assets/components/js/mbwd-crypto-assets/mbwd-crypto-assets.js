@@ -330,10 +330,11 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.shouldOverwriteCryptoAssetResult = true
     },
     setCryptoAssetsLimit () {
-      if (this.cptdShowMore) {
-        this.cryptoAssets.limit = this.shouldOverwriteCryptoAssetResult ? this.cryptoAssets.currentPage * 5 : 5
+      let limit = this.viewMode === 'cards' ? 4 : 5
+      if (this.cptdShowMore) {  
+        this.cryptoAssets.limit = this.shouldOverwriteCryptoAssetResult ? this.cryptoAssets.currentPage * limit : limit
       } else {
-        this.cryptoAssets.limit = this.viewMode === 'cards' || this.mobileMode ? 4 : 5
+        this.cryptoAssets.limit = limit
       }
     },
     scheduleGetCryptoAssetsInterval () {
