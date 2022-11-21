@@ -71,7 +71,6 @@
     border-radius: $border-radius-big;
     padding: 24px;
     width: calc(33.3% - 32px);
-    min-width: 389px;
     margin-top: 32px;
 
     .badge-wrapper {
@@ -85,34 +84,56 @@
       margin-bottom: 16px;
 
       .attributes {
-        .name {
-          @extend %typography-label-2;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
 
-          color: map-get($neutral-color, "50");
-          margin: 0 0 16px;
-        }
+        .attribute {
+          width: 100%;
+          margin-bottom: map-get($spacing-stack, "nano");
 
-        .title,
-        .description {
-          @extend %typography-label-3;
+          .name {
+            @extend %typography-label-2;
 
-          color: map-get($neutral-color, "50");
-          margin: 0 0 2px;
-        }
-
-        .description {
-          margin-bottom: 8px;
-          font-weight: 400;
-
-          &.profitability {
-            color: map-get($positive-color, "30");
-            @extend %typography-label-3;
-
-            white-space: nowrap;
+            color: map-get($neutral-color, "50");
+            margin: 0 0 map-get($spacing-stack, "nano");
           }
 
-          &:last-child {
-            margin: 0;
+          .title,
+          .description {
+            @extend %typography-label-3;
+
+            color: map-get($neutral-color, "50");
+            margin: 0 0 2px;
+          }
+
+          .description {
+            margin-bottom: 8px;
+            font-weight: 400;
+
+            &.profitability {
+              color: map-get($positive-color, "30");
+              @extend %typography-label-3;
+
+              white-space: nowrap;
+            }
+
+            &:last-child {
+              margin: 0;
+            }
+          }
+
+          &.secondary-market-description {
+            display: none;
+            width: 100%;
+            text-align: center;
+            background-color: map-get($neutral-color, "5");
+            padding: map-get($spacing-stack, "xxxs");
+            margin-top: map-get($spacing-stack, "nano");
+
+            p {
+              @extend %typography-caption
+            }
           }
         }
       }
@@ -133,6 +154,10 @@
             stroke-width: 2.8;
             stroke-linecap: round;
             animation: progress 1s ease-out forwards;
+          }
+
+          .empty {
+            stroke: map-get($neutral-color, "5");
           }
 
           @keyframes progress {
@@ -181,6 +206,51 @@
 
         &:last-child {
           margin: 0;
+        }
+      }
+    }
+
+    &.secondary-market {
+      .attributes {
+        .attribute {
+          &.profitability,
+          &.estimated-liquidation-date {
+            width: auto;
+          }
+
+          &.minimum-value {
+            display: none;
+          }
+
+          &.secondary-market-description {
+            display: block;
+          }
+        }
+      }
+    }
+
+    &.secondary-market,
+    &.finished,
+    &.sold-out,
+    &.future{
+      .sold-percentage{
+        .middle-circle {
+          p {
+            color: map-get($text-color, "primary");
+          }
+        }
+        .circular-chart {
+          .circle {
+            stroke: map-get($neutral-color, "20");
+          }
+        }
+      }
+      .ctas {
+        .primary {
+          pointer-events: none;
+          color: map-get($neutral-color, "10");
+          background-color: map-get($neutral-color, "5");
+          border: none;
         }
       }
     }

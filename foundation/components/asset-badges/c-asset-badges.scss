@@ -1,14 +1,14 @@
 @import "../../scss/variables";
 @import "../../scss/design-system/apollo/colors";
+@import "../../scss/design-system/apollo/spacing";
 @import "../../scss/design-system/apollo/buttons";
 @import "../../scss/design-system/apollo/typography";
 
 .c-asset-badges {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-end;
   flex-wrap: wrap;
-  padding-left: 8px;
+  margin-bottom: map-get($spacing-stack, "xxxs");
 
   .c-badge {
     display: flex;

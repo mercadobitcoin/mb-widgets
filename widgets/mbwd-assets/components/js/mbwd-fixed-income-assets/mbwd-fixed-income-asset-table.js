@@ -177,7 +177,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
         percString = 0
       }
 
-      return `${this.$options.filters.ftFormatNumber(percString, 2)}%`
+      return `${Math.trunc(percString)}%`
     },
     getIconAlt (name) {
       return `ícone ${name}`

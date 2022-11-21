@@ -1,25 +1,42 @@
 const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   template: `
     <div class="mbwd-fixed-income-asset-card-list apollo">
-      <a v-if="!mobileMode" class="fixed-income-card desktop" v-for="asset in assets" :key="asset.product_data.symbol">
-        <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" widgetName="mbwd-assets" />
+      <a v-if="!mobileMode" :class="getAssetClass(asset)" v-for="asset in assets" :key="asset.product_data.symbol">
+        <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" widget-name="mbwd-assets" />
         <div class="asset-data">
           <div class="attributes">
-            <p class="name">{{ asset.name }}</p>
-            <p class="title">{{ i18n('Valor inicial') }}</p>
-            <p class="description minimum-value">{{ i18n('A partir de') }} {{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
-            <p class="title">{{ i18n('Rentabilidade') }}</p>
-            <p class="description profitability">{{ asset.product_data.profitability }}</p>
-            <p class="title">{{ i18n('Prazo estimado') }}</p>
-            <p class="description">{{ asset.product_data.estimated_liquidation_date }}</p>
+            <div class="attribute"> 
+              <p class="name">{{ asset.name }}</p>
+            </div>
+            <div class="attribute minimum-value"> 
+              <p class="title">{{ i18n('Valor inicial') }}</p>
+              <p class="description">{{ i18n('A partir de') }} {{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
+            </div>
+            <div class="attribute profitability">
+              <p class="title">{{ i18n('Rentabilidade') }}</p>
+              <p class="description">{{ asset.product_data.profitability }}</p>
+            </div> 
+            <div class="attribute estimated-liquidation-date">
+              <p class="title">{{ i18n('Prazo estimado') }}</p>
+              <p class="description">{{ asset.product_data.estimated_liquidation_date }}</p>
+            </div> 
+            <div class="attribute secondary-market-description">
+            <p class="description">Disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento.</p>
+            </div>
           </div>
-          <div class="sold-percentage">
+          <div v-if="!isSecondaryMarket(asset)" class="sold-percentage">
             <div class="middle-circle">
-              <p>{{ getPercentageString(asset.product_data.sold_percentage.number) }}</p>
-              <p><strong>{{ i18n('vendido') }}</strong></p>
+              <p><strong>{{ getPercentageString(asset.product_data.sold_percentage.number) }}</strong></p>
+              <p>{{ i18n('vendido') }}</p>
             </div>
             <svg viewBox="0 0 36 36" class="circular-chart">
-            <path class="circle"
+            <path class="circle empty"
+              stroke-dasharray="100,100"
+              d="M18 2.0845
+                a 15.9155 15.9155 0 0 1 0 31.831
+                a 15.9155 15.9155 0 0 1 0 -31.831"
+            />
+            <path v-if="asset.product_data.sold_percentage.number > 0" class="circle"
               :stroke-dasharray="getSVGSoldPercentageStyle(asset.product_data.sold_percentage.number)"
               d="M18 2.0845
                 a 15.9155 15.9155 0 0 1 0 31.831
@@ -77,7 +94,8 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'Prazo estimado': 'Prazo estimado',
           'vendido': 'vendido', // eslint-disable-line
           'Investir': 'Investir', // eslint-disable-line
-          'Conhecer': 'Conhecer' // eslint-disable-line
+          'Conhecer': 'Conhecer', // eslint-disable-line
+          'Disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento.': 'Disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento.'
         },
         en: {
           'nas últimas 24h': 'in the last 24h',
@@ -87,7 +105,8 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'Prazo estimado': 'Due Date',
           'vendido': 'sold', // eslint-disable-line
           'Investir': 'Invest', // eslint-disable-line
-          'Conhecer': 'View more' // eslint-disable-line
+          'Conhecer': 'View more', // eslint-disable-line
+          'Disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento.': 'Available for trading on the secondary market, you can buy and sell at any time.'
 
         },
         es: {
@@ -98,12 +117,23 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'Prazo estimado': 'Plazo',
           'vendido': 'vendido', // eslint-disable-line
           'Investir': 'Invertir', // eslint-disable-line
-          'Conhecer': 'Saber más' // eslint-disable-line
+          'Conhecer': 'Saber más', // eslint-disable-line
+          'Disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento': 'Disponible para negociar en el mercado secundario, puede comprar y vender en cualquier momento.'
         }
       }
     }
   },
   methods: {
+    isSecondaryMarket (asset) {
+      return asset?.product_data?.status?.value === 'SECONDARY_MARKET'
+    },
+    getAssetClass (asset) {
+      return [
+        'fixed-income-card',
+        'desktop',
+        asset?.product_data?.status?.value.toLowerCase().replaceAll('_', '-')
+      ]
+    },
     getAssetBadgeAsArray (asset) {
       return [...(asset.product_data?.tags || []), { text: asset?.product_data?.status?.value ?? '', type: 'status', color: asset?.product_data?.status?.color }]
     },
@@ -118,7 +148,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         percString = 0
       }
 
-      return `${this.$options.filters.ftFormatNumber(percString, 2)}%`
+      return `${Math.trunc(percString)}%`
     },
     getSVGSoldPercentageStyle (soldPercentage) {
       return `${soldPercentage}, 100`
