@@ -280,6 +280,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
+      this.shouldOverwriteFixedIncomeResult = true
       this.getFixedIncomeAssets()
       this.stopGetFixedIncomeAssetsInterval()
       this.scheduleGetFixedIncomeAssetsInterval()

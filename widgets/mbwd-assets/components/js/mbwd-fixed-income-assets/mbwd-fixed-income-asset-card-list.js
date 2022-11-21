@@ -54,6 +54,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         <div class="attributes">
           <div class="header">
             <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+            <p class="name">{{ asset.product_data.name }}</p>
             <p class="symbol">{{ asset.product_data.symbol }}</p>
           </div>
           <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" widgetName="mbwd-assets"/>

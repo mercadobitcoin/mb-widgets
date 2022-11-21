@@ -92,6 +92,10 @@
         align-items: flex-start;
         justify-content: space-between;
         margin-bottom: 8px;
+
+        .c-asset-badges {
+          margin-bottom: map-get($spacing-stack, "xxxs");
+        }
       }
 
       & > .name {

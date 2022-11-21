@@ -305,6 +305,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     onViewModeChange (viewMode) {
       this.viewMode = viewMode
+      this.shouldOverwriteCryptoAssetResult = true
       this.getCryptoAssets()
       this.stopGetCryptoAssetsInterval()
       this.scheduleGetCryptoAssetsInterval()
