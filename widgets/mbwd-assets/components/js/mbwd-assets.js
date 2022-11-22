@@ -81,6 +81,11 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
       )
     }
   },
+  created () {
+    this.$on('clear-search', () => {
+      this.search = '';
+    })
+  },
   methods: {
     i18n (key) {
       return this.translateMap?.[this.language]?.[key] ?? ''
