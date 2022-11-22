@@ -1,4 +1,4 @@
-//Return the next breakpoint or null if is the last breakpoint
+// Return the next breakpoint or null if is the last breakpoint
 @function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
     $n: index($breakpoint-names, $name);
     @if not $n {
@@ -44,11 +44,11 @@
         @content;
       }
     } @else {
-      @if (map-has-key($breakpoints, $lower) == false) {
+      @if  map-has-key($breakpoints, $lower) == false {
         @warn 'Your lower breakpoint was invalid: #{$lower}.';
       }
   
-      @if (map-has-key($breakpoints, $upper) == false) {
+      @if  map-has-key($breakpoints, $upper) == false {
         @warn 'Your upper breakpoint was invalid: #{$upper}.';
       }
     }
@@ -57,9 +57,11 @@
   // Makes the @content apply only to the given breakpoint, not viewports any wider or narrower.
   // @include breakpoint-only(sm) {}
   @mixin breakpoint-only($breakpoint, $breakpoints: $breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+    /* stylelint-disable */
     $min:  breakpoint-min($breakpoint, $breakpoints);
     $next: breakpoint-next($breakpoint, $breakpoints);
     $max:  breakpoint-max($next, $breakpoints);
+    /* stylelint-enable */
   
     @if $min != null and $max != null {
       @media (min-width: $min) and (max-width: $max) {

@@ -344,8 +344,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.shouldOverwriteCryptoAssetResult = true
     },
     setCryptoAssetsLimit () {
-      let limit = this.viewMode === 'cards' ? 4 : 5
-      if (this.cptdShowMore) {  
+      const limit = this.viewMode === 'cards' ? 4 : 5
+      if (this.cptdShowMore) {
         this.cryptoAssets.limit = this.shouldOverwriteCryptoAssetResult ? this.cryptoAssets.currentPage * limit : limit
       } else {
         this.cryptoAssets.limit = limit

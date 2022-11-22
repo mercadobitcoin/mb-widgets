@@ -247,12 +247,14 @@
             color: map-get($text-color, "primary");
           }
         }
+
         .circular-chart {
           .circle {
             stroke: map-get($neutral-color, "20");
           }
         }
       }
+
       .ctas {
         .primary {
           pointer-events: none;
