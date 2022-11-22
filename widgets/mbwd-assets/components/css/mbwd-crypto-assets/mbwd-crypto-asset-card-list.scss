@@ -4,10 +4,9 @@
 @import "../../../../../foundation/scss/variables";
 
 .mbwd-crypto-asset-card-list {
-  display: flex;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
   gap: 32px;
-  flex-wrap: wrap;
   width: 100%;
 
   & > .crypto-card {
@@ -82,10 +81,6 @@
   & > .crypto-card.desktop {
     border-radius: 16px;
     padding: 24px;
-    min-width: 250px;
-    width: calc(25% - 32px);
-    max-width: 300px;
-
 
     & > .attributes {
       & > .header {
