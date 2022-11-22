@@ -163,8 +163,11 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     }
   },
   watch: {
-    search () {
-      this.resetFixedIncomeBasicQueryDefaultState()
+    search (value, oldValue) {
+      if (!oldValue && value) {
+        this.resetFixedIncomeBasicQueryDefaultState()
+      }
+
       this.getFixedIncomeAssets()
     }
   },
@@ -226,14 +229,14 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         order
       }
 
-      if (this.search) {
-        searchQueryStringsMap.search = this.search
-      }
-
       if (category === 'new') {
         searchQueryStringsMap.sort = 'release_date'
         searchQueryStringsMap.order = 'desc'
         return this.mxCreateUrlQueryString(searchQueryStringsMap)
+      }
+
+      if (this.search) {
+        searchQueryStringsMap.search = this.search
       }
 
       if (totalPages > 1) {
@@ -262,7 +265,13 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     changeCategory (category) {
       this.resetFixedIncomeBasicQueryDefaultState()
       this.fixedIncomeAssets.category = category
-      this.getFixedIncomeAssets()
+
+      if (this.cptdIsNewCategory && this.search) {
+        this.$parent.$emit('clear-search')
+      } else {
+        this.getFixedIncomeAssets()
+      }
+
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',

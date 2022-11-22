@@ -178,8 +178,10 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     }
   },
   watch: {
-    search () {
-      this.resetCryptoBasicQueryDefaultState()
+    search (value, oldValue) {
+      if (!oldValue && value) {
+        this.resetCryptoBasicQueryDefaultState()
+      }
       this.getCryptoAssets()
     }
   },
@@ -241,14 +243,14 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         order
       }
 
-      if (this.search) {
-        searchQueryStringsMap.search = this.search
-      }
-
       if (this.cptdIsNewCategory) {
         searchQueryStringsMap.sort = 'release_date'
         searchQueryStringsMap.order = 'desc'
         return this.mxCreateUrlQueryString(searchQueryStringsMap)
+      }
+
+      if (this.search) {
+        searchQueryStringsMap.search = this.search
       }
 
       if (this.cptdIsUpTrendCategory) {
@@ -287,7 +289,13 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     changeCategory (category) {
       this.resetCryptoBasicQueryDefaultState()
       this.cryptoAssets.category = category
-      this.getCryptoAssets()
+
+      if (this.cptdIsNewCategory && this.search) {
+        this.$parent.$emit('clear-search')
+      } else {
+        this.getCryptoAssets()
+      }
+
       this.$root.$emit('track-analytics', {
         ec: 'web:site:home',
         en: 'click',
