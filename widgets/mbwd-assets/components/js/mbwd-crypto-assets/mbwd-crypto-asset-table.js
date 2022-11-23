@@ -135,7 +135,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'capitalização de mercado': 'Market cap',
           'investir': 'Invest', // eslint-disable-line
           'criptomoeda': 'Cryptocurrency', // eslint-disable-line
-          'utility Token': 'Utility Token',
+          'utility token': 'Utility Token',
           'defi': 'Defi', // eslint-disable-line
           'fan token': 'Fan Token'
         },
