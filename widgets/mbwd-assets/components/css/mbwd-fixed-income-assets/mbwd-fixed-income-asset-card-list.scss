@@ -255,6 +255,11 @@
           }
         }
       }
+    }
+
+    &.finished,
+    &.sold-out,
+    &.future{
       .ctas {
         .primary {
           pointer-events: none;
