@@ -96,13 +96,13 @@
 
         &:focus {
           outline: none !important;
-          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
+          box-shadow: 0 0 0 0 rgb(0 123 255 / 0%) !important;
         }
 
         &:active {
           background-color: map-get($neutral-color, "10");
           outline: none !important;
-          box-shadow: 0 0 0 0 rgba(0, 123, 255, 0) !important;
+          box-shadow: 0 0 0 0 rgb(0 123 255 / 0%) !important;
         }
 
         &.active {

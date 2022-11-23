@@ -83,7 +83,7 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
   },
   created () {
     this.$on('clear-search', () => {
-      this.search = '';
+      this.search = ''
     })
   },
   methods: {
