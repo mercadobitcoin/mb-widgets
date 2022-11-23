@@ -114,43 +114,43 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
       order: '',
       translateMap: {
         pt: {
-          'Ativo': 'Ativo', // eslint-disable-line
-          'Ticker': 'Ticker', // eslint-disable-line
-          'Segmento': 'Segmento', // eslint-disable-line
-          'Preço': 'Preço', // eslint-disable-line
-          'Variação': 'Variação', // eslint-disable-line
-          'Capitalização de mercado': 'Capitalização de mercado',
-          'Investir': 'Investir', // eslint-disable-line
-          'Criptomoeda': 'Criptomoeda', // eslint-disable-line
-          'Utility Token': 'Utility Token',
-          'Defi': 'Defi', // eslint-disable-line
-          'Fan Token': 'Fan Token'
+          'ativo': 'Ativo', // eslint-disable-line
+          'ticker': 'Ticker', // eslint-disable-line
+          'segmento': 'Segmento', // eslint-disable-line
+          'preço': 'Preço', // eslint-disable-line
+          'variação': 'Variação', // eslint-disable-line
+          'capitalização de mercado': 'Capitalização de mercado',
+          'investir': 'Investir', // eslint-disable-line
+          'criptomoeda': 'Criptomoeda', // eslint-disable-line
+          'utility token': 'Utility Token',
+          'defi': 'Defi', // eslint-disable-line
+          'fan token': 'Fan Token'
         },
         en: {
-          'Ativo': 'Asset', // eslint-disable-line
-          'Ticker': 'Ticker', // eslint-disable-line
-          'Segmento': 'Segment', // eslint-disable-line
-          'Preço': 'Price', // eslint-disable-line
-          'Variação': 'Variation', // eslint-disable-line
-          'Capitalização de mercado': 'Market cap',
-          'Investir': 'Invest', // eslint-disable-line
-          'Criptomoeda': 'Cryptocurrency', // eslint-disable-line
-          'Utility Token': 'Utility Token',
-          'Defi': 'Defi', // eslint-disable-line
-          'Fan Token': 'Fan Token'
+          'ativo': 'Asset', // eslint-disable-line
+          'ticker': 'Ticker', // eslint-disable-line
+          'segmento': 'Segment', // eslint-disable-line
+          'preço': 'Price', // eslint-disable-line
+          'variação': 'Variation', // eslint-disable-line
+          'capitalização de mercado': 'Market cap',
+          'investir': 'Invest', // eslint-disable-line
+          'criptomoeda': 'Cryptocurrency', // eslint-disable-line
+          'utility Token': 'Utility Token',
+          'defi': 'Defi', // eslint-disable-line
+          'fan token': 'Fan Token'
         },
         es: {
-          'Ativo': 'Activo', // eslint-disable-line
-          'Ticker': 'Ticker', // eslint-disable-line
-          'Segmento': 'Segmento', // eslint-disable-line
-          'Preço': 'Precio', // eslint-disable-line
-          'Variação': 'Variación', // eslint-disable-line
-          'Capitalização de mercado': 'Capitalización de Mercado',
-          'Investir': 'Invertir', // eslint-disable-line
-          'Criptomoeda': 'Criptomoneda', // eslint-disable-line
-          'Utility Token': 'Utility Token',
-          'Defi': 'Defi', // eslint-disable-line
-          'Fan Token': 'Fan Token'
+          'ativo': 'Activo', // eslint-disable-line
+          'ticker': 'Ticker', // eslint-disable-line
+          'segmento': 'Segmento', // eslint-disable-line
+          'preço': 'Precio', // eslint-disable-line
+          'variação': 'Variación', // eslint-disable-line
+          'capitalização de mercado': 'Capitalización de Mercado',
+          'investir': 'Invertir', // eslint-disable-line
+          'criptomoeda': 'Criptomoneda', // eslint-disable-line
+          'utility token': 'Utility Token',
+          'defi': 'Defi', // eslint-disable-line
+          'fan token': 'Fan Token'
         }
       }
     }
@@ -160,7 +160,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
       return this.sort === sort && this.order === order ? 'active' : ''
     },
     i18n (key) {
-      return this.translateMap?.[this.language]?.[key] ?? ''
+      return this.translateMap?.[this.language]?.[key.toLowerCase()] ?? ''
     },
     getAssetLandingPageLink (symbol) {
       return `https://www.mercadobitcoin.com.br/conhecer/${(symbol ?? '').toLowerCase()}`

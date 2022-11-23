@@ -100,57 +100,57 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       order: '',
       translateMap: {
         pt: {
-          'Ativo': 'Ativo', // eslint-disable-line
-          'Valor inicial': 'Valor inicial',
-          'Rentabilidade': 'Rentabilidade', // eslint-disable-line
-          'Prazo': 'Prazo', // eslint-disable-line
-          'Estoque': 'Estoque', // eslint-disable-line
-          'Mercado': 'Mercado', // eslint-disable-line
-          'Investir': 'Investir', // eslint-disable-line
+          'ativo': 'Ativo', // eslint-disable-line
+          'valor inicial': 'Valor inicial',
+          'rentabilidade': 'Rentabilidade', // eslint-disable-line
+          'prazo': 'Prazo', // eslint-disable-line
+          'estoque': 'Estoque', // eslint-disable-line
+          'mercado': 'Mercado', // eslint-disable-line
+          'investir': 'Investir', // eslint-disable-line
           'novo': 'novo', // eslint-disable-line
           'exclusivos mb': 'exclusivos mb',
           'pré-listagem': 'pré-listagem',
-          'Primário': 'Primário', // eslint-disable-line
-          'Secundário': 'Secundário', // eslint-disable-line
-          'Esgotado': 'Esgotado', // eslint-disable-line
-          'Em breve': 'Em breve',
-          'Finalizado': 'Finalizado', // eslint-disable-line
+          'primário': 'Primário', // eslint-disable-line
+          'secundário': 'Secundário', // eslint-disable-line
+          'esgotado': 'Esgotado', // eslint-disable-line
+          'em breve': 'Em breve', // eslint-disable-line
+          'finalizado': 'Finalizado', // eslint-disable-line
           'disponível': 'disponível' // eslint-disable-line
         },
         en: {
-          'Ativo': 'Asset', // eslint-disable-line
-          'Valor inicial': 'Initial Value',
-          'Rentabilidade': 'Profitability', // eslint-disable-line
-          'Prazo': 'Due Date', // eslint-disable-line
-          'Estoque': 'Supply', // eslint-disable-line
-          'Mercado': 'Market', // eslint-disable-line
-          'Investir': 'Trade', // eslint-disable-line
+          'ativo': 'Asset', // eslint-disable-line
+          'valor inicial': 'Initial Value',
+          'rentabilidade': 'Profitability', // eslint-disable-line
+          'prazo': 'Due Date', // eslint-disable-line
+          'estoque': 'Supply', // eslint-disable-line
+          'mercado': 'Market', // eslint-disable-line
+          'investir': 'Trade', // eslint-disable-line
           'novo': 'new', // eslint-disable-line
           'exclusivos mb': 'mb exclusives',
           'pré-listagem': 'pre-listing',
-          'Primário': 'Primary', // eslint-disable-line
-          'Secundário': 'Secondary', // eslint-disable-line
-          'Esgotado': 'Sold out', // eslint-disable-line
-          'Em breve': 'Coming soon', // eslint-disable-line
-          'Finalizado': 'Finished', // eslint-disable-line
+          'primário': 'Primary', // eslint-disable-line
+          'secundário': 'Secondary', // eslint-disable-line
+          'esgotado': 'Sold out', // eslint-disable-line
+          'em breve': 'Coming soon', // eslint-disable-line
+          'finalizado': 'Finished', // eslint-disable-line
           'disponível': 'available' // eslint-disable-line
         },
         es: {
-          'Ativo': 'Activo', // eslint-disable-line
-          'Valor inicial': 'Valor inicial', // eslint-disable-line
-          'Rentabilidade': 'Rentabilidad', // eslint-disable-line
-          'Prazo': 'Plazo', // eslint-disable-line
-          'Estoque': 'Existencias', // eslint-disable-line
-          'Mercado': 'Mercado', // eslint-disable-line
-          'Investir': 'Invertir', // eslint-disable-line
+          'ativo': 'Activo', // eslint-disable-line
+          'valor inicial': 'Valor inicial', // eslint-disable-line
+          'rentabilidade': 'Rentabilidad', // eslint-disable-line
+          'prazo': 'Plazo', // eslint-disable-line
+          'estoque': 'Existencias', // eslint-disable-line
+          'mercado': 'Mercado', // eslint-disable-line
+          'investir': 'Invertir', // eslint-disable-line
           'novo': 'nueovo', // eslint-disable-line
           'exclusivos mb': 'exclusivas mb',
           'pré-listagem': 'pre-listado',
-          'Primário': 'Principal', // eslint-disable-line
-          'Secundário': 'Secundario', // eslint-disable-line
-          'Esgotado': 'Vendido', // eslint-disable-line
-          'Em breve': 'Pronto', // eslint-disable-line
-          'Finalizado': 'Acabado', // eslint-disable-line
+          'primário': 'Principal', // eslint-disable-line
+          'secundário': 'Secundario', // eslint-disable-line
+          'esgotado': 'Vendido', // eslint-disable-line
+          'em breve': 'Pronto', // eslint-disable-line
+          'finalizado': 'Acabado', // eslint-disable-line
           'disponível': 'disponible' // eslint-disable-line
         }
       }
@@ -200,7 +200,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       if (key.indexOf('_') >= 0) {
         return this.translateMap?.[this.language]?.[key.toLowerCase().replace('_', '-')] ?? ''
       }
-      return this.translateMap?.[this.language]?.[key] ?? ''
+      return this.translateMap?.[this.language]?.[key.toLowerCase()] ?? ''
     },
     redirectToAssetTradeExperience (symbol) {
       this.$root.$emit('track', 'asset-table')

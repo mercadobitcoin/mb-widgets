@@ -91,28 +91,28 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       },
       translateMap: {
         pt: {
-          'Favoritos': 'Favoritos', // eslint-disable-line
-          'Com saldo': 'Com saldo',
-          'Renda Fixa Digital': 'Renda Fixa Digital',
-          'Novos': 'Novos', // eslint-disable-line
-          'Todos': 'Todos', // eslint-disable-line
-          'Não encontramos nada em Renda Fixa Digital': 'Não encontramos nada em Renda Fixa Digital'
+          'favoritos': 'Favoritos', // eslint-disable-line
+          'com saldo': 'Com saldo',
+          'renda fixa digital': 'Renda Fixa Digital',
+          'novos': 'Novos', // eslint-disable-line
+          'todos': 'Todos', // eslint-disable-line
+          'não encontramos nada em renda fixa digital': 'Não encontramos nada em Renda Fixa Digital'
         },
         en: {
-          'Favoritos': 'Favorites', // eslint-disable-line
-          'Com saldo': 'With balance',
-          'Renda Fixa Digital': 'Digital Fixed Income',
-          'Novos': 'New', // eslint-disable-line
-          'Todos': 'All', // eslint-disable-line
-          'Não encontramos nada em Renda Fixa Digital': 'We didn\'t find anything in Digital Fixed Income'
+          'favoritos': 'Favorites', // eslint-disable-line
+          'com saldo': 'With balance',
+          'renda fixa digital': 'Digital Fixed Income',
+          'novos': 'New', // eslint-disable-line
+          'todos': 'All', // eslint-disable-line
+          'não encontramos nada em renda fixa digital': 'We didn\'t find anything in Digital Fixed Income'
         },
         es: {
-          'Favoritos': 'Favoritos', // eslint-disable-line
-          'Com saldo': 'Con saldo',
-          'Renda Fixa Digital': 'Renta Fija Digital',
-          'Novos': 'Nuevos', // eslint-disable-line
-          'Todos': 'Todos', // eslint-disable-line
-          'Não encontramos nada em Renda Fixa Digital': 'No encontramos nada en Renta Fija Digital'
+          'favoritos': 'Favoritos', // eslint-disable-line
+          'com saldo': 'Con saldo',
+          'renda fixa digital': 'Renta Fija Digital',
+          'novos': 'Nuevos', // eslint-disable-line
+          'todos': 'Todos', // eslint-disable-line
+          'não encontramos nada em renda fixa digital': 'No encontramos nada en Renta Fija Digital'
         }
       }
     }
@@ -257,7 +257,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       }
     },
     i18n (key) {
-      return this.translateMap?.[this.language]?.[key] ?? ''
+      return this.translateMap?.[this.language]?.[key.toLowerCase()] ?? ''
     },
     isViewModeActive (viewMode) {
       return this.viewMode === viewMode

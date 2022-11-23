@@ -86,31 +86,31 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       shouldOverwriteCryptoAssetResult: false,
       translateMap: {
         pt: {
-          'Favoritos': 'Favoritos', // eslint-disable-line
-          'Criptoativos': 'Criptoativos', // eslint-disable-line
-          'Novos': 'Novos', // eslint-disable-line
-          'Todos': 'Todos', // eslint-disable-line
-          'Em alta': 'Em alta',
-          'Em baixa': 'Em baixa',
-          'Não encontramos nada em Ativos': 'Não encontramos nada em Ativos'
+          'favoritos': 'Favoritos', // eslint-disable-line
+          'criptoativos': 'Criptoativos', // eslint-disable-line
+          'novos': 'Novos', // eslint-disable-line
+          'todos': 'Todos', // eslint-disable-line
+          'em alta': 'Em alta',
+          'em baixa': 'Em baixa',
+          'não encontramos nada em ativos': 'Não encontramos nada em Ativos'
         },
         en: {
-          'Favoritos': 'Favorites', // eslint-disable-line
-          'Criptoativos': 'Cryptoassets', // eslint-disable-line
-          'Novos': 'New', // eslint-disable-line
-          'Todos': 'All', // eslint-disable-line
-          'Em alta': 'Ups',
-          'Em baixa': 'Downs',
-          'Não encontramos nada em Ativos': 'We didn\'t find anything in Assets'
+          'favoritos': 'Favorites', // eslint-disable-line
+          'criptoativos': 'Cryptoassets', // eslint-disable-line
+          'novos': 'New', // eslint-disable-line
+          'todos': 'All', // eslint-disable-line
+          'em alta': 'Ups',
+          'em baixa': 'Downs',
+          'não encontramos nada em ativos': 'We didn\'t find anything in Assets'
         },
         es: {
-          'Favoritos': 'Favoritos', // eslint-disable-line
-          'Criptoativos': 'Criptoactivos', // eslint-disable-line
-          'Novos': 'Nuevos', // eslint-disable-line
-          'Todos': 'Todos', // eslint-disable-line
-          'Em alta': 'En alta',
-          'Em baixa': 'En baja',
-          'Não encontramos nada em Ativos': 'No encontramos nada en Activos'
+          'favoritos': 'Favoritos', // eslint-disable-line
+          'criptoativos': 'Criptoactivos', // eslint-disable-line
+          'novos': 'Nuevos', // eslint-disable-line
+          'todos': 'Todos', // eslint-disable-line
+          'em alta': 'En alta',
+          'em baixa': 'En baja',
+          'não encontramos nada em ativos': 'No encontramos nada en Activos'
         }
       }
     }
@@ -281,7 +281,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       }
     },
     i18n (key) {
-      return this.translateMap?.[this.language]?.[key] ?? ''
+      return this.translateMap?.[this.language]?.[key.toLowerCase()] ?? ''
     },
     isViewModeActive (viewMode) {
       return this.viewMode === viewMode

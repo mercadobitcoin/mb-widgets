@@ -58,31 +58,31 @@
       translateMap: {
         pt: {
           'nas últimas 24h': 'nas últimas 24h',
-          'Criptomoeda': 'Criptomoeda', // eslint-disable-line
-          'Utility Token': 'Utility Token',
-          'Defi': 'Defi', // eslint-disable-line
-          'Fan Token': 'Fan Token'
+          'criptomoeda': 'Criptomoeda', // eslint-disable-line
+          'utility token': 'Utility Token',
+          'defi': 'Defi', // eslint-disable-line
+          'fan token': 'Fan Token'
         },
         en: {
           'nas últimas 24h': 'last 24h',
-          'Criptomoeda': 'Cryptocurrency', // eslint-disable-line
-          'Utility Token': 'Utility Token',
-          'Defi': 'Defi', // eslint-disable-line
-          'Fan Token': 'Fan Token'
+          'criptomoeda': 'Cryptocurrency', // eslint-disable-line
+          'utility token': 'Utility Token',
+          'defi': 'Defi', // eslint-disable-line
+          'fan token': 'Fan Token'
         },
         es: {
           'nas últimas 24h': 'últimas 24h',
-          'Criptomoeda': 'Criptomoneda', // eslint-disable-line
-          'Utility Token': 'Utility Token',
-          'Defi': 'Defi', // eslint-disable-line
-          'Fan Token': 'Fan Token'
+          'criptomoeda': 'Criptomoneda', // eslint-disable-line
+          'utility token': 'Utility Token',
+          'defi': 'Defi', // eslint-disable-line
+          'fan token': 'Fan Token'
         }
       }
     }
   },
   methods: {
     i18n (key) {
-      return this.translateMap?.[this.language]?.[key] ?? ''
+      return this.translateMap?.[this.language]?.[key.toLowerCase()] ?? ''
     },
     getIconAlt (name) {
       return `ícone ${name}`
