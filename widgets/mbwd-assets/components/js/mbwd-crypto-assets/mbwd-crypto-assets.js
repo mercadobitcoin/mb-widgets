@@ -40,7 +40,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         </div>
         <div v-else class="view-mode-list table">
           <slot name="crypto-table" :assets="cryptoAssets.result">
-            <mbwd-crypto-asset-table ref="refCryptoAssetTable" @sort="changeSortOrder" :assets="cryptoAssets.result" :language="language" />
+            <mbwd-crypto-asset-table ref="refCryptoAssetTable" @sort="changeSortOrder" :initial-sort="cryptoAssets.sort" :initial-order="cryptoAssets.order" :assets="cryptoAssets.result" :language="language" />
           </slot>
         </div>
       </div>
@@ -157,6 +157,9 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         message: '',
         img: 'ilu-empty-search-result.svg'
       }
+    },
+    cptdIsAllCategory () {
+      return this.cryptoAssets.category === 'all'
     },
     cptdIsNewCategory () {
       return this.cryptoAssets.category === 'new'
@@ -290,6 +293,11 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.resetCryptoBasicQueryDefaultState()
       this.cryptoAssets.category = category
 
+      if(this.cptdIsAllCategory && this.cryptoAssets.sort === '' && this.cryptoAssets.order === '') {
+        this.cryptoAssets.sort = 'name'
+        this.cryptoAssets.order = 'asc'
+      }
+
       if (this.cptdIsNewCategory && this.search) {
         this.$parent.$emit('clear-search')
       } else {
@@ -311,7 +319,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.cryptoAssets.totalPages = 1
         this.cryptoAssets.currentPage = 1
         this.cryptoAssets.category = 'all'
-      }
+      } 
 
       this.cryptoAssets.sort = sort
       this.cryptoAssets.order = order
@@ -331,13 +339,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       })
     },
     resetCryptoBasicQueryDefaultState () {
-      if (this.$refs?.refCryptoAssetTable) {
-        this.$refs.refCryptoAssetTable.sort = 'name'
-        this.$refs.refCryptoAssetTable.order = 'asc'
-      }
-
-      this.cryptoAssets.sort = 'name'
-      this.cryptoAssets.order = 'asc'
+      this.cryptoAssets.sort = ''
+      this.cryptoAssets.order = ''
       this.cryptoAssets.currentPage = 1
       this.cryptoAssets.totalPages = 1
       this.cryptoAssets.category = 'all'
