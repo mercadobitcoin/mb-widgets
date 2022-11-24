@@ -163,7 +163,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         'categories',
         this.mobileMode ? 'mobile' : ''
       ]
-    },
+    }
   },
   watch: {
     search (value, oldValue) {
@@ -269,7 +269,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       this.resetFixedIncomeBasicQueryDefaultState()
       this.fixedIncomeAssets.category = category
 
-      if(this.cptdIsAllCategory && this.fixedIncomeAssets.sort === '' && this.fixedIncomeAssets.order === '') {
+      if (this.cptdIsAllCategory && this.fixedIncomeAssets.sort === '' && this.fixedIncomeAssets.order === '') {
         this.fixedIncomeAssets.sort = 'name'
         this.fixedIncomeAssets.order = 'asc'
       }

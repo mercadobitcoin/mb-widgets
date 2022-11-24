@@ -293,7 +293,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.resetCryptoBasicQueryDefaultState()
       this.cryptoAssets.category = category
 
-      if(this.cptdIsAllCategory && this.cryptoAssets.sort === '' && this.cryptoAssets.order === '') {
+      if (this.cptdIsAllCategory && this.cryptoAssets.sort === '' && this.cryptoAssets.order === '') {
         this.cryptoAssets.sort = 'name'
         this.cryptoAssets.order = 'asc'
       }
@@ -319,7 +319,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.cryptoAssets.totalPages = 1
         this.cryptoAssets.currentPage = 1
         this.cryptoAssets.category = 'all'
-      } 
+      }
 
       this.cryptoAssets.sort = sort
       this.cryptoAssets.order = order
