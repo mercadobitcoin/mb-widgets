@@ -21,7 +21,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
               <p class="description">{{ asset.product_data.estimated_liquidation_date }}</p>
             </div> 
             <div class="attribute secondary-market-description">
-            <p class="description">Disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento.</p>
+            <p class="description">Disponível para negociação no mercado secundário, sendo possível comprar e vender a qualquer momento.</p>
             </div>
           </div>
           <div v-if="!isSecondaryMarket(asset)" class="sold-percentage">
@@ -89,13 +89,13 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
       translateMap: {
         pt: {
           'valor inicial': 'Valor inicial',
-          'a partir de': 'a partir de',
+          'a partir de': 'A partir de',
           'rentabilidade': 'Rentabilidade', // eslint-disable-line
           'prazo estimado': 'Prazo estimado',
           'vendido': 'vendido', // eslint-disable-line
           'investir': 'Investir', // eslint-disable-line
           'conhecer': 'Conhecer', // eslint-disable-line
-          'disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento.': 'Disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento.'
+          'disponível para negociação no mercado secundário, sendo possível comprar e vender a qualquer momento.': 'Disponível para negociação no mercado secundário, sendo possível comprar e vender a qualquer momento.'
         },
         en: {
           'valor inicial': 'Initial Value',
@@ -105,7 +105,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'vendido': 'sold', // eslint-disable-line
           'investir': 'Invest', // eslint-disable-line
           'conhecer': 'View more', // eslint-disable-line
-          'disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento.': 'Available for trading on the secondary market, you can buy and sell at any time.'
+          'disponível para negociação no mercado secundário, sendo possível comprar e vender a qualquer momento.': 'Available for trading on the secondary market, you can buy and sell at any time.'
 
         },
         es: {
@@ -116,7 +116,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
           'vendido': 'vendido', // eslint-disable-line
           'investir': 'Invertir', // eslint-disable-line
           'conhecer': 'Saber más', // eslint-disable-line
-          'disponível para negociação no mercado secundário, sendo possível comprar e vender á qualquer momento': 'Disponible para negociar en el mercado secundario, puede comprar y vender en cualquier momento.'
+          'disponível para negociação no mercado secundário, sendo possível comprar e vender a qualquer momento': 'Disponible para negociar en el mercado secundario, puede comprar y vender en cualquier momento.'
         }
       }
     }
