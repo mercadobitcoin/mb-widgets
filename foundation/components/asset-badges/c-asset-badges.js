@@ -73,7 +73,7 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
       return type === 'status'
     },
     getBadgeTextColor (badge) {
-      const textColor = badge.text === 'sold-out' ? badge.color : '#1d2327'
+      const textColor = badge.text === 'sold-out' || badge.text === 'finished' ? badge.color : '#1d2327'
       const styleObject = {
         color: textColor
       }

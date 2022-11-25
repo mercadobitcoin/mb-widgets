@@ -70,7 +70,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
             <td class="market-cap">{{ asset.product_data.market_cap | ftFormatCurrency(2) }}</td>
             <td class="cta-wrapper apollo">
               <a class="button primary outlined" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
-                {{ i18n('Investir') }}
+                {{ i18n('Comprar') }}
               </a>
             </td>
           </tr>
@@ -105,13 +105,21 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
     assets: {
       type: Array,
       default: () => []
+    },
+    initialSort: {
+      type: String,
+      default: 'name'
+    },
+    initialOrder: {
+      type: String,
+      default: 'asc'
     }
   },
   mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters],// eslint-disable-line
   data () {
     return {
-      sort: '',
-      order: '',
+      sort: this.initialSort,
+      order: this.initialOrder,
       translateMap: {
         pt: {
           'ativo': 'Ativo', // eslint-disable-line
@@ -120,7 +128,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'preço': 'Preço', // eslint-disable-line
           'variação': 'Variação', // eslint-disable-line
           'capitalização de mercado': 'Capitalização de mercado',
-          'investir': 'Investir', // eslint-disable-line
+          'comprar': 'Comprar', // eslint-disable-line
           'criptomoeda': 'Criptomoeda', // eslint-disable-line
           'utility token': 'Utility Token',
           'defi': 'Defi', // eslint-disable-line
@@ -133,7 +141,7 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'preço': 'Price', // eslint-disable-line
           'variação': 'Variation', // eslint-disable-line
           'capitalização de mercado': 'Market cap',
-          'investir': 'Invest', // eslint-disable-line
+          'comprar': 'Buy', // eslint-disable-line
           'criptomoeda': 'Cryptocurrency', // eslint-disable-line
           'utility token': 'Utility Token',
           'defi': 'Defi', // eslint-disable-line
@@ -146,13 +154,21 @@ const MBWD_CRYPTO_ASSET_TABLE = () => ({ // eslint-disable-line
           'preço': 'Precio', // eslint-disable-line
           'variação': 'Variación', // eslint-disable-line
           'capitalização de mercado': 'Capitalización de Mercado',
-          'investir': 'Invertir', // eslint-disable-line
+          'comprar': 'Comprar', // eslint-disable-line
           'criptomoeda': 'Criptomoneda', // eslint-disable-line
           'utility token': 'Utility Token',
           'defi': 'Defi', // eslint-disable-line
           'fan token': 'Fan Token'
         }
       }
+    }
+  },
+  watch: {
+    initialOrder (value) {
+      this.order = value
+    },
+    initialSort (value) {
+      this.sort = value
     }
   },
   methods: {

@@ -41,7 +41,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         </div>
         <div v-else class="view-mode-list table">
           <slot name="fixed-income-table" :assets="fixedIncomeAssets.result">
-            <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="changeSortOrder" :assets="fixedIncomeAssets.result" :language="language" />
+            <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="changeSortOrder" :initial-sort="fixedIncomeAssets.sort" :initial-order="fixedIncomeAssets.order" :assets="fixedIncomeAssets.result" :language="language" />
           </slot>
         </div>
       </div>
@@ -155,6 +155,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     cptdIsNewCategory () {
       return this.fixedIncomeAssets.category === 'new'
     },
+    cptdIsAllCategory () {
+      return this.fixedIncomeAssets.category === 'all'
+    },
     cptdClassCategory () {
       return [
         'categories',
@@ -266,6 +269,11 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       this.resetFixedIncomeBasicQueryDefaultState()
       this.fixedIncomeAssets.category = category
 
+      if (this.cptdIsAllCategory && this.fixedIncomeAssets.sort === '' && this.fixedIncomeAssets.order === '') {
+        this.fixedIncomeAssets.sort = 'name'
+        this.fixedIncomeAssets.order = 'asc'
+      }
+
       if (this.cptdIsNewCategory && this.search) {
         this.$parent.$emit('clear-search')
       } else {
@@ -307,13 +315,8 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       })
     },
     resetFixedIncomeBasicQueryDefaultState () {
-      if (this.$refs?.refFixedIncomeAssetTable) {
-        this.$refs.refFixedIncomeAssetTable.sort = 'name'
-        this.$refs.refFixedIncomeAssetTable.order = 'asc'
-      }
-
-      this.fixedIncomeAssets.sort = 'name'
-      this.fixedIncomeAssets.order = 'asc'
+      this.fixedIncomeAssets.sort = ''
+      this.fixedIncomeAssets.order = ''
       this.fixedIncomeAssets.currentPage = 1
       this.fixedIncomeAssets.totalPages = 1
       this.fixedIncomeAssets.category = 'all'

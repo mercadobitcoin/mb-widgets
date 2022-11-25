@@ -88,6 +88,14 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     assets: {
       type: Array,
       default: () => []
+    },
+    initialSort: {
+      type: String,
+      default: 'name'
+    },
+    initialOrder: {
+      type: String,
+      default: 'asc'
     }
   },
   mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters],// eslint-disable-line
@@ -96,8 +104,8 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
   },
   data () {
     return {
-      sort: '',
-      order: '',
+      sort: this.initialSort,
+      order: this.initialOrder,
       translateMap: {
         pt: {
           'ativo': 'Ativo', // eslint-disable-line
@@ -154,6 +162,14 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           'disponível': 'disponible' // eslint-disable-line
         }
       }
+    }
+  },
+  watch: {
+    initialOrder (value) {
+      this.order = value
+    },
+    initialSort (value) {
+      this.sort = value
     }
   },
   methods: {
