@@ -86,7 +86,7 @@ const MBC_ASSET_BADGES = () => ({ //eslint-disable-line
       return styleObject
     },
     i18n (key) {
-      return this.translateMap?.[this.language]?.[key] ?? ''
+      return this.translateMap?.[this.language]?.[key.toLowerCase()] ?? ''
     }
   }
 })
