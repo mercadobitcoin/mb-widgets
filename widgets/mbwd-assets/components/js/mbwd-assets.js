@@ -20,7 +20,7 @@ const MBWD_ASSETS = () => ({ //eslint-disable-line
     },
     intervalTimeout: {
       type: Number,
-      default: 30000 // ms
+      default: 10000 // ms
     }
   },
   mixins: [window.MB_WIDGETS.configMixins],// eslint-disable-line

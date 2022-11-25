@@ -77,7 +77,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
   data () {
     return {
       intervalId: undefined,
-      busy: true,
+      busy: false,
       viewMode: 'table', // [card, table],
       shouldOverwriteFixedIncomeResult: false,
       fixedIncomeAssets: {
@@ -182,43 +182,45 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       return this.isViewModeActive(viewMode) ? 'active' : ''
     },
     async getFixedIncomeAssets () {
-      this.busy = true
-      try {
-        const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getFixedIncomeAssetsRequestQueryString()}`)
+      if (!this.busy) {
+        this.busy = true
+        try {
+          const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getFixedIncomeAssetsRequestQueryString()}`)
 
-        if (response.ok) {
-          const data = await response.json() //eslint-disable-line
-          const { total_items, response_data } = data //eslint-disable-line
-          const { products } = response_data // eslint-disable-line
+          if (response.ok) {
+            const data = await response.json() //eslint-disable-line
+            const { total_items, response_data } = data //eslint-disable-line
+            const { products } = response_data // eslint-disable-line
 
-          if (this.cptdShowMore && !this.shouldOverwriteFixedIncomeResult) {
-            this.fixedIncomeAssets.result.push(...products ?? []) //eslint-disable-line
-          } else {
-            this.fixedIncomeAssets.result = products ?? [] //eslint-disable-line
-            this.shouldOverwriteFixedIncomeResult = false
-            this.setFixedIncomeAssetsLimit()
-          }
-
-          if (this.cptdIsNewCategory) {
-            this.fixedIncomeAssets.totalPages = 1
-          } else {
-            if (total_items) {//eslint-disable-line
-              this.fixedIncomeAssets.totalPages = Math.ceil(total_items / this.fixedIncomeAssets.limit)//eslint-disable-line
+            if (this.cptdShowMore && !this.shouldOverwriteFixedIncomeResult) {
+              this.fixedIncomeAssets.result.push(...products ?? []) //eslint-disable-line
             } else {
-              this.fixedIncomeAssets.totalPages = 1
+              this.fixedIncomeAssets.result = products ?? [] //eslint-disable-line
+              this.shouldOverwriteFixedIncomeResult = false
+              this.setFixedIncomeAssetsLimit()
             }
+
+            if (this.cptdIsNewCategory) {
+              this.fixedIncomeAssets.totalPages = 1
+            } else {
+              if (total_items) {//eslint-disable-line
+                this.fixedIncomeAssets.totalPages = Math.ceil(total_items / this.fixedIncomeAssets.limit)//eslint-disable-line
+              } else {
+                this.fixedIncomeAssets.totalPages = 1
+              }
+            }
+          } else {
+            this.fixedIncomeAssets.result = []
+            this.fixedIncomeAssets.totalPages = 1
           }
-        } else {
+        } catch (e) {
           this.fixedIncomeAssets.result = []
           this.fixedIncomeAssets.totalPages = 1
         }
-      } catch (e) {
-        this.fixedIncomeAssets.result = []
-        this.fixedIncomeAssets.totalPages = 1
-      }
 
-      this.busy = false
-      this.$emit('list-updated', this.fixedIncomeAssets.result.length)
+        this.busy = false
+        this.$emit('list-updated', this.fixedIncomeAssets.result.length)
+      }
     },
     getFixedIncomeAssetsRequestQueryString () {
       this.setFixedIncomeAssetsLimit()
@@ -333,6 +335,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     scheduleGetFixedIncomeAssetsInterval () {
       this.intervalId = setInterval(() => {
         this.shouldOverwriteFixedIncomeResult = true
+        this.getFixedIncomeAssets()
         this.getFixedIncomeAssets()
       }, this.intervalTimeout)
     },
