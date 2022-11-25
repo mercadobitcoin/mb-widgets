@@ -132,7 +132,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
           'prazo': 'Due Date', // eslint-disable-line
           'estoque': 'Supply', // eslint-disable-line
           'mercado': 'Market', // eslint-disable-line
-          'investir': 'Trade', // eslint-disable-line
+          'investir': 'Invest', // eslint-disable-line
           'novo': 'new', // eslint-disable-line
           'exclusivos mb': 'mb exclusives',
           'pré-listagem': 'pre-listing',

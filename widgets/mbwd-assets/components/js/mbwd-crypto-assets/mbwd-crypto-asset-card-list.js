@@ -17,7 +17,7 @@
             <span class="value" :class="asset.product_data.variation.status">{{ asset.product_data.variation.string }}</span>
             <span class="label-24h">24h</span>
           </p>
-          <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
+          <p class="price">{{ asset.market_price | ftFormatCurrency(asset.product_data.fiat_decimals || 4) }}</p>
         </div>
       </a>
       <a v-if="!mobileMode" class="crypto-card desktop" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
@@ -32,7 +32,7 @@
           </p>
           <p class="type">{{ i18n(asset.product_data.sub_type.display_text) }}</p>
         </div>
-        <p class="price">{{ asset.market_price | ftFormatCurrency(2) }}</p>
+        <p class="price">{{ asset.market_price | ftFormatCurrency(asset.product_data.fiat_decimals || 4) }}</p>
         <span class="variation">
           <span class="value" :class="asset.product_data.variation.status">{{ asset.product_data.variation.string }}</span>
             {{ i18n('nas últimas 24h') }}
