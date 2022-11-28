@@ -1,0 +1,36 @@
+@import "../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../foundation/scss/variables";
+@import "../../../../foundation/scss/fonts";
+
+.mbwd-fixed-income-simulator {
+  display: flex;
+  h3, h2 {
+    @extend %typography-h3;
+    margin:0px;
+    color: map-get($neutral-color, "50");
+  }
+  p {
+    @extend %typography-body-2;
+    margin:0px;
+    color: map-get($neutral-color, "40");
+  }
+
+  .interactive-components-wrapper {
+    border: 1px solid #F3F4F4;
+    padding: 32px;
+    border-radius: 4px;
+
+    .main-title {
+      font-size: 48px;
+    }
+  }
+  .comparison-components-wrapper {
+    border: 1px solid #F3F4F4;
+    padding: 32px;
+    border-radius: 4px;
+  }
+  .interactive-components-wrapper+.comparison-components-wrapper{
+    margin-left: 32px;
+  }
+}
