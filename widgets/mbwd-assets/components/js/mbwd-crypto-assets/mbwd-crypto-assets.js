@@ -72,7 +72,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
   data () {
     return {
       intervalId: undefined,
-      busy: true,
+      busy: false,
       cryptoAssets: {
         limit: 5,
         category: 'all',
@@ -196,43 +196,45 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       return this.isViewModeActive(viewMode) ? 'active' : ''
     },
     async getCryptoAssets () {
-      this.busy = true
-      try {
-        const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getCryptoAssetsRequestQueryString()}`)
-
-        if (response.ok) {
-          const data = await response.json() //eslint-disable-line
-          const { total_items, response_data } = data //eslint-disable-line
-          const { products } = response_data // eslint-disable-line
-
-          if (this.cptdShowMore && !this.shouldOverwriteCryptoAssetResult) {
-            this.cryptoAssets.result.push(...products ?? []) //eslint-disable-line
-          } else {
-            this.cryptoAssets.result = products ?? [] //eslint-disable-line
-            this.shouldOverwriteCryptoAssetResult = false
-            this.setCryptoAssetsLimit()
-          }
-
-          if (this.cptdIsNewCategory) {
-            this.cryptoAssets.totalPages = 1
-          } else {
-            if (total_items) {//eslint-disable-line
-              this.cryptoAssets.totalPages = Math.ceil(total_items / this.cryptoAssets.limit)//eslint-disable-line
+      if(!this.busy) {
+        this.busy = true
+        try {
+          const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getCryptoAssetsRequestQueryString()}`)
+  
+          if (response.ok) {
+            const data = await response.json() //eslint-disable-line
+            const { total_items, response_data } = data //eslint-disable-line
+            const { products } = response_data // eslint-disable-line
+  
+            if (this.cptdShowMore && !this.shouldOverwriteCryptoAssetResult) {
+              this.cryptoAssets.result.push(...products ?? []) //eslint-disable-line
             } else {
-              this.cryptoAssets.totalPages = 1
+              this.cryptoAssets.result = products ?? [] //eslint-disable-line
+              this.shouldOverwriteCryptoAssetResult = false
+              this.setCryptoAssetsLimit()
             }
+  
+            if (this.cptdIsNewCategory) {
+              this.cryptoAssets.totalPages = 1
+            } else {
+              if (total_items) {//eslint-disable-line
+                this.cryptoAssets.totalPages = Math.ceil(total_items / this.cryptoAssets.limit)//eslint-disable-line
+              } else {
+                this.cryptoAssets.totalPages = 1
+              }
+            }
+          } else {
+            this.cryptoAssets.result = []
+            this.cryptoAssets.totalPages = 1
           }
-        } else {
+        } catch (e) {
           this.cryptoAssets.result = []
           this.cryptoAssets.totalPages = 1
         }
-      } catch (e) {
-        this.cryptoAssets.result = []
-        this.cryptoAssets.totalPages = 1
+  
+        this.busy = false
+        this.$emit('list-updated', this.cryptoAssets.result.length)
       }
-
-      this.busy = false
-      this.$emit('list-updated', this.cryptoAssets.result.length)
     },
     getCryptoAssetsRequestQueryString () {
       this.setCryptoAssetsLimit()
