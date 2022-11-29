@@ -4,33 +4,75 @@
 @import "../../../../foundation/scss/fonts";
 
 .mbwd-fixed-income-simulator {
-  display: flex;
-  h3, h2 {
-    @extend %typography-h3;
+  h2 {
+    margin:0px;
+    color: map-get($neutral-color, "50");
+  }
+  h3 {
     margin:0px;
     color: map-get($neutral-color, "50");
   }
   p {
-    @extend %typography-body-2;
     margin:0px;
     color: map-get($neutral-color, "40");
   }
 
-  .interactive-components-wrapper {
-    border: 1px solid #F3F4F4;
-    padding: 32px;
-    border-radius: 4px;
+  .main-title {
+    @extend %typography-mobile-h2;
+    padding: 0 8px;
+    margin-bottom: 16px;
+  }
+  .main-subtitle {
+    @extend %typography-mobile-body-1;
+    padding: 0 8px;
+    margin-bottom: 24px;
+  }
 
-    .main-title {
-      font-size: 48px;
+  .main-wrapper{
+    .interactive-components-wrapper {
+      border: 1px solid #F3F4F4;
+      padding: 24px 16px 16px 16px;
+      border-radius: 4px;
+  
+      .auxiliar-title {
+
+      }
+      .auxiliar-subtitle {
+
+      }
+    }
+    .comparison-components-wrapper {
+      padding: 0 8px;
     }
   }
-  .comparison-components-wrapper {
-    border: 1px solid #F3F4F4;
-    padding: 32px;
-    border-radius: 4px;
-  }
-  .interactive-components-wrapper+.comparison-components-wrapper{
-    margin-left: 32px;
+}
+
+@media screen and (min-width: $tablet-treshold) {
+  .mbwd-fixed-income-simulator {
+    background-color: #f00;
+
+    .main-title {
+      @extend %typography-h2;
+      margin-bottom: 16px;
+    }
+    .main-subtitle {
+      @extend %typography-body-1;
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+
+    .main-wrapper {
+      display: flex;
+      .interactive-components-wrapper {
+      }
+      .comparison-components-wrapper {
+        border: 1px solid #F3F4F4;
+        padding: 32px;
+        border-radius: 4px;
+      }
+      .interactive-components-wrapper+.comparison-components-wrapper{
+        margin-left: 32px;
+      }
+    }
   }
 }
