@@ -18,12 +18,12 @@
   }
 
   .main-title {
-    @extend %typography-mobile-h2;
+    @extend %typography-h2;
     padding: 0 8px;
     margin-bottom: 16px;
   }
   .main-subtitle {
-    @extend %typography-mobile-body-1;
+    @extend %typography-body-1;
     padding: 0 8px;
     margin-bottom: 24px;
   }
@@ -52,11 +52,11 @@
     background-color: #f00;
 
     .main-title {
-      @extend %typography-h2;
+      // @extend %typography-h2;
       margin-bottom: 16px;
     }
     .main-subtitle {
-      @extend %typography-body-1;
+      // @extend %typography-body-1;
       margin-bottom: 32px;
       padding: 0 8px;
     }
