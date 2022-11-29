@@ -10,28 +10,10 @@
 
 %typography-h2 {
   font-family: map-get($font-families, "title");
-  font-family: 'IBM Plex Sans';
-  font-style: normal;
+  font-size: 48px;
   font-weight: bold;
-  font-size: 24px;
-  line-height: 130%;
-  @media screen and (min-width: $tablet-treshold) {
-    font-family: map-get($font-families, "title");
-    font-size: 48px;
-    font-weight: bold;
-    line-height: 115%;
-    letter-spacing: -0.5px;
-    
-  }
-}
-
-%typography-mobile-h2 {
-  font-family: map-get($font-families, "title");
-  font-family: 'IBM Plex Sans';
-  font-style: normal;
-  font-weight: bold;
-  font-size: 24px;
-  line-height: 130%;
+  line-height: 115%;
+  letter-spacing: -0.5px;
 }
 
 %typography-h3 {
@@ -58,14 +40,6 @@
   letter-spacing: 0.18px;
 }
 
-%typography-mobile-h5 {
-  font-family: map-get($font-families, "title");
-  font-size: 16px;
-  font-weight: bold;
-  line-height: 130%;
-  letter-spacing: 0.18px;
-}
-
 %typography-h6 {
   font-family: map-get($font-families, "title");
   font-size: 18px;
@@ -77,14 +51,6 @@
 %typography-body-1 {
   font-family: map-get($font-families, "body");
   font-size: 18px;
-  font-weight: normal;
-  line-height: 140%;
-  letter-spacing: 0.5px;
-}
-
-%typography-mobile-body-1 {
-  font-family: map-get($font-families, "body");
-  font-size: 16px;
   font-weight: normal;
   line-height: 140%;
   letter-spacing: 0.5px;
