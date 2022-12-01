@@ -1,74 +1,79 @@
 const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
   template: `
     <div class="mbwd-fixed-income-asset-card-list apollo">
-      <a v-if="!mobileMode" :class="getAssetClass(asset)" v-for="asset in assets" :key="asset.product_data.symbol">
-        <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" widget-name="mbwd-assets" />
-        <div class="asset-data">
+      <template v-if="displaySkeleton">
+        <mbwd-fixed-income-asset-card-skeleton v-for="index in qtdSkeletons" :key="'fixed-income-asset-card-'+index" />
+      </template>
+      <template v-else>
+        <a v-if="!mobileMode" :class="getAssetClass(asset)" v-for="asset in assets" :key="asset.product_data.symbol">
+          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" widget-name="mbwd-assets" />
+          <div class="asset-data">
+            <div class="attributes">
+              <div class="attribute"> 
+                <p class="name">{{ asset.name }}</p>
+              </div>
+              <div class="attribute minimum-value"> 
+                <p class="title">{{ i18n('Valor inicial') }}</p>
+                <p class="description">{{ i18n('a partir de') }} {{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
+              </div>
+              <div class="attribute profitability">
+                <p class="title">{{ i18n('Rentabilidade') }}</p>
+                <p class="description">{{ asset.product_data.profitability }}</p>
+              </div> 
+              <div class="attribute estimated-liquidation-date">
+                <p class="title">{{ i18n('Prazo estimado') }}</p>
+                <p class="description">{{ asset.product_data.estimated_liquidation_date }}</p>
+              </div> 
+              <div class="attribute secondary-market-description">
+              <p class="description">Disponível para negociação no mercado secundário, sendo possível comprar e vender a qualquer momento.</p>
+              </div>
+            </div>
+            <div v-if="!isSecondaryMarket(asset)" class="sold-percentage">
+              <div class="middle-circle">
+                <p><strong>{{ getPercentageString(asset.product_data.sold_percentage.number) }}</strong></p>
+                <p>{{ i18n('vendido') }}</p>
+              </div>
+              <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle empty"
+                  stroke-dasharray="100,100"
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+                <path v-if="asset.product_data.sold_percentage.number > 0" class="circle"
+                  :stroke-dasharray="getSVGSoldPercentageStyle(asset.product_data.sold_percentage.number)"
+                  d="M18 2.0845
+                    a 15.9155 15.9155 0 0 1 0 31.831
+                    a 15.9155 15.9155 0 0 1 0 -31.831"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="ctas">
+            <a class="button primary filled" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">{{ i18n('Investir') }}</a>
+            <a class="button secondary ghost" @click="redirectToAssetLandingPage(asset.product_data.symbol)">{{ i18n('Conhecer') }}</a>
+          </div>
+        </a>
+        <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
           <div class="attributes">
-            <div class="attribute"> 
-              <p class="name">{{ asset.name }}</p>
+            <div class="header">
+              <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+              <p class="name">{{ asset.product_data.name }}</p>
+              <p class="symbol">{{ asset.product_data.symbol }}</p>
             </div>
-            <div class="attribute minimum-value"> 
-              <p class="title">{{ i18n('Valor inicial') }}</p>
-              <p class="description">{{ i18n('a partir de') }} {{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
-            </div>
-            <div class="attribute profitability">
-              <p class="title">{{ i18n('Rentabilidade') }}</p>
-              <p class="description">{{ asset.product_data.profitability }}</p>
-            </div> 
-            <div class="attribute estimated-liquidation-date">
-              <p class="title">{{ i18n('Prazo estimado') }}</p>
-              <p class="description">{{ asset.product_data.estimated_liquidation_date }}</p>
-            </div> 
-            <div class="attribute secondary-market-description">
-            <p class="description">Disponível para negociação no mercado secundário, sendo possível comprar e vender a qualquer momento.</p>
+            <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" widgetName="mbwd-assets"/>
+          </div>
+          <div class="market-data">
+            <p class="profitability">
+              {{ asset.product_data.profitability }}
+            </p>
+            <div class="minimum-value">
+              <p class="min-label">{{ i18n('a partir de') }}</p>
+              <p class="min-value">{{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
             </div>
           </div>
-          <div v-if="!isSecondaryMarket(asset)" class="sold-percentage">
-            <div class="middle-circle">
-              <p><strong>{{ getPercentageString(asset.product_data.sold_percentage.number) }}</strong></p>
-              <p>{{ i18n('vendido') }}</p>
-            </div>
-            <svg viewBox="0 0 36 36" class="circular-chart">
-            <path class="circle empty"
-              stroke-dasharray="100,100"
-              d="M18 2.0845
-                a 15.9155 15.9155 0 0 1 0 31.831
-                a 15.9155 15.9155 0 0 1 0 -31.831"
-            />
-            <path v-if="asset.product_data.sold_percentage.number > 0" class="circle"
-              :stroke-dasharray="getSVGSoldPercentageStyle(asset.product_data.sold_percentage.number)"
-              d="M18 2.0845
-                a 15.9155 15.9155 0 0 1 0 31.831
-                a 15.9155 15.9155 0 0 1 0 -31.831"
-            />
-          </svg>
-          </div>
-        </div>
-        <div class="ctas">
-          <a class="button primary filled" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">{{ i18n('Investir') }}</a>
-          <a class="button secondary ghost" @click="redirectToAssetLandingPage(asset.product_data.symbol)">{{ i18n('Conhecer') }}</a>
-        </div>
-      </a>
-      <a v-if="mobileMode" class="fixed-income-card mobile" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
-        <div class="attributes">
-          <div class="header">
-            <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-            <p class="name">{{ asset.product_data.name }}</p>
-            <p class="symbol">{{ asset.product_data.symbol }}</p>
-          </div>
-          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" :language="language" widgetName="mbwd-assets"/>
-        </div>
-        <div class="market-data">
-          <p class="profitability">
-            {{ asset.product_data.profitability }}
-          </p>
-          <div class="minimum-value">
-            <p class="min-label">{{ i18n('a partir de') }}</p>
-            <p class="min-value">{{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
-          </div>
-        </div>
-      </a>
+        </a>
+      </template>
     </div>`,
   props: {
     language: {
@@ -78,14 +83,20 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
     assets: {
       type: Array,
       default: () => []
+    },
+    displaySkeleton: {
+      type: Boolean,
+      default: false
     }
   },
   mixins: [window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.configMixins, window.MB_WIDGETS.currencyFilters],// eslint-disable-line
   components: {
-    'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
+    'mbc-asset-badges': MBC_ASSET_BADGES(), // eslint-disable-line
+    'mbwd-fixed-income-asset-card-skeleton': MBWD_FIXED_INCOME_ASSET_CARD_SKELETON() // eslint-disable-line
   },
   data () {
     return {
+      qtdSkeletons: 3,
       translateMap: {
         pt: {
           'valor inicial': 'Valor inicial',

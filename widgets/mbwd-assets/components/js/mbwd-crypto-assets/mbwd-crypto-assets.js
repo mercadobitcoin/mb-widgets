@@ -31,16 +31,16 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           </button>
         </div>
       </div>
-      <mbc-empty-state v-if="cryptoAssets.result.length === 0" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" widgetName="mbwd-assets" />
-      <div v-if="cryptoAssets.result.length > 0" class="result-list">
+      <mbc-empty-state v-if="cptdDisplayEmptyState" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" widgetName="mbwd-assets" />
+      <div v-if="cptdDisplayResultList" class="result-list">
         <div v-if="isViewModeActive('cards')" class="view-mode-list card">
           <slot name="crypto-cards-list" :assets="cryptoAssets.result">
-            <mbwd-crypto-asset-card-list :assets="cryptoAssets.result" :language="language"/>
+            <mbwd-crypto-asset-card-list :display-skeleton="displaySkeleton" :assets="cryptoAssets.result" :language="language"/>
           </slot>
         </div>
         <div v-else class="view-mode-list table">
           <slot name="crypto-table" :assets="cryptoAssets.result">
-            <mbwd-crypto-asset-table ref="refCryptoAssetTable" @sort="changeSortOrder" :initial-sort="cryptoAssets.sort" :initial-order="cryptoAssets.order" :assets="cryptoAssets.result" :language="language" />
+            <mbwd-crypto-asset-table ref="refCryptoAssetTable" :display-skeleton="displaySkeleton" :initial-sort="cryptoAssets.sort" :initial-order="cryptoAssets.order" :assets="cryptoAssets.result" :language="language" @sort="changeSortOrder"/>
           </slot>
         </div>
       </div>
@@ -73,6 +73,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     return {
       intervalId: undefined,
       busy: false,
+      displaySkeleton: false,
       cryptoAssets: {
         limit: 5,
         category: 'all',
@@ -116,6 +117,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     }
   },
   mounted () {
+    this.displaySkeleton = true
     this.getCryptoAssets()
     this.scheduleGetCryptoAssetsInterval()
     document.addEventListener(
@@ -178,6 +180,12 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         'categories',
         this.mobileMode ? 'mobile' : ''
       ]
+    },
+    cptdDisplayResultList () {
+      return this.displaySkeleton || this.cryptoAssets.result.length > 0
+    },
+    cptdDisplayEmptyState () {
+      return !this.displaySkeleton && this.cryptoAssets.result.length === 0
     }
   },
   watch: {
@@ -196,16 +204,16 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       return this.isViewModeActive(viewMode) ? 'active' : ''
     },
     async getCryptoAssets () {
-      if(!this.busy) {
+      if (!this.busy) {
         this.busy = true
         try {
           const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getCryptoAssetsRequestQueryString()}`)
-  
+
           if (response.ok) {
             const data = await response.json() //eslint-disable-line
             const { total_items, response_data } = data //eslint-disable-line
             const { products } = response_data // eslint-disable-line
-  
+
             if (this.cptdShowMore && !this.shouldOverwriteCryptoAssetResult) {
               this.cryptoAssets.result.push(...products ?? []) //eslint-disable-line
             } else {
@@ -213,7 +221,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
               this.shouldOverwriteCryptoAssetResult = false
               this.setCryptoAssetsLimit()
             }
-  
+
             if (this.cptdIsNewCategory) {
               this.cryptoAssets.totalPages = 1
             } else {
@@ -231,7 +239,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           this.cryptoAssets.result = []
           this.cryptoAssets.totalPages = 1
         }
-  
+
+        this.displaySkeleton = false
         this.busy = false
         this.$emit('list-updated', this.cryptoAssets.result.length)
       }
@@ -328,17 +337,20 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       this.getCryptoAssets()
     },
     onViewModeChange (viewMode) {
-      this.viewMode = viewMode
-      this.shouldOverwriteCryptoAssetResult = true
-      this.getCryptoAssets()
-      this.stopGetCryptoAssetsInterval()
-      this.scheduleGetCryptoAssetsInterval()
+      if (this.viewMode !== viewMode) {
+        this.displaySkeleton = true
+        this.viewMode = viewMode
+        this.shouldOverwriteCryptoAssetResult = true
+        this.getCryptoAssets()
+        this.stopGetCryptoAssetsInterval()
+        this.scheduleGetCryptoAssetsInterval()
 
-      this.$root.$emit('track-analytics', {
-        ec: 'web:site:home',
-        en: 'click',
-        lb: `assets:${viewMode}`
-      })
+        this.$root.$emit('track-analytics', {
+          ec: 'web:site:home',
+          en: 'click',
+          lb: `assets:${viewMode}`
+        })
+      }
     },
     resetCryptoBasicQueryDefaultState () {
       this.cryptoAssets.sort = ''

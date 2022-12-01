@@ -25,8 +25,12 @@ const task = (cb) => {
   const AssetBadges = 'foundation/components/asset-badges/c-asset-badges.js'
 
   // Crypto Components (Dependency:3)
+  const CryptoAssetsCardSkeleton =
+    'widgets/mbwd-assets/components/js/mbwd-crypto-assets/mbwd-crypto-asset-card-skeleton.js'
   const CryptoAssetsCardList =
     'widgets/mbwd-assets/components/js/mbwd-crypto-assets/mbwd-crypto-asset-card-list.js'
+  const CryptoAssetsTableSkeleton =
+      'widgets/mbwd-assets/components/js/mbwd-crypto-assets/mbwd-crypto-asset-table-skeleton.js'
   const CryptoAssetsTable =
     'widgets/mbwd-assets/components/js/mbwd-crypto-assets/mbwd-crypto-asset-table.js'
 
@@ -35,8 +39,12 @@ const task = (cb) => {
     'widgets/mbwd-assets/components/js/mbwd-crypto-assets/mbwd-crypto-assets.js'
 
   // Fixed Income Components (Dependency:3)
+  const FixedIncomeAssetsCardSkeleton =
+  'widgets/mbwd-assets/components/js/mbwd-fixed-income-assets/mbwd-fixed-income-asset-card-skeleton.js'
   const FixedIncomeAssetsCardList =
     'widgets/mbwd-assets/components/js/mbwd-fixed-income-assets/mbwd-fixed-income-asset-card-list.js'
+  const FixedIncomeAssetsTableSkeleton =
+    'widgets/mbwd-assets/components/js/mbwd-fixed-income-assets/mbwd-fixed-income-asset-table-skeleton.js'
   const FixedIncomeAssetsTable =
     'widgets/mbwd-assets/components/js/mbwd-fixed-income-assets/mbwd-fixed-income-asset-table.js'
 
@@ -67,9 +75,13 @@ const task = (cb) => {
         Pagination,
         EmptyState,
         // Dependencies:3
+        CryptoAssetsCardSkeleton,
         CryptoAssetsCardList,
+        CryptoAssetsTableSkeleton,
         CryptoAssetsTable,
+        FixedIncomeAssetsCardSkeleton,
         FixedIncomeAssetsCardList,
+        FixedIncomeAssetsTableSkeleton,
         FixedIncomeAssetsTable,
         // Dependencies:2
         CryptoAssets,
@@ -112,7 +124,9 @@ task.displayName = 'Widget: Assets Components'
 task.watchSrc = [
   'foundation/mixins/**',
   'foundation/scss/**',
-  'widgets/mbwd-assets/components/**',
+  'foundation/scss/design-system/apollo/**',
+  'widgets/mbwd-assets/components/js/**',
+  'widgets/mbwd-assets/components/css/**',
   'foundation/components/search-box/**',
   'foundation/components/pagination/**',
   'foundation/components/empty-state/**',

@@ -32,16 +32,16 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           </button>
         </div>
       </div>
-      <mbc-empty-state v-if="fixedIncomeAssets.result.length === 0" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" widgetName="mbwd-assets" />
-      <div v-if="fixedIncomeAssets.result.length > 0" class="result-list">
+      <mbc-empty-state v-if="cptdDisplayEmptyState" :title="cptdEmptyStateConfig.title" :message="cptdEmptyStateConfig.message" :main-state-icon="cptdEmptyStateConfig.img" :cta="cptdEmptyStateConfig.cta" widgetName="mbwd-assets" />
+      <div v-if="cptdDisplayResultList" class="result-list">
         <div v-if="isViewModeActive('cards')" class="view-mode-list card">
           <slot name="fixed-income-cards-list" :assets="fixedIncomeAssets.result">
-            <mbwd-fixed-income-asset-card-list :assets="fixedIncomeAssets.result" :language="language" />
+            <mbwd-fixed-income-asset-card-list :display-skeleton="displaySkeleton" :assets="fixedIncomeAssets.result" :language="language" />
           </slot>
         </div>
         <div v-else class="view-mode-list table">
           <slot name="fixed-income-table" :assets="fixedIncomeAssets.result">
-            <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" @sort="changeSortOrder" :initial-sort="fixedIncomeAssets.sort" :initial-order="fixedIncomeAssets.order" :assets="fixedIncomeAssets.result" :language="language" />
+            <mbwd-fixed-income-asset-table ref="refFixedIncomeAssetTable" :display-skeleton="displaySkeleton" :initial-sort="fixedIncomeAssets.sort" :initial-order="fixedIncomeAssets.order" :assets="fixedIncomeAssets.result" :language="language"  @sort="changeSortOrder"/>
           </slot>
         </div>
       </div>
@@ -78,6 +78,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     return {
       intervalId: undefined,
       busy: false,
+      displaySkeleton: false,
       viewMode: 'table', // [card, table],
       shouldOverwriteFixedIncomeResult: false,
       fixedIncomeAssets: {
@@ -118,6 +119,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     }
   },
   mounted () {
+    this.displaySkeleton = true
     this.getFixedIncomeAssets()
     this.scheduleGetFixedIncomeAssetsInterval()
     document.addEventListener(
@@ -163,6 +165,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         'categories',
         this.mobileMode ? 'mobile' : ''
       ]
+    },
+    cptdDisplayResultList () {
+      return this.displaySkeleton || this.fixedIncomeAssets.result.length > 0
+    },
+    cptdDisplayEmptyState () {
+      return !this.displaySkeleton && this.fixedIncomeAssets.result.length === 0
     }
   },
   watch: {
@@ -218,6 +226,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           this.fixedIncomeAssets.totalPages = 1
         }
 
+        this.displaySkeleton = false
         this.busy = false
         this.$emit('list-updated', this.fixedIncomeAssets.result.length)
       }
@@ -304,17 +313,20 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       this.getFixedIncomeAssets()
     },
     onViewModeChange (viewMode) {
-      this.viewMode = viewMode
-      this.shouldOverwriteFixedIncomeResult = true
-      this.getFixedIncomeAssets()
-      this.stopGetFixedIncomeAssetsInterval()
-      this.scheduleGetFixedIncomeAssetsInterval()
+      if (this.viewMode !== viewMode) {
+        this.displaySkeleton = true
+        this.viewMode = viewMode
+        this.shouldOverwriteFixedIncomeResult = true
+        this.getFixedIncomeAssets()
+        this.stopGetFixedIncomeAssetsInterval()
+        this.scheduleGetFixedIncomeAssetsInterval()
 
-      this.$root.$emit('track-analytics', {
-        ec: 'web:site:home',
-        en: 'click',
-        lb: `fixed-income:${viewMode}`
-      })
+        this.$root.$emit('track-analytics', {
+          ec: 'web:site:home',
+          en: 'click',
+          lb: `fixed-income:${viewMode}`
+        })
+      }
     },
     resetFixedIncomeBasicQueryDefaultState () {
       this.fixedIncomeAssets.sort = ''
