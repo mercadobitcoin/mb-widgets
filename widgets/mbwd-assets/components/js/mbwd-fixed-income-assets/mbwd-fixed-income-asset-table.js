@@ -37,47 +37,59 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
             <th></th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="asset in assets">
-            <td class="asset-cell">
-              <a class="asset" @click="redirectToAssetLandingPage(asset.product_data.symbol)">
-                <img class="icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-                {{ asset.name }}
-              </a>
-            </td>
-            <td class="minimum-value">{{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</td>
-            <td class="profitability">
-              {{ asset.product_data.profitability }}
-            </td>
-            <td class="liquidation-date">{{ asset.product_data.estimated_liquidation_date }}</td>
-            <td class="available-percentage">{{ getPercentageString(asset.product_data.available_percentage.number) }}</td>
-            <td class="status">{{ i18n(asset.product_data.status.short_text)}} </td>
-            <td class="cta-wrapper apollo">
-              <a class="button primary" :class="getButtonClass(asset.product_data.status.value)" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
-                {{ i18n('Investir') }}
-              </a>
-            </td>
-          </tr>
-        </tbody>
+        <template v-if="!displaySkeleton">
+          <tbody>
+            <tr v-for="asset in assets">
+              <td class="asset-cell">
+                <a class="asset" @click="redirectToAssetLandingPage(asset.product_data.symbol)">
+                  <img class="icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+                  {{ asset.name }}
+                </a>
+              </td>
+              <td class="minimum-value">{{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</td>
+              <td class="profitability">
+                {{ asset.product_data.profitability }}
+              </td>
+              <td class="liquidation-date">{{ asset.product_data.estimated_liquidation_date }}</td>
+              <td class="available-percentage">{{ getPercentageString(asset.product_data.available_percentage.number) }}</td>
+              <td class="status">{{ i18n(asset.product_data.status.short_text)}} </td>
+              <td class="cta-wrapper apollo">
+                <a class="button primary" :class="getButtonClass(asset.product_data.status.value)" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
+                  {{ i18n('Investir') }}
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </template>
+        <template v-else>
+          <tbody>
+            <mbwd-fixed-income-asset-table-skeleton-desktop v-for="index in qtdSkeletons" :key="'fixed-income-asset-'+index" class="mbwd-fixed-income-asset-table-skeleton"/>
+          </tbody>
+        </template>
       </table>
       <div v-if="mobileMode" class="fixed-income-asset-table-mobile">
-        <a class="fixed-income-asset" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
-          <div class="attributes">
-            <div class="header">
-              <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-              <div class="asset-data">
-                <p class="name">{{ asset.name }}</p>
-                <p class="symbol">{{ asset.product_data.symbol }}</p>
+        <template v-if="!displaySkeleton">
+          <a class="fixed-income-asset" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
+            <div class="attributes">
+              <div class="header">
+                <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+                <div class="asset-data">
+                  <p class="name">{{ asset.name }}</p>
+                  <p class="symbol">{{ asset.product_data.symbol }}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="market-data">
-          <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" widgetName="mbwd-assets"/>
-            <p class="profitability">
-              {{ asset.product_data.profitability }}
-            </p>
-          </div>
-        </a>
+            <div class="market-data">
+            <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" widgetName="mbwd-assets"/>
+              <p class="profitability">
+                {{ asset.product_data.profitability }}
+              </p>
+            </div>
+          </a>
+        </template>
+        <template v-else>
+          <mbwd-fixed-income-asset-table-skeleton-mobile v-for="index in qtdSkeletons" :key="'fixed-income-asset-'+index"/>
+        </template>
       </div>
     </div>`,
   props: {
@@ -96,16 +108,23 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     initialOrder: {
       type: String,
       default: 'asc'
+    },
+    displaySkeleton: {
+      type: Boolean,
+      default: false
     }
   },
   mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.currencyFilters],// eslint-disable-line
   components: {
-    'mbc-asset-badges': MBC_ASSET_BADGES() // eslint-disable-line
+    'mbc-asset-badges': MBC_ASSET_BADGES(), // eslint-disable-line
+    'mbwd-fixed-income-asset-table-skeleton-desktop': MBWD_FIXED_INCOME_ASSET_TABLE_SKELETON_DESKTOP(), // eslint-disable-line
+    'mbwd-fixed-income-asset-table-skeleton-mobile': MBWD_FIXED_INCOME_ASSET_TABLE_SKELETON_MOBILE() // eslint-disable-line
   },
   data () {
     return {
       sort: this.initialSort,
       order: this.initialOrder,
+      qtdSkeletons: 5,
       translateMap: {
         pt: {
           'ativo': 'Ativo', // eslint-disable-line

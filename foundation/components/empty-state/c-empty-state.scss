@@ -32,6 +32,7 @@
   }
 
   .message {
+    font-family: map-get($font-families, "body");
     font-size: 16px;
     line-height: 140%;
     text-align: center;

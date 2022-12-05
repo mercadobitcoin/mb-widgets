@@ -1,0 +1,135 @@
+@import "../../../../../foundation/scss/design-system/apollo/spacing";
+@import "../../../../../foundation/scss/design-system/apollo/skeleton";
+
+tbody {
+  &.mbwd-crypto-asset-table-skeleton-desktop {
+    tr {
+      .skeleton {
+        height: 28px;
+      }
+
+      td {
+        height: 66px;
+
+        &.asset-cell {
+          display: flex;
+
+          .skeleton.asset-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin-right: map-get($spacing-inline, 'xxxs');
+          }
+
+          .skeleton.name {
+            width: 128px;
+          }
+        }
+
+        &.symbol {
+          .skeleton {
+            width: 56px;
+          }
+        }
+
+        &.sub-type {
+          .skeleton {
+            width: 104px;
+          }
+        }
+
+        &.price {
+          .skeleton {
+            width: 104px;
+          }
+        }
+
+        &.variation {
+          .skeleton {
+            width: 56px;
+          }
+        }
+
+        &.market-cap {
+          .skeleton {
+            width: 128px;
+          }
+        }
+
+        &.cta-wrapper {
+          .skeleton {
+            width: 97px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mbwd-crypto-asset-table-skeleton-mobile {
+  background: map-get($background-color, "primary");
+  padding: map-get($spacing-inset, 'xs');
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: none;
+  transition: all 0.2s ease;
+  border-bottom: solid 1px map-get($secondary-color, "10");
+  text-decoration: none;
+
+  .attributes {
+    width: 100%;
+    display: flex;
+
+    .header {
+      display: flex;
+
+      .asset-icon {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        margin-right: map-get($spacing-inline, 'nano');
+      }
+    }
+
+    .name {
+      width: 112px;
+      height: 22px;
+      margin-bottom: map-get($spacing-stack, 'quarck');
+
+    }
+
+    .type {
+      width: 70px;
+      height: 20px;
+    }
+  }
+
+  .market-data {
+    display: flex;
+    flex-direction: column;
+
+    .price {
+      width: 96px;
+      height: 22px;
+      justify-self: flex-end;
+      margin-bottom: map-get($spacing-stack, 'quarck');
+    }
+
+    .variation {
+      display: flex;
+      justify-content: space-between;
+
+      .value {
+        width: 52px;
+        height: 18px;
+        margin-right: map-get($spacing-inline, 'nano');
+      }
+
+      .label {
+        width: 30px;
+        height: 18px;
+      }
+    }
+  }
+}
