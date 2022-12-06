@@ -164,7 +164,7 @@
   }
 
   .fixed-income-asset-table-mobile {
-    margin-top: 32px;
+    margin-top: 24px;
 
     &>.fixed-income-asset {
       padding: map-get($spacing-inset, 'xs');
@@ -177,37 +177,24 @@
       border: solid 1px transparent;
       transition: all 0.2s ease;
       border-bottom: solid 1px map-get($secondary-color, '10');
+      overflow: hidden;
 
-      &:hover,
-      &:active {
-        border: 1px solid map-get($primary-color, '30');
-        border-radius: 4px;
-      }
-
-      .asset-icon {
+      &>.asset-icon {
         width: 32px;
         height: 32px;
+        margin-right: 8px;
       }
 
-      &>.attributes {
+      .attributes {
         display: flex;
-        align-items: flex-start;
-        margin: 0;
+        flex-direction: column;
+        width: 100%;
         overflow: hidden;
 
-        &>.header {
-          display: flex;
-          align-items: flex-start;
-          width: 100%;
-
-          &>.asset-icon {
-            margin-right: 8px;
-          }
-
-          &>.asset-data {
+          &>.header {
             display: flex;
-            flex-direction: column;
-            white-space: nowrap;
+            justify-content: space-between;
+            width: 100%;
             overflow: hidden;
 
             &>.name {
@@ -215,10 +202,59 @@
 
               color: map-get($neutral-color, '50');
               white-space: nowrap;
-              margin: 0 0 4px;
+              margin: 0 map-get($spacing-inline, 'nano') 0 0;
               overflow: hidden;
               text-overflow: ellipsis;
+              width: 100%;
             }
+
+
+            &>.c-asset-badges {
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              margin-bottom: 8px;
+              width: auto;
+    
+              .badge {
+                display: inline-flex;
+                align-items: center;
+                padding: 2px 4px;
+                border: 1px solid map-get($neutral-color, '10');
+                border-radius: $border-radius-small;
+                @extend %typography-caption;
+    
+                line-height: 100%;
+                color: map-get($neutral-color, '50');
+                white-space: nowrap;
+    
+    
+                .rounded-status {
+                  width: 8px;
+                  height: 8px;
+                  border-radius: 50%;
+                  margin-right: 6px;
+    
+                  &.primary {
+                    background: map-get($tertiary-color, '30');
+                  }
+    
+                  &.secondary {
+                    background: map-get($secondary-color, '50')
+                  }
+    
+                  &.sold-out {
+                    background: map-get($negative-color, '30');
+                  }
+                }
+              }
+            }      
+          }
+
+          .descriptions {
+            display: flex;
+            justify-content: space-between;
+            overflow: hidden;
 
             &>.symbol {
               @extend %typography-body-2;
@@ -227,62 +263,16 @@
               white-space: nowrap;
               margin: 0;
             }
-          }
-        }
-      }
-
-      &>.market-data {
-        display: flex;
-        flex-direction: column;
-
-        &>.badge-wrapper {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          margin-bottom: 8px;
-
-          .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 2px 4px;
-            border: 1px solid map-get($neutral-color, '10');
-            border-radius: $border-radius-small;
-            @extend %typography-caption;
-
-            line-height: 100%;
-            color: map-get($neutral-color, '50');
-            white-space: nowrap;
-
-
-            .rounded-status {
-              width: 8px;
-              height: 8px;
-              border-radius: 50%;
-              margin-right: 6px;
-
-              &.primary {
-                background: map-get($tertiary-color, '30');
-              }
-
-              &.secondary {
-                background: map-get($secondary-color, '50')
-              }
-
-              &.sold-out {
-                background: map-get($negative-color, '30');
-              }
+    
+            &>.profitability {
+              color: map-get($positive-color, '30');
+              @extend %typography-label-2;
+    
+              margin: auto 0 0;
+              white-space: nowrap;
+              text-align: right;
             }
           }
-        }
-
-        &>.profitability {
-          color: map-get($positive-color, '30');
-          @extend %typography-label-2;
-
-          margin: auto 0 0;
-          white-space: nowrap;
-          text-align: right;
-        }
       }
     }
   }

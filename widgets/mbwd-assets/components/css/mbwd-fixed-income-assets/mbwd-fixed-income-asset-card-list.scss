@@ -166,11 +166,11 @@
             animation: progress 1s ease-out forwards;
           }
 
-          .full-empty {
+          .empty {
             stroke: map-get($neutral-color, "20");
           }
 
-          .half-filled {
+          .partly-filled {
             stroke: map-get($neutral-color, "5");
           }
 
