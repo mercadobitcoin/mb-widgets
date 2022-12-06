@@ -143,10 +143,10 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         asset?.product_data?.status?.value.toLowerCase().replaceAll('_', '-')
       ]
     },
-    getCircleClass(asset){
+    getCircleClass (asset) {
       return [
         'circle',
-        asset.product_data.sold_percentage.number === 100 || asset.product_data.sold_percentage.number === 0 ? 'full-empty' : 'half-filled',
+        asset.product_data.sold_percentage.number === 100 || asset.product_data.sold_percentage.number === 0 ? 'full-empty' : 'half-filled'
       ]
     },
     getAssetBadgeAsArray (asset) {
