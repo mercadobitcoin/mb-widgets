@@ -34,7 +34,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
                 <p>{{ i18n('vendido') }}</p>
               </div>
               <svg viewBox="0 0 36 36" class="circular-chart">
-                <path class="circle empty"
+                <path :class="getCircleClass(asset)"
                   stroke-dasharray="100,100"
                   d="M18 2.0845
                     a 15.9155 15.9155 0 0 1 0 31.831
@@ -141,6 +141,12 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         'fixed-income-card',
         'desktop',
         asset?.product_data?.status?.value.toLowerCase().replaceAll('_', '-')
+      ]
+    },
+    getCircleClass(asset){
+      return [
+        'circle',
+        asset.product_data.sold_percentage.number === 100 || asset.product_data.sold_percentage.number === 0 ? 'full-empty' : 'half-filled',
       ]
     },
     getAssetBadgeAsArray (asset) {
