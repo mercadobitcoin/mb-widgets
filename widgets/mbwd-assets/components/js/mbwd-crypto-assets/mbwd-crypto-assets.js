@@ -356,8 +356,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       }
     },
     resetCryptoBasicQueryDefaultState () {
-      this.cryptoAssets.sort = ''
-      this.cryptoAssets.order = ''
+      this.cryptoAssets.sort = 'name'
+      this.cryptoAssets.order = 'asc'
       this.cryptoAssets.currentPage = 1
       this.cryptoAssets.totalPages = 1
       this.cryptoAssets.category = 'all'
