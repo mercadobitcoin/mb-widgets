@@ -159,11 +159,14 @@
           height: 104px;
 
           .circle {
-            stroke: map-get($tertiary-color, "20");
             fill: none;
             stroke-width: 2.8;
             stroke-linecap: round;
             animation: progress 1s ease-out forwards;
+          }
+
+          .percentage-indicator {
+            stroke: map-get($tertiary-color, "20");
           }
 
           .empty {
@@ -251,12 +254,6 @@
         .middle-circle {
           p {
             color: map-get($text-color, "primary");
-          }
-        }
-
-        .circular-chart {
-          .circle {
-            stroke: map-get($neutral-color, "20");
           }
         }
       }

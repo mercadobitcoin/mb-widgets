@@ -40,7 +40,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
                     a 15.9155 15.9155 0 0 1 0 31.831
                     a 15.9155 15.9155 0 0 1 0 -31.831"
                 />
-                <path v-if="asset.product_data.sold_percentage.number > 0" class="circle"
+                <path v-if="asset.product_data.sold_percentage.number > 0" class="circle percentage-indicator"
                   :stroke-dasharray="getSVGSoldPercentageStyle(asset.product_data.sold_percentage.number)"
                   d="M18 2.0845
                     a 15.9155 15.9155 0 0 1 0 31.831
