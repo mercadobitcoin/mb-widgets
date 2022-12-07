@@ -68,7 +68,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
               {{ asset.product_data.profitability }}
             </p>
             <div class="minimum-value">
-              <p class="min-label">{{ i18n('a partir de') }}</p>
+              <p class="min-label">{{ i18n('a partir de').toLowerCase() }}</p>
               <p class="min-value">{{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
             </div>
           </div>
