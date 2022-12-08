@@ -225,7 +225,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
 
             if (this.cptdShowMore && !this.shouldOverwriteCryptoAssetResult) {
               this.cryptoAssets.result.push(...products ?? []) //eslint-disable-line
-              
+
             } else {
               this.cryptoAssets.result = products ?? [] //eslint-disable-line
               this.shouldOverwriteCryptoAssetResult = false
@@ -283,11 +283,11 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
           this.cryptoAssets.offset = (this.cryptoAssets.currentPage - 1) * this.cryptoAssets.limit
         }
       }
-    }, 
+    },
     getCryptoAssetsRequestQueryString () {
       this.setCryptoAssetsLimit()
 
-      const { type, sort, order, currentPage, totalPages, limit} =
+      const { type, sort, order, limit } =
       this.cryptoAssets
       const searchQueryStringsMap = {
         type,
@@ -296,34 +296,6 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         order,
         search: this.search
       }
-
-      // if (this.cptdIsNewCategory) {
-      //   searchQueryStringsMap.sort = 'release_date'
-      //   searchQueryStringsMap.order = 'desc'
-      //   return this.mxCreateUrlQueryString(searchQueryStringsMap)
-      // }
-
-      // if (this.search) {
-      //   searchQueryStringsMap.search = this.search
-      // }
-
-      // if (this.cptdIsUpTrendCategory) {
-      //   searchQueryStringsMap.sort = 'variation'
-      //   searchQueryStringsMap.order = 'desc'
-      // }
-
-      // if (this.cptdIsDownTrendCategory) {
-      //   searchQueryStringsMap.sort = 'variation'
-      //   searchQueryStringsMap.order = 'asc'
-      // }
-
-      // if (totalPages > 1) {
-      //   if (this.shouldOverwriteCryptoAssetResult && this.cptdShowMore) {
-      //     searchQueryStringsMap.offset = 0
-      //   } else {
-      //     searchQueryStringsMap.offset = (currentPage - 1) * limit
-      //   }
-      // }
 
       return this.mxCreateUrlQueryString(searchQueryStringsMap)
     },
@@ -341,14 +313,11 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       return this.viewMode === viewMode
     },
     changeCategory (category) {
-
       this.cryptoAssets.category = category
 
-      // if (this.cptdIsNewCategory && this.search) {
       if (this.search) {
         this.$parent.$emit('clear-search')
       } else {
-        // this.resetCryptoBasicQueryDefaultState()
         this.shouldOverwriteCryptoAssetResult = true
         this.setCryptoAssetsRequestQueryString()
         if (this.cptdIsAllCategory && this.cryptoAssets.sort === '' && this.cryptoAssets.order === '') {

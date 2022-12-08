@@ -253,11 +253,11 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
           this.fixedIncomeAssets.offset = (this.fixedIncomeAssets.currentPage - 1) * this.fixedIncomeAssets.limit
         }
       }
-    }, 
+    },
     getFixedIncomeAssetsRequestQueryString () {
       this.setFixedIncomeAssetsLimit()
 
-      const { type, sort, category, order, currentPage, totalPages, limit } =
+      const { type, sort, order, limit } =
         this.fixedIncomeAssets
       const searchQueryStringsMap = {
         type,
