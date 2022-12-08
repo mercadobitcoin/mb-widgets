@@ -165,16 +165,20 @@
             animation: progress 1s ease-out forwards;
           }
 
-          .percentage-indicator {
-            stroke: map-get($tertiary-color, "20");
-          }
-
           .empty {
             stroke: map-get($neutral-color, "20");
           }
 
           .partly-filled {
             stroke: map-get($neutral-color, "5");
+          }
+
+          .percentage-partly-filled {
+            stroke: map-get($tertiary-color, "20");
+          }
+
+          .percentage-full-filled {
+            stroke: map-get($neutral-color, "20");
           }
 
           @keyframes progress {
@@ -199,11 +203,23 @@
             @extend %typography-body-3;
 
             text-align: center;
-            color: map-get($neutral-color, "30");
             margin: 0;
-
+          
             strong {
               @extend %typography-label-3;
+            }
+          }
+
+          &.partly-filled {
+            p {
+              color: map-get($neutral-color, "30");
+              
+            }
+          }
+
+          &:not(.partly-filled) {
+            p {
+              color: map-get($text-color, "primary");
             }
           }
         }
@@ -241,19 +257,6 @@
 
           &.secondary-market-description {
             display: block;
-          }
-        }
-      }
-    }
-
-    &.secondary-market,
-    &.finished,
-    &.sold-out,
-    &.future{
-      .sold-percentage{
-        .middle-circle {
-          p {
-            color: map-get($text-color, "primary");
           }
         }
       }

@@ -29,7 +29,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
               </div>
             </div>
             <div v-if="!isSecondaryMarket(asset)" class="sold-percentage">
-              <div class="middle-circle">
+              <div :class="getMiddleCircleClass(asset)">
                 <p><strong>{{ getPercentageString(asset.product_data.sold_percentage.number) }}</strong></p>
                 <p>{{ i18n('vendido') }}</p>
               </div>
@@ -40,7 +40,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
                     a 15.9155 15.9155 0 0 1 0 31.831
                     a 15.9155 15.9155 0 0 1 0 -31.831"
                 />
-                <path v-if="asset.product_data.sold_percentage.number > 0" class="circle percentage-indicator"
+                <path v-if="asset.product_data.sold_percentage.number > 0" :class="getPercentageCircleClass(asset)"
                   :stroke-dasharray="getSVGSoldPercentageStyle(asset.product_data.sold_percentage.number)"
                   d="M18 2.0845
                     a 15.9155 15.9155 0 0 1 0 31.831
@@ -143,10 +143,22 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         asset?.product_data?.status?.value.toLowerCase().replaceAll('_', '-')
       ]
     },
+    getMiddleCircleClass (asset) {
+      return [
+        'middle-circle',
+        asset.product_data.sold_percentage.number !== 100 && asset.product_data.sold_percentage.number !== 0 ? 'partly-filled' : ''
+      ]
+    },
     getCircleClass (asset) {
       return [
         'circle',
         asset.product_data.sold_percentage.number === 100 || asset.product_data.sold_percentage.number === 0 ? 'empty' : 'partly-filled'
+      ]
+    },
+    getPercentageCircleClass (asset) {
+      return [
+        'circle',
+        asset.product_data.sold_percentage.number === 100 ? 'percentage-full-filled' : 'percentage-partly-filled'
       ]
     },
     getAssetBadgeAsArray (asset) {
