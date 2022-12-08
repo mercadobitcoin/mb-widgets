@@ -256,14 +256,16 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     getFixedIncomeAssetsRequestQueryString () {
       this.setFixedIncomeAssetsLimit()
+      this.setFixedIncomeAssetsRequestQueryString()
 
-      const { type, sort, order, limit } =
+      const { type, sort, order, limit, offset } =
         this.fixedIncomeAssets
       const searchQueryStringsMap = {
         type,
         limit,
         sort,
         order,
+        offset,
         search: this.search
       }
 
@@ -283,14 +285,13 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       return this.viewMode === viewMode
     },
     changeCategory (category) {
-      // this.resetFixedIncomeBasicQueryDefaultState()
       this.fixedIncomeAssets.category = category
 
       if (this.search) {
         this.$parent.$emit('clear-search')
       } else {
-        // this.resetCryptoBasicQueryDefaultState()
         this.shouldOverwriteFixedIncomeResult = true
+        this.resetPaginationQuery()
         this.setFixedIncomeAssetsRequestQueryString()
         if (this.cptdIsAllCategory && this.fixedIncomeAssets.sort === '' && this.fixedIncomeAssets.order === '') {
           this.fixedIncomeAssets.sort = 'name'
@@ -336,20 +337,20 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         })
       }
     },
-    resetFixedIncomeBasicQueryDefaultState () {
-      this.fixedIncomeAssets.sort = ''
-      this.fixedIncomeAssets.order = ''
+    resetPaginationQuery () {
       this.fixedIncomeAssets.currentPage = 1
       this.fixedIncomeAssets.totalPages = 1
-      this.fixedIncomeAssets.category = 'all'
-      this.shouldOverwriteFixedIncomeResult = true
+      this.fixedIncomeAssets.offset = 0
     },
     resetSearchQuery () {
       this.fixedIncomeAssets.sort = ''
       this.fixedIncomeAssets.order = ''
-      this.fixedIncomeAssets.currentPage = 1
-      this.fixedIncomeAssets.totalPages = 1
+      this.resetPaginationQuery()
       this.shouldOverwriteFixedIncomeResult = true
+    },
+    resetFixedIncomeBasicQueryDefaultState () {
+      this.resetSearchQuery()
+      this.fixedIncomeAssets.category = 'all'
     },
     setFixedIncomeAssetsLimit () {
       const limit = this.viewMode === 'cards' ? 3 : 5

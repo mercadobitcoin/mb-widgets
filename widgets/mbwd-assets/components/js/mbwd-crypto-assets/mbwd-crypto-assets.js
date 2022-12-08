@@ -286,14 +286,16 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     getCryptoAssetsRequestQueryString () {
       this.setCryptoAssetsLimit()
+      this.setCryptoAssetsRequestQueryString()
 
-      const { type, sort, order, limit } =
+      const { type, sort, order, limit, offset } =
       this.cryptoAssets
       const searchQueryStringsMap = {
         type,
         limit,
         sort,
         order,
+        offset,
         search: this.search
       }
 
@@ -319,6 +321,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.$parent.$emit('clear-search')
       } else {
         this.shouldOverwriteCryptoAssetResult = true
+        this.resetPaginationQuery()
         this.setCryptoAssetsRequestQueryString()
         if (this.cptdIsAllCategory && this.cryptoAssets.sort === '' && this.cryptoAssets.order === '') {
           this.cryptoAssets.sort = 'name'
@@ -364,20 +367,20 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         })
       }
     },
-    resetCryptoBasicQueryDefaultState () {
-      this.cryptoAssets.sort = ''
-      this.cryptoAssets.order = ''
+    resetPaginationQuery () {
       this.cryptoAssets.currentPage = 1
       this.cryptoAssets.totalPages = 1
-      this.cryptoAssets.category = 'all'
-      this.shouldOverwriteCryptoAssetResult = true
+      this.cryptoAssets.offset = 0
     },
     resetSearchQuery () {
       this.cryptoAssets.sort = ''
       this.cryptoAssets.order = ''
-      this.cryptoAssets.currentPage = 1
-      this.cryptoAssets.totalPages = 1
+      this.resetPaginationQuery()
       this.shouldOverwriteCryptoAssetResult = true
+    },
+    resetCryptoBasicQueryDefaultState () {
+      this.resetSearchQuery()
+      this.cryptoAssets.category = 'all'
     },
     setCryptoAssetsLimit () {
       const limit = this.viewMode === 'cards' ? 4 : 5
