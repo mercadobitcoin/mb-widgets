@@ -1,0 +1,251 @@
+@import "../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../foundation/scss/variables";
+@import "../../../../foundation/scss/fonts";
+
+.mbwd-fixed-income-simulator {
+  h2 {
+    margin:0px;
+    color: map-get($neutral-color, "50");
+  }
+  h3 {
+    margin:0px;
+    color: map-get($neutral-color, "50");
+  }
+  p {
+    margin:0px;
+    color: map-get($neutral-color, "40");
+  }
+
+  .main-title {
+    padding: 0 8px;
+    margin-bottom: 16px;
+
+    font-family: map-get($font-families, "title");
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 130%;
+  }
+  .main-subtitle {
+    padding: 0 8px;
+    margin-bottom: 24px;
+
+    font-family: map-get($font-families, "body");
+    font-weight: normal;;
+    font-size: 16px;
+    line-height: 140%;
+  }
+  .auxiliar-title {
+    font-family: map-get($font-families, "title");
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 130%;
+  }
+  .auxiliar-subtitle {
+    font-family: map-get($font-families, "body");
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 140%;
+  }
+
+  .main-wrapper {
+    .interactive-components-wrapper {
+      border: 1px solid map-get($neutral-color,'5');
+      padding: 24px 16px 16px 16px;
+      border-radius: 4px;
+      margin-bottom: 32px;
+  
+      .auxiliar-title {
+        margin-bottom: 12px;
+      }
+      .auxiliar-subtitle {
+        margin-bottom: 16px;
+      }
+      .investment-input-wrapper {
+        margin-bottom: 32px;
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        align-items: center;
+
+        .mbwd-form-input-wrapper {
+          .input-wrapper {
+            display: flex;
+            position: relative;
+
+            .prefix {
+              position: absolute;
+              transform: translateY(-50%);
+              top: 50%;
+              left: 8px;
+              font-family: map-get($font-families, "body");
+              font-weight: bold;
+              font-size: 20px;
+              color: map-get($neutral-color, '50');
+            }
+
+            input {
+              border-radius: 8px;
+              width: 100%;
+              border: 2px solid map-get($secondary-color, '10');
+              min-height: 48px;
+              background: transparent;
+              padding-left: 40px;
+              font-family: map-get($font-families, "body");
+              font-weight: bold;
+              font-size: 20px;
+              color: map-get($neutral-color, '50');
+
+              &:focus {
+                background-color: map-get($primary-color, '5');
+                border-color: map-get($primary-color, '30');
+                outline: none;
+              }
+
+              &.error {
+                border-color: map-get($negative-color, '30');
+              }
+            }
+          }
+          .errorMessage {
+            margin-top: 4px;
+            font-family: map-get($font-families, "body");
+            position: absolute;
+            color: map-get($negative-color, '30');
+            font-size: 10px;
+          }
+        }
+        .quick-increment-wrapper {
+          display: flex;
+          justify-content: space-between;
+          gap: 16px;
+
+          .quick-increment-button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            padding: 0px;
+            background-color: map-get($primary-color, '30');
+            color: #FFFFFF;
+            border: none;
+          }
+        }
+      }
+      .estimated-amount {
+        margin-bottom: 24px;
+        font-family: map-get($font-families, "body");
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 130%;
+        color: map-get($neutral-color, "50");
+      }
+
+      .button {
+        padding: 16px 24px;
+        border-radius: 4px;
+
+        background: map-get($primary-color,"30");
+        font-family: map-get($font-families, "body");
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 100%;
+        letter-spacing: 0.8px;
+        color: #FFFFFF;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+      }
+    }
+    .comparison-components-wrapper {
+      padding: 0 8px;
+      
+      .auxiliar-title {
+        margin-bottom: 12px;
+      }
+      .auxiliar-subtitle {
+        margin-bottom: 24px;
+      }
+      .comparison-graph-bar-wrapper {
+        .auxiliar-title {
+          margin-bottom: 24px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $tablet-treshold) {
+  .mbwd-fixed-income-simulator {
+    .main-title {
+      font-size: 48px;
+      padding: 0;
+    }
+    .main-subtitle {
+      font-size: 18px;
+      margin-bottom: 32px;
+      padding: 0;
+    }
+    .auxiliar-title {
+      font-size: 24px;
+    }
+    .auxiliar-subtitle {
+      font-size: 16px;
+    }
+    .main-wrapper {
+      display: flex;
+      justify-content: space-between;
+      gap: 32px;
+
+      .interactive-components-wrapper {
+        margin-bottom: 0px;
+        padding: 32px;
+        width: 60%;
+
+        .investment-input-wrapper {
+          gap: 24px;
+
+          .mbwd-form-input-wrapper {
+            .input-wrapper {
+              display: flex;
+              position: relative;
+  
+              .prefix {
+                left: 16px;
+                font-size: 48px;
+              }
+  
+              input {
+                min-height: 78px;
+                padding-left: 88px;
+                font-size: 48px;
+              }
+            }
+            .errorMessage {
+              margin-top: 4px;
+              font-size: 10px;
+            }
+          }
+          .quick-increment-wrapper {
+            .quick-increment-button {
+              width: 52px;
+              height: 52px;
+            }
+          }
+        }
+        .estimated-amount {
+          font-size: 56px;
+          margin-bottom: 32px;
+        }
+        .button {
+          max-width: 270px;
+        }
+      }
+      .comparison-components-wrapper {
+        border: 1px solid map-get($neutral-color,'5');
+        padding: 32px;
+        border-radius: 4px;
+        flex: 0 0 33%;
+      }
+    }
+  }
+}

@@ -10,7 +10,12 @@ const replace = require('gulp-replace')
 const footer = require('gulp-footer')
 
 const task = (cb) => {
-  // Main Component (Dependency:1)
+  // Mixins
+  const CurrencyMixins = 'foundation/mixins/currencyMixins.js'
+  const CurrencyFilters = 'foundation/mixins/filters/currencyFilters.js'
+  // Depedency
+  const FormInput = 'widgets/mbwd-fixed-income-simulator/components/js/mbwd-form-input/mbwd-form-input.js'
+  const AssetsComparisonGrphBar = 'widgets/mbwd-fixed-income-simulator/components/js/mbwd-assets-comparison-graph-bar/mbwd-assets-comparison-graph-bar.js'
   const MbdwFixedIncomeSimulator = 'widgets/mbwd-fixed-income-simulator/components/js/mbwd-fixed-income-simulator.js'
   // Main Component Path
   const MainComponentJSpath = 'widgets/mbwd-fixed-income-simulator/components/js/main.js'
@@ -18,7 +23,10 @@ const task = (cb) => {
   pump(
     [
       src([
-        // Main Component (Dependency:1)
+        CurrencyMixins,
+        CurrencyFilters,
+        FormInput,
+        AssetsComparisonGrphBar,
         MbdwFixedIncomeSimulator,
         // Main
         MainComponentJSpath,

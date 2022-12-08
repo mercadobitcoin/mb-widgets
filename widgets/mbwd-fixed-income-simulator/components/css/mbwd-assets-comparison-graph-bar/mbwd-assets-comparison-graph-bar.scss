@@ -1,0 +1,59 @@
+@import "../../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../../foundation/scss/design-system/apollo/scrollbar";
+@import "../../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../../foundation/scss/variables";
+
+.graph-bars-wrapper {
+  display: flex;
+  justify-content: space-around;
+
+  .graph-bar-item {
+    .bar-container {
+      display: flex;
+      height: 120px;
+      width: 80px;
+      margin-bottom: 12px;
+
+      .bar-filler {
+        align-self: flex-end;
+        max-height: 100%;
+        height: 90%;
+        width: 100%;
+        background-color: map-get($primary-color, "30");
+        border-radius: 4px;
+      }
+    }
+    .asset-name {
+      font-family: map-get($font-families, "body");
+      margin-bottom: 8px;
+      color: map-get($neutral-color, "50");
+      font-size: 14px;
+    }
+    .value {
+      font-family: map-get($font-families, "body");
+      margin-bottom: 4px;
+      color: map-get($neutral-color, "50");
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .yield {
+      font-family: map-get($font-families, "body");
+      color: map-get($neutral-color, "30");
+      font-size: 14px;
+    }
+    &:nth-child(2) {
+      .bar-container {
+        .bar-filler {
+          background-color: map-get($primary-color, "20");
+        }
+      }
+    }
+    &:nth-child(3) {
+      .bar-container {
+        .bar-filler {
+          background-color: map-get($primary-color, "10");
+        }
+      }
+    }
+  }
+}

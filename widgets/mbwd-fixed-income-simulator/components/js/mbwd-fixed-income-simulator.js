@@ -5,93 +5,155 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
       <p class="main-subtitle">Veja quanto o seu dinheiro pode render com ENER02.</p>
       <div class="main-wrapper">
         <div class="interactive-components-wrapper">
-          <h3 class="auxiliar-title">Quanto você gostaria de investir?</h3>
+          <h3 class="auxiliar-title">Qual valor você gostaria de investir?</h3>
           <p class="auxiliar-subtitle">O investimento inicial em Renda Fixa Digital é de R$ 100.</p>
-          <div>
-            <input></input>
-            <div>
-              <button>+</button>
-              <button>-</button>
+          <div class="investment-input-wrapper">
+            <form-input
+              prefix="R$"
+              type="text"
+              mask="true"
+              id="investedAmount"
+              clear-rule-regex="[^0-9]*$" 
+              placeholder="0,00"
+              :maxLength="input.maxLength"
+              :valid.sync="input.valid"
+              :value.sync="investedAmount.maskedValue"
+              :prevent-back-space="false"
+              :mask-callback="inputMaskCallback"
+              :validate-callback="validateInput"
+              :validation-regex="/[0-9.,]/gi"
+              :validation-regex-error="minimumAmountError" \
+            />
+            <div class="quick-increment-wrapper">
+              <button class="quick-increment-button" @click="quickDecrementInvestedAmount">-</button>
+              <button class="quick-increment-button" @click="quickIncrementInvestedAmount">+</button>
             </div>
           </div>
-          <h3>Valor que você receberá no vencimento</h3>
-          <p>{{estimatedReturnAmount}}</p>
-          <a :href=basicExperiencePairTradingUrl>Quero Investir</a>
+          <h3 class="auxiliar-title">Valor que você receberá no vencimento</h3>
+          <p class="auxiliar-subtitle">Considerando valor investido, rendimento aproximado e preço de lançamento.</p>
+          <p class="estimated-amount"> {{ asset.estimatedYieldAmount | ftFormatCurrency(2) }}</p>
+          <a class="button" :href=basicExperiencePairTradingUrl>Quero Investir</a>
         </div>
         <div class="comparison-components-wrapper">
           <div>
-            <h3>Prazo estimado de pagamento: dezembro/2022</h3>
+            <h3 class="auxiliar-title">Prazo estimado de pagamento: dezembro/2022</h3>
             <div>
-              <p v-if="asset.partialExpiration">Como este ativo possui liquidações parciais, você receberá remunerações fracionadas até o vencimento do investimento.</p>
-              <p v-else> Data prevista para o recebimento da rentabilidade total do ativo.</p>
-              <p>Para mais detalhes, acesse a <a :href="asset.detailsPdfUrl">lâmina do ativo</a>.</p>
+              <p class="auxiliar-subtitle" v-if="asset.partialExpiration">Como este ativo possui liquidações parciais, você receberá remunerações fracionadas até o vencimento do investimento.</p>
+              <p class="auxiliar-subtitle" v-else> Data prevista para o recebimento da rentabilidade total do ativo.</p>
+              <p class="auxiliar-subtitle">Para mais detalhes, acesse a <a :href="asset.detailsPdfUrl">lâmina do ativo</a>.</p>
             </div>
           </div>
-
-          <div class="comparison-graph-bar-wrapper">
-            <h3>Comparativo com outros investimentos</h3>
-            <div class="bars-wrapper">
-
-              <div class="graph-bar-item">
-                <div class="bar-container">
-                  <i class="bar-filler"> </i>
-                </div>
-                <p>{{ asset.displayName }}</p>
-                <p>{{ estimatedReturnAmount }}</p>
-                <p>{{ asset.estimatedYieldLabel }}</p>
-              </div>
-              
-              <div class="graph-bar-item">
-                <div class="bar-container">
-                  <i class="bar-filler"> </i>
-                </div>
-                <p>{{ investmentAssetsComparisonItem01.displayName }}</p>
-                <p>{{ estimatedReturnAmount }}</p>
-                <p>{{ investmentAssetsComparisonItem01.estimatedYieldLabel }}</p>
-              </div>
-
-            </div>
-          </div>
-
+          <assets-comparison-graph-bar :baseAsset="asset" :comparissonAssets="investmentAssetsComparison" />
         </div>
       </div>
     </div>
   `,
   components: {
+    'form-input': MBWD_FORM_INPUT(),// eslint-disable-line
+    'assets-comparison-graph-bar': MBWD_ASSETS_COMPARISON_GRAPH_BAR(),// eslint-disable-line
   },
+  mixins: [
+    window.MB_WIDGETS.currencyFilters,
+    window.MB_WIDGETS.currencyMixins,
+  ], //eslint-disable-line
   data () {
+    const el = document.getElementById('mbwd-fixed-income-simulator')
+    const dataSetAsset = JSON.parse(el.dataset.asset);
+    const dataSetInvestmentAssetsComparison = JSON.parse(el.dataset.investmentAssetsComparison);
     return {
-      estimatedReturnAmount: 105.50,
-      interestRate: 0.05,
-      asset: {
-        displayName: 'ENER02',
-        symbol: 'ENER02',
-        monthlyYield: 0.034,
-        estimatedYieldLabel: "18%", // usado no grafico 
-        expirationDate: 1684699915,
-        partialExpiration: true,
-        investmentMinimumAmount: 100,
-        detailsPdfUrl: 'https://www.mercadobitcoin.com.br/wp-content/uploads/2022/08/Lamina_MBFP11_02082022.pdf',
+      investedAmount: {
+        rawValue: dataSetAsset.investmentMinimumAmount,
+        maskedValue: this.$options.filters.ftFormatCurrency(dataSetAsset.investmentMinimumAmount, 2, true),
       },
-      investmentAssetsComparisonItem01: {
-        displayName: 'CDI',
-        monthlyYield: 0.025, // usado para calculo de retorno
-        estimatedYieldLabel: "13%" // usado no grafico 
-      },
-      investmentAssetsComparisonItem02: {
-        displayName: 'Poupança',
-        monthlyYield: 0.011, // usado para calculo de retorno
-        estimatedYieldLabel: "8%" // usado no grafico 
-      },
+      quickIncrementDefaultValue: 100,
+      asset: dataSetAsset,
+      investmentAssetsComparison: dataSetInvestmentAssetsComparison,
+      input: {
+        valid: true,
+        errorMessage: `O valor mínimo é `,
+        maxLength: 12,
+        maxValue: 9999999.99
+      }
     }
   },
   computed: {
-    basicExperiencePairTradingUrl () {
-      return `/plataforma/clue/?command=/trade/basic/${this.asset.symbol}/brl`
+    basicExperiencePairTradingUrl() {
+      return `/plataforma/clue/?command=/trade/basic/${this.asset.symbol}/brl`;
+    },
+    minimumAmountError() {
+      return this.input.errorMessage + this.$options.filters.ftFormatCurrency(this.asset.investmentMinimumAmount, 2);
+    },
+  },
+  watch: {
+    'investedAmount.maskedValue': function (newAmount) {
+      const rawValue = parseFloat(this.mxClearMasks(String(newAmount)))
+      this.investedAmount.rawValue = rawValue;
+      this.asset.estimatedYieldAmount = this.getEstimateReturnAmount(rawValue, this.asset.monthlyInterestRate, this.asset.expirationDate);
+
+      for (i = 0, j = this.investmentAssetsComparison.length; i < j; i++) {
+        this.investmentAssetsComparison[i].estimatedYieldAmount = this.getEstimateReturnAmount(rawValue, this.investmentAssetsComparison[i].monthlyInterestRate, this.asset.expirationDate);
+      }
     },
   },
   methods: {
-    onCryptoAssetsUpdated () {
+    cssItemPercentual(value) {
+      return {
+        height: (value/this.asset.monthlyInterestRate)*100 + '%'
+      };
+    },
+    getEstimateReturnAmount(investedAmount, interestRate, assetExpiration) {
+      const assetExpirationDate = new Date(assetExpiration);
+      const time = this.diffInMonths(new Date(assetExpirationDate),new Date());
+      return investedAmount * ((1 + interestRate) ** time);
+    },
+    diffInMonths(end, start) {
+      var timeDiff = Math.abs(end.getTime() - start.getTime());
+      return Math.round(timeDiff / (2e3 * 3600 * 365.25));
+    },
+    quickIncrementInvestedAmount() {
+      if (this.investedAmount.rawValue + this.quickIncrementDefaultValue > 9999999.99) {
+        this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(9999999.99, 2);
+        return
+      }
+      this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(
+        this.investedAmount.rawValue + this.quickIncrementDefaultValue, 2
+      );
+      this.validateInput(this.investedAmount.maskedValue);
+    },
+    quickDecrementInvestedAmount() {
+      if (this.investedAmount.rawValue - this.quickIncrementDefaultValue < 0) {
+        this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(0, 2);
+        return
+      }
+      this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(
+        this.investedAmount.rawValue - this.quickIncrementDefaultValue, 2
+      );
+
+      this.validateInput(this.investedAmount.maskedValue);
+    },
+    validateInput: function (value) {
+      const unmaskedValue = parseFloat(this.mxClearMasks(value))
+      if (unmaskedValue) {
+        if (unmaskedValue < parseFloat(this.asset.investmentMinimumAmount)) {
+          this.input.valid = false
+          return false
+        }
+        this.input.valid = true
+        return true
+      }
+      this.input.valid = false
+      return false
+    },
+    inputMaskCallback: function (value) {
+      if (value) {
+        // Removing all non numbers characters
+        value = value.replace(/[\D]+/g, '')
+
+        // Parsing value to Int and then to String
+        value = String(parseInt(value))
+        return this.$options.filters.ftFormatNumber(value / Math.pow(10, 2),2)
+      }
+      return value
     },
   }
 })
