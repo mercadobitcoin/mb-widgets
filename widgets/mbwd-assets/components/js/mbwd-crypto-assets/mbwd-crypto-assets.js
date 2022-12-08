@@ -75,6 +75,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       busy: false,
       displaySkeleton: false,
       cryptoAssets: {
+        type: 'crypto',
+        offset: 0,
         limit: 5,
         category: 'all',
         sort: 'name',
@@ -193,9 +195,13 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
   },
   watch: {
     search (value, oldValue) {
-      if (!oldValue && value) {
+      if (oldValue && !value) {
+        this.resetSearchQuery()
+      } else {
         this.resetCryptoBasicQueryDefaultState()
       }
+
+      this.setCryptoAssetsRequestQueryString()
       this.getCryptoAssets()
     }
   },
@@ -219,6 +225,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
 
             if (this.cptdShowMore && !this.shouldOverwriteCryptoAssetResult) {
               this.cryptoAssets.result.push(...products ?? []) //eslint-disable-line
+              
             } else {
               this.cryptoAssets.result = products ?? [] //eslint-disable-line
               this.shouldOverwriteCryptoAssetResult = false
@@ -248,45 +255,75 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.$emit('list-updated', this.cryptoAssets.result.length)
       }
     },
-    getCryptoAssetsRequestQueryString () {
-      this.setCryptoAssetsLimit()
-
-      const { sort, order, currentPage, totalPages, limit } =
-      this.cryptoAssets
-      const searchQueryStringsMap = {
-        type: 'crypto',
-        limit,
-        sort,
-        order
-      }
-
+    setCryptoAssetsRequestQueryString () {
       if (this.cptdIsNewCategory) {
-        searchQueryStringsMap.sort = 'release_date'
-        searchQueryStringsMap.order = 'desc'
-        return this.mxCreateUrlQueryString(searchQueryStringsMap)
-      }
-
-      if (this.search) {
-        searchQueryStringsMap.search = this.search
+        this.cryptoAssets.sort = 'release_date'
+        this.cryptoAssets.order = 'desc'
       }
 
       if (this.cptdIsUpTrendCategory) {
-        searchQueryStringsMap.sort = 'variation'
-        searchQueryStringsMap.order = 'desc'
+        this.cryptoAssets.sort = 'variation'
+        this.cryptoAssets.order = 'desc'
       }
 
       if (this.cptdIsDownTrendCategory) {
-        searchQueryStringsMap.sort = 'variation'
-        searchQueryStringsMap.order = 'asc'
+        this.cryptoAssets.sort = 'variation'
+        this.cryptoAssets.order = 'asc'
       }
 
-      if (totalPages > 1) {
+      if (this.cptdIsAllCategory) {
+        this.cryptoAssets.sort = 'name'
+        this.cryptoAssets.order = 'asc'
+      }
+
+      if (this.cryptoAssets.totalPages > 1) {
         if (this.shouldOverwriteCryptoAssetResult && this.cptdShowMore) {
-          searchQueryStringsMap.offset = 0
+          this.cryptoAssets.offset = 0
         } else {
-          searchQueryStringsMap.offset = (currentPage - 1) * limit
+          this.cryptoAssets.offset = (this.cryptoAssets.currentPage - 1) * this.cryptoAssets.limit
         }
       }
+    }, 
+    getCryptoAssetsRequestQueryString () {
+      this.setCryptoAssetsLimit()
+
+      const { type, sort, order, currentPage, totalPages, limit} =
+      this.cryptoAssets
+      const searchQueryStringsMap = {
+        type,
+        limit,
+        sort,
+        order,
+        search: this.search
+      }
+
+      // if (this.cptdIsNewCategory) {
+      //   searchQueryStringsMap.sort = 'release_date'
+      //   searchQueryStringsMap.order = 'desc'
+      //   return this.mxCreateUrlQueryString(searchQueryStringsMap)
+      // }
+
+      // if (this.search) {
+      //   searchQueryStringsMap.search = this.search
+      // }
+
+      // if (this.cptdIsUpTrendCategory) {
+      //   searchQueryStringsMap.sort = 'variation'
+      //   searchQueryStringsMap.order = 'desc'
+      // }
+
+      // if (this.cptdIsDownTrendCategory) {
+      //   searchQueryStringsMap.sort = 'variation'
+      //   searchQueryStringsMap.order = 'asc'
+      // }
+
+      // if (totalPages > 1) {
+      //   if (this.shouldOverwriteCryptoAssetResult && this.cptdShowMore) {
+      //     searchQueryStringsMap.offset = 0
+      //   } else {
+      //     searchQueryStringsMap.offset = (currentPage - 1) * limit
+      //   }
+      // }
 
       return this.mxCreateUrlQueryString(searchQueryStringsMap)
     },
@@ -304,17 +341,20 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       return this.viewMode === viewMode
     },
     changeCategory (category) {
-      this.resetCryptoBasicQueryDefaultState()
+
       this.cryptoAssets.category = category
 
-      if (this.cptdIsAllCategory && this.cryptoAssets.sort === '' && this.cryptoAssets.order === '') {
-        this.cryptoAssets.sort = 'name'
-        this.cryptoAssets.order = 'asc'
-      }
-
-      if (this.cptdIsNewCategory && this.search) {
+      // if (this.cptdIsNewCategory && this.search) {
+      if (this.search) {
         this.$parent.$emit('clear-search')
       } else {
+        // this.resetCryptoBasicQueryDefaultState()
+        this.shouldOverwriteCryptoAssetResult = true
+        this.setCryptoAssetsRequestQueryString()
+        if (this.cptdIsAllCategory && this.cryptoAssets.sort === '' && this.cryptoAssets.order === '') {
+          this.cryptoAssets.sort = 'name'
+          this.cryptoAssets.order = 'asc'
+        }
         this.getCryptoAssets()
       }
 
@@ -356,11 +396,18 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       }
     },
     resetCryptoBasicQueryDefaultState () {
-      this.cryptoAssets.sort = 'name'
-      this.cryptoAssets.order = 'asc'
+      this.cryptoAssets.sort = ''
+      this.cryptoAssets.order = ''
       this.cryptoAssets.currentPage = 1
       this.cryptoAssets.totalPages = 1
       this.cryptoAssets.category = 'all'
+      this.shouldOverwriteCryptoAssetResult = true
+    },
+    resetSearchQuery () {
+      this.cryptoAssets.sort = ''
+      this.cryptoAssets.order = ''
+      this.cryptoAssets.currentPage = 1
+      this.cryptoAssets.totalPages = 1
       this.shouldOverwriteCryptoAssetResult = true
     },
     setCryptoAssetsLimit () {

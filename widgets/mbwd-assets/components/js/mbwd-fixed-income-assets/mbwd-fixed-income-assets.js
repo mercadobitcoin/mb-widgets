@@ -82,6 +82,8 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       viewMode: 'table', // [card, table],
       shouldOverwriteFixedIncomeResult: false,
       fixedIncomeAssets: {
+        type: 'fixed_income',
+        offset: 0,
         limit: 5,
         category: 'all',
         sort: 'name',
@@ -175,10 +177,13 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
   },
   watch: {
     search (value, oldValue) {
-      if (!oldValue && value) {
+      if (oldValue && !value) {
+        this.resetSearchQuery()
+      } else {
         this.resetFixedIncomeBasicQueryDefaultState()
       }
 
+      this.setFixedIncomeAssetsRequestQueryString()
       this.getFixedIncomeAssets()
     }
   },
@@ -194,7 +199,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.busy = true
         try {
           const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getFixedIncomeAssetsRequestQueryString()}`)
-
           if (response.ok) {
             const data = await response.json() //eslint-disable-line
             const { total_items, response_data } = data //eslint-disable-line
@@ -231,34 +235,36 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.$emit('list-updated', this.fixedIncomeAssets.result.length)
       }
     },
+    setFixedIncomeAssetsRequestQueryString () {
+      if (this.cptdIsNewCategory) {
+        this.fixedIncomeAssets.sort = 'release_date'
+        this.fixedIncomeAssets.order = 'desc'
+      }
+
+      if (this.cptdIsAllCategory) {
+        this.fixedIncomeAssets.sort = 'name'
+        this.fixedIncomeAssets.order = 'asc'
+      }
+
+      if (this.fixedIncomeAssets.totalPages > 1) {
+        if (this.shouldOverwriteFixedIncomeResult && this.cptdShowMore) {
+          this.fixedIncomeAssets.offset = 0
+        } else {
+          this.fixedIncomeAssets.offset = (this.fixedIncomeAssets.currentPage - 1) * this.fixedIncomeAssets.limit
+        }
+      }
+    }, 
     getFixedIncomeAssetsRequestQueryString () {
       this.setFixedIncomeAssetsLimit()
 
-      const { sort, category, order, currentPage, totalPages, limit } =
+      const { type, sort, category, order, currentPage, totalPages, limit } =
         this.fixedIncomeAssets
       const searchQueryStringsMap = {
-        type: 'fixed_income',
+        type,
         limit,
         sort,
-        order
-      }
-
-      if (category === 'new') {
-        searchQueryStringsMap.sort = 'release_date'
-        searchQueryStringsMap.order = 'desc'
-        return this.mxCreateUrlQueryString(searchQueryStringsMap)
-      }
-
-      if (this.search) {
-        searchQueryStringsMap.search = this.search
-      }
-
-      if (totalPages > 1) {
-        if (this.shouldOverwriteFixedIncomeResult && this.cptdShowMore) {
-          searchQueryStringsMap.offset = 0
-        } else {
-          searchQueryStringsMap.offset = (currentPage - 1) * limit
-        }
+        order,
+        search: this.search
       }
 
       return this.mxCreateUrlQueryString(searchQueryStringsMap)
@@ -277,17 +283,19 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       return this.viewMode === viewMode
     },
     changeCategory (category) {
-      this.resetFixedIncomeBasicQueryDefaultState()
+      // this.resetFixedIncomeBasicQueryDefaultState()
       this.fixedIncomeAssets.category = category
 
-      if (this.cptdIsAllCategory && this.fixedIncomeAssets.sort === '' && this.fixedIncomeAssets.order === '') {
-        this.fixedIncomeAssets.sort = 'name'
-        this.fixedIncomeAssets.order = 'asc'
-      }
-
-      if (this.cptdIsNewCategory && this.search) {
+      if (this.search) {
         this.$parent.$emit('clear-search')
       } else {
+        // this.resetCryptoBasicQueryDefaultState()
+        this.shouldOverwriteFixedIncomeResult = true
+        this.setFixedIncomeAssetsRequestQueryString()
+        if (this.cptdIsAllCategory && this.fixedIncomeAssets.sort === '' && this.fixedIncomeAssets.order === '') {
+          this.fixedIncomeAssets.sort = 'name'
+          this.fixedIncomeAssets.order = 'asc'
+        }
         this.getFixedIncomeAssets()
       }
 
@@ -329,11 +337,18 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       }
     },
     resetFixedIncomeBasicQueryDefaultState () {
-      this.fixedIncomeAssets.sort = 'name'
-      this.fixedIncomeAssets.order = 'asc'
+      this.fixedIncomeAssets.sort = ''
+      this.fixedIncomeAssets.order = ''
       this.fixedIncomeAssets.currentPage = 1
       this.fixedIncomeAssets.totalPages = 1
       this.fixedIncomeAssets.category = 'all'
+      this.shouldOverwriteFixedIncomeResult = true
+    },
+    resetSearchQuery () {
+      this.fixedIncomeAssets.sort = ''
+      this.fixedIncomeAssets.order = ''
+      this.fixedIncomeAssets.currentPage = 1
+      this.fixedIncomeAssets.totalPages = 1
       this.shouldOverwriteFixedIncomeResult = true
     },
     setFixedIncomeAssetsLimit () {
