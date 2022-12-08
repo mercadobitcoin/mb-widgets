@@ -329,8 +329,8 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       }
     },
     resetFixedIncomeBasicQueryDefaultState () {
-      this.fixedIncomeAssets.sort = ''
-      this.fixedIncomeAssets.order = ''
+      this.fixedIncomeAssets.sort = 'name'
+      this.fixedIncomeAssets.order = 'asc'
       this.fixedIncomeAssets.currentPage = 1
       this.fixedIncomeAssets.totalPages = 1
       this.fixedIncomeAssets.category = 'all'
@@ -347,7 +347,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     scheduleGetFixedIncomeAssetsInterval () {
       this.intervalId = setInterval(() => {
         this.shouldOverwriteFixedIncomeResult = true
-        this.getFixedIncomeAssets()
         this.getFixedIncomeAssets()
       }, this.intervalTimeout)
     },

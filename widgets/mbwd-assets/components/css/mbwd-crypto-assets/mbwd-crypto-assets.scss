@@ -127,15 +127,17 @@
   }
 }
 
-@media screen and (max-width: $tablet-treshold) {
-  .mbwd-crypto-assets {
-    & > .title {
-      font-size: 20px;
-      margin: 0 0 24px;
-    }
+.mbwd-crypto-assets.mobile {
+  & > .title {
+    font-size: 20px;
+    margin: 0 0 24px;
+  }
 
-    & > .pagination-wrapper {
-      padding: 32px 0;
-    }
+  & > .options {
+    margin: 0 0 24px;
+  }
+
+  & > .pagination-wrapper {
+    padding: 32px 0;
   }
 }

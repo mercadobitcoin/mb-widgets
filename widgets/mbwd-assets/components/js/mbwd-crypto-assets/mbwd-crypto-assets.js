@@ -1,6 +1,6 @@
 MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
   template: `
-    <div class="mbwd-crypto-assets">
+    <div class="mbwd-crypto-assets" :class="cssClassMobileDesktop">
       <h3 class="title">
         {{ i18n('Criptoativos') }}
         <div v-if="mobileMode" class="view-modes">
@@ -130,6 +130,9 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     this.stopGetCryptoAssetsInterval()
   },
   computed: {
+    cssClassMobileDesktop () {
+      return this.mobileMode ? 'mobile' : 'desktop'
+    },
     cptdAssetCategories () {
       return [
         {
@@ -353,8 +356,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       }
     },
     resetCryptoBasicQueryDefaultState () {
-      this.cryptoAssets.sort = ''
-      this.cryptoAssets.order = ''
+      this.cryptoAssets.sort = 'name'
+      this.cryptoAssets.order = 'asc'
       this.cryptoAssets.currentPage = 1
       this.cryptoAssets.totalPages = 1
       this.cryptoAssets.category = 'all'

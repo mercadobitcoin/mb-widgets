@@ -70,20 +70,18 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       <div v-if="mobileMode" class="fixed-income-asset-table-mobile">
         <template v-if="!displaySkeleton">
           <a class="fixed-income-asset" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
+            <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
             <div class="attributes">
               <div class="header">
-                <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
-                <div class="asset-data">
                   <p class="name">{{ asset.name }}</p>
-                  <p class="symbol">{{ asset.product_data.symbol }}</p>
-                </div>
+                  <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" widgetName="mbwd-assets"/>
               </div>
-            </div>
-            <div class="market-data">
-            <mbc-asset-badges :badges="getAssetBadgeAsArray(asset)" widgetName="mbwd-assets"/>
-              <p class="profitability">
-                {{ asset.product_data.profitability }}
-              </p>
+              <div class="descriptions">
+                <p class="symbol">{{ asset.product_data.symbol }}</p>
+                <p class="profitability">
+                  {{ asset.product_data.profitability }}
+                </p>
+              </div>
             </div>
           </a>
         </template>

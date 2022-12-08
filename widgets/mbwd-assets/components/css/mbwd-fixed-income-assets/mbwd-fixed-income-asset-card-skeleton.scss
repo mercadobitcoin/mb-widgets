@@ -3,13 +3,12 @@
 @import "../../../../../foundation/scss/variables";
 
 .fixed-income-card-skeleton {
-  margin-top: map-get($spacing-stack, 'xs');
-
   .desktop {
     background: map-get($background-color, "primary");
     box-shadow: $box-shadow-lvl-1;
     border-radius: $border-radius-big;
     padding: map-get($spacing-inset, 'sm');
+    margin-top: map-get($spacing-stack, 'xs');
 
     .badge {
       width: 128px;

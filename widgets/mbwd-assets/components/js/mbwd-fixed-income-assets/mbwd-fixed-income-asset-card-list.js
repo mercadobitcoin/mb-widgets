@@ -29,18 +29,18 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
               </div>
             </div>
             <div v-if="!isSecondaryMarket(asset)" class="sold-percentage">
-              <div class="middle-circle">
+              <div :class="getMiddleCircleClass(asset)">
                 <p><strong>{{ getPercentageString(asset.product_data.sold_percentage.number) }}</strong></p>
                 <p>{{ i18n('vendido') }}</p>
               </div>
               <svg viewBox="0 0 36 36" class="circular-chart">
-                <path class="circle empty"
+                <path :class="getCircleClass(asset)"
                   stroke-dasharray="100,100"
                   d="M18 2.0845
                     a 15.9155 15.9155 0 0 1 0 31.831
                     a 15.9155 15.9155 0 0 1 0 -31.831"
                 />
-                <path v-if="asset.product_data.sold_percentage.number > 0" class="circle"
+                <path v-if="asset.product_data.sold_percentage.number > 0" :class="getPercentageCircleClass(asset)"
                   :stroke-dasharray="getSVGSoldPercentageStyle(asset.product_data.sold_percentage.number)"
                   d="M18 2.0845
                     a 15.9155 15.9155 0 0 1 0 31.831
@@ -68,7 +68,7 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
               {{ asset.product_data.profitability }}
             </p>
             <div class="minimum-value">
-              <p class="min-label">{{ i18n('a partir de') }}</p>
+              <p class="min-label">{{ i18n('a partir de').toLowerCase() }}</p>
               <p class="min-value">{{ asset.product_data.minimum_value | ftFormatCurrency(2) }}</p>
             </div>
           </div>
@@ -141,6 +141,24 @@ const MBWD_FIXED_INCOME_ASSET_CARD_LIST = () => ({// eslint-disable-line
         'fixed-income-card',
         'desktop',
         asset?.product_data?.status?.value.toLowerCase().replaceAll('_', '-')
+      ]
+    },
+    getMiddleCircleClass (asset) {
+      return [
+        'middle-circle',
+        asset.product_data.sold_percentage.number !== 100 && asset.product_data.sold_percentage.number !== 0 ? 'partly-filled' : ''
+      ]
+    },
+    getCircleClass (asset) {
+      return [
+        'circle',
+        asset.product_data.sold_percentage.number === 100 || asset.product_data.sold_percentage.number === 0 ? 'empty' : 'partly-filled'
+      ]
+    },
+    getPercentageCircleClass (asset) {
+      return [
+        'circle',
+        asset.product_data.sold_percentage.number === 100 ? 'percentage-full-filled' : 'percentage-partly-filled'
       ]
     },
     getAssetBadgeAsArray (asset) {
