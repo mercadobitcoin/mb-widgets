@@ -16,20 +16,15 @@
     margin:0px;
     color: map-get($neutral-color, "40");
   }
-
   .main-title {
-    padding: 0 8px;
     margin-bottom: 16px;
-
     font-family: map-get($font-families, "title");
     font-weight: bold;
     font-size: 24px;
     line-height: 130%;
   }
   .main-subtitle {
-    padding: 0 8px;
     margin-bottom: 24px;
-
     font-family: map-get($font-families, "body");
     font-weight: normal;;
     font-size: 16px;
@@ -47,7 +42,6 @@
     font-size: 14px;
     line-height: 140%;
   }
-
   .main-wrapper {
     .interactive-components-wrapper {
       border: 1px solid map-get($neutral-color,'5');
@@ -156,9 +150,7 @@
         text-align: center;
       }
     }
-    .comparison-components-wrapper {
-      padding: 0 8px;
-      
+    .comparison-components-wrapper {      
       .auxiliar-title {
         margin-bottom: 12px;
       }

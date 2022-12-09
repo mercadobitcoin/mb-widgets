@@ -88,12 +88,11 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
     'investedAmount.maskedValue': function (newAmount) {
       const rawValue = parseFloat(this.mxClearMasks(String(newAmount)))
       this.investedAmount.rawValue = rawValue;
-      this.asset.estimatedYieldAmount = this.getEstimateReturnAmount(rawValue, this.asset.monthlyInterestRate, this.asset.expirationDate);
-
-      for (i = 0, j = this.investmentAssetsComparison.length; i < j; i++) {
-        this.investmentAssetsComparison[i].estimatedYieldAmount = this.getEstimateReturnAmount(rawValue, this.investmentAssetsComparison[i].monthlyInterestRate, this.asset.expirationDate);
-      }
+      this.calculateAndUpdateEstimatedYield();
     },
+  },
+  mounted () {
+    this.calculateAndUpdateEstimatedYield();
   },
   methods: {
     cssItemPercentual(value) {
@@ -155,5 +154,21 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
       }
       return value
     },
+    calculateAndUpdateEstimatedYield: function () {
+      this.investedAmount.rawValue;
+      this.asset.estimatedYieldAmount = this.getEstimateReturnAmount(
+        this.investedAmount.rawValue,
+        this.asset.monthlyInterestRate,
+        this.asset.expirationDate
+      );
+
+      for (i = 0, j = this.investmentAssetsComparison.length; i < j; i++) {
+        this.investmentAssetsComparison[i].estimatedYieldAmount = this.getEstimateReturnAmount(
+          this.investedAmount.rawValue,
+          this.investmentAssetsComparison[i].monthlyInterestRate,
+          this.asset.expirationDate
+        );
+      }
+    }
   }
 })
