@@ -289,7 +289,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     changeCategory (category) {
       this.fixedIncomeAssets.category = category
 
-      if (this.search) {
+      if (this.cptdIsNewCategory && this.search) {
         this.$parent.$emit('clear-search')
       } else {
         this.shouldOverwriteFixedIncomeResult = true

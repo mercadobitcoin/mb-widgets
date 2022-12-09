@@ -319,7 +319,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     changeCategory (category) {
       this.cryptoAssets.category = category
 
-      if (this.search) {
+      if (this.cptdIsNewCategory && this.search) {
         this.$parent.$emit('clear-search')
       } else {
         this.shouldOverwriteCryptoAssetResult = true
