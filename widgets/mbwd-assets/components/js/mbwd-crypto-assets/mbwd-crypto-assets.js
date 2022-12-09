@@ -45,7 +45,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         </div>
       </div>
       <div class="pagination-wrapper">
-        <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" trackComponent="assets" @change="changePage"/>
+        <mbc-pagination :total-pages="cryptoAssets.totalPages" :current-page="cryptoAssets.currentPage" track-component="assets" @change="changePage"/>
       </div>
     </div>`,
   mixins: [window.MB_WIDGETS.configMixins, window.MB_WIDGETS.UIMixins, window.MB_WIDGETS.URLMixins], // eslint-disable-line
@@ -201,8 +201,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.resetCryptoBasicQueryDefaultState()
       }
 
-      this.setCryptoAssetsRequestQueryString()
-      this.getCryptoAssets()
+      this.setCryptoAssetsRequestQueryStringAndGetCryptoAssets()
     }
   },
   methods: {
@@ -211,6 +210,10 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     cssIsViewModeActive (viewMode) {
       return this.isViewModeActive(viewMode) ? 'active' : ''
+    },
+    setCryptoAssetsRequestQueryStringAndGetCryptoAssets() {
+      this.setCryptoAssetsRequestQueryString()
+      this.getCryptoAssets();
     },
     async getCryptoAssets () {
       if (!this.busy) {
@@ -286,7 +289,6 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     getCryptoAssetsRequestQueryString () {
       this.setCryptoAssetsLimit()
-      this.setCryptoAssetsRequestQueryString()
 
       const { type, sort, order, limit, offset } =
       this.cryptoAssets
@@ -338,7 +340,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     changePage (page) {
       this.cryptoAssets.currentPage = page
-      this.getCryptoAssets()
+      this.setCryptoAssetsRequestQueryStringAndGetCryptoAssets()
     },
     changeSortOrder ({ sort, order }) {
       if (this.cryptoAssets.sort !== sort) {
@@ -356,7 +358,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.displaySkeleton = true
         this.viewMode = viewMode
         this.shouldOverwriteCryptoAssetResult = true
-        this.getCryptoAssets()
+        this.setCryptoAssetsRequestQueryStringAndGetCryptoAssets()
         this.stopGetCryptoAssetsInterval()
         this.scheduleGetCryptoAssetsInterval()
 
@@ -369,7 +371,6 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     resetPaginationQuery () {
       this.cryptoAssets.currentPage = 1
-      this.cryptoAssets.totalPages = 1
       this.cryptoAssets.offset = 0
     },
     resetSearchQuery () {

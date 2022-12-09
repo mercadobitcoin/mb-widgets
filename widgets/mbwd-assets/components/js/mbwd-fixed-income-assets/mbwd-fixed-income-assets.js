@@ -183,8 +183,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.resetFixedIncomeBasicQueryDefaultState()
       }
 
-      this.setFixedIncomeAssetsRequestQueryString()
-      this.getFixedIncomeAssets()
+      this.setFixedIncomeAssetsRequestQueryStringAndGetFixedIncomeAssets()
     }
   },
   methods: {
@@ -193,6 +192,10 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     cssIsViewModeActive (viewMode) {
       return this.isViewModeActive(viewMode) ? 'active' : ''
+    },
+    setFixedIncomeAssetsRequestQueryStringAndGetFixedIncomeAssets() {
+      this.setFixedIncomeAssetsRequestQueryString()
+      this.getFixedIncomeAssets();
     },
     async getFixedIncomeAssets () {
       if (!this.busy) {
@@ -256,7 +259,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     getFixedIncomeAssetsRequestQueryString () {
       this.setFixedIncomeAssetsLimit()
-      this.setFixedIncomeAssetsRequestQueryString()
 
       const { type, sort, order, limit, offset } =
         this.fixedIncomeAssets
@@ -308,7 +310,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     changePage (page) {
       this.fixedIncomeAssets.currentPage = page
-      this.getFixedIncomeAssets()
+      this.setFixedIncomeAssetsRequestQueryStringAndGetFixedIncomeAssets()
     },
     changeSortOrder ({ sort, order }) {
       if (this.fixedIncomeAssets.sort !== sort) {
@@ -326,7 +328,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.displaySkeleton = true
         this.viewMode = viewMode
         this.shouldOverwriteFixedIncomeResult = true
-        this.getFixedIncomeAssets()
+        this.setFixedIncomeAssetsRequestQueryStringAndGetFixedIncomeAssets()
         this.stopGetFixedIncomeAssetsInterval()
         this.scheduleGetFixedIncomeAssetsInterval()
 
@@ -339,7 +341,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     resetPaginationQuery () {
       this.fixedIncomeAssets.currentPage = 1
-      this.fixedIncomeAssets.totalPages = 1
       this.fixedIncomeAssets.offset = 0
     },
     resetSearchQuery () {
