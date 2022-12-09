@@ -17,7 +17,7 @@ const MBC_PAGINATION = () => ({ //eslint-disable-line
         </button>
       </div>
       <div v-if="mobileMode" class="show-more">
-        <button class="btn-show-more" :disabled="currentPage === totalPages" @click="navigateTo(null, 'showMore')">
+        <button class="btn-show-more" :disabled="currentPage >= totalPages" @click="navigateTo(null, 'showMore')">
           <span> Mostrar mais </span>
           <div class="arrow bottom" />
         </button>
