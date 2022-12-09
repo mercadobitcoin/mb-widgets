@@ -314,7 +314,6 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     changeSortOrder ({ sort, order }) {
       if (this.fixedIncomeAssets.sort !== sort) {
-        this.fixedIncomeAssets.totalPages = 1
         this.fixedIncomeAssets.currentPage = 1
         this.fixedIncomeAssets.category = 'all'
       }

@@ -344,7 +344,6 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     changeSortOrder ({ sort, order }) {
       if (this.cryptoAssets.sort !== sort) {
-        this.cryptoAssets.totalPages = 1
         this.cryptoAssets.currentPage = 1
         this.cryptoAssets.category = 'all'
       }
