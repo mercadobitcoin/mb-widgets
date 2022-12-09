@@ -211,9 +211,9 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     cssIsViewModeActive (viewMode) {
       return this.isViewModeActive(viewMode) ? 'active' : ''
     },
-    setCryptoAssetsRequestQueryStringAndGetCryptoAssets() {
+    setCryptoAssetsRequestQueryStringAndGetCryptoAssets () {
       this.setCryptoAssetsRequestQueryString()
-      this.getCryptoAssets();
+      this.getCryptoAssets()
     },
     async getCryptoAssets () {
       if (!this.busy) {

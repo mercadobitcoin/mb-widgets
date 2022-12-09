@@ -193,9 +193,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     cssIsViewModeActive (viewMode) {
       return this.isViewModeActive(viewMode) ? 'active' : ''
     },
-    setFixedIncomeAssetsRequestQueryStringAndGetFixedIncomeAssets() {
+    setFixedIncomeAssetsRequestQueryStringAndGetFixedIncomeAssets () {
       this.setFixedIncomeAssetsRequestQueryString()
-      this.getFixedIncomeAssets();
+      this.getFixedIncomeAssets()
     },
     async getFixedIncomeAssets () {
       if (!this.busy) {
