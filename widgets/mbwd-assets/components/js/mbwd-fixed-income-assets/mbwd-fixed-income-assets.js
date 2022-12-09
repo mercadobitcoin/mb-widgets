@@ -201,7 +201,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
       if (!this.busy) {
         this.busy = true
         try {
-          const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getFixedIncomeAssetsRequestQueryString()}`)
+          const response = await fetch(`https://store.mercadobitcoin.com.br/api/v1/marketplace/product/unlogged${this.getFixedIncomeAssetsRequestQueryString()}`)
           if (response.ok) {
             const data = await response.json() //eslint-disable-line
             const { total_items, response_data } = data //eslint-disable-line

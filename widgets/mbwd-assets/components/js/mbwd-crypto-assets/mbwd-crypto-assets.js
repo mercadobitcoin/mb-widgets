@@ -219,7 +219,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
       if (!this.busy) {
         this.busy = true
         try {
-          const response = await fetch(`https://hotwheels-tp-together.dev.mercadolitecoin.com.br/api/v1/marketplace/product/unlogged${this.getCryptoAssetsRequestQueryString()}`)
+          const response = await fetch(`https://store.mercadobitcoin.com.br/api/v1/marketplace/product/unlogged${this.getCryptoAssetsRequestQueryString()}`)
 
           if (response.ok) {
             const data = await response.json() //eslint-disable-line
