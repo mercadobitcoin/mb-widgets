@@ -75,7 +75,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
       investmentAssetsComparison: dataSetInvestmentAssetsComparison,
       input: {
         valid: true,
-        errorMessage: `O valor mínimo é `,
+        errorMessage: `Valor mínimo `,
         maxLength: 12,
         maxValue: 9999999.99
       }
