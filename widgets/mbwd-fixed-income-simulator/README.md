@@ -21,22 +21,22 @@ So, make sure that you use it inside a proper container or you can just overide 
 ## How to use it
 - Import the minified widget JavaScript, available on:
 ```sh
-/public/mbwd-most-valued-assets/js/c-mbwd-most-valued-assets.js
+/public/mbwd-fixed-income-simulator/js/mbwd-fixed-income-simulator.js
 ```
 - Import the minified widget CSS, available on:
 ```sh
-/public/mbwd-most-valued-assets/css/c-mbwd-most-valued-assets.css
+/public/mbwd-fixed-income-simulator/css/mbwd-fixed-income-simulator.css
 ```
-- Now you have a **MbwdMostValuedAssets** factory instance available on the window
+- Now you have a **MbwdFixedIncomeSimulator** factory instance available on the window
 - So to use it ✨:
 ```html
 <!-- Provide the component tag with an ID-->
-<mbwd-most-valued-assets id="mostValuedAssets" />
+<mbwd-fixed-income-simulator id="mbwd-fixed-income-simulator" />
 ```
 ```javascript
 // Create a new widget instance and call the method render
-const widget = new MbwdMostValuedAssets();
-widget.render(Vue, '#mostValuedAssets');
+const widget = new MBWD_FIXED_INCOME_SIMULATOR();
+widget.render(Vue, '#mbwd-fixed-income-simulator');
 ```
 
 ## Requirements

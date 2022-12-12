@@ -2,11 +2,11 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
   template: `
     <div class="mbwd-fixed-income-simulator">
       <h2 class="main-title">Simulador de Renda Fixa Digital</h2>
-      <p class="main-subtitle">Veja quanto o seu dinheiro pode render com ENER02.</p>
+      <p class="main-subtitle">Veja quanto o seu dinheiro pode render com {{ asset.displayName }}.</p>
       <div class="main-wrapper">
         <div class="interactive-components-wrapper">
           <h3 class="auxiliar-title">Qual valor você gostaria de investir?</h3>
-          <p class="auxiliar-subtitle">O investimento inicial em Renda Fixa Digital é de R$ 100.</p>
+          <p class="auxiliar-subtitle">O investimento inicial em Renda Fixa Digital é de R$ {{ asset.investmentMinimumAmount }}.</p>
           <div class="investment-input-wrapper">
             <form-input
               prefix="R$"
@@ -40,7 +40,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
         </div>
         <div class="comparison-components-wrapper">
           <div>
-            <h3 class="auxiliar-title">Prazo estimado de pagamento: dezembro/2022</h3>
+            <h3 class="auxiliar-title">Prazo estimado de pagamento: {{expirationMonthStringfied}}</h3>
             <div>
               <p class="auxiliar-subtitle" v-if="asset.partialExpiration">Como este ativo possui liquidações parciais, você receberá remunerações fracionadas até o vencimento do investimento.</p>
               <p class="auxiliar-subtitle" v-else> Data prevista para o recebimento da rentabilidade total do ativo.</p>
@@ -83,10 +83,16 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
   },
   computed: {
     basicExperiencePairTradingUrl() {
-      return `/plataforma/clue/?command=/trade/basic/${this.asset.symbol}/brl`;
+      return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${this.asset.symbol}/brl`;
     },
     minimumAmountError() {
       return this.input.errorMessage + this.$options.filters.ftFormatCurrency(this.asset.investmentMinimumAmount, 2);
+    },
+    expirationMonthStringfied() {
+      var date = new Date(this.asset.expirationDate);
+      const year = date.getFullYear();
+      const month = date.toLocaleString('pt-br', { month: 'long' });
+      return `${month}/${year}`
     },
   },
   watch: {
