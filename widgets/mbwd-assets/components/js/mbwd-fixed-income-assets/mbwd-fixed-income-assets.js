@@ -249,6 +249,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.fixedIncomeAssets.order = 'asc'
       }
 
+      this.setFixedIncomeAssetsOffset();
+    },
+    setFixedIncomeAssetsOffset() {
       if (this.fixedIncomeAssets.totalPages > 1) {
         if (this.shouldOverwriteFixedIncomeResult && this.cptdShowMore) {
           this.fixedIncomeAssets.offset = 0
@@ -310,7 +313,8 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     changePage (page) {
       this.fixedIncomeAssets.currentPage = page
-      this.setFixedIncomeAssetsRequestQueryStringAndGetFixedIncomeAssets()
+      this.setFixedIncomeAssetsOffset()
+      this.getFixedIncomeAssets()
     },
     changeSortOrder ({ sort, order }) {
       if (this.fixedIncomeAssets.sort !== sort) {

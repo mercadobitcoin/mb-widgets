@@ -278,7 +278,10 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.cryptoAssets.sort = 'name'
         this.cryptoAssets.order = 'asc'
       }
-
+      this.setCryptoAssetsOffset();
+      
+    },
+    setCryptoAssetsOffset () {
       if (this.cryptoAssets.totalPages > 1) {
         if (this.shouldOverwriteCryptoAssetResult && this.cptdShowMore) {
           this.cryptoAssets.offset = 0
@@ -340,7 +343,8 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     changePage (page) {
       this.cryptoAssets.currentPage = page
-      this.setCryptoAssetsRequestQueryStringAndGetCryptoAssets()
+      this.setCryptoAssetsOffset()
+      this.getCryptoAssets()
     },
     changeSortOrder ({ sort, order }) {
       if (this.cryptoAssets.sort !== sort) {
