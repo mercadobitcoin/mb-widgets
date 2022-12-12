@@ -279,8 +279,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.cryptoAssets.sort = 'name'
         this.cryptoAssets.order = 'asc'
       }
-      this.setCryptoAssetsOffset();
-      
+      this.setCryptoAssetsOffset()
     },
     setCryptoAssetsOffset () {
       if (this.cryptoAssets.totalPages > 1) {

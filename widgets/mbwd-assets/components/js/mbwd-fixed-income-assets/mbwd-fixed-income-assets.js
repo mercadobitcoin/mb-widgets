@@ -250,9 +250,9 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.fixedIncomeAssets.order = 'asc'
       }
 
-      this.setFixedIncomeAssetsOffset();
+      this.setFixedIncomeAssetsOffset()
     },
-    setFixedIncomeAssetsOffset() {
+    setFixedIncomeAssetsOffset () {
       if (this.fixedIncomeAssets.totalPages > 1) {
         if (this.shouldOverwriteFixedIncomeResult && this.cptdShowMore) {
           this.fixedIncomeAssets.offset = 0
