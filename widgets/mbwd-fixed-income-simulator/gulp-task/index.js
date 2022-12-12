@@ -11,6 +11,7 @@ const footer = require('gulp-footer')
 
 const task = (cb) => {
   // Mixins
+  const ConfigMixins = 'foundation/mixins/configMixins.js'
   const CurrencyMixins = 'foundation/mixins/currencyMixins.js'
   const CurrencyFilters = 'foundation/mixins/filters/currencyFilters.js'
   // Depedency
@@ -23,6 +24,7 @@ const task = (cb) => {
   pump(
     [
       src([
+        ConfigMixins,
         CurrencyMixins,
         CurrencyFilters,
         FormInput,

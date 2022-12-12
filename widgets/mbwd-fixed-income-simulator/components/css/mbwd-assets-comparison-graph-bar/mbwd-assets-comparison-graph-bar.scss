@@ -1,6 +1,7 @@
 @import "../../../../../foundation/scss/design-system/apollo/colors";
 @import "../../../../../foundation/scss/design-system/apollo/scrollbar";
 @import "../../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../../foundation/scss/design-system/apollo/spacing";
 @import "../../../../../foundation/scss/variables";
 
 .graph-bars-wrapper {
@@ -20,26 +21,22 @@
         height: 90%;
         width: 100%;
         background-color: map-get($primary-color, "30");
-        border-radius: 4px;
+        border-radius: $border-radius-small
       }
     }
     .asset-name {
-      font-family: map-get($font-families, "body");
-      margin-bottom: 8px;
+      @extend %typography-body-3;
       color: map-get($neutral-color, "50");
-      font-size: 14px;
+      margin-bottom: map-get($spacing-stack, "nano");
     }
     .value {
-      font-family: map-get($font-families, "body");
-      margin-bottom: 4px;
+      @extend %typography-label-3;
       color: map-get($neutral-color, "50");
-      font-size: 14px;
-      font-weight: 600;
+      margin-bottom: map-get($spacing-stack, "quark");
     }
     .yield {
-      font-family: map-get($font-families, "body");
+      @extend %typography-body-3;
       color: map-get($neutral-color, "30");
-      font-size: 14px;
     }
     &:nth-child(2) {
       .bar-container {

@@ -25,8 +25,12 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
               :validation-regex-error="minimumAmountError" \
             />
             <div class="quick-increment-wrapper">
-              <button class="quick-increment-button" @click="quickDecrementInvestedAmount">-</button>
-              <button class="quick-increment-button" @click="quickIncrementInvestedAmount">+</button>
+              <button class="quick-increment-button" @click="quickDecrementInvestedAmount">
+                <img class="quick-increment-icon left" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/'+'mbwd-fixed-income-simulator'+'/img/icons/ico-minus-white.svg'" />
+              </button>
+              <button class="quick-increment-button" @click="quickIncrementInvestedAmount">
+                <img class="quick-increment-icon right" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/'+'mbwd-fixed-income-simulator'+'/img/icons/ico-plus-white.svg'" />
+              </button>
             </div>
           </div>
           <h3 class="auxiliar-title">Valor que você receberá no vencimento</h3>
@@ -53,6 +57,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
     'assets-comparison-graph-bar': MBWD_ASSETS_COMPARISON_GRAPH_BAR(),// eslint-disable-line
   },
   mixins: [
+    window.MB_WIDGETS.configMixins,
     window.MB_WIDGETS.currencyFilters,
     window.MB_WIDGETS.currencyMixins,
   ], //eslint-disable-line

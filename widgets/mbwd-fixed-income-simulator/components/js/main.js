@@ -5,10 +5,10 @@ function MbwdFixedIncomeSimulator () { // eslint-disable-line
       const cssLink = document.createElement('link')
       if (window.location.host.includes('localhost')) {
         cssLink.href = 'widgets/mbwd-fixed-income-simulator/css/mbwd-fixed-income-simulator.css'
-      // } else if (window.location.host.includes('mercado-bitcoin.vipdev.lndo.site')) {
-      //   cssLink.href = 'http://localhost:5001/web/widgets/mbwd-fixed-income-simulator/css/mbwd-fixed-income-simulator.css'
-      // } else {
-      //   cssLink.href = 'https://static.mercadolitecoin.com.br/web/widgets/mbwd-fixed-income-simulator/css/mbwd-fixed-income-simulator.css'
+      } else if (window.location.host.includes('mercado-bitcoin.vipdev.lndo.site')) {
+        cssLink.href = 'http://localhost:5001/web/widgets/mbwd-fixed-income-simulator/css/mbwd-fixed-income-simulator.css'
+      } else {
+        cssLink.href = 'https://static.mercadolitecoin.com.br/web/widgets/mbwd-fixed-income-simulator/css/mbwd-fixed-income-simulator.css'
       }
       cssLink.rel = 'stylesheet'
 
