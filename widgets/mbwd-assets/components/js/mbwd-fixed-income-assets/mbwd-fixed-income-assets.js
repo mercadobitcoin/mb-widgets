@@ -90,6 +90,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         order: 'asc',
         currentPage: 1,
         totalPages: 1,
+        totalItems: 0,
         result: []
       },
       translateMap: {
@@ -219,6 +220,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
               this.fixedIncomeAssets.totalPages = 1
             } else {
               if (total_items) {//eslint-disable-line
+                this.fixedIncomeAssets.totalItems = total_items //eslint-disable-line
                 this.fixedIncomeAssets.totalPages = Math.ceil(total_items / this.fixedIncomeAssets.limit)//eslint-disable-line
                 this.fixedIncomeAssets.currentPage = this.fixedIncomeAssets.currentPage > this.fixedIncomeAssets.totalPages ? this.fixedIncomeAssets.totalPages : this.fixedIncomeAssets.currentPage
               } else {
@@ -257,6 +259,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         if (this.shouldOverwriteFixedIncomeResult && this.cptdShowMore) {
           this.fixedIncomeAssets.offset = 0
         } else {
+          this.fixedIncomeAssets.currentPage = this.fixedIncomeAssets.currentPage > Math.ceil(this.fixedIncomeAssets.totalItems / this.fixedIncomeAssets.limit) ? Math.ceil(this.fixedIncomeAssets.totalItems / this.fixedIncomeAssets.limit) : this.fixedIncomeAssets.currentPage
           this.fixedIncomeAssets.offset = (this.fixedIncomeAssets.currentPage - 1) * this.fixedIncomeAssets.limit
         }
       }
@@ -325,6 +328,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
 
       this.fixedIncomeAssets.sort = sort
       this.fixedIncomeAssets.order = order
+      this.fixedIncomeAssets.offset = 0
       this.getFixedIncomeAssets()
     },
     onViewModeChange (viewMode) {
@@ -332,6 +336,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         this.displaySkeleton = true
         this.viewMode = viewMode
         this.shouldOverwriteFixedIncomeResult = true
+        this.setFixedIncomeAssetsLimit()
         this.setFixedIncomeAssetsRequestQueryStringAndGetFixedIncomeAssets()
         this.stopGetFixedIncomeAssetsInterval()
         this.scheduleGetFixedIncomeAssetsInterval()

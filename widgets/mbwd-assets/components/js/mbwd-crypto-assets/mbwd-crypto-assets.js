@@ -83,6 +83,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         order: 'asc',
         currentPage: 1,
         totalPages: 1,
+        totalItems: 0,
         result: []
       },
       viewMode: 'table', // [card, table]
@@ -239,6 +240,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
               this.cryptoAssets.totalPages = 1
             } else {
               if (total_items) {//eslint-disable-line
+                this.cryptoAssets.totalItems = total_items //eslint-disable-line
                 this.cryptoAssets.totalPages = Math.ceil(total_items / this.cryptoAssets.limit)//eslint-disable-line
                 this.cryptoAssets.currentPage = this.cryptoAssets.currentPage > this.cryptoAssets.totalPages ? this.cryptoAssets.totalPages : this.cryptoAssets.currentPage
               } else {
@@ -286,6 +288,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         if (this.shouldOverwriteCryptoAssetResult && this.cptdShowMore) {
           this.cryptoAssets.offset = 0
         } else {
+          this.cryptoAssets.currentPage = this.cryptoAssets.currentPage > Math.ceil(this.cryptoAssets.totalItems / this.cryptoAssets.limit) ? Math.ceil(this.cryptoAssets.totalItems / this.cryptoAssets.limit) : this.cryptoAssets.currentPage
           this.cryptoAssets.offset = (this.cryptoAssets.currentPage - 1) * this.cryptoAssets.limit
         }
       }
@@ -354,6 +357,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
 
       this.cryptoAssets.sort = sort
       this.cryptoAssets.order = order
+      this.cryptoAssets.offset = 0
       this.getCryptoAssets()
     },
     onViewModeChange (viewMode) {
@@ -361,6 +365,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
         this.displaySkeleton = true
         this.viewMode = viewMode
         this.shouldOverwriteCryptoAssetResult = true
+        this.setCryptoAssetsLimit()
         this.setCryptoAssetsRequestQueryStringAndGetCryptoAssets()
         this.stopGetCryptoAssetsInterval()
         this.scheduleGetCryptoAssetsInterval()
