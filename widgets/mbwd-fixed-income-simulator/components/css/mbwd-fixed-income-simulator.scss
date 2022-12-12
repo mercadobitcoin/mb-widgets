@@ -3,6 +3,7 @@
 @import "../../../../foundation/scss/design-system/apollo/spacing";
 @import "../../../../foundation/scss/variables";
 @import "../../../../foundation/scss/fonts";
+@import "../../../../foundation//scss/breakpoints.scss";
 
 .mbwd-fixed-income-simulator {
   h2 {
@@ -122,6 +123,7 @@
             flex-wrap: wrap;
             align-content: center;
             justify-content: center;
+            cursor: pointer;
 
             .quick-increment-icon {
               &.left {
@@ -169,10 +171,7 @@
       }
     }
   }
-}
-
-@media screen and (min-width: $tablet-treshold) {
-  .mbwd-fixed-income-simulator {
+  @include breakpoint-up(md) {
     .main-title {
       font-size: 48px;
       padding: 0;
@@ -180,7 +179,6 @@
     .main-subtitle {
       font-size: 18px;
       margin-bottom: map-get($spacing-stack, 'xs');
-
       padding: 0;
     }
     .auxiliar-title {
@@ -193,15 +191,15 @@
       display: flex;
       justify-content: space-between;
       gap: map-get($spacing-inline, 'xs');
-
+  
       .interactive-components-wrapper {
         margin-bottom: 0px;
         padding: map-get($spacing-inset, 'md');
         width: 60%;
-
+  
         .investment-input-wrapper {
           gap: map-get($spacing-inline, 'xxs');
-
+  
           .mbwd-form-input-wrapper {
             .input-wrapper {
               display: flex;
@@ -214,7 +212,7 @@
   
               input {
                 min-height: 78px;
-                padding-left: map-get($spacing-inline, 'xxl');
+                padding-left: 96px;
                 font-size: 48px;
               }
             }
