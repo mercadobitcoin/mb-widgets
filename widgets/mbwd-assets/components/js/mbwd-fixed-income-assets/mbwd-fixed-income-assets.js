@@ -220,6 +220,7 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
             } else {
               if (total_items) {//eslint-disable-line
                 this.fixedIncomeAssets.totalPages = Math.ceil(total_items / this.fixedIncomeAssets.limit)//eslint-disable-line
+                this.fixedIncomeAssets.currentPage = this.fixedIncomeAssets.currentPage > this.fixedIncomeAssets.totalPages ? this.fixedIncomeAssets.totalPages : this.fixedIncomeAssets.currentPage
               } else {
                 this.fixedIncomeAssets.totalPages = 1
               }

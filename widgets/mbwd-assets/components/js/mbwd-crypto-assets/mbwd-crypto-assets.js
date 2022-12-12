@@ -240,6 +240,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
             } else {
               if (total_items) {//eslint-disable-line
                 this.cryptoAssets.totalPages = Math.ceil(total_items / this.cryptoAssets.limit)//eslint-disable-line
+                this.cryptoAssets.currentPage = this.cryptoAssets.currentPage > this.cryptoAssets.totalPages ? this.cryptoAssets.totalPages : this.cryptoAssets.currentPage
               } else {
                 this.cryptoAssets.totalPages = 1
               }
