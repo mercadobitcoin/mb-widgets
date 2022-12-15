@@ -36,7 +36,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
           <h3 class="auxiliar-title">Valor que você receberá no vencimento</h3>
           <p class="auxiliar-subtitle">Considerando valor investido, rendimento aproximado e preço de lançamento.</p>
           <p class="estimated-amount"> {{ asset.estimatedYieldAmount | ftFormatCurrency(2) }}</p>
-          <a class="button" :href=basicExperiencePairTradingUrl>Quero Investir</a>
+          <a class="button" :href=basicExperiencePairTradingUrl>Quero investir</a>
         </div>
         <div class="comparison-components-wrapper">
           <div>
