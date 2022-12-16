@@ -36,7 +36,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
           <h3 class="auxiliar-title">Valor que você receberá no vencimento</h3>
           <p class="auxiliar-subtitle">Considerando valor investido, rendimento aproximado e preço de lançamento.</p>
           <p class="estimated-amount"> {{ asset.estimatedYieldAmount | ftFormatCurrency(2) }}</p>
-          <a @click="trackTradeLinkAnalytics($event, 'invest:' + asset.displayName)" class="button" :href=basicExperiencePairTradingUrl target="_blank">Quero investir</a>
+          <a @click="trackAnalytics('click', asset.symbol)" class="button" :href=basicExperiencePairTradingUrl target="_blank">Quero investir</a>
         </div>
         <div class="comparison-components-wrapper">
           <div>
@@ -65,10 +65,16 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
     const el = document.getElementById('mbwd-fixed-income-simulator')
     const dataSetAsset = JSON.parse(el.dataset.asset);
     const dataSetInvestmentAssetsComparison = JSON.parse(el.dataset.investmentAssetsComparison);
-    const dataSetAnalytics = JSON.parse(el.dataset.analytics);
+    const dataSetAnalyticsEventCategory = el.dataset.analyticsEventCategory;
 
     return {
-      analytics: dataSetAnalytics,
+      analytics: {
+        event: {
+          category: dataSetAnalyticsEventCategory,
+          name: '',
+          label: '',
+        }
+      },
       investedAmount: {
         rawValue: dataSetAsset.investmentMinimumAmount,
         maskedValue: this.$options.filters.ftFormatCurrency(dataSetAsset.investmentMinimumAmount, 2, true),
@@ -184,12 +190,17 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
         );
       }
     },
-    trackTradeLinkAnalytics(event, analyticsLabel) {
-      this.$root.$emit('track-analytics', {
-        ec: this.analytics.category,
-        en: event.type,
-        lb: `${this.analytics.labelPrefix}:${analyticsLabel}`
-      })
+    trackAnalytics(eventName, eventLabel) {
+      this.analytics.event.name = eventName;
+      this.analytics.event.label = eventLabel;
+      this.emitAnalyticsEvent();
     },
+    emitAnalyticsEvent() {
+      this.$root.$emit('track-analytics', {
+        ec: this.analytics.event.category,
+        en: this.analytics.event.name,
+        lb: `fixed-income-simulator:${this.analytics.event.label}`
+      })
+    }, 
   }
 })
