@@ -401,9 +401,11 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     scheduleGetCryptoAssetsInterval () {
       this.intervalId = setInterval(() => {
-        this.shouldOverwriteCryptoAssetResult = true
-        this.setCryptoAssetsOffset()
-        this.getCryptoAssets()
+        if (!this.busy) {
+          this.shouldOverwriteCryptoAssetResult = true
+          this.setCryptoAssetsOffset()
+          this.getCryptoAssets()
+        }
       }, this.intervalTimeout)
     },
     stopGetCryptoAssetsInterval () {

@@ -372,9 +372,11 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
     },
     scheduleGetFixedIncomeAssetsInterval () {
       this.intervalId = setInterval(() => {
-        this.shouldOverwriteFixedIncomeResult = true
-        this.setFixedIncomeAssetsOffset()
-        this.getFixedIncomeAssets()
+        if (!this.busy) {
+          this.shouldOverwriteFixedIncomeResult = true
+          this.setFixedIncomeAssetsOffset()
+          this.getFixedIncomeAssets()
+        }
       }, this.intervalTimeout)
     },
     stopGetFixedIncomeAssetsInterval () {
