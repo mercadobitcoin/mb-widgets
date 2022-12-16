@@ -351,13 +351,13 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     },
     changeSortOrder ({ sort, order }) {
       if (this.cryptoAssets.sort !== sort) {
-        this.cryptoAssets.currentPage = 1
         this.cryptoAssets.category = 'all'
       }
 
       this.cryptoAssets.sort = sort
       this.cryptoAssets.order = order
       this.cryptoAssets.offset = 0
+      this.cryptoAssets.currentPage = 1
       this.getCryptoAssets()
     },
     onViewModeChange (viewMode) {
@@ -402,6 +402,7 @@ MBWD_CRYPTO_ASSETS = () => ({ // eslint-disable-line
     scheduleGetCryptoAssetsInterval () {
       this.intervalId = setInterval(() => {
         this.shouldOverwriteCryptoAssetResult = true
+        this.setCryptoAssetsOffset()
         this.getCryptoAssets()
       }, this.intervalTimeout)
     },
