@@ -29,9 +29,9 @@ function MbwdFixedIncomeSimulator () { // eslint-disable-line
 
       this.appendStyle()
 
-      const mbwdAssetsWrapper = document.querySelector(querySelector)
+      const mbwdFixedIncomeSimulatorWrapper = document.querySelector(querySelector)
       const mbwdAssetsTag = `<mbwd-fixed-income-simulator/>`
-      mbwdAssetsWrapper.insertAdjacentHTML('beforeend', mbwdAssetsTag)
+      mbwdFixedIncomeSimulatorWrapper.insertAdjacentHTML('beforeend', mbwdAssetsTag)
       new Vue({// eslint-disable-line
         el: document.querySelector('mbwd-fixed-income-simulator'),
         components: {
@@ -39,7 +39,7 @@ function MbwdFixedIncomeSimulator () { // eslint-disable-line
         },
         created () {
           this.$root.$on('track-analytics', event => {
-            if (mbwdAssetsWrapper.dataset.trackAnalyticsEnabled) {
+            if (mbwdFixedIncomeSimulatorWrapper.dataset.trackAnalyticsEnabled) {
               try {
                 if (window.gtag) {
                   gtag('event', event.en, { //eslint-disable-line

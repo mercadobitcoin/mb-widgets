@@ -36,7 +36,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
           <h3 class="auxiliar-title">Valor que você receberá no vencimento</h3>
           <p class="auxiliar-subtitle">Considerando valor investido, rendimento aproximado e preço de lançamento.</p>
           <p class="estimated-amount"> {{ asset.estimatedYieldAmount | ftFormatCurrency(2) }}</p>
-          <a class="button" :href=basicExperiencePairTradingUrl>Quero investir</a>
+          <a @click="trackTradeLinkAnalytics($event, 'invest:' + asset.displayName)" class="button" :href=basicExperiencePairTradingUrl target="_blank">Quero investir</a>
         </div>
         <div class="comparison-components-wrapper">
           <div>
@@ -44,7 +44,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
             <div>
               <p class="auxiliar-subtitle" v-if="asset.partialExpiration">Como este ativo possui liquidações parciais, você receberá remunerações fracionadas até o vencimento do investimento.</p>
               <p class="auxiliar-subtitle" v-else> Data prevista para o recebimento da rentabilidade total do ativo.</p>
-              <p class="auxiliar-subtitle">Para mais detalhes, acesse a <a :href="asset.detailsPdfUrl">lâmina do ativo</a>.</p>
+              <p class="auxiliar-subtitle">Para mais detalhes, acesse a <a :href="asset.pdfDetailsURL" target="_blank">lâmina do ativo</a>.</p>
             </div>
           </div>
           <assets-comparison-graph-bar :baseAsset="asset" :comparissonAssets="investmentAssetsComparison" />
@@ -65,7 +65,10 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
     const el = document.getElementById('mbwd-fixed-income-simulator')
     const dataSetAsset = JSON.parse(el.dataset.asset);
     const dataSetInvestmentAssetsComparison = JSON.parse(el.dataset.investmentAssetsComparison);
+    const dataSetAnalytics = JSON.parse(el.dataset.analytics);
+
     return {
+      analytics: dataSetAnalytics,
       investedAmount: {
         rawValue: dataSetAsset.investmentMinimumAmount,
         maskedValue: this.$options.filters.ftFormatCurrency(dataSetAsset.investmentMinimumAmount, 2, true),
@@ -141,7 +144,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
 
       this.validateInput(this.investedAmount.maskedValue);
     },
-    validateInput: function (value) {
+    validateInput(value) {
       const unmaskedValue = parseFloat(this.mxClearMasks(value))
       if (unmaskedValue) {
         if (unmaskedValue < parseFloat(this.asset.investmentMinimumAmount)) {
@@ -154,7 +157,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
       this.input.valid = false
       return false
     },
-    inputMaskCallback: function (value) {
+    inputMaskCallback(value) {
       if (value) {
         // Removing all non numbers characters
         value = value.replace(/[\D]+/g, '')
@@ -165,7 +168,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
       }
       return value
     },
-    calculateAndUpdateEstimatedYield: function () {
+    calculateAndUpdateEstimatedYield() {
       this.investedAmount.rawValue;
       this.asset.estimatedYieldAmount = this.getEstimateReturnAmount(
         this.investedAmount.rawValue,
@@ -180,6 +183,13 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
           this.asset.expirationDate
         );
       }
-    }
+    },
+    trackTradeLinkAnalytics(event, analyticsLabel) {
+      this.$root.$emit('track-analytics', {
+        ec: this.analytics.category,
+        en: event.type,
+        lb: `${this.analytics.labelPrefix}:${analyticsLabel}`
+      })
+    },
   }
 })
