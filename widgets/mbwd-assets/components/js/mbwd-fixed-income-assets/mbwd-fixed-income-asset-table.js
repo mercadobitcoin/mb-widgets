@@ -202,8 +202,8 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     getAssetLandingPageLink (symbol) {
       return `https://www.mercadobitcoin.com.br/conhecer/${(symbol ?? '').toLowerCase()}`
     },
-    getPercentageString (percentage = 0, market) { ///if de se mercado secundario coloca traço em estoque
-      let percString = percentage      
+    getPercentageString (percentage = 0, market) {
+      let percString = percentage
 
       if (market === 'SECONDARY_MARKET') {
         return '-'
