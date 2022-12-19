@@ -1,0 +1,279 @@
+@import "../../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../../foundation/scss/design-system/apollo/buttons";
+@import "../../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../../foundation/scss/design-system/apollo/spacing";
+@import "../../../../../foundation/scss/variables";
+
+.mbwd-fixed-income-asset-table {
+  .fixed-income-asset-table-desktop {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 32px;
+    height: auto;
+
+    thead,
+    tbody {
+      tr {
+        th,
+        td {
+          text-align: left;
+          transition: border 0.2s ease;
+          border-left: none;
+          border-right: none;
+          border-top: solid 1px transparent;
+          border-bottom: solid 1px map-get($secondary-color, "10");
+
+          &:first-child {
+            border-left: solid 1px transparent;
+          }
+
+          &:last-child {
+            border-right: solid 1px transparent;
+          }
+        }
+
+        td {
+          transition: background 0.2s ease;
+        }
+
+        &:hover {
+          th,
+          td {
+            border-top: solid 1px map-get($primary-color, "main");
+            border-bottom: solid 1px map-get($primary-color, "main");
+
+            &:first-child {
+              border-left: solid 1px map-get($primary-color, "main");
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+            }
+
+            &:last-child {
+              border-right: solid 1px map-get($primary-color, "main");
+              border-top-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+            }
+          }
+
+          td {
+            background-color: map-get($primary-color, "5");
+          }
+        }
+      }
+    }
+
+    thead {
+      tr {
+        th {
+          padding: 10px 16px;
+          @extend %typography-label-3;
+
+          color: map-get($neutral-color, '50');
+
+          .sorter-cell {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+
+            .sorters {
+              display: inline-flex;
+              flex-direction: column;
+              align-items: center;
+              margin-left: 8px;
+
+              .arrow {
+                width: 0;
+                height: 0;
+                padding: 0;
+                margin: 0;
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                transition: all 0.2s ease;
+
+                &.up {
+                  border-bottom: 4px solid map-get($neutral-color, '10');
+                  margin-bottom: 3px;
+                }
+
+                &.down {
+                  border-top: 4px solid map-get($neutral-color, '10');
+                }
+
+                &.active {
+                  border-bottom-color: map-get($primary-color, '30');
+                  border-top-color: map-get($primary-color, '30');
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          padding: map-get($spacing-inset, 'xs');
+          @extend %typography-body-2;
+
+          color: map-get($neutral-color, '50');
+
+          &.asset-cell {
+            .asset {
+              display: flex;
+              align-items: center;
+              color: map-get($neutral-color, '50');
+              cursor: pointer;
+              text-decoration: none;
+
+              img {
+                max-width: 24px;
+                max-height: 24px;
+                margin-right: 16px;
+              }
+            }
+          }
+
+          &.minimum-value {
+            font-weight: 700;
+          }
+
+          &.profitability {
+            font-weight: 700;
+            color: map-get($positive-color, '30');
+          }
+
+          &.cta-wrapper {
+            text-align: right;
+            width: 100px;
+
+            .button {
+              padding: 4px 16px;
+              min-width: unset;
+              height: 32px;
+            }
+
+            .disabled {
+              pointer-events: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .fixed-income-asset-table-mobile {
+    margin-top: 24px;
+
+    &>.fixed-income-asset {
+      padding: map-get($spacing-inset, 'xs');
+      width: 100%;
+      background: map-get($background-color, 'primary');
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      cursor: pointer;
+      border: solid 1px transparent;
+      transition: all 0.2s ease;
+      border-bottom: solid 1px map-get($secondary-color, '10');
+      overflow: hidden;
+
+      &>.asset-icon {
+        width: 32px;
+        height: 32px;
+        margin-right: 8px;
+      }
+
+      .attributes {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        overflow: hidden;
+
+          &>.header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            overflow: hidden;
+
+            &>.name {
+              @extend %typography-label-2;
+
+              color: map-get($neutral-color, '50');
+              white-space: nowrap;
+              margin: 0 map-get($spacing-inline, 'nano') 0 0;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              width: 100%;
+            }
+
+
+            &>.c-asset-badges {
+              display: flex;
+              align-items: center;
+              justify-content: flex-end;
+              margin-bottom: 8px;
+              width: auto;
+    
+              .badge {
+                display: inline-flex;
+                align-items: center;
+                padding: 2px 4px;
+                border: 1px solid map-get($neutral-color, '10');
+                border-radius: $border-radius-small;
+                @extend %typography-caption;
+    
+                line-height: 100%;
+                color: map-get($neutral-color, '50');
+                white-space: nowrap;
+    
+    
+                .rounded-status {
+                  width: 8px;
+                  height: 8px;
+                  border-radius: 50%;
+                  margin-right: 6px;
+    
+                  &.primary {
+                    background: map-get($tertiary-color, '30');
+                  }
+    
+                  &.secondary {
+                    background: map-get($secondary-color, '50')
+                  }
+    
+                  &.sold-out {
+                    background: map-get($negative-color, '30');
+                  }
+                }
+              }
+            }      
+          }
+
+          .descriptions {
+            display: flex;
+            justify-content: space-between;
+            overflow: hidden;
+
+            &>.symbol {
+              @extend %typography-body-2;
+
+              color: map-get($neutral-color, '50');
+              white-space: nowrap;
+              margin: 0;
+            }
+    
+            &>.profitability {
+              color: map-get($positive-color, '30');
+              @extend %typography-label-2;
+    
+              margin: auto 0 0;
+              white-space: nowrap;
+              text-align: right;
+            }
+          }
+      }
+    }
+  }
+}

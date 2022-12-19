@@ -1,0 +1,45 @@
+// Commonly used on Y Axis
+$spacing-stack: (
+  "quarck": 4px,
+  "nano": 8px,
+  "xxxs": 16px,
+  "xxs": 24px,
+  "xs": 32px,
+  "sm": 40px,
+  "md": 48px,
+  "lg": 56px,
+  "xl": 64px,
+  "jumbo": 72px,
+  "xxl": 80px,
+  "xxxl": 120px,
+  "giant": 200px,
+);
+
+// Commonly used on X Axis
+$spacing-inline: (
+  "quarck": 4px,
+  "nano": 8px,
+  "xxxs": 16px,
+  "xxs": 24px,
+  "xs": 32px,
+  "sm": 40px,
+  "md": 48px,
+  "xl": 64px,
+  "xxl": 80px,
+);
+
+// Commonly used on to inset spaces (border, box-shadow, etc.)
+$spacing-inset: (
+  "quarck": 4px,
+  "nano": 8px,
+  "xs": 16px,
+  "sm": 24px,
+  "md": 32px,
+  "lg": 40px,
+);
+$spacing-squish: (
+  "quarck": 4px 8px,
+  "nano": 8px 16px,
+  "xs": 16px 24px,
+  "sm": 16 32px,
+);

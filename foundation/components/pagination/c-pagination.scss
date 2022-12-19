@@ -1,0 +1,123 @@
+@import "../../scss/variables";
+@import "../../scss/design-system/apollo/colors";
+@import "../../scss/design-system/apollo/typography";
+
+.c-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+
+  .pages {
+    display: inline-flex;
+    white-space: nowrap;
+
+    .page {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin: 0 4px;
+      padding: 0;
+
+      @extend %typography-body-3;
+
+      color: map-get($neutral-color, "50");
+      background-color: transparent;
+      border: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+
+      .arrow {
+        width: 8px;
+        height: 8px;
+        transition: border 0.2s ease;
+        border-bottom-right-radius: 1.5px;
+        border-top-left-radius: 1.5px;
+
+        &.right {
+          border-top: 2px solid map-get($primary-color, "main");
+          border-right: 2px solid map-get($primary-color, "main");
+          transform: rotate(45deg);
+        }
+
+        &.left {
+          border-bottom: 2px solid map-get($primary-color, "main");
+          border-left: 2px solid map-get($primary-color, "main");
+          transform: rotate(45deg);
+        }
+      }
+
+      &.ellipsis {
+        cursor: default;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      &.active {
+        color: #fff;
+
+        @extend %typography-label-3;
+
+        border-radius: 4px;
+        background-color: map-get($primary-color, "main");
+      }
+
+      &:disabled {
+        .arrow {
+          &.right {
+            border-top: 2px solid map-get($secondary-color, "20");
+            border-right: 2px solid map-get($secondary-color, "20");
+          }
+
+          &.left {
+            border-bottom: 2px solid map-get($secondary-color, "20");
+            border-left: 2px solid map-get($secondary-color, "20");
+          }
+        }
+      }
+    }
+  }
+
+  .show-more {
+    .btn-show-more {
+      background-color: transparent;
+      border: none;
+      color: map-get($primary-color, "main");
+      cursor: pointer;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+
+      @extend %typography-button-1;
+
+      &:disabled {
+        display: none;
+      }
+
+      .arrow {
+        width: 8px;
+        height: 8px;
+        transition: border 0.2s ease;
+        border-bottom-right-radius: 1.5px;
+        border-top-left-radius: 1.5px;
+        margin-top: -4px;
+
+        &.bottom {
+          border-top: 2px solid map-get($primary-color, "main");
+          border-right: 2px solid map-get($primary-color, "main");
+          transform: rotate(135deg);
+        }
+      }
+    }
+  }
+}

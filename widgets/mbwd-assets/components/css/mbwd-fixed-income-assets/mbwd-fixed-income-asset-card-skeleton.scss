@@ -1,0 +1,233 @@
+@import "../../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../../foundation/scss/design-system/apollo/spacing";
+@import "../../../../../foundation/scss/variables";
+
+.fixed-income-card-skeleton {
+  .desktop {
+    background: map-get($background-color, "primary");
+    box-shadow: $box-shadow-lvl-1;
+    border-radius: $border-radius-big;
+    padding: map-get($spacing-inset, 'sm');
+    margin-top: map-get($spacing-stack, 'xs');
+
+    .badge {
+      width: 128px;
+      height: 20px;
+      margin-bottom: map-get($spacing-stack, 'xxxs');
+    }
+
+    .asset-data {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .attributes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .attribute {
+          width: 100%;
+
+          .name {
+            width: 180px;
+            height: 20px;
+            margin-bottom: map-get($spacing-stack, 'xxxs');
+          }
+        }
+
+        .minimum-value {
+          .title {
+            width: 80px;
+            height: 18px;
+            margin-bottom: map-get($spacing-stack, 'nano');
+          }
+
+          .description {
+            width: 112px;
+            height: 20px;
+            margin-bottom: map-get($spacing-stack, 'nano');
+          }
+        }
+
+        .profitability {
+          .title {
+            width: 96px;
+            height: 18px;
+            margin-bottom: map-get($spacing-stack, 'quarck');
+          }
+
+          .description {
+            width: 104px;
+            height: 18px;
+            margin-bottom: map-get($spacing-stack, 'nano');
+          }
+        }
+
+        .estimated-liquidation-date {
+          margin-bottom: map-get($spacing-stack, 'nano');
+
+          .title {
+            width: 104px;
+            height: 18px;
+            margin-bottom: map-get($spacing-stack, 'quarck');
+          }
+
+          .description {
+            width: 58px;
+            height: 20px;
+          }
+        }
+      }
+
+      .sold-percentage {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .middle-circle {
+          width: 104px;
+          height: 104px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          border-radius: 50%;
+          border: 8px solid map-get($neutral-color, '5');
+
+          .percentage {
+            width: 32px;
+            height: 20px;
+            margin-bottom: map-get($spacing-stack, 'quarck');
+          }
+
+          .label {
+            width: 54px;
+            height: 20px;
+          }
+        }
+      }
+    }
+
+    .ctas {
+      .button {
+        width: 100%;
+        height: 32px;
+
+        &:first-child {
+          margin-bottom: map-get($spacing-stack, 'xxxs');
+        }
+      }
+    }
+
+    .attributes {
+      margin-bottom: map-get($spacing-stack, 'xxxs');
+
+      .header {
+        margin-bottom: map-get($spacing-stack, 'nano');
+
+        .asset-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+        }
+      }
+
+      .name {
+        width: 128px;
+        height: 22px;
+        margin-bottom: map-get($spacing-stack, 'quarck');
+
+      }
+
+      .type {
+        width: 80px;
+        height: 16px;
+      }
+    }
+
+    .price {
+      width: 124px;
+      height: 26px;
+      margin-bottom: map-get($spacing-stack, 'quarck');
+    }
+
+    .variation {
+      display: flex;
+
+      .value {
+        width: 52px;
+        height: 22px;
+        margin-right: map-get($spacing-inline, 'nano');
+      }
+
+      .label {
+        width: 120px;
+        height: 22px;
+      }
+    }
+  }
+
+  .mobile {
+    background: map-get($background-color, "primary");
+    box-shadow: $box-shadow-lvl-1;
+    border-radius: $border-radius-big;
+    padding: map-get($spacing-inset, 'xs');
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .attributes {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: map-get($spacing-stack, 'xxxs');
+
+      .header {
+        display: flex;
+        height: 32px;
+
+        .asset-icon {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          margin-right: map-get($spacing-inline, 'nano');
+        }
+
+        .name {
+          width: 112px;
+          height: 24px;
+
+        }
+      }
+    }
+
+    .badge {
+      width: 112px;
+      height: 24px;
+    }
+
+    .market-data {
+      display: flex;
+      width: 100%;
+      height: 30px;
+      overflow: hidden;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .profitability {
+        width: 152px;
+        height: 22px;
+      }
+
+      .price {
+        width: 80px;
+        height: 22px;
+        justify-self: flex-end;
+        margin-bottom: map-get($spacing-stack, 'quarck');
+      }
+    }
+  }
+}

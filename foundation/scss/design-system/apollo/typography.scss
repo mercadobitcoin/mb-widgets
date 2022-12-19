@@ -1,0 +1,129 @@
+@import "../../variables";
+
+%typography-h1 {
+  font-family: map-get($font-families, "title");
+  font-size: 64px;
+  font-weight: bold;
+  line-height: 115%;
+  letter-spacing: -1.5px;
+}
+
+%typography-h2 {
+  font-family: map-get($font-families, "title");
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 115%;
+  letter-spacing: -0.5px;
+}
+
+%typography-h3 {
+  font-family: map-get($font-families, "title");
+  font-size: 34px;
+  font-weight: bold;
+  line-height: 115%;
+  letter-spacing: 0;
+}
+
+%typography-h4 {
+  font-family: map-get($font-families, "title");
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 115%;
+  letter-spacing: 0;
+}
+
+%typography-h5 {
+  font-family: map-get($font-families, "title");
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 118%;
+  letter-spacing: 0.18px;
+}
+
+%typography-h6 {
+  font-family: map-get($font-families, "title");
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 118%;
+  letter-spacing: 0.15px;
+}
+
+%typography-body-1 {
+  font-family: map-get($font-families, "body");
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 140%;
+  letter-spacing: 0.5px;
+}
+
+%typography-body-2 {
+  font-family: map-get($font-families, "body");
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 140%;
+  letter-spacing: 0.25px;
+}
+
+%typography-body-3 {
+  font-family: map-get($font-families, "body");
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 140%;
+  letter-spacing: 0.25px;
+}
+
+%typography-label-1 {
+  font-family: map-get($font-families, "body");
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 140%;
+  letter-spacing: 0.5px;
+}
+
+%typography-label-2 {
+  font-family: map-get($font-families, "body");
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 140%;
+  letter-spacing: 0.25px;
+}
+
+%typography-label-3 {
+  font-family: map-get($font-families, "body");
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 140%;
+  letter-spacing: 0.25px;
+}
+
+%typography-button-1 {
+  font-family: map-get($font-families, "body");
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0.4px;
+  line-height: 112%;
+}
+
+%typography-button-2 {
+  font-family: map-get($font-families, "body");
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  line-height: 100%;
+}
+
+%typography-caption {
+  font-family: map-get($font-families, "body");
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 140%;
+  letter-spacing: 0.4px;
+}
+
+%typography-overline {
+  font-family: map-get($font-families, "body");
+  font-size: 10px;
+  font-weight: normal;
+  line-height: 140%;
+  letter-spacing: 1.5px;
+}

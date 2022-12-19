@@ -1,0 +1,62 @@
+@import "../../scss/variables";
+@import "../../scss/design-system/apollo/colors";
+@import "../../scss/design-system/apollo/spacing";
+@import "../../scss/design-system/apollo/buttons";
+@import "../../scss/design-system/apollo/typography";
+
+.c-asset-badges {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  .c-badge {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    padding: 2px 4px;
+    margin-left: 8px;
+    margin-bottom: 8px;
+    line-height: 100%;
+    height: 21px;
+    @extend %typography-caption;
+
+    color: map-get($neutral-color, "50");
+    border: 1px solid map-get($neutral-color, "10");
+    border-radius: $border-radius-small;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    & > .rounded-status {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 6px;
+
+      &.primary-market {
+        background: map-get($tertiary-color, "30");
+      }
+
+      &.secondary-market {
+        background: map-get($secondary-color, "50");
+      }
+
+      &.sold-out {
+        background: map-get($negative-color, "30");
+      }
+
+      &.future {
+        background-color: map-get($warning-color, "30");
+      }
+
+      &.finished {
+        background-color: map-get($positive-color, "30");
+      }
+    }
+  }
+}

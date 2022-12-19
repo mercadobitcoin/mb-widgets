@@ -1,0 +1,17 @@
+{
+  "rules": {
+    "no-descending-specificity": null,
+    "function-no-unknown": null,
+    "scss/no-global-function-names": null,
+    "scss/function-no-unknown": true,
+    "at-rule-no-unknown": null,
+    "scss/at-rule-no-unknown": true
+  },
+  "customSyntax": "postcss-scss",
+  "plugins": ["stylelint-scss"],
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-standard-scss",
+    "stylelint-config-prettier-scss"
+  ]
+}

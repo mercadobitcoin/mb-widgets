@@ -1,0 +1,127 @@
+@import "../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../foundation/scss/design-system/apollo/buttons";
+@import "../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../foundation/scss/design-system/apollo/spacing";
+@import "../../../../foundation/scss/variables";
+@import "../../../../foundation/scss/fonts";
+
+.mbwd-most-valued-assets {
+  box-sizing: border-box;
+  padding: map-get($spacing-inset, 'xs');
+  background: map-get($neutral-color, '50');
+  border-radius: $default-border-radius;
+
+  & * {
+    box-sizing: border-box;
+  }
+
+  & > .title {
+    @extend %typography-h4;
+
+    color: #fff;
+    margin: 0 0 4px;
+  }
+
+  & > .description {
+    @extend %typography-body-2;
+
+    color: #fff;
+    margin: 0 0 24px;
+  }
+
+  & > .badge {
+    padding: 4px 8px;
+    @extend %typography-label-3;
+
+    border: 1px solid map-get($neutral-color, '40');
+    border-radius: $default-border-radius;
+
+    /* White */
+    color: #fff;
+    margin: 0 0 24px;
+    display: inline-flex;
+  }
+
+  & > .assets {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & > .asset {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: calc(100% / 4);
+      padding: map-get($spacing-inset, 'xs');
+      margin-right: 16px;
+      background: #fff;
+      border: 1px solid map-get($secondary-color, '5');
+      box-shadow: $box-shadow-lvl-1;
+      border-radius: $default-border-radius;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+
+      &:hover {
+        border: 1px solid map-get($primary-color, '30');
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      & > .attributes {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+
+        & > .icon {
+          width: 16px;
+          height: 16px;
+          margin-right: 4px;
+        }
+
+        & > .name {
+          @extend %typography-label-2;
+
+          color: map-get($neutral-color, '50');
+          margin: 0;
+        }
+      }
+
+      & > .variation {
+        @extend %typography-label-2;
+
+        color: map-get($positive-color, '30');
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .mbwd-most-valued-assets {
+    padding: 24px 16px;
+
+    & > .description {
+      font-size: 14px;
+    }
+
+    & > .assets {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+      & > .asset {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 16px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

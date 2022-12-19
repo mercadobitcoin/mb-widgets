@@ -1,0 +1,353 @@
+@import "../../../../../foundation/scss/design-system/apollo/colors";
+@import "../../../../../foundation/scss/design-system/apollo/buttons";
+@import "../../../../../foundation/scss/design-system/apollo/typography";
+@import "../../../../../foundation/scss/design-system/apollo/spacing";
+@import "../../../../../foundation/scss/variables";
+@import "../../../../../foundation//scss/breakpoints.scss";
+
+.mbwd-fixed-income-asset-card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  flex-wrap: wrap;
+  gap: 24px;
+
+  @include breakpoint-down(md) {
+    margin-top: 24px;
+    grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+  }
+
+  & > .fixed-income-card {
+    background: map-get($background-color, "primary");
+    box-shadow: $box-shadow-lvl-1;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    border: solid 1px transparent;
+    transition: all 0.2s ease;
+
+    &:hover,
+    &:active {
+      border: 1px solid map-get($primary-color, "30");
+    }
+
+    .badge-wrapper {
+      display: flex;
+      align-items: center;
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        padding: 2px 4px;
+        border: 1px solid map-get($neutral-color, "10");
+        border-radius: $border-radius-small;
+        @extend %typography-caption;
+
+        line-height: 100%;
+        color: map-get($neutral-color, "50");
+        white-space: nowrap;
+
+        .rounded-status {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          margin-right: 6px;
+
+          &.primary {
+            background: map-get($tertiary-color, "30");
+          }
+
+          &.secondary {
+            background: map-get($secondary-color, "50");
+          }
+
+          &.sold-out {
+            background: map-get($negative-color, "30");
+          }
+        }
+      }
+    }
+
+    .asset-icon {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+  & > .fixed-income-card.desktop {
+    border-radius: $border-radius-big;
+    padding: 24px;
+    margin-top: 32px;
+
+    .badge-wrapper {
+      margin: 0 0 16px;
+    }
+
+    .c-asset-badges {
+      margin-bottom: map-get($spacing-stack, 'xxxs');
+    }
+
+    .asset-data {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+
+      .attributes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .attribute {
+          width: 100%;
+          margin-bottom: map-get($spacing-stack, "nano");
+
+          .name {
+            @extend %typography-label-2;
+
+            color: map-get($neutral-color, "50");
+            margin: 0 0 map-get($spacing-stack, "nano");
+          }
+
+          .title,
+          .description {
+            @extend %typography-label-3;
+
+            color: map-get($neutral-color, "50");
+            margin: 0 0 2px;
+          }
+
+          .description {
+            margin-bottom: 8px;
+            font-weight: 400;
+
+            &:last-child {
+              margin: 0;
+            }
+          }
+
+          &.profitability {
+            .description {
+              color: map-get($positive-color, "30");
+              @extend %typography-label-3;
+  
+              white-space: nowrap;
+            }
+          }
+
+          &.secondary-market-description {
+            display: none;
+            width: 100%;
+            text-align: center;
+            background-color: map-get($neutral-color, "5");
+            padding: map-get($spacing-stack, "xxxs");
+            margin-top: map-get($spacing-stack, "nano");
+
+            p {
+              @extend %typography-caption
+            }
+          }
+        }
+      }
+
+      .sold-percentage {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .circular-chart {
+          width: 104px;
+          height: 104px;
+
+          .circle {
+            fill: none;
+            stroke-width: 2.8;
+            stroke-linecap: round;
+            animation: progress 1s ease-out forwards;
+          }
+
+          .empty {
+            stroke: map-get($neutral-color, "20");
+          }
+
+          .partly-filled {
+            stroke: map-get($neutral-color, "5");
+          }
+
+          .percentage-partly-filled {
+            stroke: map-get($tertiary-color, "20");
+          }
+
+          .percentage-full-filled {
+            stroke: map-get($neutral-color, "20");
+          }
+
+          @keyframes progress {
+            0% {
+              stroke-dasharray: 0 100;
+            }
+          }
+        }
+
+        .middle-circle {
+          position: absolute;
+          border-radius: 50%;
+          height: 85px;
+          width: 85px;
+          background-color: #fff;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          p {
+            @extend %typography-body-3;
+
+            text-align: center;
+            margin: 0;
+          
+            strong {
+              @extend %typography-label-3;
+            }
+          }
+
+          &.partly-filled {
+            p {
+              color: map-get($neutral-color, "30");
+              
+            }
+          }
+
+          &:not(.partly-filled) {
+            p {
+              color: map-get($text-color, "primary");
+            }
+          }
+        }
+      }
+    }
+
+    .ctas {
+      display: flex;
+      flex-direction: column;
+
+      .button {
+        @extend %typography-button-2;
+
+        height: 32px;
+        margin-bottom: 16px;
+        border-radius: 4px;
+
+        &:last-child {
+          margin: 0;
+        }
+      }
+    }
+
+    &.secondary-market {
+      .attributes {
+        .attribute {
+          &.profitability,
+          &.estimated-liquidation-date {
+            width: auto;
+          }
+
+          &.minimum-value {
+            display: none;
+          }
+
+          &.secondary-market-description {
+            display: block;
+          }
+        }
+      }
+    }
+
+    &.finished,
+    &.sold-out,
+    &.future{
+      .ctas {
+        .primary {
+          pointer-events: none;
+          color: map-get($neutral-color, "10");
+          background-color: map-get($neutral-color, "5");
+          border: none;
+        }
+      }
+    }
+  }
+
+  & > .fixed-income-card.mobile {
+    padding: map-get($spacing-inset, 'xs');
+    border-radius: $border-radius-default;
+    width: 100%;
+    justify-content: space-between;
+
+    & > .attributes {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin: 0 0 8px;
+
+      & > .header {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        overflow: hidden;
+
+        & > .asset-icon {
+          width: 24px;
+          height: 24px;
+          margin-right: 8px;
+        }
+
+        & > .symbol {
+          @extend %typography-label-2;
+
+          color: map-get($neutral-color, "50");
+          white-space: nowrap;
+          margin: 0;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-right: map-get($spacing-inline, 'quarck');
+        }
+      }
+
+      .c-asset-badges {
+        flex-wrap: nowrap;
+        width: auto;
+      }
+    }
+
+    & > .market-data {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+
+      .profitability {
+        color: map-get($positive-color, "30");
+        @extend %typography-label-3;
+
+        margin: 0;
+        white-space: nowrap;
+      }
+
+      .minimum-value {
+        text-align: right;
+
+        .min-label {
+          @extend %typography-caption;
+
+          font-size: 10px;
+          margin: 0;
+        }
+
+        .min-value {
+          @extend %typography-label-2;
+
+          margin: 0;
+        }
+      }
+    }
+  }
+}
