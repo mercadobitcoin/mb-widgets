@@ -203,11 +203,11 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       return `https://www.mercadobitcoin.com.br/conhecer/${(symbol ?? '').toLowerCase()}`
     },
     getPercentageString (percentage = 0, marketStatus) {
-      let percString = percentage
-
       if (marketStatus === 'SECONDARY_MARKET') {
         return '-'
       }
+
+      let percString = percentage
 
       if (percString > 100) {
         percString = 100
