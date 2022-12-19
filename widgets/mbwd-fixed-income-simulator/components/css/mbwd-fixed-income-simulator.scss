@@ -157,12 +157,16 @@
         text-align: center;
       }
     }
-    .comparison-components-wrapper {      
+    .comparison-components-wrapper {
       .auxiliar-title {
         margin-bottom: 12px;
       }
       .auxiliar-subtitle {
         margin-bottom: map-get($spacing-stack, 'xxs');
+
+        a { 
+          color: map-get($tertiary-color, '30')
+        }
       }
       .comparison-graph-bar-wrapper {
         .auxiliar-title {
