@@ -51,7 +51,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
                 {{ asset.product_data.profitability }}
               </td>
               <td class="liquidation-date">{{ asset.product_data.estimated_liquidation_date }}</td>
-              <td class="available-percentage">{{ getPercentageString(asset.product_data.available_percentage.number) }}</td>
+              <td class="available-percentage">{{ getPercentageString(asset.product_data.available_percentage.number, asset.product_data.status.value) }}</td>
               <td class="status">{{ i18n(asset.product_data.status.short_text)}} </td>
               <td class="cta-wrapper apollo">
                 <a class="button primary" :class="getButtonClass(asset.product_data.status.value)" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
@@ -202,10 +202,10 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
     getAssetLandingPageLink (symbol) {
       return `https://www.mercadobitcoin.com.br/conhecer/${(symbol ?? '').toLowerCase()}`
     },
-    getPercentageString (percentage = 0) {
-      let percString = percentage
+    getPercentageString (percentage = 0, market) { ///if de se mercado secundario coloca traço em estoque
+      let percString = percentage      
 
-      if (percString === '-') {
+      if (market === 'SECONDARY_MARKET') {
         return '-'
       }
 
