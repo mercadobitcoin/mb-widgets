@@ -50,6 +50,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
           <assets-comparison-graph-bar :baseAsset="asset" :comparissonAssets="investmentAssetsComparison" />
         </div>
       </div>
+      <p class="disclaimer">A simulação é meramente ilustrativa e não constitui garantia por parte do Mercado Bitcoin, MB Tokens e/ou por qualquer empresa do grupo.</p>
     </div>
   `,
   components: {

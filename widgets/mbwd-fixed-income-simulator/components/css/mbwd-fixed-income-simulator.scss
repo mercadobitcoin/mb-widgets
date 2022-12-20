@@ -175,6 +175,11 @@
       }
     }
   }
+  .disclaimer {
+    @extend %typography-caption;
+    color: map-get($neutral-color, '40');
+    margin-top: map-get($spacing-stack,'xxs');
+  }
   @include breakpoint-up(md) {
     .main-title {
       font-size: 48px;
