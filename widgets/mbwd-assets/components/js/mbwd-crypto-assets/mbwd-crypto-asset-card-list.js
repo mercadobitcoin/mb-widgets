@@ -8,7 +8,7 @@
         <a v-if="mobileMode" class="crypto-card mobile" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
           <div class="attributes">
             <div class="header">
-              <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+              <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)" with="24" height="24" />
               <div class="asset-data">
                 <p class="name">{{ asset.name }}</p>
                 <p class="type">{{ i18n(asset.product_data.sub_type.display_text) }}</p>
@@ -27,7 +27,7 @@
         <a v-if="!mobileMode" class="crypto-card desktop" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
           <div class="attributes">
             <div class="header">
-              <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+              <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)" with="24" height="24" />
               <mbc-asset-badges :badges="asset.tags" type="crypto" :language="language" widgetName="mbwd-assets"/>
             </div>
             <p class="name">

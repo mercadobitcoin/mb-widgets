@@ -7,7 +7,7 @@ const MBWD_MOST_VALUED_ASSETS = () => ({ //eslint-disable-line
                 <div class="assets">
                     <a class="asset" v-for="asset in mostValuedAssetsList" :key="asset.symbol" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
                         <div class="attributes">
-                            <img class="icon" :src="getIconUrl(asset.icon)" :title="getIconAlt(asset.symbol)" :alt="getIconAlt(asset.symbol)"/>
+                            <img class="icon" :src="getIconUrl(asset.icon)" :title="getIconAlt(asset.symbol)" :alt="getIconAlt(asset.symbol)" width="24" height="24" />
                             <p class="name">{{ asset.symbol }}</p>
                         </div>
                         <span class="variation">+{{ asset.variation | ftFormatNumber(2) }}%</span>

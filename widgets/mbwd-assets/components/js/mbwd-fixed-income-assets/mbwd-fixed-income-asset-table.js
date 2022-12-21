@@ -42,7 +42,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
             <tr v-for="asset in assets">
               <td class="asset-cell">
                 <a class="asset" @click="redirectToAssetLandingPage(asset.product_data.symbol)">
-                  <img class="icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+                  <img class="icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"  width="24" height="24"/>
                   {{ asset.name }}
                 </a>
               </td>
@@ -70,7 +70,7 @@ const MBWD_FIXED_INCOME_ASSET_TABLE = () => ({// eslint-disable-line
       <div v-if="mobileMode" class="fixed-income-asset-table-mobile">
         <template v-if="!displaySkeleton">
           <a class="fixed-income-asset" v-for="asset in assets" :key="asset.product_data.symbol" @click="redirectToAssetTradeExperience(asset.product_data.symbol)">
-            <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)"/>
+            <img class="asset-icon" :src="asset.icon_url.svg" :title="getIconAlt(asset.name)" :alt="getIconAlt(asset.name)" with="24" height="24" />
             <div class="attributes">
               <div class="header">
                   <p class="name">{{ asset.name }}</p>

@@ -6,12 +6,12 @@ const MBWD_FIXED_INCOME_ASSETS = () => ({
         {{ i18n('Renda Fixa Digital') }}
         <div v-if="mobileMode" class="view-modes">
           <button class="view-mode" :class="cssIsViewModeActive('cards')" @click="onViewModeChange('cards')">
-            <img v-if="isViewModeActive('cards')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-four-squares-white.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-four-squares-mono.svg'">
+            <img v-if="isViewModeActive('cards')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-four-squares-white.svg'" width="17" height="16">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-four-squares-mono.svg'" width="17" height="16">
           </button>
           <button class="view-mode" :class="cssIsViewModeActive('table')" @click="onViewModeChange('table')">
-            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-three-rectangles-white.svg'">
-            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-three-rectangles-mono.svg'">
+            <img v-if="isViewModeActive('table')" :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-three-rectangles-white.svg'" width="16" height="16">
+            <img v-else :src="MB_WIDGETS_GLOBAL_Cdn_Widgets_Url+'/mbwd-assets/img/icons/ico-three-rectangles-mono.svg'" width="16" height="16">
           </button>
         </div>
       </h3>
