@@ -135,8 +135,8 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
       return Math.round(timeDiff / (2e3 * 3600 * 365.25));
     },
     quickIncrementInvestedAmount() {
-      if (this.investedAmount.rawValue + this.quickIncrementDefaultValue > 9999999.99) {
-        this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(9999999.99, 2);
+      if (this.investedAmount.rawValue + this.quickIncrementDefaultValue > input.maxValue) {
+        this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(input.maxValue, 2);
         return
       }
       this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(
