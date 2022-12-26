@@ -1,7 +1,7 @@
 const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
   template: `
     <div class="mbwd-fixed-income-simulator">
-      <h2 class="main-title">Simulador de Renda Fixa Digital</h2>
+      <h2 class="main-title">{{ componentMainTitle }}</h2>
       <p class="main-subtitle">Veja quanto o seu dinheiro pode render com {{ asset.displayName }}.</p>
       <div class="main-wrapper">
         <div class="interactive-components-wrapper">
@@ -58,6 +58,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
     'assets-comparison-graph-bar': MBWD_ASSETS_COMPARISON_GRAPH_BAR(),// eslint-disable-line
   },
   mixins: [
+    window.MB_WIDGETS.mixins,
     window.MB_WIDGETS.configMixins,
     window.MB_WIDGETS.currencyFilters,
     window.MB_WIDGETS.currencyMixins,
@@ -67,8 +68,9 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
     const dataSetAsset = JSON.parse(el.dataset.asset);
     const dataSetInvestmentAssetsComparison = JSON.parse(el.dataset.investmentAssetsComparison);
     const dataSetAnalyticsEventCategory = el.dataset.analyticsEventCategory;
-
+    const dataSetTitle = el.dataset.title;
     return {
+      componentMainTitle: dataSetTitle,
       analytics: {
         event: {
           category: dataSetAnalyticsEventCategory,
@@ -88,7 +90,8 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
         errorMessage: `Valor mínimo `,
         maxLength: 12,
         maxValue: 9999999.99
-      }
+      },
+      debounceIntervalId: null,
     }
   },
   computed: {
@@ -110,6 +113,7 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
       const rawValue = parseFloat(this.mxClearMasks(String(newAmount)))
       this.investedAmount.rawValue = rawValue;
       this.calculateAndUpdateEstimatedYield();
+      this.trackSimulationAnalytics(newAmount);
     },
   },
   mounted () {
@@ -139,6 +143,8 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
         this.investedAmount.rawValue + this.quickIncrementDefaultValue, 2
       );
       this.validateInput(this.investedAmount.maskedValue);
+
+      this.trackAnalytics('click', 'button:increment');
     },
     quickDecrementInvestedAmount() {
       if (this.investedAmount.rawValue - this.quickIncrementDefaultValue < 0) {
@@ -150,6 +156,8 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
       );
 
       this.validateInput(this.investedAmount.maskedValue);
+
+      this.trackAnalytics('click', 'button:decrement');
     },
     validateInput(value) {
       const unmaskedValue = parseFloat(this.mxClearMasks(value))
@@ -202,6 +210,11 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
         en: this.analytics.event.name,
         lb: `fixed-income-simulator:${this.analytics.event.label}`
       })
-    }, 
+    },
+    trackSimulationAnalytics (eventLabel) {
+      this.debounceIntervalId = this.mxDebounce(this.debounceIntervalId, () => {
+        this.trackAnalytics('simulate', eventLabel);
+      })
+    },
   }
 })
