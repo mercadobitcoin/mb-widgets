@@ -1,4 +1,5 @@
 function MbwdFixedIncomeSimulator () { // eslint-disable-line
+  if (window.rfdSimulatorIsLoaded) return
   return {
     version: '1.0.0',
     appendStyle () {
@@ -29,29 +30,36 @@ function MbwdFixedIncomeSimulator () { // eslint-disable-line
 
       this.appendStyle()
 
-      const mbwdFixedIncomeSimulatorWrapper = document.querySelector(querySelector)
-      const mbwdAssetsTag = `<mbwd-fixed-income-simulator/>`
-      mbwdFixedIncomeSimulatorWrapper.insertAdjacentHTML('beforeend', mbwdAssetsTag)
-      new Vue({// eslint-disable-line
-        el: document.querySelector('mbwd-fixed-income-simulator'),
-        components: {
-          'mbwd-fixed-income-simulator': MBWD_FIXED_INCOME_SIMULATOR()// eslint-disable-line
-        },
-        created () {
-          this.$root.$on('track-analytics', event => {
-            if (mbwdFixedIncomeSimulatorWrapper.dataset.trackAnalyticsEnabled) {
-              try {
-                if (window.gtag) {
-                  gtag('event', event.en, { //eslint-disable-line
-                    event_category: event.ec,
-                    event_label: event.lb
-                  })
-                }
-              } catch (e) {}
-            }
-          })
-        }
-      })
+      const widgets = document.querySelectorAll(querySelector);
+      for (let i = 0, j = widgets.length; i < j; i++) {
+        const mbwdAssetDiv = `
+          <div data-asset-symbol=${widgets[i].dataset.assetSymbol}>
+            <mbwd-fixed-income-simulator asset-symbol="${widgets[i].dataset.assetSymbol}"/>
+          </div>
+        `
+        widgets[i].insertAdjacentHTML('beforeend', mbwdAssetDiv)
+        new Vue({// eslint-disable-line
+          el: widgets[i].querySelector(`[data-asset-symbol=${widgets[i].dataset.assetSymbol}]`),
+          components: {
+            'mbwd-fixed-income-simulator': MBWD_FIXED_INCOME_SIMULATOR()// eslint-disable-line
+          },
+          created () {
+            this.$root.$on('track-analytics', event => {
+              if (widgets[i].dataset.trackAnalyticsEnabled) {
+                try {
+                  if (window.gtag) {
+                    gtag('event', event.en, { //eslint-disable-line
+                      event_category: event.ec,
+                      event_label: event.lb
+                    })
+                  }
+                } catch (e) {}
+              }
+            })
+          }
+        })
+      }
+      window.rfdSimulatorIsLoaded = true
     }
   }
 }

@@ -36,7 +36,9 @@ const task = (cb) => {
         MainComponentJSpath,
       ]),
       concat('mbwd-fixed-income-simulator.js'),
-      footer('MbwdFixedIncomeSimulator().render(Vue, "#mbwd-fixed-income-simulator");'),
+      footer(`window.addEventListener('DOMContentLoaded', function(){
+        MbwdFixedIncomeSimulator().render(Vue, '[data-el-name="widget-rfd-simulator"]');
+      })`),
       terser(),
       replace(/ {2,}/g, ''),
       rename({ extname: '.min.js' }),

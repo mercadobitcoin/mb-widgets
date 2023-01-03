@@ -1,3 +1,4 @@
+// todo trocar o const pra declaracao de func normal
 const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
   template: `
     <div class="mbwd-fixed-income-simulator">
@@ -63,8 +64,14 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
     window.MB_WIDGETS.currencyFilters,
     window.MB_WIDGETS.currencyMixins,
   ], //eslint-disable-line
+  props: {
+    assetSymbol: {
+      type: String,
+      required: true
+    }
+  },
   data () {
-    const el = document.getElementById('mbwd-fixed-income-simulator')
+    const el = document.querySelector(`[data-asset-symbol="${this.assetSymbol}"]`)
     const dataSetAsset = JSON.parse(el.dataset.asset);
     const dataSetInvestmentAssetsComparison = JSON.parse(el.dataset.investmentAssetsComparison);
     const dataSetAnalyticsEventCategory = el.dataset.analyticsEventCategory;
@@ -135,8 +142,8 @@ const MBWD_FIXED_INCOME_SIMULATOR = () => ({ //eslint-disable-line
       return Math.round(timeDiff / (2e3 * 3600 * 365.25));
     },
     quickIncrementInvestedAmount() {
-      if (this.investedAmount.rawValue + this.quickIncrementDefaultValue > input.maxValue) {
-        this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(input.maxValue, 2);
+      if (this.investedAmount.rawValue + this.quickIncrementDefaultValue > this.input.maxValue) {
+        this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(this.input.maxValue, 2);
         return
       }
       this.investedAmount.maskedValue = this.$options.filters.ftFormatNumber(
