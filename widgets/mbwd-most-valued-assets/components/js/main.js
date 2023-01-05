@@ -3,7 +3,6 @@ function MbwdMostValuedAssets () { // eslint-disable-line
     version: '1.0.0',
     appendStyle () {
       const cssLink = document.createElement('link')
-      cssLink.href = 'widgets/mbwd-most-valued-assets/css/mbwd-most-valued-assets.css'
       if (window.location.host.includes('localhost')) {
         cssLink.href = 'widgets/mbwd-most-valued-assets/css/mbwd-most-valued-assets.css'
       } else if (window.location.host.includes('mercado-bitcoin.vipdev.lndo.site')) {
