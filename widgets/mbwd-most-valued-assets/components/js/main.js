@@ -4,6 +4,13 @@ function MbwdMostValuedAssets () { // eslint-disable-line
     appendStyle () {
       const cssLink = document.createElement('link')
       cssLink.href = 'widgets/mbwd-most-valued-assets/css/mbwd-most-valued-assets.css'
+      if (window.location.host.includes('localhost')) {
+        cssLink.href = 'widgets/mbwd-most-valued-assets/css/mbwd-most-valued-assets.css'
+      } else if (window.location.host.includes('mercado-bitcoin.vipdev.lndo.site')) {
+        cssLink.href = 'http://localhost:5001/web/widgets/mbwd-most-valued-assets/css/mbwd-most-valued-assets.css'
+      } else {
+        cssLink.href = 'https://static.mercadolitecoin.com.br/web/widgets/mbwd-most-valued-assets/css/mbwd-most-valued-assets.css'
+      }
       cssLink.rel = 'stylesheet'
 
       document.head.appendChild(cssLink)
