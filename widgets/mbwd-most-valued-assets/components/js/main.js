@@ -30,7 +30,8 @@ function MbwdMostValuedAssets () { // eslint-disable-line
       this.appendStyle()
 
       const mbwdMostValuedAssetsWrapper = document.querySelector(querySelector)
-      const mbwdMostValuedAssetsTag = `<mbwd-most-valued-assets language='${mbwdMostValuedAssetsWrapper.dataset.language || 'pt'}' />`
+      const datasetTrackingConfig = mbwdMostValuedAssetsWrapper.dataset.trackingConfig ? `:tracking-config="${mbwdMostValuedAssetsWrapper.dataset.trackingConfig}"` : ''
+      const mbwdMostValuedAssetsTag = `<mbwd-most-valued-assets language='${mbwdMostValuedAssetsWrapper.dataset.language || 'pt'}' ${datasetTrackingConfig}/>`
       mbwdMostValuedAssetsWrapper.insertAdjacentHTML('beforeend', mbwdMostValuedAssetsTag)
 
       new Vue({ // eslint-disable-line
@@ -39,7 +40,7 @@ function MbwdMostValuedAssets () { // eslint-disable-line
           'mbwd-most-valued-assets': MBWD_MOST_VALUED_ASSETS() // eslint-disable-line
         },
         created () {
-          this.$root.$on('track', event => {
+          this.$root.$on('track-analytics', event => {
             if (mbwdMostValuedAssetsWrapper.dataset.trackAnalyticsEnabled) {
               try {
                 if (window.gtag) {

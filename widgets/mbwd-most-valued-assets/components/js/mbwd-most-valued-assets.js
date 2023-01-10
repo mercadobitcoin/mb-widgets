@@ -5,7 +5,7 @@ const MBWD_MOST_VALUED_ASSETS = () => ({ //eslint-disable-line
                 <p class="description">{{ i18n('Veja os 4 ativos que mais estão valorizando no Mercado Bitcoin.') }}</p>
                 <p class="badge">{{ i18n('Nas últimas 24 horas') }}</p>
                 <div class="assets">
-                    <a class="asset" v-for="asset in mostValuedAssetsList" :key="asset.symbol" :href="getAssetBasicTradeExperienceLink(asset.symbol)">
+                    <a class="asset" v-for="asset in mostValuedAssetsList" :key="asset.symbol" @click="redirectToAssetBasicTradeExperience(asset.symbol)">
                         <div class="attributes">
                             <img class="icon" :src="getIconUrl(asset.icon)" :title="getIconAlt(asset.symbol)" :alt="getIconAlt(asset.symbol)" width="24" height="24" />
                             <p class="name">{{ asset.symbol }}</p>
@@ -22,9 +22,19 @@ const MBWD_MOST_VALUED_ASSETS = () => ({ //eslint-disable-line
     intervalTimeout: {
       type: Number,
       default: 30000 // ms
+    },
+    trackingConfig: {
+      type: Object,
+      default: () => {
+        return {
+          "ec": "web:platform:home", //eslint-disable-line
+          "en":"click", //eslint-disable-line
+          "lb":"top-gainers-24h:%symbol%" //eslint-disable-line
+        }
+      }
     }
   },
-    mixins: [window.MB_WIDGETS.currencyFilters], //eslint-disable-line
+  mixins: [window.MB_WIDGETS.currencyFilters], //eslint-disable-line
   data () {
     return {
       intervalId: null,
@@ -84,10 +94,16 @@ const MBWD_MOST_VALUED_ASSETS = () => ({ //eslint-disable-line
     getAssetBasicTradeExperienceLink (symbol) {
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
     },
+    redirectToAssetBasicTradeExperience (symbol) {
+      this.$root.$emit('track-analytics', {
+        ...this.trackingConfig,
+        lb: this.trackingConfig.lb.replace('%symbol%', symbol)
+      })
+      location.href = this.getAssetBasicTradeExperienceLink(symbol) // eslint-disable-line
+    },
     async getMostValuedAssets () {
       try {
-        // throw new Error('Error')
-          const response = await fetch('https://store.mercadobitcoin.com.br/api/v1/marketplace/crypto/coin?sort=variation&order=DESC&limit=4') // eslint-disable-line
+        const response = await fetch('https://store.mercadobitcoin.com.br/api/v1/marketplace/crypto/coin?sort=variation&order=DESC&limit=4') // eslint-disable-line
 
         if (response.ok) {
             const { response_data } = await response.json() // eslint-disable-line
