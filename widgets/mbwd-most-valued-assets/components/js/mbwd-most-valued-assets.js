@@ -88,13 +88,13 @@ const MBWD_MOST_VALUED_ASSETS = () => ({ //eslint-disable-line
     getAssetBasicTradeExperienceLink (symbol) {
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
     },
-    redirectToAssetBasicTradeExperience(symbol) {
-      let trackingObject = JSON.parse(this.trackingString) 
-      if(trackingObject.lb.includes('top-gainers-24h')){
+    redirectToAssetBasicTradeExperience (symbol) {
+      const trackingObject = JSON.parse(this.trackingString)
+      if (trackingObject.lb.includes('top-gainers-24h')) {
         trackingObject.lb = `${trackingObject.lb}:${symbol}`
       }
       this.$root.$emit('track-analytics', trackingObject)
-      //location.href = this.getAssetBasicTradeExperienceLink(symbol) // eslint-disable-line
+      location.href = this.getAssetBasicTradeExperienceLink(symbol) // eslint-disable-line
     },
     async getMostValuedAssets () {
       try {
