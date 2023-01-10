@@ -23,9 +23,15 @@ const MBWD_MOST_VALUED_ASSETS = () => ({ //eslint-disable-line
       type: Number,
       default: 30000 // ms
     },
-    trackingString: {
-      type: String,
-      default: '{"ec": "web:platform:home", "en":"click", "lb":"top-gainers-24h"}'
+    trackingConfig: {
+      type: Object,
+      default: () => {
+        return {
+          "ec": "web:platform:home", //eslint-disable-line
+          "en":"click", //eslint-disable-line
+          "lb":"top-gainers-24h:%symbol%" //eslint-disable-line
+        }
+      }
     }
   },
   mixins: [window.MB_WIDGETS.currencyFilters], //eslint-disable-line
@@ -89,11 +95,10 @@ const MBWD_MOST_VALUED_ASSETS = () => ({ //eslint-disable-line
       return `https://www.mercadobitcoin.com.br/plataforma/clue/?command=/trade/basic/${(symbol ?? '').toLowerCase()}/brl`
     },
     redirectToAssetBasicTradeExperience (symbol) {
-      const trackingObject = JSON.parse(this.trackingString)
-      if (trackingObject.lb.includes('top-gainers-24h')) {
-        trackingObject.lb = `${trackingObject.lb}:${symbol}`
-      }
-      this.$root.$emit('track-analytics', trackingObject)
+      this.$root.$emit('track-analytics', {
+        ...this.trackingConfig,
+        lb: this.trackingConfig.lb.replace('%symbol%', symbol)
+      })
       location.href = this.getAssetBasicTradeExperienceLink(symbol) // eslint-disable-line
     },
     async getMostValuedAssets () {
